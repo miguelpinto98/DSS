@@ -1,4 +1,4 @@
-DSS
+﻿DSS
 ===
 
 Gestão da actividade de uma Associação de Escolas de Futebol
@@ -8,6 +8,6 @@ Até logo :P
 
 Teste 2
 
-Olá, fofinhos :) Beijinhos da 63
+Olá, fofinhos :) Beijinhos da 63Linda
 
 Tutorial git: https://www.codeschool.com/courses/try-git
