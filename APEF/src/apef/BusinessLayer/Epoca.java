@@ -8,7 +8,7 @@ package apef;
 
 /**
  *
- * @author serafim
+ * @author maleite
  */
 public class Epoca {
     
