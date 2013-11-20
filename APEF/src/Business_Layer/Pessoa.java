@@ -4,12 +4,14 @@
  * and open the template in the editor.
  */
 
-package apef;
+package Business_Layer;
 
 /**
  *
  * @author serafim
  */
-public class Plantel {
-    
+public abstract class Pessoa {
+    private String nome;
+    private Imagem foto;
+    private Integer dataNascimento;    
 }

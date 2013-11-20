@@ -4,12 +4,16 @@
  * and open the template in the editor.
  */
 
-package apef;
+package Business_Layer;
 
 /**
  *
  * @author serafim
  */
-public class Agenda {
+public class Jogador extends Pessoa {
     
+    public static int IDENTIFICADOR=1;
+    
+    private int id;
+    private int nrGolos;
 }

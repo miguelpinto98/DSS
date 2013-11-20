@@ -4,12 +4,14 @@
  * and open the template in the editor.
  */
 
-package apef;
+package Business_Layer;
+
+import java.util.Set;
 
 /**
  *
  * @author serafim
  */
-public class Campeonato {
-    
+public class Historico {
+    private Set<Jogo> jogosRealizados;
 }

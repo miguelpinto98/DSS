@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-package apef.BusinessLayer;
-
+package Business_Layer;
+import java.util.ArrayList;
 /**
  *
  * @author serafim
  */
-public class EstatisticaCompeticao {
-    
+public class Escola {
+    private String nome;
+    private String local;
+    private Campo campo;
+    private ArrayList<Equipa> equipas;
 }

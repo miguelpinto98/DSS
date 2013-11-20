@@ -4,12 +4,15 @@
  * and open the template in the editor.
  */
 
-package apef;
+package Business_Layer;
+
+import java.util.ArrayList;
+import java.util.Set;
 
 /**
  *
  * @author serafim
  */
-public class Resultado {
-    
+public class Agenda {
+    private Set<Jogo> jogosFuturos;
 }

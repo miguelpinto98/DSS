@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package apef.BusinessLayer;
+package Business_Layer;
 
 /**
  *

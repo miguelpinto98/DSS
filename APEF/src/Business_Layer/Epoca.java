@@ -4,12 +4,12 @@
  * and open the template in the editor.
  */
 
-package apef;
+package Business_Layer;
 
 /**
  *
- * @author serafim
+ * @author maleite
  */
-public class Escalao {
+public class Epoca {
     
 }

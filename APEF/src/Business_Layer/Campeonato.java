@@ -4,12 +4,12 @@
  * and open the template in the editor.
  */
 
-package apef;
+package Business_Layer;
 
 /**
  *
  * @author serafim
  */
-public class Arbitro {
+public class Campeonato {
     
 }

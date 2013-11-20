@@ -4,12 +4,15 @@
  * and open the template in the editor.
  */
 
-package apef;
+package Business_Layer;
+
+import java.util.ArrayList;
 
 /**
  *
  * @author serafim
  */
-public class Torneio {
-    
+public class Plantel {
+    private Treinador treinador;
+    private ArrayList<Jogador> jogadores;
 }
