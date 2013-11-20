@@ -6,6 +6,8 @@
 
 package Business_Layer;
 
+import java.util.GregorianCalendar;
+
 /**
  *
  * @author serafim
@@ -13,5 +15,5 @@ package Business_Layer;
 public abstract class Pessoa {
     private String nome;
     private Imagem foto;
-    private Integer dataNascimento;    
+    private GregorianCalendar dataNascimento;    
 }
