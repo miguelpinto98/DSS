@@ -1,2 +1,6 @@
 /APEF/nbproject/private/
 /APEF/build/
+
+*.class
+/APEF/src/.classpath
+/APEF/src/.project
