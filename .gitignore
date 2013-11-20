@@ -1,3 +1,10 @@
 /APEF/nbproject/private/
 /APEF/build/
+<<<<<<< HEAD
 /APEF/dist/
+=======
+
+*.class
+/APEF/src/.classpath
+/APEF/src/.project
+>>>>>>> ef773f60577c56e4566b51e38143cbdb47471d75
