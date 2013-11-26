@@ -11,7 +11,9 @@ package Business_Layer;
  * @author serafim
  */
 public class Escalao {
-    private String idEscalao; //identificador/nome do escalão
+    
+    // Variaveis de Instancia
+    private String Escalao; //identificador/nome do escalão
     private Integer duracaoJogo;
     private Plantel plantel;
     private Agenda agenda;

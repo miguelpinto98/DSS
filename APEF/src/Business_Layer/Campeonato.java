@@ -6,10 +6,22 @@
 
 package Business_Layer;
 
+import java.util.HashMap;
+import java.util.HashSet;
+
 /**
  *
  * @author serafim
  */
 public class Campeonato {
     
+    public static int IDENTIFICADOR=1; 
+
+    // Variaveis de Instancia
+    private int id;
+    private String nome;
+    private int nrEquipas;
+    private Calendario calendario;
+    private Classificacao classificacao;
+    private HashMap<Integer,Integer> goleadores; //<id do jogador,nr golos>     
 }

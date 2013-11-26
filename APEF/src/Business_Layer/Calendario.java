@@ -6,10 +6,14 @@
 
 package Business_Layer;
 
+import java.util.Set;
+
 /**
  *
  * @author serafim
  */
 public class Calendario {
     
+    // Variaveis de Instancia
+    private Set<Jornada> jornadas;
 }

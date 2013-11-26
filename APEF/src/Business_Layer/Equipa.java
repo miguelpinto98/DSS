@@ -15,8 +15,13 @@ import java.util.Map;
  * @author serafim
  */
 public class Equipa {
+    
+    public static int IDENTIFICADOR=1; 
+    
+    // Variaveis de Instancia
+    private int id;
     private String nome;
     private Imagem emblema;
-    private Map<Integer,Integer> palmares;
+    private Map<String,Integer> palmares; //<nome da competicao, nr vezes que ganhou>
     private ArrayList<Escalao> escaloes;    
 }

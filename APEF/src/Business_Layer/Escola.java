@@ -10,6 +10,8 @@ import java.util.ArrayList;
  * @author serafim
  */
 public class Escola {
+    
+    // Variaveis de Instancia
     private String nome;
     private String local;
     private Campo campo;

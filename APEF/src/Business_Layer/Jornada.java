@@ -6,10 +6,14 @@
 
 package Business_Layer;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author serafim
  */
 public class Jornada {
     
+    // Variaveis de Instancia
+    private ArrayList<Jogo> jogos;   
 }

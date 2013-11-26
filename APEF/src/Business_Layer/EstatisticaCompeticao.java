@@ -6,10 +6,12 @@
 
 package Business_Layer;
 
+import java.util.Map;
+
 /**
  *
  * @author serafim
  */
 public class EstatisticaCompeticao {
-    
+    private Map<Integer,DadosEstatisticos> estatistica; //<id equipas, dados estatisticos>
 }

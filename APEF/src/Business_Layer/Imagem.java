@@ -12,18 +12,18 @@ package Business_Layer;
  */
 public class Imagem {
 
-        // v. i.
+        // Variaveis de Instancia
         private String nome;
         private String path;
 
-        // construtor
+        // Construtores
         public Imagem(String nome, String path) {
 
                 this.nome = nome;
                 this.path = path;
         }
 
-        // get e set
+        // Getters e Setters
         public String getNome() {
                 return nome;
         }
@@ -40,7 +40,7 @@ public class Imagem {
                 this.path = path;
         }
 
-        // equals, clone, toString
+        // Clone, toString, equals
         @Override
         public boolean equals(Object obj) {
                 if (obj == null) {

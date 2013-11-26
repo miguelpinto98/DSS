@@ -14,6 +14,7 @@ public class Jogador extends Pessoa {
     
     public static int IDENTIFICADOR=1;
     
+    // Variaveis de Instancia
     private int id;
     private int nrGolos;
 }

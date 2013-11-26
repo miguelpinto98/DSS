@@ -13,5 +13,7 @@ import java.util.Set;
  * @author serafim
  */
 public class Historico {
+    
+   // Variaveis de Instancia
     private Set<Jogo> jogosRealizados;
 }

@@ -6,10 +6,18 @@
 
 package Business_Layer;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author maleite
  */
 public class Epoca {
     
+    public static int IDENTIFICADOR=1;
+    
+    // Variaveis de Instancia
+    private String nome;
+    private Campeonato campeonato;
+    private ArrayList<Torneio> torneios;   
 }

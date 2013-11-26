@@ -13,6 +13,8 @@ import java.util.GregorianCalendar;
  * @author serafim
  */
 public abstract class Pessoa {
+    
+    // Variaveis de Instancia
     private String nome;
     private Imagem foto;
     private GregorianCalendar dataNascimento;    

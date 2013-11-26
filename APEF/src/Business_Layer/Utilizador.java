@@ -13,6 +13,8 @@ import java.util.GregorianCalendar;
  * @author serafim
  */
 public class Utilizador {
+    
+    // Variaveis de Instancia
     private String nomeUtilizador;
     private String nome;
     private String email;

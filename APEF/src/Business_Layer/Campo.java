@@ -14,7 +14,7 @@ public class Campo {
     
     public static int IDENTIFICADOR=1; 
     
+    // Variaveis de Instancia
     private int id;    
-    private String nome;
-    
+    private String nome;   
 }

@@ -12,4 +12,6 @@ package Business_Layer;
  */
 public class Classificacao {
     
+    // Variaveis de Instancia
+    private EstatisticaCompeticao classificacao;
 }

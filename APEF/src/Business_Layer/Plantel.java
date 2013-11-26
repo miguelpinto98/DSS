@@ -13,6 +13,8 @@ import java.util.ArrayList;
  * @author serafim
  */
 public class Plantel {
+    
+    // Variaveis de Instancia
     private Treinador treinador;
     private ArrayList<Jogador> jogadores;
 }

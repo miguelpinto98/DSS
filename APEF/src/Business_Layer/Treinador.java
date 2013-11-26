@@ -11,4 +11,6 @@ package Business_Layer;
  * @author serafim
  */
 public class Treinador extends Pessoa {
+    
+    // Variaveis de Instancia
 }

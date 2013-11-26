@@ -12,4 +12,7 @@ package Business_Layer;
  */
 public class Resultado {
     
+    // Variaveis de Instancia
+    private int nrGolosCasa;
+    private int nrGolosFora;
 }
