@@ -7,5 +7,6 @@ public class APEF {
 	private HashMap<String, Epoca> epoca;
 	private HashMap<String, Utilizador> util;
 
-    public static int IDENTIFICADOR=1;	
+    public static int IDENTIFICADOR=1;
+    
 }

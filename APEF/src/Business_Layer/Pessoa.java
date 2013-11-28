@@ -1,21 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package Business_Layer;
 
 import java.util.GregorianCalendar;
 
-/**
- *
- * @author serafim
- */
 public abstract class Pessoa {
-    
-    // Variaveis de Instancia
+    private int id;
     private String nome;
     private Imagem foto;
-    private GregorianCalendar dataNascimento;    
+    private GregorianCalendar dataNascimento;
+    private int sexo; //0 - nao esta definido, 1 - masc , 2 - fem
 }

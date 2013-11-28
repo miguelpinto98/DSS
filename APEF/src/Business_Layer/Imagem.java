@@ -1,27 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package Business_Layer;
 
-/**
- *
- * @author serafim
- */
 public class Imagem {
-
-        // Variaveis de Instancia
-        private String nome;
-        private String path;
-
-        // Construtores
-        public Imagem(String nome, String path) {
-
-                this.nome = nome;
-                this.path = path;
-        }
+	private String nome;
+    private String path;
+    
+    public Imagem(String nome, String path) {
+    	this.nome = nome;
+    	this.path = path;
+    	}
 
         // Getters e Setters
         public String getNome() {
