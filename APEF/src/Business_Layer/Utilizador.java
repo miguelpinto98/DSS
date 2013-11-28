@@ -14,4 +14,13 @@ public abstract class Utilizador {
     private GregorianCalendar dataNascimento;
     private boolean ativo;
     
+    public Utilizador() {
+    	
     }
+    
+    public Utilizador(Utilizador u) {
+    	
+    }
+    
+    public abstract Utilizador clone() ;
+}
