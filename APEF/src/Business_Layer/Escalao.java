@@ -13,11 +13,11 @@ package Business_Layer;
 public class Escalao {
     
     // Variaveis de Instancia
-    private String Escalao; //identificador/nome do escalão
+    private String nomeEscalao; //identificador/nome do escal��o
     private Integer duracaoJogo;
     private Plantel plantel;
-    private Agenda agenda;
-    private Historico historico;
+    private Agenda agenda; //Jogos A realizar	
+    private Historico historico; //Jogos passados
     private Epoca epoca;
     private DadosEstatisticos dados;
 }

@@ -13,9 +13,9 @@ import java.util.GregorianCalendar;
  * @author serafim
  */
 public class Jogo {
+    private boolean realizado = false;
     
     // Variaveis de Instancia
-    private boolean realizado = false;
     private GregorianCalendar data;
     private int hora;
     private Campo campo;
