@@ -118,7 +118,10 @@ public abstract class Utilizador {
         this.dataNascimento = dn;
     }
     
+    public abstract Utilizador clone(); 
+   
+    public abstract String toString();
     
-    public Utilizador clone();
-    
+    public abstract void equals();
 }
+
