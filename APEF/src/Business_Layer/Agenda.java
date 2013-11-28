@@ -9,6 +9,10 @@ public class Agenda {
             this.jogos = new HashSet<>();
         }
         
+        public Agenda(HashSet<Jogo> j){
+            this.jogos = j;
+        }
+        
         public Agenda(Agenda a){
             this.jogos = a.getJogos();
         }
@@ -24,4 +28,26 @@ public class Agenda {
             for(Jogo j : jogo) this.jogos.add(j);
         }
     
+        public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if ((o == null) || (this.getClass() != o.getClass()))
+			return false;
+		else {
+			Agenda a = (Agenda) o;
+			return (this.jogos.equals(a.getJogos()));
+		}
+        }
+                
+        public Agenda clone() {
+		return new Agenda(this);
+	}
+        
+	public String toString() {
+		StringBuilder s = new StringBuilder();
+		
+		s.append("Agenda");
+		s.append(this.getJogos() + "\n");
+		return s.toString();
+	}
 }
