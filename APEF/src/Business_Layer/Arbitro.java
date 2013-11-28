@@ -6,15 +6,18 @@ public class Arbitro extends Utilizador {
     public Arbitro() {
     	super();
     	this.agenda = new Agenda();
-    }
-    
+    } 
     
     public Arbitro(Arbitro arbitro) {
-		// TODO Auto-generated constructor stub
-	}
-
+	
+    }
+    
+     private Agenda getAgenda() {
+        
+    }
 
 	public Arbitro clone() {
     	return new Arbitro(this);
     }
-}
+   
+} 
