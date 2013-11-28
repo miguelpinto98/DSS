@@ -5,3 +5,4 @@
 *.class
 /APEF/src/.classpath
 /APEF/src/.project
+/APEF/src/.settings/org.eclipse.core.resources.prefs
