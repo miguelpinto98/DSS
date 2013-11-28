@@ -8,4 +8,14 @@ public class APEF {
 	private HashMap<String, Utilizador> util;
 	
 	
+	asdafsadcascc
+	sdasdasjhajgehfjhbdfzhjhjhjdfghjzjf
+	asdjksahfkashsdasdasjhajgehfjhbdfzhjhjhjdfghjzjf
+	asdjksahfkashsdasdasjhajgehfjhbdfzhjhjhjdfghjzjf
+	asdjksahfkashsdasdasjhajgehfjhbdfzhjhjhjdfghjzjf
+	asdjksahfkashsdasdasjhajgehfjhbdfzhjhjhjdfghjzjf
+	asdjksahfkashsdasdasjhajgehfjhbdfzhjhjhjdfghjzjf
+	asdjksahfkashsdasdasjhajgehfjhbdfzhjhjhjdfghjzjf
+	asdjksahfkash
+	
 }
