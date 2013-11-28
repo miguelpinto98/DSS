@@ -39,7 +39,6 @@ public class APEF {
 		return aux;
 	}
 
-	
 	public HashMap<String, Utilizador> getUsers() {
 		HashMap<String,Utilizador> aux = new HashMap<>();
 		
@@ -49,11 +48,17 @@ public class APEF {
 		return aux;
 	}
 
-	public void setEscolas() {}
+	public void setEscolas(HashMap<String, Escola> escolas) {
+		this.escola = escolas;
+	}
 	
-	public void setEpoca() {}
+	public void setEpoca(HashMap<String, Epoca> epocas) {
+		this.epoca = epocas;
+	}
 	
-	public void setUsers() {}
+	public void setUsers(HashMap<String, Utilizador> users) {
+		this.users = users;
+    }
 	
 	public int hashCode() {
 		final int prime = 31;
