@@ -3,7 +3,10 @@ package Business_Layer;
 import java.util.GregorianCalendar;
 
 public abstract class Utilizador {
+    
+    //Variaveis de Instancia
     private int id;
+    private Imagem avatar;
     private String nomeUtilizador;
     private String nome;
     private String email;
@@ -14,8 +17,10 @@ public abstract class Utilizador {
     private GregorianCalendar dataNascimento;
     private boolean ativo;
     
+    //Construtores
     public Utilizador() {
     	this.id = 0;
+        this.avatar = null;
         this.nomeUtilizador = "";
         this.nome = "";
         this.email = "";
@@ -26,9 +31,26 @@ public abstract class Utilizador {
         this.dataNascimento = new GregorianCalendar();
         this.ativo = false;
     }
+
+    public Utilizador(int id, Imagem img, String nickname, String nome, String email, 
+                        String pw, String morada, String tlmvl, 
+                        String codPostal, GregorianCalendar data, 
+                        boolean ativo) {
+        this.id = id;
+        this.avatar = img;
+        this.nomeUtilizador = nickname;
+        this.nome = nome;
+        this.password = pw;
+        this.morada = morada;
+        this. telemovel = tlmvl;
+        this.codigoPostal = codPostal;
+        this.dataNascimento = data;
+        this.ativo = ativo;
+    }
     
     public Utilizador(Utilizador u) {
     	this.id = u.getID();
+        this.avatar = u.getAvatar();
         this.nomeUtilizador = u.getNomeUser();
         this.nome = u.getNome();
         this.email = u.getEmail();
@@ -40,9 +62,13 @@ public abstract class Utilizador {
         this.ativo = u.getAtivo();
     }
 
-    //Get's
+    //Getters
     public int getID() {
         return this.id;
+    }
+    
+    public Imagem getAvatar() {
+        return this.avatar;
     }
 
     public String getNomeUser() {
@@ -81,9 +107,13 @@ public abstract class Utilizador {
         return this.ativo;
     }
     
-    //Set's
+    //Setters
     public void setID(int iden){
         this.id = iden;
+    }
+    
+    public void setAvatar(Imagem img) {
+        this.avatar = img;
     }
     
     public void setNomeUser(String nUser){
@@ -118,10 +148,11 @@ public abstract class Utilizador {
         this.dataNascimento = dn;
     }
     
+    //Equals,Clone,toString
     public abstract Utilizador clone(); 
    
     public abstract String toString();
     
-    public abstract void equals();
+    public abstract boolean equals(Object o);
 }
 

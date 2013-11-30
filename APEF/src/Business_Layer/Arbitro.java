@@ -49,5 +49,4 @@ public class Arbitro extends Utilizador {
 	public void resultadoJogo(int casa, int fora, HashMap<Integer,Integer> goleadores) {
 		this.agenda.addResultadoJogo(casa,fora,goleadores);
 	}
-	
 } 
