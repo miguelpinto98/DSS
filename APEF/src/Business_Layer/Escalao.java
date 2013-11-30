@@ -7,4 +7,14 @@ public abstract class Escalao {
     private Agenda agenda; 			//Jogos	
     private DadosEstatisticos dados;
     private String forma;
+    
+    public Escalao() {
+    	
+    }
+    
+    public abstract Escalao clone();
+    
+    public abstract String toString();
+    
+    public abstract boolean equals(Object o);
 }

@@ -8,5 +8,13 @@ public class Equipa {
     private String nome;
     private Imagem emblema;
     private HashMap<String,Integer> palmares; //<nome da competicao, nr vezes que ganhou>
-    private ArrayList<Escalao> escaloes;    
+    private ArrayList<Escalao> escaloes;
+    
+    public Equipa(Equipa equipa) {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Equipa clone() {
+    	return new Equipa(this);
+    }
 }
