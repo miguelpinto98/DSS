@@ -7,17 +7,4 @@ public class Arbitro extends Utilizador {
     	super();
     	this.agenda = new Agenda();
     } 
-    
-    public Arbitro(Arbitro arbitro) {
-	
-    }
-    
-     private Agenda getAgenda() {
-        
-    }
-
-	public Arbitro clone() {
-    	return new Arbitro(this);
-    }
-   
-} 
+}
