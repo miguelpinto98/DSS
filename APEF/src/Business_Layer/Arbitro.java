@@ -1,6 +1,6 @@
 package Business_Layer;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class Arbitro extends Utilizador {
     private Agenda agenda;
@@ -46,7 +46,7 @@ public class Arbitro extends Utilizador {
 		}
 	}
 	
-	public void resultadoJogo(int casa, int fora, HashMap<Integer,Integer> goleadores) {
+	public void resultadoJogo(int casa, int fora, ArrayList<Integer> goleadores) {
 		this.agenda.addResultadoJogo(casa,fora,goleadores);
 	}
 } 

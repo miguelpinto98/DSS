@@ -11,7 +11,7 @@ public class Equipa {
     private ArrayList<Escalao> escaloes;
     
     public Equipa(Equipa equipa) {
-		// TODO Auto-generated constructor stub
+    	
 	}
 
 	public Equipa clone() {

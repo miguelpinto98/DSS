@@ -1,7 +1,6 @@
 package Business_Layer;
 
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.TreeSet;
 
 public class Agenda {
@@ -53,9 +52,14 @@ public class Agenda {
 		return s.toString();
 	}
 
-	public void addResultadoJogo(int casa, int fora,HashMap<Integer, Integer> goleadores) {
-		
-		for(Jogo j : this.jogos)
-			;
+	public void addResultadoJogo(int casa, int fora, ArrayList<Integer> goleadores) {	
+		for(Jogo j : this.jogos) {
+			if(!j.isJogoRealizado()) {
+				j.resultadoJogo(casa, fora);
+				j.goleadoresJogo(goleadores);
+				j.setRealizado(true);
+			}
+			break;
+		}
 	}
 }
