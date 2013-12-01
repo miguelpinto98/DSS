@@ -1,8 +1,12 @@
 package Business_Layer;
 
 public class Benjamins extends Escalao {
-	private static final int duracaoJogo = 45;
+	
+    //variaveis de instancia
+    private static final int duracaoJogo = 45;
 
+    
+    
 	@Override
 	public Escalao clone() {
 		// TODO Auto-generated method stub
