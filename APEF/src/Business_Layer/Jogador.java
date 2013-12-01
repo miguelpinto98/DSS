@@ -44,8 +44,13 @@ public class Jogador extends Pessoa {
     }
 
     public String toString() {
-    	StringBuilder str = new StringBuilder("Jogador\n");
+    	StringBuilder str = new StringBuilder();
+    	str.append("--Jogador--\n") ;
 
     	return str.toString();
-    }   
+    }  
+    
+    
+    	
+    //Metodos
 }

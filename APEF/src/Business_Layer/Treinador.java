@@ -33,5 +33,6 @@ public class Treinador extends Pessoa {
     	return str.toString();
     }   
     
+    //Metodos
     
 }
