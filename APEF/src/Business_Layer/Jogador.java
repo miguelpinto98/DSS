@@ -35,7 +35,7 @@ public class Jogador extends Pessoa {
     		return false;
         else {
     	Jogador jogador = (Jogador) o;
-    	return this.getID() == (jogador.getID());
+    	return (this.getID() == jogador.getID());
         }
     }
     
@@ -48,9 +48,6 @@ public class Jogador extends Pessoa {
     	str.append("--Jogador--\n") ;
 
     	return str.toString();
-    }  
-    
-    
-    	
+    }  	
     //Metodos
 }

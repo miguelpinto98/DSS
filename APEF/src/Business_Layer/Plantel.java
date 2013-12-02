@@ -14,7 +14,7 @@ public class Plantel {
 
     //Construtores
     public Plantel() {
-    	this.treinador = null;
+    	this.treinador = new Treinador();
     	this.jogadores = new HashSet<>();
     }
 
@@ -29,7 +29,10 @@ public class Plantel {
     }
     
     public HashSet<Jogador> getJogadores() {
-        return this.jogadores;
+        HashSet<Jogador> aux = new HashSet<Jogador>();
+        for(Jogador j: this.jogadores) 
+            aux.add(j.clone());
+        return aux;
     }
    
     //Setters
@@ -83,7 +86,7 @@ public class Plantel {
     }
     
     public Set<Jogador> procurarJogadorNome(String jogador) {
-    	Set<Jogador> res = new HashSet<Jogador>();
+        Set<Jogador> res = new HashSet<Jogador>();
     	for (Iterator<Jogador> it = this.jogadores.iterator(); it.hasNext();) {
             Jogador j = it.next();
             if(j.getNome().contains(jogador))
