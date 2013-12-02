@@ -45,14 +45,14 @@ public class Epoca {
          ArrayList<Torneio> aux = new ArrayList<>();
          
          for(Torneio t : this.torneios){
-             aux.add(t.clone());
+             aux.add(t.clone()); //
          }
          
          return aux;
      }
 
      //setters
-     public void setEpoca(String nome){
+     public void setNome(String nome){
          this.nome = nome;
      }
      
@@ -71,8 +71,13 @@ public class Epoca {
     }
     
     public String toString() {
-        StringBuilder str = new StringBuilder("Epoca\n");
-		
+        StringBuilder str = new StringBuilder();
+	
+        str.append("Banco de Dados");
+	str.append(this.getNome() + "\n");
+	str.append(this.getCampeonato() + "\n");
+	str.append(this.getTorneios() + "\n");
+                
         return str.toString();
     }
     
