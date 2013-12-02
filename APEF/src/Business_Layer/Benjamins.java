@@ -1,27 +1,43 @@
 package Business_Layer;
 
 public class Benjamins extends Escalao {
-	
-    //variaveis de instancia
+
     private static final int duracaoJogo = 45;
 
     
+    //construtor vazio
+    public Benjamins(){
+        super();
+    } 
     
-	@Override
-	public Escalao clone() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    //construtor de copia
+    public Benjamins(Benjamins benjamin){
+        super(benjamin);
+    }
+    
+    
+    //clone, equals e toString
+    	@Override
+    public Benjamins clone() {
+        return new Benjamins(this);
+    }
 
 	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public String toString() {
+	StringBuilder str = new StringBuilder("Benjamins\n");
+		
+	return str.toString();
+    }
 
 	@Override
-	public boolean equals(Object o) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    public boolean equals(Object o) {
+	if (this == o)
+			return true;
+		if ((o == null) || (o.getClass() != this.getClass()))
+			return false;
+		else {
+			Benjamins b = (Benjamins) o;
+			return (this.getPlantel() == b.getPlantel());	
+		}	
+    }
 }

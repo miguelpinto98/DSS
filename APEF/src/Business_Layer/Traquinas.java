@@ -3,22 +3,39 @@ package Business_Layer;
 public class Traquinas extends Escalao {
 	private static final int duracaoJogo = 45;
 
+        //construtor vazio
+        public Traquinas(){
+            super();
+        }
+        
+        //construtor de copia
+        public Traquinas(Traquinas t){
+            super(t);
+        }
+        
+        //clone, equals e toString
 	@Override
-	public Escalao clone() {
-		// TODO Auto-generated method stub
-		return null;
+	public Traquinas clone() {
+            return new Traquinas(this);
 	}
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
+            StringBuilder str = new StringBuilder("Traquinas\n");
+		
+            return str.toString();
 	}
 
 	@Override
 	public boolean equals(Object o) {
-		// TODO Auto-generated method stub
+            if (this == o)
+		return true;
+            if ((o == null) || (o.getClass() != this.getClass()))
 		return false;
+            else {
+			Traquinas b = (Traquinas) o;
+			return (this.getPlantel() == b.getPlantel());	
+		}
 	}
 
 }
