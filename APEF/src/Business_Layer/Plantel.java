@@ -11,16 +11,25 @@ public class Plantel {
 	//Variaveis de Instancia
     private Treinador treinador;
     private HashSet<Jogador> jogadores;
+    private Agenda agenda;          //Jogos 
+    private DadosEstatisticos dados;
+    private String forma;
 
     //Construtores
     public Plantel() {
     	this.treinador = new Treinador();
     	this.jogadores = new HashSet<>();
+        this.agenda = new Agenda();
+        this.dados = new DadosEstatisticos();
+        this.forma = "";
     }
 
     public Plantel(Plantel p) {
     	this.treinador = p.getTreinador();
     	this.jogadores = p.getJogadores();
+        this.agenda = p.getAgenda();
+        this.dados = p.getDados();
+        this.forma = p.getForma();
     }
 
     //Getters
@@ -34,6 +43,18 @@ public class Plantel {
             aux.add(j.clone());
         return aux;
     }
+
+    public Agenda getAgenda() {
+        return this.agenda;
+    }
+    
+    public DadosEstatisticos getDados() {
+        return this.dados;
+    }
+    
+    public String getForma(){
+        return this.forma;
+    }
    
     //Setters
     public void setTreinador(Treinador t) {
@@ -42,6 +63,18 @@ public class Plantel {
 
     public void setJogadores(HashSet<Jogador> j) {
         this.jogadores = j;
+    }
+
+    public void setAgenda(Agenda agenda){
+        this.agenda = agenda;
+    }
+    
+    public void setDados(DadosEstatisticos dados){
+        this.dados = dados;
+    }
+    
+    public void setForma(String f){
+        this.forma = f;
     }
 
     //Equals,hashCode,Clone,toString
