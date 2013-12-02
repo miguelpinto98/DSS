@@ -1,21 +1,26 @@
 package Business_Layer;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Objects;
 
 public class Epoca {
-    
-	//Variaveis de Instancia
+
+    //Variaveis de Instancia
     private String nome;
     private Campeonato campeonato;
     private HashSet<Torneio> torneios;
-    
+
     //Construtores
     public Epoca() {
     	this.nome = "";
     	this.campeonato = new Campeonato();
     	this.torneios = new HashSet<>();
+    }
+
+    public Epoca(String n, Campeonato c, HashSet<Torneio> t){
+        this.nome = n;
+        this.campeonato = c;
+        this.torneios = t;
     }
 
     public Epoca(Epoca e) {
@@ -38,7 +43,7 @@ public class Epoca {
         for(Torneio t: this.torneios) 
             aux.add(t.clone());
         return aux;
-        }
+    }
 
     //Setters
     public void setNome(String n) {
@@ -79,7 +84,9 @@ public class Epoca {
         StringBuilder str = new StringBuilder(); 
         
         str.append("--Epoca--\n");
-        
+        str.append(this.getNome() + "\n");
+		str.append(this.getCampeonato() + "\n");
+		str.append(this.getTorneios() + "\n");
         return str.toString(); 
-	}
+    }
 }
