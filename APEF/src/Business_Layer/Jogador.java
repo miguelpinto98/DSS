@@ -46,6 +46,9 @@ public class Jogador extends Pessoa {
     public String toString() {
     	StringBuilder str = new StringBuilder();
     	str.append("--Jogador--\n") ;
+        str.append(this.getNrGolos());
+        str.append(this.getNome());
+        str.append(this.getSexo());
 
     	return str.toString();
     }  	

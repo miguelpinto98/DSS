@@ -104,6 +104,7 @@ public class Plantel {
 		StringBuilder str = new StringBuilder(); 
 		
 		str.append("--Plantel--\n");
+        str.append(this.getJogadores());
 		
 		return str.toString(); 
 	}
