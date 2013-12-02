@@ -34,7 +34,7 @@ public abstract class Pessoa {
 		this.nome = p.getNome();
 		this.foto = p.getFoto();
 		this.dataNascimento = p.getDataNasc();
-		this.sexo = getSexo();
+		this.sexo = p.getSexo();
 	}
 
 	//Getters
@@ -75,7 +75,7 @@ public abstract class Pessoa {
     	this.dataNascimento = data;
     }
 
-    public void setSex(int genero) {
+    public void setSexo(int genero) {
     	this.sexo = genero;
     }
 

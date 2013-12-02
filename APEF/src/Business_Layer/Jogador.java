@@ -1,5 +1,7 @@
 package Business_Layer;
 
+import java.util.GregorianCalendar;
+
 public class Jogador extends Pessoa {    
     
     //Variaveis de Instancia
@@ -10,8 +12,13 @@ public class Jogador extends Pessoa {
     	super();
     	this.nrGolos = 0;
     }
+   
+    public Jogador(String nome, GregorianCalendar g,int sexo) {
+        super(1,nome,null,g,sexo);
+        this.nrGolos = 99;
+    }
 
- 	public Jogador(Jogador t) {
+    public Jogador(Jogador t) {
     	super(t);
     	this.nrGolos = t.getNrGolos();
     }
@@ -45,10 +52,13 @@ public class Jogador extends Pessoa {
 
     public String toString() {
     	StringBuilder str = new StringBuilder();
-    	str.append("--Jogador--\n") ;
-        str.append(this.getNrGolos());
+    	str.append("--Jogador--") ;
+        str.append(this.getID());
+        str.append(this.getNrGolos()+"  ");
+        str.append(this.getDataNasc());
+        str.append(this.getSexo()+"\n");
         str.append(this.getNome());
-        str.append(this.getSexo());
+        
 
     	return str.toString();
     }  	

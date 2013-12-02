@@ -99,16 +99,24 @@ public class Plantel {
     public Plantel clone() {
     	return new Plantel(this);
     }
+    
+    public StringBuilder imprime(HashSet<Jogador> hash) {
+        StringBuilder s = new StringBuilder();
+        for (Jogador j: hash) {
+            s.append(j.toString());
+        }
+       return s;
+    }
 
     public String toString() {
 		StringBuilder str = new StringBuilder(); 
 		
 		str.append("--Plantel--\n");
-        str.append(this.getJogadores());
+                str.append(this.imprime(getJogadores()));
 		
 		return str.toString(); 
 	}
-
+    
 	//Metodos
     public void inserirJogador(Jogador j) {
         if (jogadores.size() < 12) 
