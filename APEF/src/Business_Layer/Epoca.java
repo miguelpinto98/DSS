@@ -39,7 +39,7 @@ public class Epoca {
     }
     
     public HashSet<Torneio> getTorneios() {
-        HashSet<Torneio> aux = new HashSet<Torneio>();
+        HashSet<Torneio> aux = new HashSet<>();
         for(Torneio t: this.torneios) 
             aux.add(t.clone());
         return aux;
@@ -74,7 +74,7 @@ public class Epoca {
             return ( this.nome.equals(t.getNome()) && this.campeonato.equals(t.getCampeonato()) &&
         			this.torneios.equals(t.getTorneios()) );
         }
-    }
+    } 
 
     public Epoca clone() {
         return new Epoca(this);
