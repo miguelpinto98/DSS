@@ -4,30 +4,34 @@ public class Imagem {
 	private String nome;
     private String path;
     
+    public Imagem() {
+    	this.nome = new String();
+    	this.path = new String();
+    }
+    
     public Imagem(String nome, String path) {
     	this.nome = nome;
     	this.path = path;
-    	}
+    }
+    
+    // Getters e Setters
+    public String getNome() {
+    	return this.nome;
+    }
 
-        // Getters e Setters
-        public String getNome() {
-                return nome;
-        }
+    public void setNome(String nome) {
+    	this.nome = nome;
+    }
 
-        public void setNome(String nome) {
-                this.nome = nome;
-        }
+    public String getPath() {
+    	return path;
+    }
 
-        public String getPath() {
-                return path;
-        }
+    public void setPath(String path) {
+    	this.path = path;
+    }
 
-        public void setPath(String path) {
-                this.path = path;
-        }
-
-        // Clone, toString, equals
-        @Override
+    // Clone, toString, equals
         public boolean equals(Object obj) {
                 if (obj == null) {
                         return false;

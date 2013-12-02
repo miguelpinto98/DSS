@@ -127,7 +127,19 @@ public class Jogo {
 	public void setGoleadoresJogo(HashMap<Integer, Integer> goleadores) {
 		this.goleadores = goleadores;
 	}
+	
+	public Jogo clone() {
+		return new Jogo(this);
+	}
 
+	public String toString() {
+		StringBuilder str = new StringBuilder("Jogo");
+		
+		str.append("Campo: "+this.campo.toString());
+		
+		return str.toString();
+	}
+	
 	public boolean equals(Object o) {
 		if (this == o)
 			return true;
@@ -146,29 +158,28 @@ public class Jogo {
 		}
 	}
 	
-	protected Jogo clone() {
-		return new Jogo(this);
-	}
-
-	public String toString() {
-		StringBuilder str = new StringBuilder("Jogo");
-		
-		str.append("Campo: "+this.campo.toString());
-		
-		return str.toString();
-	}
-	
 	public void resultadoJogo(int ngc, int ngf) {
 		setNumGolosJogoCasa(ngc);
 		setNumGolosJogoFora(ngf);
 	}
-	
-	public void addJogadorGoleador(int id) {
-		this.goleadores.put(id, this.goleadores.get(id) + 1);
-	}
 
 	public void goleadoresJogo(ArrayList<Integer> golos) {
 		for(Integer id : golos)
-			this.addJogadorGoleador(id);
+			if(this.goleadores.containsKey(id))
+				this.goleadores.put(id, this.goleadores.get(id) + 1);
+			else
+				this.goleadores.put(id, 1);
+	}
+	
+	public void listaGoleadores() {
+		for(Integer n : this.goleadores.keySet())
+			System.out.println("ID: "+n+" Golos: "+this.goleadores.get(n));
+	}
+
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((goleadores == null) ? 0 : goleadores.hashCode());
+		return result;
 	}
 }
