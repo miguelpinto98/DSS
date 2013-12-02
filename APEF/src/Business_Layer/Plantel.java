@@ -1,6 +1,7 @@
 package Business_Layer;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Objects;
 import java.util.Set;
 import java.util.logging.Logger;
@@ -41,10 +42,11 @@ public class Plantel {
     }
 
     //Equals,hashCode,Clone,toString
-    public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + Objects.hashCode(this.jogadores);
-        return hash;
+    public int hashCode() {     
+        final int prime = 7;
+        int result = 1;
+        result = prime * result + ((this.jogadores == null) ? 0 : this.jogadores.hashCode());
+        return result;
     }
 
     public boolean equals(Object o) {
@@ -71,18 +73,23 @@ public class Plantel {
 	}
 
 	//Metodos
-	public void inserirJogador(Jogador j) {
-        } 
+    public void inserirJogador(Jogador j) {
+        if (jogadores.size() < 12) 
+            this.jogadores.add(j);
+    }
         
-        public void removerJogador(Jogador j) {
+    public void removerJogador(Jogador j) {
+        this.jogadores.remove(j);
+    }
+    
+    public Set<Jogador> procurarJogadorNome(String jogador) {
+    	Set<Jogador> res = new HashSet<Jogador>();
+    	for (Iterator<Jogador> it = this.jogadores.iterator(); it.hasNext();) {
+            Jogador j = it.next();
+            if(j.getNome().contains(jogador))
+                res.add(j.clone());
         }
-        
-        public void editarJogador(Jogador j) {
-        }
-        
-        public Set<Jogador> procurarJogador(String nome) {
-            Set<Jogador> res = new HashSet<Jogador>();
-            return res;
-        }
+        return res;
+    }
 }
 

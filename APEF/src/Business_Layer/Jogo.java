@@ -108,7 +108,7 @@ public class Jogo {
 	}
 
 	public int getNumGolosJogoFora() {
-		return numGolosFora;
+		return this.numGolosFora;
 	}
 
 	public void setNumGolosJogoFora(int numGolosFora) {
