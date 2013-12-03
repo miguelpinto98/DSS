@@ -9,6 +9,11 @@ public class Arbitro extends Utilizador {
     	super();
     	this.agenda = new Agenda();
     }
+
+    public Arbitro(int id, String nickname, String password, String email) {
+		super(id,null,nickname,"",email,password,"","","",null,false,false);
+		this.agenda = new Agenda(); 
+	}
     
     public Arbitro(Arbitro arb) {
     	super(arb);

@@ -5,8 +5,18 @@ import java.util.HashSet;
 public class ResponsavelEscola extends Utilizador {
 	private HashSet<Equipa> equipas; //???
 	
-	public ResponsavelEscola(ResponsavelEscola re) {
+	public ResponsavelEscola() {
 		super();
+		this.equipas = new HashSet<Equipa>();
+	}
+
+	public ResponsavelEscola(int id, String nickname, String password, String email) {
+		super(id,null,nickname,"",email,password,"","","",null,false,false);
+		this.equipas = new HashSet<Equipa>(); 
+	}
+
+	public ResponsavelEscola(ResponsavelEscola re) {
+		super(re);
 		this.equipas = re.getEquipasResponsavel();
 	}
 	
@@ -16,7 +26,7 @@ public class ResponsavelEscola extends Utilizador {
 		for(Equipa e : this.equipas)
 			hse.add(e.clone());
 		
-		return null;
+		return hse;
 	}
 
 	public void setEquipasResponsavel(HashSet<Equipa> es) {

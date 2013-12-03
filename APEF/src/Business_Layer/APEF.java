@@ -1,11 +1,13 @@
 package Business_Layer;
 
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class APEF {
 	private HashMap<String, Escola> escola;
 	private HashMap<String, Epoca> epoca;
 	private HashMap<String, Utilizador> users;
+	private Utilizador emSessao;
 
     public static int IDENTIFICADOR=1;
     
@@ -48,6 +50,10 @@ public class APEF {
 		return aux;
 	}
 
+	public Utilizador getEmSessao() {
+		return this.emSessao;
+	}
+
 	public void setEscolas(HashMap<String, Escola> escolas) {
 		this.escola = escolas;
 	}
@@ -58,6 +64,10 @@ public class APEF {
 	
 	public void setUsers(HashMap<String, Utilizador> users) {
 		this.users = users;
+    }
+
+    public void setEmSessao(Utilizador u) {
+    	this.emSessao = u;
     }
 	
 	public int hashCode() {
@@ -91,4 +101,102 @@ public class APEF {
 		
 		return str.toString(); 
 	}
+
+	/**
+	*Metodos Utilizadores
+	*/
+
+	/**public boolean existeEmail(String e) {
+		boolean res=false;
+		for(Utilizador u : this.users) {
+			if (u.getEmail().equals(e)) {
+				res = true;
+				break;
+			}
+		}
+		return res;
+	}*/
+
+	public boolean existeEmail(String e) {
+		boolean res=false;
+		Iterator<String> it = this.users.keySet().iterator(); 
+		while (it.hasNext() && !res) {
+			String u = it.next();
+			if (this.users.get(u).getEmail().equals(e)) {
+				res = true;
+			}
+		}
+                return res;
+	}
+
+	public boolean existeNickname(String nickname){
+		return (this.users.containsKey(nickname));
+	}
+
+	public boolean existeUtilizador(String nickname, String email){
+		return (existeNickname(nickname) || existeEmail(email));
+	}
+
+	public void inserirUtilizador(Utilizador user) {
+		if ( !(existeUtilizador(user.getNomeUser(),user.getEmail())) )
+                    this.users.put(user.getNomeUser(),user);
+	}
+
+	public static boolean validaPassword(String pw) {
+        boolean res = true;
+        int i = 0;
+        
+        if(pw.length() < 6)
+                    return false ;
+        for (; i < pw.length() && res; i++) {
+        	char c = pw.charAt(i);
+            if (!(Character.isDigit(c) || Character.isLetter(c) || (c == '_') || (c == '.')))
+            	res = false;
+        }
+        return res;
+    }
+
+	public void registarUser(String nickname, String password, String email, int tipoUser) {
+		if(validaPassword(password)) {
+			if (tipoUser==0) 
+			{ Admin user = new Admin(IDENTIFICADOR, nickname, password, email);
+       	    		  inserirUtilizador(user);
+			}
+			if (tipoUser==1) 
+			{ ResponsavelEscola user = new ResponsavelEscola(IDENTIFICADOR, nickname, password, email);
+                	  inserirUtilizador(user);
+            }
+			if (tipoUser==2) 
+			{ Arbitro user = new Arbitro(IDENTIFICADOR, nickname, password, email);
+	                  inserirUtilizador(user);
+            }
+		IDENTIFICADOR++;
+		}
+	}
+
+	public void removerUtilizador(Utilizador user) {
+		this.users.remove(user.getNomeUser());
+	}
+
+	public boolean validaLogin(String nickname, String password){
+		return (existeNickname(nickname) && this.users.get(nickname).passwordCorresponde(password));
+	}
+
+	public void login(String nickname, String password){
+		if (validaLogin(nickname,password)) {
+			  Utilizador user = this.users.get(nickname);
+			  if (user.getAtivo()) { 
+			  	this.emSessao = user;
+			  	if(user.getAtivo() && !user.getCamposPreenchidos())
+			  			{ /** metodo prencher campos*/ }
+			  }
+			  else { System.out.println("espera validacao"); }
+			}
+		else System.out.println("LOGIN INVALIDO");
+	}
+	
+	public void logout(){
+		this.emSessao = null;
+	}
+
 }

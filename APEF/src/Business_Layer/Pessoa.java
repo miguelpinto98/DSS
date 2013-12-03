@@ -85,4 +85,10 @@ public abstract class Pessoa {
     public abstract String toString();
     
     public abstract boolean equals(Object o);
+
+    /**metodos*/
+    public void atualizaDados (String nome, Imagem foto, GregorianCalendar dataNascimento, int sexo) {
+
+    }
+    
 }

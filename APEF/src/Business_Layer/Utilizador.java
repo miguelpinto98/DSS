@@ -1,5 +1,7 @@
 package Business_Layer;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
 import java.util.GregorianCalendar;
 
 public abstract class Utilizador {
@@ -16,6 +18,7 @@ public abstract class Utilizador {
     private String codigoPostal;
     private GregorianCalendar dataNascimento;
     private boolean ativo;
+    private boolean camposPreenchidos;
     
     //Construtores
     public Utilizador() {
@@ -30,12 +33,13 @@ public abstract class Utilizador {
         this.codigoPostal = "";
         this.dataNascimento = new GregorianCalendar();
         this.ativo = false;
+        this.camposPreenchidos = false;
     }
 
     public Utilizador(int id, Imagem img, String nickname, String nome, String email, 
                         String pw, String morada, String tlmvl, 
                         String codPostal, GregorianCalendar data, 
-                        boolean ativo) {
+                        boolean ativo, boolean camposPreenchidos) {
         this.id = id;
         this.avatar = img;
         this.nomeUtilizador = nickname;
@@ -46,6 +50,7 @@ public abstract class Utilizador {
         this.codigoPostal = codPostal;
         this.dataNascimento = data;
         this.ativo = ativo;
+        this.camposPreenchidos = camposPreenchidos;
     }
     
     public Utilizador(Utilizador u) {
@@ -60,6 +65,7 @@ public abstract class Utilizador {
         this.codigoPostal = u.getCodPostal();
         this.dataNascimento = u.getDataNasc();
         this.ativo = u.getAtivo();
+        this.camposPreenchidos = u.getCamposPreenchidos();
     }
 
     //Getters
@@ -106,6 +112,10 @@ public abstract class Utilizador {
     public boolean getAtivo() {
         return this.ativo;
     }
+
+    public boolean getCamposPreenchidos() {
+        return this.camposPreenchidos;
+    }
     
     //Setters
     public void setID(int iden){
@@ -148,11 +158,41 @@ public abstract class Utilizador {
         this.dataNascimento = dn;
     }
     
+    public void setAtivo(boolean m){
+        this.ativo = m;
+    }
+
+    public void setCamposPreenchidos(boolean m){
+        this.camposPreenchidos = m;
+    }
+
     //Equals,Clone,toString
     public abstract Utilizador clone(); 
    
     public abstract String toString();
     
     public abstract boolean equals(Object o);
+
+    /**Metodos*/
+    public static String encriptarPassword (String pw) {
+        byte[] pwB = pw.getBytes() ;
+        byte[] pwEnc = null ;
+        String res = null ;        
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5") ;
+            pwEnc = md.digest(pwB) ;
+            BigInteger big = new BigInteger(1, pwEnc) ;
+            res = big.toString(16) ;            
+        } catch (Exception e) {throw new NullPointerException(e.getMessage()) ;}
+        return res ;
+    }
+
+    public boolean passwordCorresponde(String pw) {    
+        System.out.println("pw login :" + encriptarPassword(pw)) ;
+        System.out.println("pw user :" + this.password) ;
+        return this.password.equals(encriptarPassword(pw));
+       }
+
+
 }
 
