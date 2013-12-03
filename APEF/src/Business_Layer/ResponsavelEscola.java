@@ -1,6 +1,7 @@
 package Business_Layer;
 
 import java.util.HashSet;
+import java.util.GregorianCalendar;
 
 public class ResponsavelEscola extends Utilizador {
 	private HashSet<Equipa> equipas; //???
@@ -10,8 +11,8 @@ public class ResponsavelEscola extends Utilizador {
 		this.equipas = new HashSet<Equipa>();
 	}
 
-	public ResponsavelEscola(int id, String nickname, String password, String email) {
-		super(id,null,nickname,"",email,password,"","","",null,false,false);
+	public ResponsavelEscola(int id, String nickname, String password, String email, GregorianCalendar g) {
+		super(id,null,nickname,"",email,password,"","","",g,false,false);
 		this.equipas = new HashSet<Equipa>(); 
 	}
 
@@ -49,7 +50,11 @@ public class ResponsavelEscola extends Utilizador {
 	}
 	
 	public String toString() {
-		StringBuilder str = new StringBuilder("Responsavel Escola");
+		StringBuilder str = new StringBuilder("Responsavel Escola\n");
+                str.append("ID:" + this.getID() + "\n");
+                str.append("Nickname:" + this.getNomeUser()+"\n");
+                str.append("Password:" + this.getPass()+"\n");
+                str.append("Email:" + this.getEmail()+"\n");
 		
 		return str.toString();
 	}

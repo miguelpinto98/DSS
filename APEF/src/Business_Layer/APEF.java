@@ -97,7 +97,8 @@ public class APEF {
 	public String toString() {
 		StringBuilder str = new StringBuilder(); 
 		
-		str.append("APEF");
+		str.append("APEF\n");
+		str.append("Utilizador:" + this.getUsers());
 		
 		return str.toString(); 
 	}
@@ -163,12 +164,12 @@ public class APEF {
        	    		  inserirUtilizador(user);
 			}
 			if (tipoUser==1) 
-			{ ResponsavelEscola user = new ResponsavelEscola(IDENTIFICADOR, nickname, password, email);
-                	  inserirUtilizador(user);
+			{ //ResponsavelEscola user = new ResponsavelEscola(IDENTIFICADOR, nickname, password, email);
+                	  //inserirUtilizador(user);
             }
 			if (tipoUser==2) 
-			{ Arbitro user = new Arbitro(IDENTIFICADOR, nickname, password, email);
-	                  inserirUtilizador(user);
+			{ //Arbitro user = new Arbitro(IDENTIFICADOR, nickname, password, email);
+	                  //inserirUtilizador(user);
             }
 		IDENTIFICADOR++;
 		}

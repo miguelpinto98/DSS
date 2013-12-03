@@ -44,9 +44,10 @@ public abstract class Utilizador {
         this.avatar = img;
         this.nomeUtilizador = nickname;
         this.nome = nome;
+        this.email = email;
         this.password = pw;
         this.morada = morada;
-        this. telemovel = tlmvl;
+        this.telemovel = tlmvl;
         this.codigoPostal = codPostal;
         this.dataNascimento = data;
         this.ativo = ativo;
