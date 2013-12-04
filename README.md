@@ -1,15 +1,29 @@
-﻿DSS
-===
+To-Do list :: DSS
+=================
 
-Gestão da actividade de uma Associação de Escolas de Futebol
-Temos de trabalhar com muita muita força!
+Ate dia 8/DEZ
+- especificação do sistema que ja tiverem realizado (no minimo, 2/3 dos use case devem ter sido considerados); [no .vpp]
 
-Até logo :P
+Ate dia 20/DEZ
+- implementaçao (pelo menos 1/3 dos use case deverao estar implementados); [codigo]
 
-Teste 2
+Ate dia 5/JAN
+- Entrega final do projecto, com relatorio.
 
-Olá, fofinhos :) Beijinhos da 63Linda
+=================
+- Começar interface grafica;
+- Continuar o desenvolvimento .vpp;
+- Continuar o desenvolvimento dos metodos das classes;
+-
 
-up
 
-Tutorial git: https://www.codeschool.com/courses/try-git
+// a partir do momento que um metodo passe para o facade, passa a ser possivel fazer no .vpp o use case geral especificado dele
+=================
+
+
+
+-----------------------------
+| "Feito" (ou grande parte) |
+-----------------------------
+- Classe Utilizador (metodos);
+- 
