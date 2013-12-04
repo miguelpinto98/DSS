@@ -1,5 +1,6 @@
 package Business_Layer;
 
+import java.util.GregorianCalendar;
 import java.util.HashSet;
 
 public class Admin extends Utilizador {
@@ -11,8 +12,8 @@ public class Admin extends Utilizador {
 		this.historicoAccao = new HashSet<String>();
 	}
 
-	public Admin(int id, String nickname, String password, String email){
-		super(id,null,nickname,"",email,password,"","","",null,false,false);
+	public Admin(int id, String nickname, String password, String email, GregorianCalendar g){
+		super(id,null,nickname,"",email,password,"","","",g,false,false);
 		this.historicoAccao = new HashSet<String>(); 
 	}
 
@@ -56,8 +57,11 @@ public class Admin extends Utilizador {
 	}*/
 
 	public String toString() {
-		StringBuilder str = new StringBuilder("Admin");
-		
+		StringBuilder str = new StringBuilder("Admin\n");
+		str.append("ID:" + this.getID() + "\n");
+                str.append("Nickname:" + this.getNomeUser()+"\n");
+                str.append("Password:" + this.getPass()+"\n");
+                str.append("Email:" + this.getEmail()+"\n");
 		return str.toString();
 	}
 

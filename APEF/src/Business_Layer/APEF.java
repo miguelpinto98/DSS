@@ -1,5 +1,6 @@
 package Business_Layer;
 
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -15,12 +16,14 @@ public class APEF {
     	this.escola = new HashMap<>();
     	this.epoca = new HashMap<>();
     	this.users = new HashMap<>();
+        this.emSessao = null;
     }
 
 	public APEF(APEF a) {
 		this.escola = a.getEscolas();
 		this.epoca = a.getEpoca();
 		this.users = a.getUsers();
+                this.emSessao = a.getEmSessao();
 	}
 
 	public HashMap<String, Escola> getEscolas() {
@@ -45,7 +48,7 @@ public class APEF {
 		HashMap<String,Utilizador> aux = new HashMap<>();
 		
 		for(String s : this.users.keySet())
-			aux.put(s, this.users.get(s).clone());
+			aux.put(s, this.users.get(s));
 		
 		return aux;
 	}
@@ -158,19 +161,26 @@ public class APEF {
     }
 
 	public void registarUser(String nickname, String password, String email, int tipoUser) {
-		if(validaPassword(password)) {
+            GregorianCalendar g = new GregorianCalendar();
+            if(validaPassword(password)) {
 			if (tipoUser==0) 
-			{ Admin user = new Admin(IDENTIFICADOR, nickname, password, email);
+			{ Admin user = new Admin(IDENTIFICADOR, nickname, password, email, g);
+                          String pw = user.encriptarPassword(password);
+                          user.setPass(pw);
        	    		  inserirUtilizador(user);
 			}
 			if (tipoUser==1) 
-			{ //ResponsavelEscola user = new ResponsavelEscola(IDENTIFICADOR, nickname, password, email);
-                	  //inserirUtilizador(user);
-            }
+			{ ResponsavelEscola user = new ResponsavelEscola(IDENTIFICADOR, nickname, password, email,g);
+                	  String pw = user.encriptarPassword(password);
+                          user.setPass(pw);
+                          inserirUtilizador(user);
+                        }
 			if (tipoUser==2) 
-			{ //Arbitro user = new Arbitro(IDENTIFICADOR, nickname, password, email);
-	                  //inserirUtilizador(user);
-            }
+			{ Arbitro user = new Arbitro(IDENTIFICADOR, nickname, password, email, g);
+                          String pw = user.encriptarPassword(password);
+                          user.setPass(pw);
+	                  inserirUtilizador(user);
+                        }
 		IDENTIFICADOR++;
 		}
 	}
@@ -185,10 +195,9 @@ public class APEF {
 
 	public void login(String nickname, String password){
 		if (validaLogin(nickname,password)) {
-			  Utilizador user = this.users.get(nickname);
-			  if (user.getAtivo()) { 
-			  	this.emSessao = user;
-			  	if(user.getAtivo() && !user.getCamposPreenchidos())
+			  if ((this.users.get(nickname).getAtivo())) { 
+			  	this.emSessao = this.users.get(nickname);
+			  	if(this.users.get(nickname).getAtivo() && !this.users.get(nickname).getCamposPreenchidos())
 			  			{ /** metodo prencher campos*/ }
 			  }
 			  else { System.out.println("espera validacao"); }

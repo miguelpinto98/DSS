@@ -189,8 +189,8 @@ public abstract class Utilizador {
     }
 
     public boolean passwordCorresponde(String pw) {    
-        System.out.println("pw login :" + encriptarPassword(pw)) ;
-        System.out.println("pw user :" + this.password) ;
+        //System.out.println("pw login :" + encriptarPassword(pw)) ;
+        //System.out.println("pw user :" + this.password) ;
         return this.password.equals(encriptarPassword(pw));
        }
 

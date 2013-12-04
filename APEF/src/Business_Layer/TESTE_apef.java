@@ -35,19 +35,25 @@ public class TESTE_apef {
                 APEF a = new APEF();
         	Arbitro u = new Arbitro(APEF.IDENTIFICADOR,"grupista","123456","asd@gmail.com",new GregorianCalendar());
                 ResponsavelEscola r = new ResponsavelEscola(2,"JoaoF","lolololol","jf@hotmail.com",new GregorianCalendar());
-                a.inserirUtilizador(u);
-                a.inserirUtilizador(r);
                 
-                System.out.println(a.existeEmail("asd@gmail.com"));
-                System.out.println(a.existeUtilizador("grupista","asd@gmail.com"));               
+                a.registarUser("maleite","atelogo","maleite@hidasa",0);
+                a.registarUser("grupista","123456","asadasdadasd@gmail.com",2);
+                a.registarUser("jigs","123456","98@gmail.com",1);
+                a.registarUser("jigs","123456","sdasdadsad@gmail.com",1);
+                a.registarUser("atum","123456","maleite@hidasa",1);
+                a.registarUser("jigsdads","123","9adsa8@gmail.com",1);
+                
                 System.out.println(a.toString());
                 
-                a.removerUtilizador(u);
-                System.out.println(a.toString());
-
-
-
+                a.getUsers().get("maleite").setAtivo(true);
+                System.out.println(a.getUsers().get("maleite").getAtivo());
                 
+                a.login("maleite","atelogo");
+                a.logout();
+                if(a.getEmSessao()==null){ System.out.println("Está em modo convidado!"); }
+                else {
+                System.out.println(a.getEmSessao().toString());
+                }
 	}
 
 }
