@@ -25,8 +25,14 @@ public class Escola {
         this.campo = escola.getCampo();
         this.equipas = escola.getEquipas();
     }
-    
-    
+
+    public Escola(String nome, String local, Campo campo) {
+        this.nome = nome;
+        this.local = local;
+        this.campo = campo;
+        this.equipas = new HashSet<Equipa>();
+    }
+
     //getters
      public String getNome() {
          return this.nome;
@@ -79,8 +85,8 @@ public class Escola {
         
         str.append("Escola\n");
         str.append(this.getNome() + "\n");
-	str.append(this.getLocal() + "\n");
-	str.append(this.getCampo() + "\n");
+	    str.append(this.getLocal() + "\n");
+	    str.append(this.getCampo() + "\n");
         str.append(this.getEquipas() + "\n");
         
         return str.toString(); 

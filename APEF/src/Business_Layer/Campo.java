@@ -17,6 +17,11 @@ public class Campo {
     	this.nome = c.getNome();
     }
 
+    public Campo(int x, String n) {
+        this.id = x;
+        this.nome = n;
+    }
+
     //Getters
     public int getID() {
     	return this.id;
@@ -53,7 +58,10 @@ public class Campo {
 
     public String toString() {
     	StringBuilder str = new StringBuilder();
-    	str.append("--CAmpo--\n") ;
+    	str.append("--Campo--\n") ;
+        str.append(getID() + "\n");
+        str.append(getNome() + "\n");
+
 
     	return str.toString();
     }

@@ -57,7 +57,7 @@ public class Agenda {
 			if(!j.isJogoRealizado()) {
 				j.resultadoJogo(casa, fora);
 				j.goleadoresJogo(goleadores);
-				j.atualizaEscalao();
+				//j.atualizaEscalao();
 				j.setRealizado(true);
 			}
 			break;

@@ -165,10 +165,10 @@ public class Jogo {
 	public void goleadoresJogo(ArrayList<Integer> golos) {
 		this.setGoleadoresJogo(golos);
 	}
-	
+	/*
 	public void atualizaEscalao() {
 		this.ecasa.adicionaDadosEscalao(this.numGolosCasa,this.numGolosFora);
 		this.ecasa.adicionaDadosEscalao(this.numGolosCasa,this.numGolosFora);
-	}
+	}*/
 
 }

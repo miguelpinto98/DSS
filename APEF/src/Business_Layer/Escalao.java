@@ -6,6 +6,9 @@ public abstract class Escalao {
     private Plantel plantelA;
     private Plantel plantelB;
 
+    public Escalao() {
+    }
+
     
     //clone, equals e toString
     public abstract Escalao clone();
@@ -14,13 +17,8 @@ public abstract class Escalao {
     
     public abstract boolean equals(Object o);
 
-    
+    /*
 	public void adicionaDadosEscalao(int ngMarcados, int ngSofridos) {
 		this.dados.addDadosEstatisticos(ngMarcados,ngSofridos);
-	}
-
-   
-
-    
-    
+	}*/
 }

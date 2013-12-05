@@ -5,23 +5,23 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 public class APEF {
-	private HashMap<String, Escola> escola;
-	private HashMap<String, Epoca> epoca;
+	private HashMap<String, Escola> escolas;
+	private HashMap<String, Epoca> epocas;
 	private HashMap<String, Utilizador> users;
 	private Utilizador emSessao;
 
     public static int IDENTIFICADOR=1;
     
     public APEF() {
-    	this.escola = new HashMap<>();
-    	this.epoca = new HashMap<>();
+    	this.escolas = new HashMap<>();
+    	this.epocas = new HashMap<>();
     	this.users = new HashMap<>();
         this.emSessao = null;
     }
 
 	public APEF(APEF a) {
-		this.escola = a.getEscolas();
-		this.epoca = a.getEpoca();
+		this.escolas = a.getEscolas();
+		this.epocas = a.getEpoca();
 		this.users = a.getUsers();
                 this.emSessao = a.getEmSessao();
 	}
@@ -29,8 +29,8 @@ public class APEF {
 	public HashMap<String, Escola> getEscolas() {
 		HashMap<String,Escola> aux = new HashMap<>();
 		
-		for(String s : this.escola.keySet())
-			aux.put(s, this.escola.get(s).clone());
+		for(String s : this.escolas.keySet())
+			aux.put(s, this.escolas.get(s).clone());
 		
 		return aux;
 	}
@@ -38,8 +38,8 @@ public class APEF {
 	public HashMap<String, Epoca> getEpoca() {
 		HashMap<String,Epoca> aux = new HashMap<>();
 		
-		for(String s : this.epoca.keySet())
-			aux.put(s, this.epoca.get(s).clone());
+		for(String s : this.epocas.keySet())
+			aux.put(s, this.epocas.get(s).clone());
 		
 		return aux;
 	}
@@ -58,11 +58,11 @@ public class APEF {
 	}
 
 	public void setEscolas(HashMap<String, Escola> escolas) {
-		this.escola = escolas;
+		this.escolas = escolas;
 	}
 	
 	public void setEpoca(HashMap<String, Epoca> epocas) {
-		this.epoca = epocas;
+		this.epocas = epocas;
 	}
 	
 	public void setUsers(HashMap<String, Utilizador> users) {
@@ -76,8 +76,8 @@ public class APEF {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((this.epoca == null) ? 0 : this.epoca.hashCode());
-		result = prime * result + ((this.escola == null) ? 0 : this.escola.hashCode());
+		result = prime * result + ((this.epocas == null) ? 0 : this.epocas.hashCode());
+		result = prime * result + ((this.escolas == null) ? 0 : this.escolas.hashCode());
 		result = prime * result + ((this.users == null) ? 0 : this.users.hashCode());
 		return result;
 	}
@@ -89,7 +89,7 @@ public class APEF {
 			return false;
 		else {
 			APEF apef = (APEF) o;
-			return this.escola.equals(apef.getEscolas()) && this.epoca.equals(apef.getEpoca()) && this.users.equals(apef.getUsers());
+			return this.escolas.equals(apef.getEscolas()) && this.epocas.equals(apef.getEpoca()) && this.users.equals(apef.getUsers());
 		}
 	}
 	
@@ -102,6 +102,7 @@ public class APEF {
 		
 		str.append("APEF\n");
 		str.append("Utilizador:" + this.getUsers());
+        str.append("Escola:" + this.getEscolas());
 		
 		return str.toString(); 
 	}
@@ -109,18 +110,6 @@ public class APEF {
 	/**
 	*Metodos Utilizadores
 	*/
-
-	/**public boolean existeEmail(String e) {
-		boolean res=false;
-		for(Utilizador u : this.users) {
-			if (u.getEmail().equals(e)) {
-				res = true;
-				break;
-			}
-		}
-		return res;
-	}*/
-
 	public boolean existeEmail(String e) {
 		boolean res=false;
 		Iterator<String> it = this.users.keySet().iterator(); 
@@ -142,8 +131,10 @@ public class APEF {
 	}
 
 	public void inserirUtilizador(Utilizador user) {
-		if ( !(existeUtilizador(user.getNomeUser(),user.getEmail())) )
+		if ( !(existeUtilizador(user.getNomeUser(),user.getEmail())) ) {
                     this.users.put(user.getNomeUser(),user);
+                    IDENTIFICADOR++;
+        }
 	}
 
 	public static boolean validaPassword(String pw) {
@@ -180,8 +171,8 @@ public class APEF {
                           String pw = user.encriptarPassword(password);
                           user.setPass(pw);
 	                  inserirUtilizador(user);
+                      
                         }
-		IDENTIFICADOR++;
 		}
 	}
 
@@ -208,5 +199,41 @@ public class APEF {
 	public void logout(){
 		this.emSessao = null;
 	}
+
+	/**
+	*Metodos Escola
+	*/
+	public boolean existeEscola(String nome) {
+		return (this.escolas.containsKey(nome));
+	}
+
+	public boolean existeCampo(Campo c) {
+		boolean res=false;
+		Iterator<String> it = this.escolas.keySet().iterator(); 
+		while (it.hasNext() && !res) {
+			String n = it.next();
+			if (this.escolas.get(n).getCampo().equals(c)) {
+				res = true;
+			}
+		}
+		return res;
+	}
+
+	public void inserirEscola(Escola escola) {
+		if(!existeEscola(escola.getNome()) && !existeCampo(escola.getCampo()));
+			this.escolas.put(escola.getNome(),escola);
+	}
+        
+    public void criarEscola(String nome, String local, String nomeCampo) {
+    	Campo c = new Campo(IDENTIFICADOR,nomeCampo);
+        Escola a = new Escola(nome,local,c);
+    	inserirEscola(a);
+        IDENTIFICADOR++;
+        
+    }
+    /**
+	*Metodos Equipa
+	*/
+	
 
 }
