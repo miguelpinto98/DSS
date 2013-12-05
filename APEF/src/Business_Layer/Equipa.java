@@ -18,17 +18,15 @@ public class Equipa {
     	this.escaloes = new ArrayList<>();
     }
     
-    public Equipa(int i, String n, Imagem e, HashMap<String, Integer> comps, ArrayList<Escalao> ale) {
-    	this.id = i;
+    public Equipa(int id, String n, Imagem e) {
+    	this.id = id;
     	this.nome = n;
     	this.emblema = e;
     	this.palmares = new HashMap<>();
-    	for(String s : comps.keySet())
-    		this.palmares.put(s, comps.get(s));
-    	
-    	this.escaloes = ale;
+    	this.escaloes = new ArrayList<>();	
     }
     
+
     public Equipa(Equipa e) {
     	this.id = e.getID();
     	this.nome = e.getNome();
@@ -116,4 +114,6 @@ public class Equipa {
 			return (this.id == (e.getID()));
 		}
 	}
+
+
 }

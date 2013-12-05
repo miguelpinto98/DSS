@@ -152,27 +152,26 @@ public class APEF {
     }
 
 	public void registarUser(String nickname, String password, String email, int tipoUser) {
-            GregorianCalendar g = new GregorianCalendar();
-            if(validaPassword(password)) {
-			if (tipoUser==0) 
-			{ Admin user = new Admin(IDENTIFICADOR, nickname, password, email, g);
-                          String pw = user.encriptarPassword(password);
-                          user.setPass(pw);
-       	    		  inserirUtilizador(user);
+		GregorianCalendar g = new GregorianCalendar();
+		if(validaPassword(password)) {
+			if (tipoUser==0) { 
+				Admin user = new Admin(IDENTIFICADOR, nickname, password, email, g);
+				String pw = user.encriptarPassword(password);
+                user.setPass(pw);
+       	    	inserirUtilizador(user);
 			}
-			if (tipoUser==1) 
-			{ ResponsavelEscola user = new ResponsavelEscola(IDENTIFICADOR, nickname, password, email,g);
-                	  String pw = user.encriptarPassword(password);
-                          user.setPass(pw);
-                          inserirUtilizador(user);
-                        }
-			if (tipoUser==2) 
-			{ Arbitro user = new Arbitro(IDENTIFICADOR, nickname, password, email, g);
-                          String pw = user.encriptarPassword(password);
-                          user.setPass(pw);
-	                  inserirUtilizador(user);
-                      
-                        }
+			if (tipoUser==1) { 
+				ResponsavelEscola user = new ResponsavelEscola(IDENTIFICADOR, nickname, password, email,g);
+                String pw = user.encriptarPassword(password);
+                user.setPass(pw);
+                inserirUtilizador(user);
+            }
+			if (tipoUser==2) { 
+				Arbitro user = new Arbitro(IDENTIFICADOR, nickname, password, email, g);
+                String pw = user.encriptarPassword(password);
+                user.setPass(pw);
+	            inserirUtilizador(user);
+	        }	
 		}
 	}
 
@@ -231,9 +230,8 @@ public class APEF {
         IDENTIFICADOR++;
         
     }
-    /**
-	*Metodos Equipa
-	*/
-	
 
+    public void removerEscola(Escola escola) {
+		this.escolas.remove(escola.getNome());
+	}
 }

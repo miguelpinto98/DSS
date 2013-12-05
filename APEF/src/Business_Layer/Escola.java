@@ -1,6 +1,7 @@
 package Business_Layer;
 
 import java.util.HashSet;
+import java.util.Iterator;
 
 public class Escola {
 	
@@ -102,12 +103,39 @@ public class Escola {
             return this.nome.equals(t.getNome());
         }
     }
+    /**
+    *Metodos Equipa
+    */
+    public boolean existeEquipa(String n) {
+        boolean res=false;
+        Iterator<Equipa> it = this.equipas.iterator(); 
+        while (it.hasNext() && !res) {
+            Equipa eq = it.next();
+            if (eq.getNome().equals(n)) {
+                res = true;
+            }
+        }
+        return res;
+    }
+
+    public void inserirEquipa(Equipa a) {
+        if(!existeEquipa(a.getNome())) {
+            this.equipas.add(a);
+        }
+    }
+
+    public void criarEquipa(String nome, String img, String path) {        
+        Imagem i = new Imagem(img,path);
+        Equipa a = new Equipa(APEF.IDENTIFICADOR,nome,i);
+        inserirEquipa(a);
+        APEF.IDENTIFICADOR++;
+    }
+
+    public void removerEquipa(Equipa a) {
+        this.equipas.remove(a);
+    }
 
 
-   
 
-    
 
-    
-   
 }

@@ -112,14 +112,16 @@ public class Plantel {
 		StringBuilder str = new StringBuilder(); 
 		
 		str.append("--Plantel--\n");
-                str.append(this.imprime(getJogadores()));
+        str.append(this.imprime(getJogadores()));
 		
 		return str.toString(); 
 	}
     
-	//Metodos
+    /**
+    *Metodos Jogadores
+    */
     public void inserirJogador(Jogador j) {
-        if (jogadores.size() < 12) 
+        if (jogadores.size() < 12) //está mal(no min 12, no max 25) 
             this.jogadores.add(j);
     }
         
