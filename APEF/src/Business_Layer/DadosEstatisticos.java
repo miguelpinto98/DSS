@@ -95,4 +95,18 @@ public class DadosEstatisticos {
 
     	return s.toString();
     }
+
+	public void addDadosEstatisticos(int numGolosMarcados, int numGolosSofridos) {
+		this.gmarcados = this.gmarcados + numGolosMarcados;
+		this.gsofridos = this.gsofridos + numGolosSofridos;
+		
+		if(numGolosMarcados > numGolosSofridos)
+			this.vitorias++;
+		else {
+			if(numGolosMarcados < numGolosSofridos)
+				this.derrotas++;
+			else
+				this.empates++;
+		}
+	}
 }

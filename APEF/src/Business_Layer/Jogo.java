@@ -2,7 +2,6 @@ package Business_Layer;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
 
 public class Jogo {
     private boolean realizado; /* Comeca a falso */
@@ -13,7 +12,7 @@ public class Jogo {
     private Escalao efora;
     private int numGolosCasa;
     private int numGolosFora;
-    private HashMap<Integer,Integer> goleadores;
+    private ArrayList<Integer> goleadores;
 	
     public Jogo() {
     	this.realizado = false;
@@ -24,7 +23,7 @@ public class Jogo {
     	this.efora = null;		//!!!
     	this.numGolosCasa = 0;
     	this.numGolosFora = 0;
-    	this.goleadores = new HashMap<> ();
+    	this.goleadores = new ArrayList<> ();
     }
     
     public Jogo(GregorianCalendar g, Campo c, Arbitro a, Escalao ec, Escalao ef) {
@@ -36,7 +35,7 @@ public class Jogo {
     	this.efora = ef;
     	this.numGolosCasa = 0;
     	this.numGolosFora = 0;
-    	this.goleadores = new HashMap<>();
+    	this.goleadores = new ArrayList<>();
     }
     
     public Jogo(Jogo j) {
@@ -115,16 +114,16 @@ public class Jogo {
 		this.numGolosFora = numGolosFora;
 	}
 
-	public HashMap<Integer, Integer> getGoleadoresJogo() {
-		HashMap<Integer,Integer> hsg = new HashMap<>();
+	public ArrayList<Integer> getGoleadoresJogo() {
+		ArrayList<Integer> hsg = new ArrayList<>();
 		
-		for(Integer n : this.goleadores.keySet())
-			hsg.put(n, this.goleadores.get(n));
+		for(Integer n : this.goleadores)
+			hsg.add(n);
 		
 		return hsg;
 	}
 
-	public void setGoleadoresJogo(HashMap<Integer, Integer> goleadores) {
+	public void setGoleadoresJogo(ArrayList<Integer> goleadores) {
 		this.goleadores = goleadores;
 	}
 	
@@ -164,22 +163,12 @@ public class Jogo {
 	}
 
 	public void goleadoresJogo(ArrayList<Integer> golos) {
-		for(Integer id : golos)
-			if(this.goleadores.containsKey(id))
-				this.goleadores.put(id, this.goleadores.get(id) + 1);
-			else
-				this.goleadores.put(id, 1);
+		this.setGoleadoresJogo(golos);
 	}
 	
-	public void listaGoleadores() {
-		for(Integer n : this.goleadores.keySet())
-			System.out.println("ID: "+n+" Golos: "+this.goleadores.get(n));
+	public void atualizaEscalao() {
+		this.ecasa.adicionaDadosEscalao(this.numGolosCasa,this.numGolosFora);
+		this.ecasa.adicionaDadosEscalao(this.numGolosCasa,this.numGolosFora);
 	}
 
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((goleadores == null) ? 0 : goleadores.hashCode());
-		return result;
-	}
 }
