@@ -202,33 +202,15 @@ public class APEF {
 	/**
 	*Metodos Escola
 	*/
-	public boolean existeEscola(String nome) {
-		return (this.escolas.containsKey(nome));
-	}
-
-	public boolean existeCampo(Campo c) {
-		boolean res=false;
-		Iterator<String> it = this.escolas.keySet().iterator(); 
-		while (it.hasNext() && !res) {
-			String n = it.next();
-			if (this.escolas.get(n).getCampo().equals(c)) {
-				res = true;
-			}
-		}
-		return res;
-	}
-
-	public void inserirEscola(Escola escola) {
-		if(!existeEscola(escola.getNome()) && !existeCampo(escola.getCampo()));
-			this.escolas.put(escola.getNome(),escola);
-	}
         
     public void criarEscola(String nome, String local, String nomeCampo) {
+    	if(!(this.escolas.containsKey(nome))){
     	Campo c = new Campo(IDENTIFICADOR,nomeCampo);
         Escola a = new Escola(nome,local,c);
-    	inserirEscola(a);
+    	this.escolas.put(nome,a);
         IDENTIFICADOR++;
         
+    }
     }
 
     public void removerEscola(Escola escola) {

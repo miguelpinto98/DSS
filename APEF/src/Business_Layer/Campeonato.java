@@ -3,15 +3,15 @@ package Business_Layer;
 import java.util.HashMap;
 import java.util.Objects;
 
-public class Campeonato {
+public class Campeonato implements Competicao{
     
     //Variaveis de Instancia
     private int id;
     private String nome;
     private int nrEquipas;
     private Calendario calendario;
-    private Classificacao classificacao;
     private HashMap<Integer,Integer> goleadores; //<id do jogador,nr golos>     
+    private Classificacao classificacao;
 
     //Construtores
     public Campeonato() {
@@ -19,8 +19,8 @@ public class Campeonato {
     	this.nome = "";
     	this.nrEquipas = 0;
     	this.calendario = new Calendario();
-    	this.classificacao = null;
     	this.goleadores = new HashMap<>();
+        this.classificacao = null;
     }
     
     public Campeonato(Campeonato ca) {
@@ -28,8 +28,8 @@ public class Campeonato {
     	this.nome = ca.getNome();
     	this.nrEquipas = ca.getNrEquipas();
     	this.calendario = ca.getCalendario();
-    	this.classificacao = ca.getClassificacao();
     	this.goleadores = ca.getGoleadores();
+        this.classificacao = ca.getClassificacao();
     }
     
     //Getters e Setters

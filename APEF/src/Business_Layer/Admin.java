@@ -5,34 +5,34 @@ import java.util.HashSet;
 
 public class Admin extends Utilizador {
 	
-	private HashSet<String> historicoAccao;
+	private HashSet<HistoricoAcao> acoes;
 
 	public Admin(){
 		super();
-		this.historicoAccao = new HashSet<String>();
+		this.acoes = new HashSet<HistoricoAcao>();
 	}
 
 	public Admin(int id, String nickname, String password, String email, GregorianCalendar g){
 		super(id,null,nickname,"",email,password,"","","",g,false,false);
-		this.historicoAccao = new HashSet<String>(); 
+		this.acoes = new HashSet<HistoricoAcao>(); 
 	}
 
 	public Admin(Admin a) {
 		super(a);
-		this.historicoAccao = a.getHistoricoAccao();
+		this.acoes = a.getAcoes();
 	}
 	
-	public HashSet<String> getHistoricoAccao() {
-		HashSet<String> hse = new HashSet<String>();
+	public HashSet<HistoricoAcao> getAcoes() {
+		HashSet<HistoricoAcao> hse = new HashSet<HistoricoAcao>();
 		
-		for(String s : this.historicoAccao)
+		for(HistoricoAcao s : this.acoes)
 			hse.add(s);
 		
 		return hse;
 	}
 
-	public void setHistoricoAccao (HashSet<String> es) {
-		this.historicoAccao = es;
+	public void setacoes (HashSet<HistoricoAcao> es) {
+		this.acoes = es;
 	}
 
 	public Admin clone() {
@@ -53,15 +53,16 @@ public class Admin extends Utilizador {
 	/**public gdagvdd inserirEu(Utilizador x, Escola)
 	{   nomeEquipa = 
 		String s = "Inserir equipa "+ nomeEquipa + " da escola "+getNomeEscola();
-		this.historicoAccao.add(s)
+		this.acoes.add(s)
 	}*/
 
 	public String toString() {
 		StringBuilder str = new StringBuilder("Admin\n");
 		str.append("ID:" + this.getID() + "\n");
 		str.append("Nickname:" + this.getNomeUser()+"\n");
-        str.append("Password:" + this.getPass()+"\n");
-        str.append("Email:" + this.getEmail()+"\n");
+                str.append("Password:" + this.getPass()+"\n");
+                str.append("Email:" + this.getEmail()+"\n");
+                str.append(this.getAcoes());
 		return str.toString();
 	}
 

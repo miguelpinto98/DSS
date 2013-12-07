@@ -4,34 +4,29 @@ import java.util.HashSet;
 import java.util.GregorianCalendar;
 
 public class ResponsavelEscola extends Utilizador {
-	private HashSet<Equipa> equipas; //???
+	private Escola escola; //???
 	
 	public ResponsavelEscola() {
 		super();
-		this.equipas = new HashSet<Equipa>();
+		this.escola = new Escola();
 	}
 
 	public ResponsavelEscola(int id, String nickname, String password, String email, GregorianCalendar g) {
 		super(id,null,nickname,"",email,password,"","","",g,false,false);
-		this.equipas = new HashSet<Equipa>(); 
+		this.escola = new Escola(); 
 	}
 
 	public ResponsavelEscola(ResponsavelEscola re) {
 		super(re);
-		this.equipas = re.getEquipasResponsavel();
+		this.escola = re.getEscola();
 	}
 	
-	public HashSet<Equipa> getEquipasResponsavel() {
-		HashSet<Equipa> hse = new HashSet<>();
-		
-		for(Equipa e : this.equipas)
-			hse.add(e.clone());
-		
-		return hse;
+	public Escola getEscola() {
+		return this.escola;
 	}
 
-	public void setEquipasResponsavel(HashSet<Equipa> es) {
-		this.equipas = es;
+	public void setEscola(Escola es) {
+		this.escola = es;
 	}
 
 	public ResponsavelEscola clone() {
