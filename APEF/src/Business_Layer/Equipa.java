@@ -8,14 +8,14 @@ public class Equipa {
     private String nome;
     private Imagem emblema;
     private HashMap<String,Integer> palmares; //<nome da competicao, nr vezes que ganhou>
-    private ArrayList<Escalao> escaloes;
+    private ArrayList<Plantel> planteis;
     
     public Equipa() {
     	this.id = 0;
     	this.nome = new String();
     	this.emblema = new Imagem();
     	this.palmares = new HashMap<>();
-    	this.escaloes = new ArrayList<>();
+    	this.planteis = new ArrayList<>();
     }
     
     public Equipa(int id, String n, Imagem e) {
@@ -23,7 +23,7 @@ public class Equipa {
     	this.nome = n;
     	this.emblema = e;
     	this.palmares = new HashMap<>();
-    	this.escaloes = new ArrayList<>();	
+    	this.planteis = new ArrayList<>();	
     }
     
 
@@ -32,7 +32,7 @@ public class Equipa {
     	this.nome = e.getNome();
     	this.emblema = e.getEmblema();
     	this.palmares = e.getPalmares();
-    	this.escaloes = e.getEscaloes();
+    	this.planteis = e.getPlanteis();
 	}
 
 	public int getID() {
@@ -56,11 +56,11 @@ public class Equipa {
 		return hmp;
 	}
 
-	public ArrayList<Escalao> getEscaloes() {
-		ArrayList<Escalao> ale = new ArrayList<>();
+	public ArrayList<Plantel> getPlanteis() {
+		ArrayList<Plantel> ale = new ArrayList<>();
 		
-		for(Escalao e : this.escaloes)
-			ale.add(e.clone());
+		for(Plantel p : this.planteis)
+			ale.add(p.clone());
 		
 		return ale;
 	}
@@ -81,8 +81,8 @@ public class Equipa {
 		this.palmares = palmares;
 	}
 
-	public void setEscaloes(ArrayList<Escalao> escaloes) {
-		this.escaloes = escaloes;
+	public void setPlanteis(ArrayList<Plantel> planteis) {
+		this.planteis = planteis;
 	}
 
 	public Equipa clone() {

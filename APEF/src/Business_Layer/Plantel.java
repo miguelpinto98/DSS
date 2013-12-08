@@ -9,6 +9,8 @@ import java.util.logging.Logger;
 public class Plantel {
     
 	//Variaveis de Instancia
+    private int id;
+    private String tipoEscalao;
     private Treinador treinador;
     private HashSet<Jogador> jogadores;
     private Agenda agenda;          //Jogos 
@@ -17,6 +19,8 @@ public class Plantel {
 
     //Construtores
     public Plantel() {
+        this.id = 0;
+        this.tipoEscalao = "";
     	this.treinador = new Treinador();
     	this.jogadores = new HashSet<>();
         this.agenda = new Agenda();
@@ -25,6 +29,8 @@ public class Plantel {
     }
 
     public Plantel(Plantel p) {
+        this.id = p.getID();
+        this.tipoEscalao = p.getTipoEscalao();
     	this.treinador = p.getTreinador();
     	this.jogadores = p.getJogadores();
         this.agenda = p.getAgenda();
@@ -33,6 +39,14 @@ public class Plantel {
     }
 
     //Getters
+    public int getID(){
+        return this.id;
+    }
+    
+    public String getTipoEscalao(){
+        return this.tipoEscalao;
+    }
+    
     public Treinador getTreinador() {
         return this.treinador;
     }
@@ -57,6 +71,14 @@ public class Plantel {
     }
    
     //Setters
+    public void setID(int i){
+        this.id = i;
+    }
+    
+    public void setTipoEscalao(String n){
+        this.tipoEscalao = n;
+    }
+    
     public void setTreinador(Treinador t) {
         this.treinador = t;
     }

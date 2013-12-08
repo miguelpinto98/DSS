@@ -1,59 +1,73 @@
 package Business_Layer;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Objects;
 
 public class Epoca {
 
     //Variaveis de Instancia
-    private String nome;
-    private Campeonato campeonato;
-    private HashSet<Torneio> torneios;
+    private int ano;
+    private ArrayList<Campeonato> campeonatos;
+    private ArrayList<HashSet<Torneio>> torneios;
 
     //Construtores
     public Epoca() {
-    	this.nome = "";
-    	this.campeonato = new Campeonato();
-    	this.torneios = new HashSet<>();
+    	this.ano = 0;
+    	this.campeonatos = new ArrayList<>();
+    	this.torneios = new ArrayList<>();
     }
 
-    public Epoca(String n, Campeonato c, HashSet<Torneio> t){
-        this.nome = n;
-        this.campeonato = c;
+    public Epoca(int ano, ArrayList<Campeonato> c, ArrayList<HashSet<Torneio>> t){
+        this.ano = ano;
+        this.campeonatos = c;
         this.torneios = t;
     }
 
     public Epoca(Epoca e) {
-    	this.nome = e.getNome();
-    	this.campeonato = e.getCampeonato();
+    	this.ano = e.getAno();
+    	this.campeonatos = e.getCampeonatos();
     	this.torneios = e.getTorneios();
     }
 
     //Getters
-    public String getNome() {
-        return this.nome;
+    public int getAno() {
+        return this.ano;
     }
     
-    public Campeonato getCampeonato() {
-        return this.campeonato;
-    }
-    
-    public HashSet<Torneio> getTorneios() {
-        HashSet<Torneio> aux = new HashSet<>();
-        for(Torneio t: this.torneios) 
-            aux.add(t.clone());
+    public ArrayList<Campeonato> getCampeonatos() {
+        ArrayList<Campeonato> aux = new ArrayList<>();
+        int i;
+        for(i=0;i<this.campeonatos.size();i++){
+            aux.add(this.campeonatos.get(i).clone());
+        }
         return aux;
+    }
+    
+    public ArrayList<HashSet<Torneio>> getTorneios() {
+        ArrayList<HashSet<Torneio>> array = new ArrayList<>();
+        HashSet<Torneio> hash = null;
+        int i;
+        
+        for(i=0;i<this.torneios.size();i++){
+            hash = new HashSet<>();
+            for(Torneio t: this.torneios.get(i)){ 
+                hash.add(t.clone());
+            }
+            array.add(hash);
+        }
+        return array;
     }
 
     //Setters
-    public void setNome(String n) {
-        this.nome = n;
+    public void setAno(int ano) {
+        this.ano = ano;
     }
 
-    public void setCampeonato(Campeonato c) {
-        this.campeonato = c;
+    public void setCampeonatos(ArrayList<Campeonato> c) {
+        this.campeonatos = c;
     }
-    public void setTorneios(HashSet<Torneio> t) {
+    public void setTorneios(ArrayList<HashSet<Torneio>> t) {
         this.torneios = t;
     }	
 
@@ -71,8 +85,8 @@ public class Epoca {
             return false;
         else {
             Epoca t = (Epoca) o;
-            return ( this.nome.equals(t.getNome()) && this.campeonato.equals(t.getCampeonato()) &&
-        			this.torneios.equals(t.getTorneios()) );
+            return ( this.ano == t.getAno() && this.campeonatos.equals(t.getCampeonatos()) &&
+        			this.torneios.equals(t.getTorneios()));
         }
     } 
 
@@ -84,8 +98,8 @@ public class Epoca {
         StringBuilder str = new StringBuilder(); 
         
         str.append("--Epoca--\n");
-        str.append(this.getNome() + "\n");
-		str.append(this.getCampeonato() + "\n");
+        str.append(this.getAno() + "\n");
+		str.append(this.getCampeonatos() + "\n");
 		str.append(this.getTorneios() + "\n");
         return str.toString(); 
     }

@@ -1,6 +1,7 @@
 package Business_Layer;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -11,15 +12,18 @@ public class Torneio implements Competicao{
     private String nome;
     private int nrEquipas;
     private HashMap<Integer,Integer> goleadores;
-    private ArrayList<Fase> fases;
+    private GregorianCalendar dataInicio;
+    private GregorianCalendar dataFim;
+    private ArrayList<Fase> fases;    
 
     public Torneio() {
-    	this.id = 0;
+        this.id = 0;
         this.nome = "";
         this.nrEquipas = 0;
         this.goleadores = new HashMap<>();
         this.fases = new ArrayList<>();
-
+        this.dataInicio = new GregorianCalendar();
+        this.dataFim = new GregorianCalendar();
     }
         
 	public Torneio(Torneio t) {
@@ -28,6 +32,8 @@ public class Torneio implements Competicao{
         this.nrEquipas = t.getNrEquipas();
         this.goleadores = t.getGoleadores();
         this.fases = t.getFases();
+        this.dataInicio = t.getDataInicio();
+        this.dataFim = t.getDataFim();
 	}
 
     public int getID() {
@@ -77,6 +83,22 @@ public class Torneio implements Competicao{
 
     public void setFases (ArrayList<Fase> al){
         this.fases = al;
+    }
+    
+    public GregorianCalendar getDataInicio(){
+        return this.dataInicio;
+    }
+
+    public void setDataInicio (GregorianCalendar data) {
+        this.dataInicio = data;
+    }
+
+    public GregorianCalendar getDataFim(){
+        return this.dataFim;
+    }
+
+    public void setDataFim (GregorianCalendar data){
+        this.dataFim = data;
     }
 
     //Equals,hashCode,Clone,toString

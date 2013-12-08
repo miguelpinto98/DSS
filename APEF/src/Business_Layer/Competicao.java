@@ -1,5 +1,6 @@
 package Business_Layer;
 
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 
 public interface Competicao {
@@ -21,6 +22,14 @@ public interface Competicao {
 
     public void setGoleadores(HashMap<Integer, Integer> goleadores);
 
+    public GregorianCalendar getDataInicio();
+
+    public void setDataInicio (GregorianCalendar data);
+
+    public GregorianCalendar getDataFim();
+
+    public void setDataFim (GregorianCalendar data);
+    
     //Equals,hashCode,Clone,toString
     public int hashCode();
 

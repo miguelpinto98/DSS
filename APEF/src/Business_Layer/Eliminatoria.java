@@ -19,8 +19,8 @@ public class Eliminatoria extends Fase {
         if ( (o == null) || (this.getClass() != o.getClass()) )
             return false;
         else {
-        Eliminatoria eliminatoria = (Eliminatoria) o;
-        return (this.getCalendario().equals(eliminatoria.getCalendario()));
+        Eliminatoria e = (Eliminatoria) o;
+        return (this.getCalendario().equals(e.getCalendario()));
         }
     }
     

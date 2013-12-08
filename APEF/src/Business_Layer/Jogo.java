@@ -8,8 +8,8 @@ public class Jogo {
     private GregorianCalendar dia; /* Dia e hora de jogo */
     private Campo campo;
     private Arbitro arbitro;
-    private Escalao ecasa;
-    private Escalao efora;
+    private Plantel ecasa;
+    private Plantel efora;
     private int numGolosCasa;
     private int numGolosFora;
     private ArrayList<Integer> goleadores;
@@ -26,7 +26,7 @@ public class Jogo {
     	this.goleadores = new ArrayList<> ();
     }
     
-    public Jogo(GregorianCalendar g, Campo c, Arbitro a, Escalao ec, Escalao ef) {
+    public Jogo(GregorianCalendar g, Campo c, Arbitro a, Plantel ec, Plantel ef) {
     	this.realizado = false;
     	this.dia = (GregorianCalendar) g.clone();
     	this.campo = c;
@@ -43,8 +43,8 @@ public class Jogo {
     	this.dia = j.getDiaJogo();
     	this.campo = j.getCampoJogo();
     	this.arbitro = j.getArbitroJogo();
-    	this.ecasa = j.getEscalaoJogoCasa();
-    	this.efora = j.getEscalaoJogoFora();
+    	this.ecasa = j.getPlantelCasa();
+    	this.efora = j.getPlantelFora();
     	this.numGolosCasa = j.getNumGolosJogoCasa();
     	this.numGolosFora = j.getNumGolosJogoFora();
     	this.goleadores = j.getGoleadoresJogo();
@@ -82,19 +82,19 @@ public class Jogo {
 		this.arbitro = arbitro;
 	}
 
-	public Escalao getEscalaoJogoCasa() {
+	public Plantel getPlantelCasa() {
 		return this.ecasa;
 	}
 
-	public void setEscalaoJogoCasa(Escalao ecasa) {
+	public void setPlantelCasa(Plantel ecasa) {
 		this.ecasa = ecasa;
 	}
 	
-	public Escalao getEscalaoJogoFora() {
+	public Plantel getPlantelFora() {
 		return this.efora;
 	}
 
-	public void setEscalaoJogoFora(Escalao efora) {
+	public void setPlantelFora(Plantel efora) {
 		this.efora = efora;
 	}
 
@@ -149,8 +149,8 @@ public class Jogo {
 			return (this.dia.equals(j.getDiaJogo()) &&
 					this.campo.equals(j.getCampoJogo()) &&
 					this.arbitro.equals(j.getArbitroJogo()) &&
-					this.ecasa.equals(j.getEscalaoJogoCasa()) &&
-					this.efora.equals(j.getEscalaoJogoFora()) &&
+					this.ecasa.equals(j.getPlantelCasa()) &&
+					this.efora.equals(j.getPlantelFora()) &&
 					this.numGolosCasa == j.getNumGolosJogoCasa() &&
 					this.numGolosFora == j.getNumGolosJogoFora() &&
 					this.goleadores.equals(j.getGoleadoresJogo()));

@@ -1,6 +1,8 @@
 package Business_Layer;
 
+import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Objects;
 
 public class Campeonato implements Competicao{
@@ -10,8 +12,11 @@ public class Campeonato implements Competicao{
     private String nome;
     private int nrEquipas;
     private Calendario calendario;
+    private HashSet<Equipa> listaEquipas;
     private HashMap<Integer,Integer> goleadores; //<id do jogador,nr golos>     
     private Classificacao classificacao;
+    private GregorianCalendar dataInicio;
+    private GregorianCalendar dataFim;
 
     //Construtores
     public Campeonato() {
@@ -19,8 +24,11 @@ public class Campeonato implements Competicao{
     	this.nome = "";
     	this.nrEquipas = 0;
     	this.calendario = new Calendario();
+        this.listaEquipas = new HashSet<>();
     	this.goleadores = new HashMap<>();
         this.classificacao = null;
+        this.dataInicio = new GregorianCalendar();
+        this.dataFim = new GregorianCalendar();
     }
     
     public Campeonato(Campeonato ca) {
@@ -28,8 +36,11 @@ public class Campeonato implements Competicao{
     	this.nome = ca.getNome();
     	this.nrEquipas = ca.getNrEquipas();
     	this.calendario = ca.getCalendario();
+        this.listaEquipas = ca.getListaEquipas();
     	this.goleadores = ca.getGoleadores();
         this.classificacao = ca.getClassificacao();
+        this.dataInicio = ca.getDataInicio();
+        this.dataFim = ca.getDataFim();
     }
     
     //Getters e Setters
@@ -65,6 +76,17 @@ public class Campeonato implements Competicao{
         this.calendario = calendario;
     }
 
+    public HashSet<Equipa> getListaEquipas() {
+        HashSet<Equipa> aux = new HashSet<Equipa>();
+        for(Equipa e: this.listaEquipas) 
+            aux.add(e.clone());
+        return aux;
+    }
+
+    public void setListaEquipas (HashSet<Equipa> le){
+        this.listaEquipas = le;
+    }
+    
     public Classificacao getClassificacao() {
         return this.classificacao;
     }
@@ -85,6 +107,22 @@ public class Campeonato implements Competicao{
         this.goleadores = goleadores;
     }
 
+    public GregorianCalendar getDataInicio(){
+        return this.dataInicio;
+    }
+
+    public void setDataInicio (GregorianCalendar data) {
+        this.dataInicio = data;
+    }
+
+    public GregorianCalendar getDataFim(){
+        return this.dataFim;
+    }
+
+    public void setDataFim (GregorianCalendar data){
+        this.dataFim = data;
+    }
+    
     //Equals,hashCode,Clone,toString
     public int hashCode() {
         int hash = 5;
