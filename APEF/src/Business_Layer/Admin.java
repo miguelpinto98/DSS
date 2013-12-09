@@ -31,7 +31,7 @@ public class Admin extends Utilizador {
 		return hse;
 	}
 
-	public void setacoes (HashSet<HistoricoAcao> es) {
+	public void setAcoes (HashSet<HistoricoAcao> es) {
 		this.acoes = es;
 	}
 

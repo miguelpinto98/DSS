@@ -12,6 +12,7 @@ public class Torneio implements Competicao{
     private String nome;
     private int nrEquipas;
     private HashMap<Integer,Integer> goleadores;
+    private EstatisticaCompeticao estatisticaCompeticao;
     private GregorianCalendar dataInicio;
     private GregorianCalendar dataFim;
     private ArrayList<Fase> fases;    
@@ -21,6 +22,7 @@ public class Torneio implements Competicao{
         this.nome = "";
         this.nrEquipas = 0;
         this.goleadores = new HashMap<>();
+        this.estatisticaCompeticao = new EstatisticaCompeticao();
         this.fases = new ArrayList<>();
         this.dataInicio = new GregorianCalendar();
         this.dataFim = new GregorianCalendar();
@@ -31,6 +33,7 @@ public class Torneio implements Competicao{
         this.nome = t.getNome();
         this.nrEquipas = t.getNrEquipas();
         this.goleadores = t.getGoleadores();
+        this.estatisticaCompeticao = t.getEstatisticaCompeticao();
         this.fases = t.getFases();
         this.dataInicio = t.getDataInicio();
         this.dataFim = t.getDataFim();
@@ -72,6 +75,13 @@ public class Torneio implements Competicao{
         this.goleadores = goleadores;
     }
 
+    public EstatisticaCompeticao getEstatisticaCompeticao(){
+        return this.estatisticaCompeticao;
+    }
+
+    public void setEstatisticaCompeticao(EstatisticaCompeticao ec){
+        this.estatisticaCompeticao = ec;
+    }
     public ArrayList<Fase> getFases(){
         ArrayList<Fase> aux = new ArrayList<>();
 

@@ -8,7 +8,7 @@ public class Equipa {
     private String nome;
     private Imagem emblema;
     private HashMap<String,Integer> palmares; //<nome da competicao, nr vezes que ganhou>
-    private ArrayList<Plantel> planteis;
+    private ArrayList<Plantel> planteis;  
     
     public Equipa() {
     	this.id = 0;
