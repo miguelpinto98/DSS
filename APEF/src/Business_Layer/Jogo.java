@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 public class Jogo {
+    private int idCompeticao;
     private boolean realizado; /* Comeca a falso */
     private GregorianCalendar dia; /* Dia e hora de jogo */
     private Campo campo;
@@ -15,6 +16,7 @@ public class Jogo {
     private ArrayList<Integer> goleadores;
 	
     public Jogo() {
+    	this.idCompeticao = 0;
     	this.realizado = false;
     	this.dia = new GregorianCalendar();
     	this.campo = new Campo();
@@ -26,7 +28,8 @@ public class Jogo {
     	this.goleadores = new ArrayList<> ();
     }
     
-    public Jogo(GregorianCalendar g, Campo c, Arbitro a, Plantel ec, Plantel ef) {
+    public Jogo(int i, GregorianCalendar g, Campo c, Arbitro a, Plantel ec, Plantel ef) {
+    	this.idCompeticao = i;
     	this.realizado = false;
     	this.dia = (GregorianCalendar) g.clone();
     	this.campo = c;
@@ -39,7 +42,8 @@ public class Jogo {
     }
     
     public Jogo(Jogo j) {
-    	this.realizado = j.isJogoRealizado();
+    	this.idCompeticao = j.getIdCompeticao();
+    	this.realizado = j.getRealizado();
     	this.dia = j.getDiaJogo();
     	this.campo = j.getCampoJogo();
     	this.arbitro = j.getArbitroJogo();
@@ -50,7 +54,15 @@ public class Jogo {
     	this.goleadores = j.getGoleadoresJogo();
 	}
     
-	public boolean isJogoRealizado() {
+	public int getIdCompeticao(){
+		return this.idCompeticao;
+	}
+
+	public void setIdCompeticao(int n){
+		this.idCompeticao = n;
+	}
+
+	public boolean getRealizado() {
 		return this.realizado;
 	}
 
