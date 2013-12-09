@@ -13,9 +13,9 @@ public class Jogador extends Pessoa {
     	this.nrGolos = 0;
     }
    
-    public Jogador(String nome, GregorianCalendar g,int sexo) {
-        super(1,nome,null,g,sexo);
-        this.nrGolos = 99;
+    public Jogador(int id,String nome, GregorianCalendar g,int sexo) {
+        super(id,nome,null,g,sexo);
+        this.nrGolos = 0;
     }
 
     public Jogador(Jogador t) {
@@ -53,14 +53,19 @@ public class Jogador extends Pessoa {
     public String toString() {
     	StringBuilder str = new StringBuilder();
     	str.append("--Jogador--") ;
-        str.append(this.getID());
-        str.append(this.getNrGolos()+"  ");
-        str.append(this.getDataNasc());
-        str.append(this.getSexo()+"\n");
-        str.append(this.getNome());
-        
-
+        str.append("\nJogador ID: "+this.getID());
+        str.append("\nJogador Nome: "+this.getNome());
+        str.append("\nJogador Golos: "+this.getNrGolos());
+        str.append("\nJogador Data Nascimento: "+this.getDataNasc().get(GregorianCalendar.YEAR) +"/"+
+				this.getDataNasc().get(GregorianCalendar.MONTH) +"/"+
+				this.getDataNasc().get(GregorianCalendar.DAY_OF_MONTH));
+        str.append("\nJogador Sexo: "+this.getSexo()+"\n");
+ 
     	return str.toString();
     }  	
     //Metodos
+
+	public void addGolosJogador() {
+		this.nrGolos = this.nrGolos + 1;
+	}
 }

@@ -58,10 +58,8 @@ public class Campo {
 
     public String toString() {
     	StringBuilder str = new StringBuilder();
-    	str.append("--Campo--\n") ;
-        str.append(getID() + "\n");
-        str.append(getNome() + "\n");
-
+        str.append("\nID Campo: "+this.getID());
+        str.append("\nNome Campo: "+this.getNome());
 
     	return str.toString();
     }

@@ -11,7 +11,7 @@ public class Equipa {
     private ArrayList<Escalao> escaloes;  
     
     public Equipa() {
-    	this.id = 0;
+    	this.id = 0; 	//nao definido
     	this.nome = new String();
     	this.emblema = new Imagem();
     	this.palmares = new HashMap<>();

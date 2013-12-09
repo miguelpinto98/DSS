@@ -36,11 +36,20 @@ public class Arbitro extends Utilizador {
     }
 
 	public String toString() {
-		StringBuilder str = new StringBuilder("Arbitro\n");
-		str.append("ID:" + this.getID() + "\n");
-                str.append("Nickname:" + this.getNomeUser()+"\n");
-                str.append("Password:" + this.getPass()+"\n");
-                str.append("Email:" + this.getEmail()+"\n");
+		StringBuilder str = new StringBuilder("-----Arbitro-----\n");
+		str.append("ID: " + this.getID());
+        str.append("\nNickname: " + this.getNomeUser());
+        str.append("\nNome: " + this.getNome());
+        str.append("\nEmail: " + this.getEmail());
+        str.append("\nPassword:" + this.getPass());
+        str.append("\nMorada :" + this.getMorada());
+        str.append("\nTelemovel: " + this.getTelemovel());
+		str.append("\nData de Nascimento: " + this.getDataNasc().get(GregorianCalendar.YEAR) +"/"+this.getDataNasc().get(GregorianCalendar.MONTH) +"/"+this.getDataNasc().get(GregorianCalendar.DAY_OF_MONTH));
+        str.append("\nEmail: " + this.getEmail());
+        str.append("\nAtivo: " + this.isAtivo());
+        str.append("\nCampos Preenchidos: "+  this.isCamposPreenchidos());     
+        str.append("\n"+this.getAgenda().toString());   
+        str.append("\n-----------------\n");
 		return str.toString();
 	}
 
@@ -56,6 +65,6 @@ public class Arbitro extends Utilizador {
 	}
 	
 	public void resultadoJogo(int casa, int fora, ArrayList<Integer> goleadores) {
-		this.agenda.addResultadoJogo(casa,fora,goleadores);
+		this.agenda.addResultadoJogo(casa,fora,goleadores); 
 	}
 } 

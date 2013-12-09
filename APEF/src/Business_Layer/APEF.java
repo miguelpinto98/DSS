@@ -185,9 +185,9 @@ public class APEF {
 
 	public void login(String nickname, String password){
 		if (validaLogin(nickname,password)) {
-			  if ((this.users.get(nickname).getAtivo())) { 
+			  if ((this.users.get(nickname).isAtivo())) { 
 			  	this.emSessao = this.users.get(nickname);
-			  	if(this.users.get(nickname).getAtivo() && !this.users.get(nickname).getCamposPreenchidos())
+			  	if(this.users.get(nickname).isAtivo() && !this.users.get(nickname).isCamposPreenchidos())
 			  			{ /** metodo prencher campos*/ }
 			  }
 			  else { System.out.println("espera validacao"); }

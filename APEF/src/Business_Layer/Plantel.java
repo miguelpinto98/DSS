@@ -1,10 +1,8 @@
 package Business_Layer;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Objects;
-import java.util.Set;
-import java.util.logging.Logger;
 
 public class Plantel {
     
@@ -12,21 +10,28 @@ public class Plantel {
     private int id;
     private String tipoEscalao;
     private Treinador treinador;
-    private HashSet<Jogador> jogadores;
+    private HashMap<Integer,Jogador> jogadores;
     private Agenda agenda;          //Jogos 
     private DadosEstatisticos dados;
-    private String forma;
 
     //Construtores
     public Plantel() {
         this.id = 0;
         this.tipoEscalao = "";
     	this.treinador = new Treinador();
-    	this.jogadores = new HashSet<>();
+    	this.jogadores = new HashMap<>();
         this.agenda = new Agenda();
         this.dados = new DadosEstatisticos();
-        this.forma = "";
     }
+    
+    public Plantel(int id, String tipo, Treinador t, HashMap<Integer,Jogador> j, Agenda a, DadosEstatisticos d) {
+    	this.id = id;
+    	this.tipoEscalao = tipo;
+    	this.treinador = t;
+    	this.jogadores = j;
+    	this.agenda = a;
+    	this.dados = d;
+    } 
 
     public Plantel(Plantel p) {
         this.id = p.getID();
@@ -35,7 +40,6 @@ public class Plantel {
     	this.jogadores = p.getJogadores();
         this.agenda = p.getAgenda();
         this.dados = p.getDados();
-        this.forma = p.getForma();
     }
 
     //Getters
@@ -51,10 +55,12 @@ public class Plantel {
         return this.treinador;
     }
     
-    public HashSet<Jogador> getJogadores() {
-        HashSet<Jogador> aux = new HashSet<Jogador>();
-        for(Jogador j: this.jogadores) 
-            aux.add(j.clone());
+    public HashMap<Integer,Jogador> getJogadores() {
+        HashMap<Integer,Jogador> aux = new HashMap<Integer,Jogador>();
+        
+        for(Integer n : this.jogadores.keySet()) 
+            aux.put(n, this.jogadores.get(n));
+        
         return aux;
     }
 
@@ -65,11 +71,7 @@ public class Plantel {
     public DadosEstatisticos getDados() {
         return this.dados;
     }
-    
-    public String getForma(){
-        return this.forma;
-    }
-   
+
     //Setters
     public void setID(int i){
         this.id = i;
@@ -83,7 +85,7 @@ public class Plantel {
         this.treinador = t;
     }
 
-    public void setJogadores(HashSet<Jogador> j) {
+    public void setJogadores(HashMap<Integer, Jogador> j) {
         this.jogadores = j;
     }
 
@@ -95,9 +97,7 @@ public class Plantel {
         this.dados = dados;
     }
     
-    public void setForma(String f){
-        this.forma = f;
-    }
+
 
     //Equals,hashCode,Clone,toString
     public int hashCode() {     
@@ -108,7 +108,7 @@ public class Plantel {
     }
 
     public boolean equals(Object o) {
-        if (this == null)
+        if (this == o)
             return true;
         if ((o == null) || (this.getClass() != o.getClass()))
             return false;
@@ -124,9 +124,10 @@ public class Plantel {
     
     public StringBuilder imprime(HashSet<Jogador> hash) {
         StringBuilder s = new StringBuilder();
-        for (Jogador j: hash) {
+        
+        for (Jogador j: hash)
             s.append(j.toString());
-        }
+        
        return s;
     }
 
@@ -134,31 +135,42 @@ public class Plantel {
 		StringBuilder str = new StringBuilder(); 
 		
 		str.append("--Plantel--\n");
-        str.append(this.imprime(getJogadores()));
+		for(Jogador j : this.jogadores.values())
+			str.append(j.toString());
 		
 		return str.toString(); 
 	}
     
     /**
-    *Metodos Jogadores
+    * Metodos Jogadores
     */
     public void inserirJogador(Jogador j) {
-        if (jogadores.size() < 12) //está mal(no min 12, no max 25) 
-            this.jogadores.add(j);
+    	if(!(this.jogadores.containsKey(j.getID())) && this.jogadores.size() <= 25)
+    			this.jogadores.put(j.getID(), j);
     }
         
-    public void removerJogador(Jogador j) {
+    public void removerJogador(Jogador j) { /* DEVE Faltar verificacoes */
         this.jogadores.remove(j);
     }
     
-    public Set<Jogador> procurarJogadorNome(String jogador) {
-        Set<Jogador> res = new HashSet<Jogador>();
-    	for (Iterator<Jogador> it = this.jogadores.iterator(); it.hasNext();) {
-            Jogador j = it.next();
-            if(j.getNome().contains(jogador))
-                res.add(j.clone());
-        }
+    public HashSet<Jogador> procurarJogadorNome(String jogador) {
+    	HashSet<Jogador> res = new HashSet<>();
+    	
+    	for(Jogador j : this.jogadores.values())
+    		if(j.getNome().contains(jogador))
+    			res.add(j.clone());
+    			
         return res;
     }
+
+	public void adicionaDadosPlantel(int numGolosMarcados, int numGolosSofridos, ArrayList<Integer> goleadores) {
+		this.dados.addDadosEstatisticos(numGolosMarcados, numGolosSofridos);
+		
+		for(Integer n : goleadores) 
+			if(this.jogadores.containsKey(n))
+				this.jogadores.get(n).addGolosJogador();
+	}
+	
+	/*FALTA METODO PARA MEXER NO CALENDARIO DO PLANTEL*/
 }
 

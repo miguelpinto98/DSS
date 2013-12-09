@@ -1,16 +1,16 @@
 package Business_Layer;
 
 import java.util.ArrayList;
-import java.util.TreeSet;
+import java.util.HashSet; /*FAZER UM COMPARE PARA ORDENAR POR DATA*/
 
 public class Agenda {
-	private TreeSet<Jogo> jogos;
+	private HashSet<Jogo> jogos;
         
         public Agenda(){
-            this.jogos = new TreeSet<>();
+            this.jogos = new HashSet<>();
         }
         
-        public Agenda(TreeSet<Jogo> j){
+        public Agenda(HashSet<Jogo> j){
             this.jogos = j;
         }
         
@@ -18,14 +18,14 @@ public class Agenda {
             this.jogos = a.getJogos();
         }
 
-        public TreeSet<Jogo> getJogos() {
-            TreeSet<Jogo> aux = new TreeSet<Jogo>();
+        public HashSet<Jogo> getJogos() {
+            HashSet<Jogo> aux = new HashSet<Jogo>();
             for(Jogo j: this.jogos) aux.add(j);
             return aux;
         }
     
-        public void setJogos(TreeSet<Jogo> jogo){
-            this.jogos = new TreeSet<Jogo>();
+        public void setJogos(HashSet<Jogo> jogo){
+            this.jogos = new HashSet<Jogo>();
             for(Jogo j : jogo) this.jogos.add(j);
         }
     
@@ -47,20 +47,27 @@ public class Agenda {
 	public String toString() {
 		StringBuilder s = new StringBuilder();
 		
-		s.append("Agenda");
-		s.append(this.getJogos() + "\n");
+		s.append("***** Agenda *****");
+		for(Jogo j : this.jogos)
+			s.append(j.toString());
+		
+		s.append("\n******************\n");
+
 		return s.toString();
 	}
 
-	public void addResultadoJogo(int casa, int fora, ArrayList<Integer> goleadores) {	
+	public void addResultadoJogo(int casa, int fora, ArrayList<Integer> goleadores) {
+		boolean mudou = false;
+		
 		for(Jogo j : this.jogos) {
-			if(!j.isJogoRealizado()) {
+			if(!j.isJogoRealizado() && !mudou) {
 				j.resultadoJogo(casa, fora);
 				j.goleadoresJogo(goleadores);
-				//j.atualizaEscalao();
+				j.atualizaPlantel();
 				j.setRealizado(true);
+			
+				mudou=true;
 			}
-			break;
 		}
 	}
 }

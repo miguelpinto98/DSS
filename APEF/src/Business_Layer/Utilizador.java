@@ -65,8 +65,8 @@ public abstract class Utilizador {
         this.telemovel = u.getTelemovel();
         this.codigoPostal = u.getCodPostal();
         this.dataNascimento = u.getDataNasc();
-        this.ativo = u.getAtivo();
-        this.camposPreenchidos = u.getCamposPreenchidos();
+        this.ativo = u.isAtivo();
+        this.camposPreenchidos = u.isCamposPreenchidos();
     }
 
     //Getters
@@ -110,11 +110,11 @@ public abstract class Utilizador {
         return (GregorianCalendar) dataNascimento.clone();
     }
 
-    public boolean getAtivo() {
+    public boolean isAtivo() {
         return this.ativo;
     }
 
-    public boolean getCamposPreenchidos() {
+    public boolean isCamposPreenchidos() {
         return this.camposPreenchidos;
     }
     

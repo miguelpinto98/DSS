@@ -43,7 +43,7 @@ public class Jogo {
     
     public Jogo(Jogo j) {
     	this.idCompeticao = j.getIdCompeticao();
-    	this.realizado = j.getRealizado();
+    	this.realizado = j.isJogoRealizado();
     	this.dia = j.getDiaJogo();
     	this.campo = j.getCampoJogo();
     	this.arbitro = j.getArbitroJogo();
@@ -62,7 +62,7 @@ public class Jogo {
 		this.idCompeticao = n;
 	}
 
-	public boolean getRealizado() {
+	public boolean isJogoRealizado() {
 		return this.realizado;
 	}
 
@@ -144,9 +144,22 @@ public class Jogo {
 	}
 
 	public String toString() {
-		StringBuilder str = new StringBuilder("Jogo");
+		StringBuilder str = new StringBuilder("\n##### Jogo ######");
 		
-		str.append("Campo: "+this.campo.toString());
+		str.append("\nID Competicao: "+this.getIdCompeticao());
+		str.append("\nRealizado: "+this.isJogoRealizado());
+		str.append("\nData de Nascimento: " + this.getDiaJogo().get(GregorianCalendar.YEAR) +"/"+
+				this.getDiaJogo().get(GregorianCalendar.MONTH) +"/"+
+				this.getDiaJogo().get(GregorianCalendar.DAY_OF_MONTH)+" "+
+				this.getDiaJogo().get(GregorianCalendar.HOUR)+":"+
+				this.getDiaJogo().get(GregorianCalendar.MINUTE));
+		str.append(this.campo.toString());
+		str.append("\nArbitro: "+this.arbitro.getNome());
+		str.append("\nPlantel Casa\n"+this.ecasa.toString());
+		str.append("\nPlantel Fora\n"+this.efora.toString());
+		str.append("\nGolos Plantel Casa: "+this.numGolosCasa);
+		str.append("\nGolos Plantel Fora: "+this.numGolosFora);
+		str.append("\nGoleadores: "+"\n");
 		
 		return str.toString();
 	}
@@ -177,10 +190,10 @@ public class Jogo {
 	public void goleadoresJogo(ArrayList<Integer> golos) {
 		this.setGoleadoresJogo(golos);
 	}
-	/*
-	public void atualizaEscalao() {
-		this.ecasa.adicionaDadosEscalao(this.numGolosCasa,this.numGolosFora);
-		this.ecasa.adicionaDadosEscalao(this.numGolosCasa,this.numGolosFora);
-	}*/
+	
+	public void atualizaPlantel() {
+		this.ecasa.adicionaDadosPlantel(this.numGolosCasa,this.numGolosFora,this.goleadores);
+		this.efora.adicionaDadosPlantel(this.numGolosFora,this.numGolosCasa,this.goleadores);
+	}
 
 }
