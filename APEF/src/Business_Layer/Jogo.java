@@ -19,8 +19,8 @@ public class Jogo {
     	this.dia = new GregorianCalendar();
     	this.campo = new Campo();
     	this.arbitro = new Arbitro();
-    	this.ecasa = null;		//!!!
-    	this.efora = null;		//!!!
+    	this.ecasa = new Plantel();
+    	this.efora = new Plantel();
     	this.numGolosCasa = 0;
     	this.numGolosFora = 0;
     	this.goleadores = new ArrayList<> ();
