@@ -6,7 +6,7 @@ import java.util.Iterator;
 
 public class APEF {
 	private HashMap<String, Escola> escolas;
-	private HashMap<String, Epoca> epocas;
+	private HashMap<Integer, Epoca> epocas;
 	private HashMap<String, Utilizador> users;
 	private Utilizador emSessao;
 
@@ -35,10 +35,10 @@ public class APEF {
 		return aux;
 	}
 	
-	public HashMap<String, Epoca> getEpoca() {
-		HashMap<String,Epoca> aux = new HashMap<>();
+	public HashMap<Integer, Epoca> getEpoca() {
+		HashMap<Integer,Epoca> aux = new HashMap<>();
 		
-		for(String s : this.epocas.keySet())
+		for(Integer s : this.epocas.keySet())
 			aux.put(s, this.epocas.get(s).clone());
 		
 		return aux;
@@ -61,7 +61,7 @@ public class APEF {
 		this.escolas = escolas;
 	}
 	
-	public void setEpoca(HashMap<String, Epoca> epocas) {
+	public void setEpoca(HashMap<Integer, Epoca> epocas) {
 		this.epocas = epocas;
 	}
 	
@@ -216,5 +216,16 @@ public class APEF {
 
     public void removerEscola(Escola escola) {
 		this.escolas.remove(escola.getNome());
+	}
+
+	public void criaEpoca(int anoEpoca) {
+		GregorianCalendar g = new GregorianCalendar();
+		
+		if(this.epocas.containsKey(anoEpoca) || (anoEpoca-g.get(GregorianCalendar.YEAR))==0)
+			; /*Epoca ja existe || Nao esta no ano corrente*/
+		else {
+			Epoca e = new Epoca();
+			this.epocas.put(anoEpoca, e);
+		}	
 	}
 }

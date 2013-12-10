@@ -4,7 +4,7 @@ import java.util.GregorianCalendar;
 import java.util.HashSet;
 
 public class Admin extends Utilizador {
-	
+	private APEF gestao;
 	private HashSet<HistoricoAcao> acoes;
 
 	public Admin(){
@@ -64,6 +64,10 @@ public class Admin extends Utilizador {
         str.append("Email:" + this.getEmail()+"\n");
         str.append(this.getAcoes());
 		return str.toString();
+	}
+	
+	public void criaNovaEpoca(int ano) {
+		this.gestao.criaEpoca(ano);
 	}
 
 }

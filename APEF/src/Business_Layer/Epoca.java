@@ -30,6 +30,12 @@ public class Epoca {
     	this.campeonatos = e.getCampeonatos();
     	this.torneios = e.getTorneios();
     }
+    
+    public Epoca(int ano) {
+    	this.ano = ano;
+    	this.campeonatos = new ArrayList<>();
+    	this.torneios = new ArrayList<>();
+    }
 
     //Getters
     public int getAno() {
