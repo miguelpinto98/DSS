@@ -156,7 +156,7 @@ public class Campeonato implements Competicao{
     }
     
     public boolean equals(Object o) {
-        if (this == null)
+        if (this == o)
             return true;
         if ((o == null) || (this.getClass() != o.getClass()))
             return false;

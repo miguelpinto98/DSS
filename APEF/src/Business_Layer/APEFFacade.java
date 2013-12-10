@@ -1,11 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package Business_Layer;
 
+import java.util.ArrayList;
+
 public interface APEFFacade {
+	
+	/**
+	 * Arbitro adiciona um resultado de um jogo, depois de realizado
+	 * @param Numero de golos do plantel da casa
+	 * @param Numero de golos do plantel visitante
+	 * @param Golos que cada jogador (ID) marcou
+	 */
+	public void resultadoJogo(int casa, int fora, ArrayList<Integer> goleadores);
     
 }
