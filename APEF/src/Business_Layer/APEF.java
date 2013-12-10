@@ -205,12 +205,13 @@ public class APEF {
         
     public void criarEscola(String nome, String local, String nomeCampo) {
     	if(!(this.escolas.containsKey(nome))){
-    	Campo c = new Campo(IDENTIFICADOR,nomeCampo);
-        Escola a = new Escola(nome,local,c);
-    	this.escolas.put(nome,a);
-        IDENTIFICADOR++;
-        
-    }
+    		Campo c = new Campo(IDENTIFICADOR,nomeCampo);
+        	Escola a = new Escola(nome,local,c);
+    		this.escolas.put(nome,a);
+        	IDENTIFICADOR++;
+    	}
+    	else
+    		System.out.println("Escola já existe");
     }
 
     public void removerEscola(Escola escola) {

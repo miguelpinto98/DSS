@@ -60,9 +60,9 @@ public class Admin extends Utilizador {
 		StringBuilder str = new StringBuilder("Admin\n");
 		str.append("ID:" + this.getID() + "\n");
 		str.append("Nickname:" + this.getNomeUser()+"\n");
-                str.append("Password:" + this.getPass()+"\n");
-                str.append("Email:" + this.getEmail()+"\n");
-                str.append(this.getAcoes());
+        str.append("Password:" + this.getPass()+"\n");
+        str.append("Email:" + this.getEmail()+"\n");
+        str.append(this.getAcoes());
 		return str.toString();
 	}
 

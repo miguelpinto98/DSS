@@ -1,5 +1,6 @@
 package Business_Layer;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -42,7 +43,19 @@ public class Campeonato implements Competicao{
         this.dataInicio = ca.getDataInicio();
         this.dataFim = ca.getDataFim();
     }
-    
+
+    public Campeonato(int id, String nome, int nrEquipas, GregorianCalendar i, GregorianCalendar f) {
+        this.id = id;
+        this.nome = nome;
+        this.nrEquipas = nrEquipas;
+        this.calendario = new Calendario();
+        this.listaEquipas = new HashSet<>();
+        this.goleadores = new HashMap<>();
+        this.classificacao = new Classificacao();
+        this.dataInicio = i;
+        this.dataFim = f;
+    }
+
     //Getters e Setters
     public int getID() {
         return this.id;
@@ -151,7 +164,7 @@ public class Campeonato implements Competicao{
 		str.append("--Campeonato--\n");
 		
 		return str.toString(); 
-	} 
+	}
 }
 
 

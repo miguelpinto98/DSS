@@ -1,6 +1,7 @@
 package Business_Layer;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Objects;
 
@@ -8,7 +9,7 @@ public class Epoca {
 
     //Variaveis de Instancia
     private int ano;
-    private ArrayList<Campeonato> campeonatos;
+    private ArrayList<Campeonato> campeonatos; //[1ºpetizes,2ºtraquinas,3ºbenjamins,4ºinfantis]
     private ArrayList<HashSet<Torneio>> torneios;
 
     //Construtores
@@ -103,4 +104,27 @@ public class Epoca {
 		str.append(this.getTorneios() + "\n");
         return str.toString(); 
     }
+
+    public boolean existeNomeCampeonato(String n) {
+        boolean res=false;
+        for(Campeonato c : this.campeonatos) {
+            if(c.getNome().equals(n)) 
+                res=true;
+            else
+                res=false;    
+        }
+        
+        return res;
+    }
+    
+    public void criarCampeonato(String nome, int nrEquipas, GregorianCalendar i, GregorianCalendar f) {   
+        if(!existeNomeCampeonato(nome)) {
+            Campeonato c = new Campeonato(APEF.IDENTIFICADOR,nome,nrEquipas,i,f);
+            this.campeonatos.add(c);
+            APEF.IDENTIFICADOR++;
+        }
+        else
+            System.out.println("Nome já existe");
+    }
+
 }
