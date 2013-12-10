@@ -9,7 +9,7 @@ public class Epoca {
 
     //Variaveis de Instancia
     private int ano;
-    private ArrayList<Campeonato> campeonatos; //[1ºpetizes,2ºtraquinas,3ºbenjamins,4ºinfantis]
+    private ArrayList<Campeonato> campeonatos;
     private ArrayList<HashSet<Torneio>> torneios;
 
     //Construtores
@@ -117,9 +117,12 @@ public class Epoca {
         return res;
     }
     
-    public void criarCampeonato(String nome, int nrEquipas, GregorianCalendar i, GregorianCalendar f) {   
+    public void abreCampeonato(String nome, GregorianCalendar limiteInscricao, int tipoEscalao) {   
         if(!existeNomeCampeonato(nome)) {
-            Campeonato c = new Campeonato(APEF.IDENTIFICADOR,nome,nrEquipas,i,f);
+            Campeonato c = new Campeonato(APEF.IDENTIFICADOR,nome,limiteInscricao,tipoEscalao);
+            //de acordo com o tipo escalao insere no array, 
+            //na posicao fixa desse escalao
+            //(1ºinfantis,2ºbenjamins,3ºtraquinas,4ºpetizes)
             this.campeonatos.add(c);
             APEF.IDENTIFICADOR++;
         }
