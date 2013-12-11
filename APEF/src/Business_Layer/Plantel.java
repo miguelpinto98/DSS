@@ -31,7 +31,16 @@ public class Plantel {
     	this.jogadores = j;
     	this.agenda = a;
     	this.dados = d;
-    } 
+    }
+    
+    public Plantel(int id, String tipo) {
+        this. id = id;
+        this.tipoEscalao = tipo;
+        this.treinador = new Treinador();
+    	this.jogadores = new HashMap<>();
+        this.agenda = new Agenda();
+        this.dados = new DadosEstatisticos(); 
+    }
 
     public Plantel(Plantel p) {
         this.id = p.getID();
@@ -140,7 +149,6 @@ public class Plantel {
 		
 		return str.toString(); 
 	}
-    
     /**
     * Metodos Jogadores
     */

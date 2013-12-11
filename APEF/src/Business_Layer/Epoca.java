@@ -9,17 +9,17 @@ public class Epoca {
 
     //Variaveis de Instancia
     private int ano;
-    private ArrayList<Campeonato> campeonatos;
+    private Campeonato[] campeonatos;
     private ArrayList<HashSet<Torneio>> torneios;
 
     //Construtores
     public Epoca() {
     	this.ano = 0;
-    	this.campeonatos = new ArrayList<>();
+    	this.campeonatos = new Campeonato[4];
     	this.torneios = new ArrayList<>();
     }
 
-    public Epoca(int ano, ArrayList<Campeonato> c, ArrayList<HashSet<Torneio>> t){
+    public Epoca(int ano, Campeonato[] c, ArrayList<HashSet<Torneio>> t){
         this.ano = ano;
         this.campeonatos = c;
         this.torneios = t;
@@ -33,7 +33,7 @@ public class Epoca {
     
     public Epoca(int ano) {
     	this.ano = ano;
-    	this.campeonatos = new ArrayList<>();
+    	this.campeonatos = new Campeonato[4];
     	this.torneios = new ArrayList<>();
     }
 
@@ -42,11 +42,11 @@ public class Epoca {
         return this.ano;
     }
     
-    public ArrayList<Campeonato> getCampeonatos() {
-        ArrayList<Campeonato> aux = new ArrayList<>();
+    public Campeonato[] getCampeonatos() {
+        Campeonato[] aux = new Campeonato[4];
         int i;
-        for(i=0;i<this.campeonatos.size();i++){
-            aux.add(this.campeonatos.get(i).clone());
+        for(i=0;i<4;i++){
+            aux[i] = this.campeonatos[i].clone();
         }
         return aux;
     }
@@ -71,7 +71,7 @@ public class Epoca {
         this.ano = ano;
     }
 
-    public void setCampeonatos(ArrayList<Campeonato> c) {
+    public void setCampeonatos(Campeonato[] c) {
         this.campeonatos = c;
     }
     public void setTorneios(ArrayList<HashSet<Torneio>> t) {
@@ -123,17 +123,27 @@ public class Epoca {
         return res;
     }
     
-    public void abreCampeonato(String nome, GregorianCalendar limiteInscricao, int tipoEscalao) {   
+    public void abreCampeonato(String nome, GregorianCalendar limiteInscricao, int tipoEscalao, int limiteEquipas) {   
         if(!existeNomeCampeonato(nome)) {
-            Campeonato c = new Campeonato(APEF.IDENTIFICADOR,nome,limiteInscricao,tipoEscalao);
-            //de acordo com o tipo escalao insere no array, 
-            //na posicao fixa desse escalao
-            //(1ºinfantis,2ºbenjamins,3ºtraquinas,4ºpetizes)
-            this.campeonatos.add(c);
-            APEF.IDENTIFICADOR++;
+            Campeonato c = new Campeonato(APEF.IDENTIFICADOR,nome,limiteInscricao,tipoEscalao,limiteEquipas);
+            if (tipoEscalao < 4 && tipoEscalao >= 0) 
+                this.campeonatos[tipoEscalao] = c;
+                APEF.IDENTIFICADOR++; 
         }
         else
             System.out.println("Nome já existe");
     }
-
+    
+    public void inscreverEmCompeticao(Plantel p, int tipo) {
+        int nr = this.campeonatos[tipo].getNrPlanteis();
+        GregorianCalendar agora = new GregorianCalendar();
+        
+        if(this.campeonatos[tipo].getListaPlanteis().size() > 0 && agora.compareTo(this.campeonatos[tipo].getDataInicio()) <= 0 ) {
+            this.campeonatos[tipo].getListaPlanteis().add(p);
+            this.campeonatos[tipo].setNrPlanteis(nr-1);  
+        }
+        
+        else
+            System.err.println("erro");
+    }
 }

@@ -7,7 +7,7 @@ import java.util.GregorianCalendar;
 public abstract class Utilizador {
     
     //Variaveis de Instancia
-    private int id;
+    int id;
     private Imagem avatar;
     private String nomeUtilizador;
     private String nome;

@@ -1,5 +1,6 @@
 package Business_Layer;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Escalao {
@@ -55,5 +56,23 @@ public class Escalao {
 			return (this.planteis.equals(e.getPlanteis()));
 		}
 	}
-
+    
+    public String defineNomePlantel(Equipa e, int tipo) {
+        String res="";
+        if(tipo==0) res=e.getNome()+"Infantis";
+        if(tipo==1) res=e.getNome()+"Benjamins";
+        if(tipo==2) res=e.getNome()+"Traquinas";
+        if(tipo==3) res=e.getNome()+"Petizes";
+        
+        return res;
+    }
+     
+    public void criarPlantel(int id, Equipa e, int tipo) {
+        String nomePlantel = defineNomePlantel(e, tipo);
+        
+        if(!(this.planteis.containsKey(id))) {
+            Plantel p = new Plantel(id,nomePlantel);
+            this.planteis.put(id, p);
+        }
+    }        
 }

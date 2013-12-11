@@ -46,11 +46,11 @@ public class Campeonato implements Competicao{
         this.dataFim = ca.getDataFim();
     }
 
-    public Campeonato(int id, String nome, GregorianCalendar i, int tipo) {
+    public Campeonato(int id, String nome, GregorianCalendar i, int tipo, int nrEquipasMax) {
         this.id = id;
         this.tipoEscalao = tipo;
         this.nome = nome;
-        this.nrPlanteis = 0;
+        this.nrPlanteis = nrEquipasMax;
         this.calendario = new Calendario();
         this.listaPlanteis = new HashSet<>();
         this.goleadores = new HashMap<>();
