@@ -4,6 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Equipa {
+
+	private static final int indexInfantis = 0;
+    private static final int indexBenjamins = 1;
+    private static final int indexTraquinas = 2;
+    private static final int indexPetizes = 3;
+    private static final int maxEscaloes = 4;
+    
     private int id;
     private String nome;
     private Imagem emblema;
@@ -15,7 +22,7 @@ public class Equipa {
     	this.nome = new String();
     	this.emblema = new Imagem();
     	this.palmares = new HashMap<>();
-    	this.escaloes = new Escalao[4];
+    	this.escaloes = new Escalao[maxEscaloes];
     }
     
     public Equipa(int id, String n, Imagem e) {
@@ -23,7 +30,7 @@ public class Equipa {
     	this.nome = n;
     	this.emblema = e;
     	this.palmares = new HashMap<>();
-    	this.escaloes = new Escalao[4];	
+    	this.escaloes = new Escalao[maxEscaloes];	
     }
     
 
@@ -57,9 +64,9 @@ public class Equipa {
 	}
 
 	public Escalao[] getEscaloes() {
-		Escalao[] aux = new Escalao[4];
+		Escalao[] aux = new Escalao[maxEscaloes];
         int i;
-        for(i=0;i<4;i++){
+        for(i=0;i<maxEscaloes;i++){
             aux[i] = this.escaloes[i].clone();
         }
         return aux;

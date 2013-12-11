@@ -1,11 +1,13 @@
 package Business_Layer;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 public class Jogador extends Pessoa {    
     
     //Variaveis de Instancia
     private int nrGolos;
+    private ArrayList<Integer> competicoes;
 
     //Construtores
     public Jogador() {

@@ -14,9 +14,9 @@ public interface Competicao {
 
     public void setNome(String nome);
 
-    public int getNrPlanteis();
+    public int getNrEscaloes();
 
-    public void setNrPlanteis(int nrPlanteis);
+    public void setNrEscaloes(int nrPlanteis);
 
     public HashMap<Integer, Integer> getGoleadores();
 

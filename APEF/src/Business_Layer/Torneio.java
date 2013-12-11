@@ -10,7 +10,7 @@ public class Torneio implements Competicao{
     //Variaveis de Instancia
     private int id;
     private String nome;
-    private int nrPlanteis;
+    private int nrEscaloes;
     private HashMap<Integer,Integer> goleadores;
     private EstatisticaCompeticao estatisticaCompeticao;
     private GregorianCalendar dataInicio;
@@ -20,7 +20,7 @@ public class Torneio implements Competicao{
     public Torneio() {
         this.id = 0;
         this.nome = "";
-        this.nrPlanteis = 0;
+        this.nrEscaloes = 0;
         this.goleadores = new HashMap<>();
         this.estatisticaCompeticao = new EstatisticaCompeticao();
         this.fases = new ArrayList<>();
@@ -31,7 +31,7 @@ public class Torneio implements Competicao{
 	public Torneio(Torneio t) {
         this.id = t.getID();
         this.nome = t.getNome();
-        this.nrPlanteis = t.getNrPlanteis();
+        this.nrEscaloes = t.getNrEscaloes();
         this.goleadores = t.getGoleadores();
         this.estatisticaCompeticao = t.getEstatisticaCompeticao();
         this.fases = t.getFases();
@@ -55,12 +55,12 @@ public class Torneio implements Competicao{
         this.nome = nome;
     }
 
-    public int getNrPlanteis() {
-        return this.nrPlanteis;
+    public int getNrEscaloes() {
+        return this.nrEscaloes;
     }
 
-    public void setNrPlanteis(int nrPlanteis) {
-        this.nrPlanteis = nrPlanteis;
+    public void setNrEscaloes(int nrEscaloes) {
+        this.nrEscaloes = nrEscaloes;
     }
 
     public HashMap<Integer, Integer> getGoleadores() {

@@ -64,7 +64,7 @@ public class TESTE_apef {
 		
 		/* TESTAR ADICIONAR RESULTADO A UM JOGO
 		 * 
-		 */
+		 *//*
 		Arbitro aa = new Arbitro(1000, "manuelQuim", "123", "a@b.c", new GregorianCalendar(1992,7,9));
 		System.out.println(aa.toString());
 		
@@ -113,7 +113,7 @@ public class TESTE_apef {
 		aa.setAgenda(ag);
 		
 		/*JOGO 1*/
-		ArrayList<Integer> golos = new ArrayList<>();
+		/*ArrayList<Integer> golos = new ArrayList<>();
 		golos.add(2);
 		golos.add(6);
 		golos.add(10);
@@ -131,8 +131,7 @@ public class TESTE_apef {
 		
 		aa.resultadoJogo(1, 1, golos);
 		
-		System.out.println(aa.toString());
-
+		System.out.println(aa.toString());*/
 	}
 
 }

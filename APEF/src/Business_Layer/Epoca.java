@@ -7,6 +7,12 @@ import java.util.Objects;
 
 public class Epoca {
 
+    private static final int indexInfantis = 0;
+    private static final int indexBenjamins = 1;
+    private static final int indexTraquinas = 2;
+    private static final int indexPetizes = 3;
+    private static final int maxEscaloes = 4;
+
     //Variaveis de Instancia
     private int ano;
     private Campeonato[] campeonatos;
@@ -15,8 +21,8 @@ public class Epoca {
     //Construtores
     public Epoca() {
     	this.ano = 0;
-    	this.campeonatos = new Campeonato[4];
-    	this.torneios = new ArrayList<>();
+    	this.campeonatos = new Campeonato[maxEscaloes];
+    	this.torneios = new ArrayList<HashSet<Torneio>>();
     }
 
     public Epoca(int ano, Campeonato[] c, ArrayList<HashSet<Torneio>> t){
@@ -33,7 +39,7 @@ public class Epoca {
     
     public Epoca(int ano) {
     	this.ano = ano;
-    	this.campeonatos = new Campeonato[4];
+    	this.campeonatos = new Campeonato[maxEscaloes];
     	this.torneios = new ArrayList<>();
     }
 
@@ -43,9 +49,9 @@ public class Epoca {
     }
     
     public Campeonato[] getCampeonatos() {
-        Campeonato[] aux = new Campeonato[4];
+        Campeonato[] aux = new Campeonato[maxEscaloes];
         int i;
-        for(i=0;i<4;i++){
+        for(i=0;i<maxEscaloes;i++){
             aux[i] = this.campeonatos[i].clone();
         }
         return aux;
@@ -122,7 +128,7 @@ public class Epoca {
         
         return res;
     }
-    
+    /*
     public void abreCampeonato(String nome, GregorianCalendar limiteInscricao, int tipoEscalao, int limiteEquipas) {   
         if(!existeNomeCampeonato(nome)) {
             Campeonato c = new Campeonato(APEF.IDENTIFICADOR,nome,limiteInscricao,tipoEscalao,limiteEquipas);
@@ -134,16 +140,16 @@ public class Epoca {
             System.out.println("Nome já existe");
     }
     
-    public void inscreverEmCompeticao(Plantel p, int tipo) {
-        int nr = this.campeonatos[tipo].getNrPlanteis();
+    public void inscreverEmCompeticao(Escalao e, int tipo) {
+        int nr = this.campeonatos[tipo].getNrEscaloes();
         GregorianCalendar agora = new GregorianCalendar();
         
-        if(this.campeonatos[tipo].getListaPlanteis().size() > 0 && agora.compareTo(this.campeonatos[tipo].getDataInicio()) <= 0 ) {
-            this.campeonatos[tipo].getListaPlanteis().add(p);
-            this.campeonatos[tipo].setNrPlanteis(nr-1);  
+        if(this.campeonatos[tipo].getListaEscaloes().size() > 0 && agora.compareTo(this.campeonatos[tipo].getDataInicio()) <= 0 ) {
+            this.campeonatos[tipo].getListaEscaloes().add(e);
+            this.campeonatos[tipo].setNrEscaloes(nr-1);  
         }
         
         else
             System.err.println("erro");
-    }
+    }*/
 }

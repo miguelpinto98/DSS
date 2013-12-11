@@ -11,9 +11,9 @@ public class Campeonato implements Competicao{
     private int id;
     private int tipoEscalao;
     private String nome;
-    private int nrPlanteis;
+    private int nrEscaloes;
     private Calendario calendario;
-    private HashSet<Plantel> listaPlanteis;
+    private HashSet<Escalao> listaEscaloes;
     private HashMap<Integer,Integer> goleadores; //<id do jogador,nr golos>     
     private Classificacao classificacao;
     private GregorianCalendar dataInicio;
@@ -24,9 +24,9 @@ public class Campeonato implements Competicao{
     	this.id = 0;
         this.tipoEscalao = -1;
     	this.nome = "";
-    	this.nrPlanteis = 0;
+    	this.nrEscaloes = 0;
     	this.calendario = new Calendario();
-        this.listaPlanteis = new HashSet<>();
+        this.listaEscaloes = new HashSet<>();
     	this.goleadores = new HashMap<>();
         this.classificacao = null;
         this.dataInicio = new GregorianCalendar();
@@ -37,9 +37,9 @@ public class Campeonato implements Competicao{
     	this.id = ca.getID();
         this.tipoEscalao = ca.getTipoEscalao();
     	this.nome = ca.getNome();
-    	this.nrPlanteis = ca.getNrPlanteis();
+    	this.nrEscaloes = ca.getNrEscaloes();
     	this.calendario = ca.getCalendario();
-        this.listaPlanteis = ca.getListaPlanteis();
+        this.listaEscaloes = ca.getListaEscaloes();
     	this.goleadores = ca.getGoleadores();
         this.classificacao = ca.getClassificacao();
         this.dataInicio = ca.getDataInicio();
@@ -50,9 +50,9 @@ public class Campeonato implements Competicao{
         this.id = id;
         this.tipoEscalao = tipo;
         this.nome = nome;
-        this.nrPlanteis = nrEquipasMax;
+        this.nrEscaloes = nrEquipasMax;
         this.calendario = new Calendario();
-        this.listaPlanteis = new HashSet<>();
+        this.listaEscaloes = new HashSet<>();
         this.goleadores = new HashMap<>();
         this.classificacao = new Classificacao();
         this.dataInicio = i;
@@ -85,12 +85,12 @@ public class Campeonato implements Competicao{
         this.nome = nome;
     }
 
-    public int getNrPlanteis() {
-        return this.nrPlanteis;
+    public int getNrEscaloes() {
+        return this.nrEscaloes;
     }
 
-    public void setNrPlanteis(int nrPlanteis) {
-        this.nrPlanteis = nrPlanteis;
+    public void setNrEscaloes(int nrEscaloes) {
+        this.nrEscaloes = nrEscaloes;
     }
 
     public Calendario getCalendario() {
@@ -101,15 +101,15 @@ public class Campeonato implements Competicao{
         this.calendario = calendario;
     }
 
-    public HashSet<Plantel> getListaPlanteis() {
-        HashSet<Plantel> aux = new HashSet<Plantel>();
-        for(Plantel e: this.listaPlanteis) 
+    public HashSet<Escalao> getListaEscaloes() {
+        HashSet<Escalao> aux = new HashSet<Escalao>();
+        for(Escalao e: this.listaEscaloes) 
             aux.add(e.clone());
         return aux;
     }
 
-    public void setListaPlanteis (HashSet<Plantel> le){
-        this.listaPlanteis = le;
+    public void setListaEscaloes (HashSet<Escalao> le){
+        this.listaEscaloes = le;
     }
     
     public Classificacao getClassificacao() {

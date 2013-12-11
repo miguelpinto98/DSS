@@ -9,8 +9,8 @@ public class Jogo {
     private GregorianCalendar dia; /* Dia e hora de jogo */
     private Campo campo;
     private Arbitro arbitro;
-    private Plantel ecasa;
-    private Plantel efora;
+    private Escalao ecasa;
+    private Escalao efora;
     private int numGolosCasa;
     private int numGolosFora;
     private ArrayList<Integer> goleadores;
@@ -21,14 +21,14 @@ public class Jogo {
     	this.dia = new GregorianCalendar();
     	this.campo = new Campo();
     	this.arbitro = new Arbitro();
-    	this.ecasa = new Plantel();
-    	this.efora = new Plantel();
+    	this.ecasa = new Escalao();
+    	this.efora = new Escalao();
     	this.numGolosCasa = 0;
     	this.numGolosFora = 0;
     	this.goleadores = new ArrayList<> ();
     }
     
-    public Jogo(int i, GregorianCalendar g, Campo c, Arbitro a, Plantel ec, Plantel ef) {
+    public Jogo(int i, GregorianCalendar g, Campo c, Arbitro a, Escalao ec, Escalao ef) {
     	this.idCompeticao = i;
     	this.realizado = false;
     	this.dia = (GregorianCalendar) g.clone();
@@ -47,8 +47,8 @@ public class Jogo {
     	this.dia = j.getDiaJogo();
     	this.campo = j.getCampoJogo();
     	this.arbitro = j.getArbitroJogo();
-    	this.ecasa = j.getPlantelCasa();
-    	this.efora = j.getPlantelFora();
+    	this.ecasa = j.getEscalaoCasa();
+    	this.efora = j.getEscalaoFora();
     	this.numGolosCasa = j.getNumGolosJogoCasa();
     	this.numGolosFora = j.getNumGolosJogoFora();
     	this.goleadores = j.getGoleadoresJogo();
@@ -94,19 +94,19 @@ public class Jogo {
 		this.arbitro = arbitro;
 	}
 
-	public Plantel getPlantelCasa() {
+	public Escalao getEscalaoCasa() {
 		return this.ecasa;
 	}
 
-	public void setPlantelCasa(Plantel ecasa) {
+	public void setEscalaoCasa(Escalao ecasa) {
 		this.ecasa = ecasa;
 	}
 	
-	public Plantel getPlantelFora() {
+	public Escalao getEscalaoFora() {
 		return this.efora;
 	}
 
-	public void setPlantelFora(Plantel efora) {
+	public void setEscalaoFora(Escalao efora) {
 		this.efora = efora;
 	}
 
@@ -155,10 +155,10 @@ public class Jogo {
 				this.getDiaJogo().get(GregorianCalendar.MINUTE));
 		str.append(this.campo.toString());
 		str.append("\nArbitro: "+this.arbitro.getNome());
-		str.append("\nPlantel Casa\n"+this.ecasa.toString());
-		str.append("\nPlantel Fora\n"+this.efora.toString());
-		str.append("\nGolos Plantel Casa: "+this.numGolosCasa);
-		str.append("\nGolos Plantel Fora: "+this.numGolosFora);
+		str.append("\nEscalao Casa\n"+this.ecasa.toString());
+		str.append("\nEscalao Fora\n"+this.efora.toString());
+		str.append("\nGolos Escalao Casa: "+this.numGolosCasa);
+		str.append("\nGolos Escalao Fora: "+this.numGolosFora);
 		str.append("\nGoleadores: "+"\n");
 		
 		return str.toString();
@@ -174,8 +174,8 @@ public class Jogo {
 			return (this.dia.equals(j.getDiaJogo()) &&
 					this.campo.equals(j.getCampoJogo()) &&
 					this.arbitro.equals(j.getArbitroJogo()) &&
-					this.ecasa.equals(j.getPlantelCasa()) &&
-					this.efora.equals(j.getPlantelFora()) &&
+					this.ecasa.equals(j.getEscalaoCasa()) &&
+					this.efora.equals(j.getEscalaoFora()) &&
 					this.numGolosCasa == j.getNumGolosJogoCasa() &&
 					this.numGolosFora == j.getNumGolosJogoFora() &&
 					this.goleadores.equals(j.getGoleadoresJogo()));
@@ -191,9 +191,9 @@ public class Jogo {
 		this.setGoleadoresJogo(golos);
 	}
 	
-	public void atualizaPlantel() {
-		this.ecasa.adicionaDadosPlantel(this.numGolosCasa,this.numGolosFora,this.goleadores,this.dia);
-		this.efora.adicionaDadosPlantel(this.numGolosFora,this.numGolosCasa,this.goleadores,this.dia);
+	public void atualizaEscalao() {
+		this.ecasa.adicionaDadosEscalao(this.numGolosCasa,this.numGolosFora,this.goleadores,this.dia);
+		this.efora.adicionaDadosEscalao(this.numGolosFora,this.numGolosCasa,this.goleadores,this.dia);
 	}
 
 }

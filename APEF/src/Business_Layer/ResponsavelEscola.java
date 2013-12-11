@@ -53,17 +53,4 @@ public class ResponsavelEscola extends Utilizador {
 		
 		return str.toString();
 	}
-    
-    public void inscreverEquipaCompeticao(int idCompeticao, Equipa x, int tipoEscalao) {
-        
-        HashSet<Equipa> equipasREscola = this.escola.getEquipas();
- 
-        for(Equipa e : equipasREscola) {
-            if(x.equals(e))
-                e.getEscaloes()[tipoEscalao].criarPlantel(idCompeticao,x,tipoEscalao);      
-        }       
-        
-        //APEF.inscreverEmCompeticao(p,tipoEscalao);
-  
-    }
 }
