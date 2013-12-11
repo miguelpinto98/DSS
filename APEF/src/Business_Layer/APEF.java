@@ -211,7 +211,7 @@ public class APEF {
         	IDENTIFICADOR++;
     	}
     	else
-    		System.out.println("Escola já existe");
+    		System.out.println("Escola ja existe");
     }
 
     public void removerEscola(Escola escola) {
@@ -227,5 +227,9 @@ public class APEF {
 			Epoca e = new Epoca();
 			this.epocas.put(anoEpoca, e);
 		}	
+	}
+	
+	public void mudarPermissoes(String name) {
+		this.users.get(name).setAtivo(true);		
 	}
 }

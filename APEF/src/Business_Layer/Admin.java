@@ -69,5 +69,9 @@ public class Admin extends Utilizador {
 	public void criaNovaEpoca(int ano) {
 		this.gestao.criaEpoca(ano);
 	}
+	
+	public void atribuiPermissoes(String name) {
+		this.gestao.mudarPermissoes(name);
+	}
 
 }

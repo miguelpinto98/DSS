@@ -1,6 +1,7 @@
 package Business_Layer;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.HashSet; /*FAZER UM COMPARE PARA ORDENAR POR DATA*/
 
 public class Agenda {
@@ -69,5 +70,10 @@ public class Agenda {
 				mudou=true;
 			}
 		}
+	}
+
+	public void atualizaAgenda(GregorianCalendar dia) {
+		// TODO Auto-generated method stub
+		
 	}
 }

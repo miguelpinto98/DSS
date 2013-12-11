@@ -192,8 +192,8 @@ public class Jogo {
 	}
 	
 	public void atualizaPlantel() {
-		this.ecasa.adicionaDadosPlantel(this.numGolosCasa,this.numGolosFora,this.goleadores);
-		this.efora.adicionaDadosPlantel(this.numGolosFora,this.numGolosCasa,this.goleadores);
+		this.ecasa.adicionaDadosPlantel(this.numGolosCasa,this.numGolosFora,this.goleadores,this.dia);
+		this.efora.adicionaDadosPlantel(this.numGolosFora,this.numGolosCasa,this.goleadores,this.dia);
 	}
 
 }

@@ -1,6 +1,7 @@
 package Business_Layer;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -171,8 +172,9 @@ public class Plantel {
         return res;
     }
 
-	public void adicionaDadosPlantel(int numGolosMarcados, int numGolosSofridos, ArrayList<Integer> goleadores) {
+	public void adicionaDadosPlantel(int numGolosMarcados, int numGolosSofridos, ArrayList<Integer> goleadores, GregorianCalendar dia) {
 		this.dados.addDadosEstatisticos(numGolosMarcados, numGolosSofridos);
+		this.agenda.atualizaAgenda(dia);
 		
 		for(Integer n : goleadores) 
 			if(this.jogadores.containsKey(n))
