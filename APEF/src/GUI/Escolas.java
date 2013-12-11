@@ -6,9 +6,9 @@ import javax.swing.JFrame;
  *
  * @author Utilizador
  */
-public class Torneios extends JFrame {
+public class Escolas extends JFrame {
 
-    public Torneios() {
+    public Escolas() {
         initComponents();
     }
 
@@ -29,7 +29,6 @@ public class Torneios extends JFrame {
         jPanel6 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
-        jComboBox1 = new javax.swing.JComboBox();
         jPanel4 = new javax.swing.JPanel();
         jButton6 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
@@ -61,15 +60,7 @@ public class Torneios extends JFrame {
         jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 32)); // NOI18N
-        jLabel4.setText("Torneios");
-
-        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Época 13/14" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
+        jLabel4.setText("Escolas");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -79,20 +70,17 @@ public class Torneios extends JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jSeparator4)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(412, Short.MAX_VALUE)
                         .addComponent(jLabel4)
-                        .addGap(251, 251, 251)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(423, 423, 423)))
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
+                .addComponent(jLabel4)
+                .addGap(23, 23, 23)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -253,9 +241,16 @@ public class Torneios extends JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+   public static void main(String args[]) {
+       
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Escolas().setVisible(true);
+            }
+        });
+    }
+  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -264,7 +259,6 @@ public class Torneios extends JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
