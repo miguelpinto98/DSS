@@ -6,9 +6,9 @@ import javax.swing.JFrame;
  *
  * @author Utilizador
  */
-public class TorneioInformaçao extends JFrame {
+public class TorneioInformacao extends JFrame {
 
-    public TorneioInformaçao() {
+    public TorneioInformacao() {
         initComponents();
     }
 
@@ -79,7 +79,7 @@ public class TorneioInformaçao extends JFrame {
         jLabel4.setText("Nome");
 
         jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Época 13/14" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "��poca 13/14" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -90,7 +90,7 @@ public class TorneioInformaçao extends JFrame {
         jLabel5.setText("Torneios >");
 
         jLabel6.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel6.setText("Informação");
+        jLabel6.setText("Informa����o");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -135,7 +135,7 @@ public class TorneioInformaçao extends JFrame {
         jPanel4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true));
 
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel2.setText("Estatística");
+        jLabel2.setText("Estat��stica");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("Melhores Jogadores");
@@ -155,7 +155,7 @@ public class TorneioInformaçao extends JFrame {
                 {null, null, null}
             },
             new String [] {
-                "", "Jogador", "Nº Golos"
+                "", "Jogador", "N�� Golos"
             }
         ) {
             Class[] types = new Class [] {
@@ -204,13 +204,13 @@ public class TorneioInformaçao extends JFrame {
         );
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jLabel7.setText("Informação");
+        jLabel7.setText("Informa����o");
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel8.setText("Data de início:");
+        jLabel8.setText("Data de in��cio:");
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel9.setText("Número de equipas participantes:");
+        jLabel9.setText("N��mero de equipas participantes:");
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel10.setText("Fase Actual");
@@ -275,13 +275,13 @@ public class TorneioInformaçao extends JFrame {
         jButton6.setText("Home");
 
         jButton7.setForeground(new java.awt.Color(102, 102, 102));
-        jButton7.setText("Informação");
+        jButton7.setText("Informa����o");
 
         jButton8.setForeground(new java.awt.Color(102, 102, 102));
-        jButton8.setText("Estatísticas");
+        jButton8.setText("Estat��sticas");
 
         jButton9.setForeground(new java.awt.Color(102, 102, 102));
-        jButton9.setText("Calendário");
+        jButton9.setText("Calend��rio");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -340,7 +340,7 @@ public class TorneioInformaçao extends JFrame {
         jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 1, 36)); // NOI18N
-        jLabel1.setText("Associação Portuguesa de Escolas de Futebol");
+        jLabel1.setText("Associa����o Portuguesa de Escolas de Futebol");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -428,7 +428,7 @@ public class TorneioInformaçao extends JFrame {
        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TorneioInformaçao().setVisible(true);
+                new TorneioInformacao().setVisible(true);
             }
         });
     } 
