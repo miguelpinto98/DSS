@@ -133,4 +133,46 @@ public class TESTE_apef {
 		
 		System.out.println(aa.toString());
 	}*/
-}}
+        
+        APEF a = new APEF();
+        Epoca ep = new Epoca(2013);
+        Campeonato c = new Campeonato("Campeonato APEF - Infantis", new GregorianCalendar(),0,10);
+        a.getEpocas().put(ep.getAno(),ep);
+        ep.inserirCampeonato(c);
+
+		Jogador j1 = new Jogador("zzz", new GregorianCalendar(), 0,false);
+		Jogador j2 = new Jogador("xxx", new GregorianCalendar(), 0,false);
+		Jogador j3 = new Jogador("www", new GregorianCalendar(), 0,false);
+		Jogador j4 = new Jogador("yyy", new GregorianCalendar(), 0,false);
+		Jogador j5 = new Jogador("kkk", new GregorianCalendar(), 0,false);
+        Jogador j6 = new Jogador("zzz", new GregorianCalendar(), 0,false);
+		Jogador j7 = new Jogador("xxx", new GregorianCalendar(), 0,false);
+		Jogador j8 = new Jogador("www", new GregorianCalendar(), 0,false);
+		Jogador j9 = new Jogador("yyy", new GregorianCalendar(), 0,false);
+		Jogador j10 = new Jogador("kkk", new GregorianCalendar(), 0,false);
+        Jogador j11 = new Jogador("zzz", new GregorianCalendar(), 0,false);
+		Jogador j12 = new Jogador("xxx", new GregorianCalendar(), 0,false);
+		Jogador j13 = new Jogador("www", new GregorianCalendar(), 0,false);
+        ArrayList<Jogador> selecionados = new ArrayList<>();
+        selecionados.add(j1);
+        selecionados.add(j2);
+        selecionados.add(j3);
+        selecionados.add(j4);
+        selecionados.add(j5);
+        selecionados.add(j6);
+        selecionados.add(j7);
+        selecionados.add(j8);
+        selecionados.add(j9);
+        selecionados.add(j10);
+        selecionados.add(j11);
+        selecionados.add(j12);
+        selecionados.add(j13);
+        Treinador t = new Treinador();
+        HashMap<Integer,Jogador> jogadores = new HashMap<>();
+        Agenda ag =  new Agenda();
+        DadosEstatisticos d = new DadosEstatisticos();
+        Escalao e = new Escalao(0,t,jogadores,ag,d);
+        
+        a.inscreverCompeticao(2013, c.getID(), e, selecionados);
+        System.out.println(c.toString());
+    }}

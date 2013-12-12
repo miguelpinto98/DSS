@@ -17,9 +17,10 @@ public class Jogador extends Pessoa {
         this.emprestado = false;
     }
    
-    public Jogador(String nome, GregorianCalendar g,int sexo, boolean emprestado) {
+    public Jogador(String nome, GregorianCalendar g, int sexo, boolean emprestado) {
         super(nome,null,g,sexo);
         this.nrGolos = 0;
+        this.competicoes = new ArrayList<>();
         this.emprestado = emprestado;
     }
 

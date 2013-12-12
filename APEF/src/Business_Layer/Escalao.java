@@ -35,13 +35,14 @@ public class Escalao {
         APEF.IDENTIFICADOR++;
     }
     
-    public Escalao(int id, int tipo) {
-        this. id = id;
+    public Escalao(int tipo) {
+        this. id = APEF.IDENTIFICADOR;
         this.tipoEscalao = tipo;
         this.treinador = new Treinador();
     	this.jogadores = new HashMap<>();
         this.agenda = new Agenda();
         this.dados = new DadosEstatisticos(); 
+        APEF.IDENTIFICADOR++;
     }
 
     public Escalao(Escalao p) {

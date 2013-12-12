@@ -46,8 +46,8 @@ public class Campeonato implements Competicao{
         this.dataFim = ca.getDataFim();
     }
 
-    public Campeonato(int id, String nome, GregorianCalendar limiteInscricao, int tipo, int nrEquipasMax) {
-        this.id = id;
+    public Campeonato(String nome, GregorianCalendar limiteInscricao, int tipo, int nrEquipasMax) {
+        this.id = APEF.IDENTIFICADOR;
         this.tipoEscalao = tipo;
         this.nome = nome;
         this.nrEscaloes = nrEquipasMax;
@@ -57,6 +57,7 @@ public class Campeonato implements Competicao{
         this.classificacao = new Classificacao();
         this.dataInicio = limiteInscricao;
         this.dataFim = limiteInscricao;
+        APEF.IDENTIFICADOR++;
     }
 
     //Getters e Setters
@@ -174,6 +175,10 @@ public class Campeonato implements Competicao{
 		StringBuilder str = new StringBuilder(); 
 		
 		str.append("--Campeonato--\n");
+        str.append("\nID: "+this.getID());
+        str.append("\nNome: "+this.getNome());
+        str.append("\nNrEquipas: "+this.getNrEscaloes());
+        str.append("\nParticipantes: "+this.getListaEscaloes());
 		
 		return str.toString(); 
 	}

@@ -52,7 +52,7 @@ public class Epoca {
         Campeonato[] aux = new Campeonato[maxEscaloes];
         int i;
         for(i=0;i<maxEscaloes;i++){
-            aux[i] = this.campeonatos[i].clone();
+            aux[i] = this.campeonatos[i];
         }
         return aux;
     }
@@ -127,5 +127,9 @@ public class Epoca {
         }
         
         return res;
+    }
+    
+    public void inserirCampeonato(Campeonato c) {
+        campeonatos[c.getTipoEscalao()] = c;
     }
 }

@@ -22,7 +22,7 @@ public class APEF {
 
 	public APEF(APEF a) {
 		this.escolas = a.getEscolas();
-		this.epocas = a.getEpoca();
+		this.epocas = a.getEpocas();
 		this.users = a.getUsers();
                 this.emSessao = a.getEmSessao();
 	}
@@ -36,7 +36,7 @@ public class APEF {
 		return aux;
 	}
 	
-	public HashMap<Integer, Epoca> getEpoca() {
+	public HashMap<Integer, Epoca> getEpocas() {
 		HashMap<Integer,Epoca> aux = new HashMap<>();
 		
 		for(Integer s : this.epocas.keySet())
@@ -90,7 +90,7 @@ public class APEF {
 			return false;
 		else {
 			APEF apef = (APEF) o;
-			return this.escolas.equals(apef.getEscolas()) && this.epocas.equals(apef.getEpoca()) && this.users.equals(apef.getUsers());
+			return this.escolas.equals(apef.getEscolas()) && this.epocas.equals(apef.getEpocas()) && this.users.equals(apef.getUsers());
 		}
 	}
 	
