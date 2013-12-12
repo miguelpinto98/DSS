@@ -55,6 +55,11 @@ public class EstatisticaCompeticao {
         s.append("Estatistica da Competicao:" + this.getEstatistica());
         return s.toString();
     }
+
+    public void inserirDadosEstatisticos(int idEquipa, DadosEstatisticos d) {
+        if( !(this.estatistica.containsKey(idEquipa)))
+                this.estatistica.put(idEquipa, d);
+    }
 }
 
   

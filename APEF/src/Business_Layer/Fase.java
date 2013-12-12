@@ -55,4 +55,13 @@ public abstract class Fase {
     public abstract Fase clone();
 
     public abstract String toString();
+
+    public void inserirEquipa(Equipa e) {
+        if (!this.listaEquipas.contains(e))
+            this.listaEquipas.add(e);
+    }
+    
+    public void removerEquipa(Equipa e) {
+        this.listaEquipas.remove(e);
+    }
 }

@@ -57,5 +57,14 @@ public class Calendario {
     	str.append("--Calendario--\n") ;
 
     	return str.toString();
-    }  
+    } 
+
+    public void inserirJornada(Jornada j) {
+        if (!this.jornadas.contains(j))
+            this.jornadas.add(j);
+    }
+
+    public void removerJornada(Jornada j) {
+        this.jornadas.remove(j);
+    }
 }

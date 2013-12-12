@@ -128,28 +128,4 @@ public class Epoca {
         
         return res;
     }
-    /*
-    public void abreCampeonato(String nome, GregorianCalendar limiteInscricao, int tipoEscalao, int limiteEquipas) {   
-        if(!existeNomeCampeonato(nome)) {
-            Campeonato c = new Campeonato(APEF.IDENTIFICADOR,nome,limiteInscricao,tipoEscalao,limiteEquipas);
-            if (tipoEscalao < 4 && tipoEscalao >= 0) 
-                this.campeonatos[tipoEscalao] = c;
-                APEF.IDENTIFICADOR++; 
-        }
-        else
-            System.out.println("Nome já existe");
-    }
-    
-    public void inscreverEmCompeticao(Escalao e, int tipo) {
-        int nr = this.campeonatos[tipo].getNrEscaloes();
-        GregorianCalendar agora = new GregorianCalendar();
-        
-        if(this.campeonatos[tipo].getListaEscaloes().size() > 0 && agora.compareTo(this.campeonatos[tipo].getDataInicio()) <= 0 ) {
-            this.campeonatos[tipo].getListaEscaloes().add(e);
-            this.campeonatos[tipo].setNrEscaloes(nr-1);  
-        }
-        
-        else
-            System.err.println("erro");
-    }*/
 }

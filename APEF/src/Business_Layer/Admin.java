@@ -12,9 +12,10 @@ public class Admin extends Utilizador {
 		this.acoes = new HashSet<HistoricoAcao>();
 	}
 
-	public Admin(int id, String nickname, String password, String email, GregorianCalendar g){
-		super(id,null,nickname,"",email,password,"","","",g,false,false);
+	public Admin(String nickname, String password, String email, GregorianCalendar g){
+		super(null,nickname,"",email,password,"","","",g,false,false);
 		this.acoes = new HashSet<HistoricoAcao>(); 
+		APEF.IDENTIFICADOR++;
 	}
 
 	public Admin(Admin a) {
@@ -74,4 +75,7 @@ public class Admin extends Utilizador {
 		this.gestao.mudarPermissoes(name);
 	}
 
+	public void inserirHistorico(HistoricoAcao h) {
+		this.acoes.add(h);
+	}
 }

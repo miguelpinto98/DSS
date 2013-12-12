@@ -9,7 +9,7 @@ public class Escalao {
     
 	//Variaveis de Instancia
     private int id;
-    private String tipoEscalao;
+    private int tipoEscalao;
     private Treinador treinador;
     private HashMap<Integer,Jogador> jogadores;
     private Agenda agenda;          //Jogos 
@@ -18,23 +18,24 @@ public class Escalao {
     //Construtores
     public Escalao() {
         this.id = 0;
-        this.tipoEscalao = "";
+        this.tipoEscalao = -1;
     	this.treinador = new Treinador();
     	this.jogadores = new HashMap<>();
         this.agenda = new Agenda();
         this.dados = new DadosEstatisticos();
     }
     
-    public Escalao(int id, String tipo, Treinador t, HashMap<Integer,Jogador> j, Agenda a, DadosEstatisticos d) {
-    	this.id = id;
+    public Escalao(int tipo, Treinador t, HashMap<Integer,Jogador> j, Agenda a, DadosEstatisticos d) {
+    	this.id = APEF.IDENTIFICADOR;
     	this.tipoEscalao = tipo;
     	this.treinador = t;
     	this.jogadores = j;
     	this.agenda = a;
     	this.dados = d;
+        APEF.IDENTIFICADOR++;
     }
     
-    public Escalao(int id, String tipo) {
+    public Escalao(int id, int tipo) {
         this. id = id;
         this.tipoEscalao = tipo;
         this.treinador = new Treinador();
@@ -57,7 +58,7 @@ public class Escalao {
         return this.id;
     }
     
-    public String getTipoEscalao(){
+    public int getTipoEscalao(){
         return this.tipoEscalao;
     }
     
@@ -87,7 +88,7 @@ public class Escalao {
         this.id = i;
     }
     
-    public void setTipoEscalao(String n){
+    public void setTipoEscalao(int n){
         this.tipoEscalao = n;
     }
     
@@ -154,13 +155,19 @@ public class Escalao {
     * Metodos Jogadores
     */
     public void inserirJogador(Jogador j) {
-    	if(!(this.jogadores.containsKey(j.getID())) && this.jogadores.size() <= 25)
+    	if( !(this.jogadores.containsKey(j.getID())) )
     			this.jogadores.put(j.getID(), j);
     }
         
     public void removerJogador(Jogador j) { /* DEVE Faltar verificacoes */
         this.jogadores.remove(j);
     }
+
+    public void removerTreinador() {
+        this.treinador = new Treinador();
+    }
+
+
     
     public HashSet<Jogador> procurarJogadorNome(String jogador) {
     	HashSet<Jogador> res = new HashSet<>();

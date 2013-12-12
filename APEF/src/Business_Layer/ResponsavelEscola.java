@@ -11,9 +11,10 @@ public class ResponsavelEscola extends Utilizador {
 		this.escola = new Escola();
 	}
 
-	public ResponsavelEscola(int id, String nickname, String password, String email, GregorianCalendar g) {
-		super(id,null,nickname,"",email,password,"","","",g,false,false);
+	public ResponsavelEscola(String nickname, String password, String email, GregorianCalendar g) {
+		super(null,nickname,"",email,password,"","","",g,false,false);
 		this.escola = new Escola(); 
+		APEF.IDENTIFICADOR++;
 	}
 
 	public ResponsavelEscola(ResponsavelEscola re) {

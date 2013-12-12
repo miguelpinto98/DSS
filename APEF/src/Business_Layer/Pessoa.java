@@ -13,20 +13,21 @@ public abstract class Pessoa {
 
     //Construtores
 	public Pessoa() {
-		this.id = 0;
+		this.id = -1;
 		this.nome = "";
 		this.foto = null;
 		this.dataNascimento = new GregorianCalendar();
 		this.sexo = 0;
 	}
 
-	public Pessoa(int id, String name, Imagem img, 
+	public Pessoa(String name, Imagem img, 
 					GregorianCalendar data, int genero) {
-		this.id = id;
+		this.id = APEF.IDENTIFICADOR;
 		this.nome = name;
 		this.foto = img;
 		this.dataNascimento = data;
 		this.sexo = genero;
+        APEF.IDENTIFICADOR++;
 	}
 
 	public Pessoa(Pessoa p) {
