@@ -46,7 +46,7 @@ public class Campeonato implements Competicao{
         this.dataFim = ca.getDataFim();
     }
 
-    public Campeonato(int id, String nome, GregorianCalendar i, int tipo, int nrEquipasMax) {
+    public Campeonato(int id, String nome, GregorianCalendar limiteInscricao, int tipo, int nrEquipasMax) {
         this.id = id;
         this.tipoEscalao = tipo;
         this.nome = nome;
@@ -55,8 +55,8 @@ public class Campeonato implements Competicao{
         this.listaEscaloes = new HashSet<>();
         this.goleadores = new HashMap<>();
         this.classificacao = new Classificacao();
-        this.dataInicio = i;
-        this.dataFim = i;
+        this.dataInicio = limiteInscricao;
+        this.dataFim = limiteInscricao;
     }
 
     //Getters e Setters
@@ -177,6 +177,21 @@ public class Campeonato implements Competicao{
 		
 		return str.toString(); 
 	}
+
+    /**Metodos*/
+    public void inserirEscalao(Escalao e) {
+        if(!this.listaEscaloes.contains(e))
+            this.listaEscaloes.add(e);
+    }
+
+    public void removerEscalao(Escalao e) {
+        this.listaEscaloes.remove(e);
+    }
+
+    public void inscreverEscalao(Escalao e) {
+        inserirEscalao(e);
+        this.nrEscaloes--;
+    }
 }
 
 

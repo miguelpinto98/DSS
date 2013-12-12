@@ -1,5 +1,6 @@
 package Business_Layer;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -132,9 +133,7 @@ public class APEF {
 
 	public void inserirUtilizador(Utilizador user) {
 		if ( !(existeUtilizador(user.getNomeUser(),user.getEmail())) ) {
-                    this.users.put(user.getNomeUser(),user);
-                    IDENTIFICADOR++;
-        }
+                    this.users.put(user.getNomeUser(),user);        }
 	}
 
 	public static boolean validaPassword(String pw) {
@@ -155,19 +154,19 @@ public class APEF {
 		GregorianCalendar g = new GregorianCalendar();
 		if(validaPassword(password)) {
 			if (tipoUser==0) { 
-				Admin user = new Admin(IDENTIFICADOR, nickname, password, email, g);
+				Admin user = new Admin(nickname, password, email, g);
 				String pw = user.encriptarPassword(password);
                 user.setPass(pw);
        	    	inserirUtilizador(user);
 			}
 			if (tipoUser==1) { 
-				ResponsavelEscola user = new ResponsavelEscola(IDENTIFICADOR, nickname, password, email,g);
+				ResponsavelEscola user = new ResponsavelEscola(nickname, password, email,g);
                 String pw = user.encriptarPassword(password);
                 user.setPass(pw);
                 inserirUtilizador(user);
             }
 			if (tipoUser==2) { 
-				Arbitro user = new Arbitro(IDENTIFICADOR, nickname, password, email, g);
+				Arbitro user = new Arbitro(nickname, password, email, g);
                 String pw = user.encriptarPassword(password);
                 user.setPass(pw);
 	            inserirUtilizador(user);
@@ -202,13 +201,9 @@ public class APEF {
 	/**
 	*Metodos Escola
 	*/
-        
-    public void criarEscola(String nome, String local, String nomeCampo) {
-    	if(!(this.escolas.containsKey(nome))){
-    		Campo c = new Campo(IDENTIFICADOR,nomeCampo);
-        	Escola a = new Escola(nome,local,c);
-    		this.escolas.put(nome,a);
-        	IDENTIFICADOR++;
+    public void inserirEscola(Escola a) {
+    	if( !(this.escolas.containsKey(a.getNome())) ){
+    		this.escolas.put(a.getNome(),a);
     	}
     	else
     		System.out.println("Escola ja existe");
@@ -217,7 +212,10 @@ public class APEF {
     public void removerEscola(Escola escola) {
 		this.escolas.remove(escola.getNome());
 	}
-
+	
+	/**
+	*Metodos Epoca
+	*/
 	public void criaEpoca(int anoEpoca) {
 		GregorianCalendar g = new GregorianCalendar();
 		
@@ -232,4 +230,37 @@ public class APEF {
 	public void mudarPermissoes(String name) {
 		this.users.get(name).setAtivo(true);		
 	}
+
+	/**
+	*Metodos Campeonato
+	*/
+	public boolean verificaJogadores(ArrayList<Jogador> inscritos) {
+		return (inscritos.size() >= 12 && inscritos.size() <=25);
+	}
+
+	public void inscreveJogadores(int idCompeticao, ArrayList<Jogador> inscritos) {
+		for(Jogador j : inscritos) {
+			j.addCompeticao(idCompeticao);
+		}
+	}
+
+	/*Isto e' um boolean para depois no swing dar um erro caso falhe alguma coisa*/ 
+	public boolean inscreverCompeticao(int anoEpoca, int idCompeticao, Escalao x, ArrayList<Jogador> inscritos) {
+		if(verificaJogadores(inscritos)) {
+			inscreveJogadores(idCompeticao,inscritos);
+			this.epocas.get(anoEpoca).getCampeonatos()[x.getTipoEscalao()].inscreverEscalao(x);
+			return true;
+		}
+		else return false;
+	}
+    
+    /*Isto serve para confirmar se a inscricao acabou, e o admin pode agora "IniciarCampeonato"(metodo a ser 
+    definido, que ja ira verificar 1º se tem o nr de equipas pre-definido e de seguida, gerar o calendario, etc.)
+    */
+    public boolean acabouInscricao(Campeonato c) {
+        GregorianCalendar now = new GregorianCalendar();
+        if ( c.getDataInicio().compareTo(now) > 0 )
+            return true;
+        else return false;
+    }
 }

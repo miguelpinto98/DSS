@@ -21,7 +21,7 @@ public class Escola {
     
     //Construtor de copia
     public Escola(Escola escola) {
-	this.nome = escola.getNome();
+        this.nome = escola.getNome();
         this.local = escola.getLocal();
         this.campo = escola.getCampo();
         this.equipas = escola.getEquipas();
@@ -123,19 +123,8 @@ public class Escola {
             this.equipas.add(a);
         }
     }
-
-    public void criarEquipa(String nome, String img, String path) {        
-        Imagem i = new Imagem(img,path);
-        Equipa a = new Equipa(APEF.IDENTIFICADOR,nome,i);
-        inserirEquipa(a);
-        APEF.IDENTIFICADOR++;
-    }
-
+    
     public void removerEquipa(Equipa a) {
         this.equipas.remove(a);
     }
-
-
-
-
 }

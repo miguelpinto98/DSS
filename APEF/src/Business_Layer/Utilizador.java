@@ -7,7 +7,7 @@ import java.util.GregorianCalendar;
 public abstract class Utilizador {
     
     //Variaveis de Instancia
-    int id;
+    private int id;
     private Imagem avatar;
     private String nomeUtilizador;
     private String nome;
@@ -36,11 +36,11 @@ public abstract class Utilizador {
         this.camposPreenchidos = false;
     }
 
-    public Utilizador(int id, Imagem img, String nickname, String nome, String email, 
+    public Utilizador(Imagem img, String nickname, String nome, String email, 
                         String pw, String morada, String tlmvl, 
                         String codPostal, GregorianCalendar data, 
                         boolean ativo, boolean camposPreenchidos) {
-        this.id = id;
+        this.id = APEF.IDENTIFICADOR;
         this.avatar = img;
         this.nomeUtilizador = nickname;
         this.nome = nome;
@@ -52,6 +52,7 @@ public abstract class Utilizador {
         this.dataNascimento = data;
         this.ativo = ativo;
         this.camposPreenchidos = camposPreenchidos;
+        APEF.IDENTIFICADOR++;
     }
     
     public Utilizador(Utilizador u) {

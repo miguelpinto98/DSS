@@ -57,5 +57,14 @@ public class Jornada {
     	str.append("--Calendario--\n") ;
 
     	return str.toString();
-    }  
+    }
+
+    public void inserirJogo(Jogo j) {
+        if(!this.jogos.contains(j))
+            this.jogos.add(j);
+    }
+
+    public void removerJogo(Jogo j) {
+        this.jogos.remove(j);
+    }
 }

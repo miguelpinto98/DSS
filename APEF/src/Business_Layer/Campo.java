@@ -17,9 +17,10 @@ public class Campo {
     	this.nome = c.getNome();
     }
 
-    public Campo(int x, String n) {
-        this.id = x;
+    public Campo(String n) {
+        this.id = APEF.IDENTIFICADOR;
         this.nome = n;
+        APEF.IDENTIFICADOR++;
     }
 
     //Getters

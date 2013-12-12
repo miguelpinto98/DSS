@@ -57,6 +57,15 @@ public class Agenda {
 		return s.toString();
 	}
 
+	public void inserirJogo(Jogo j) {
+		if(!this.jogos.contains(j))
+			this.jogos.add(j);
+	}
+
+	public void removerJogo(Jogo j) {
+		this.jogos.remove(j);
+	}
+
 	public void addResultadoJogo(int casa, int fora, ArrayList<Integer> goleadores) {
 		boolean mudou = false;
 		

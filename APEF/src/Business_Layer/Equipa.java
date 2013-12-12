@@ -25,12 +25,13 @@ public class Equipa {
     	this.escaloes = new Escalao[maxEscaloes];
     }
     
-    public Equipa(int id, String n, Imagem e) {
-    	this.id = id;
+    public Equipa(String n, Imagem e) {
+    	this.id = APEF.IDENTIFICADOR;
     	this.nome = n;
     	this.emblema = e;
     	this.palmares = new HashMap<>();
-    	this.escaloes = new Escalao[maxEscaloes];	
+    	this.escaloes = new Escalao[maxEscaloes];
+    	APEF.IDENTIFICADOR++;	
     }
     
 
@@ -122,5 +123,20 @@ public class Equipa {
 		}
 	}
 
+	public void atualizaPalmares(String nomeCompeticao, Equipa e) {
+		if(this.palmares.containsKey(nomeCompeticao)) {
+			int contador = this.palmares.get(nomeCompeticao);
+			this.palmares.put(nomeCompeticao,contador+1);
+		}
+		else
+			this.palmares.put(nomeCompeticao,1);
+	}
 
+	public void inserirEscalao(Escalao a) {
+		this.escaloes[a.getTipoEscalao()] = a;
+	}
+
+	public void removerEscalao(Escalao a) {
+		this.escaloes[a.getTipoEscalao()] = null;
+	}
 }
