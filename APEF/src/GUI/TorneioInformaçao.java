@@ -423,7 +423,7 @@ public class TorneioInformaçao extends JFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     
-     public static void main(String args[]) {
+     /*public static void main(String args[]) {
        
        
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -431,7 +431,7 @@ public class TorneioInformaçao extends JFrame {
                 new TorneioInformaçao().setVisible(true);
             }
         });
-    } 
+    } */
      
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
