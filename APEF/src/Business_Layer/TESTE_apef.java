@@ -131,6 +131,6 @@ public class TESTE_apef {
 		
 		aa.resultadoJogo(1, 1, golos);
 		
-		System.out.println(aa.toString());*/
-	}
-}
+		System.out.println(aa.toString());
+	}*/
+}}
