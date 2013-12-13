@@ -254,7 +254,7 @@ public class APEF {
 		if(verificaJogadores(inscritos)) {
 			inscreveJogadores(idCompeticao,inscritos);
             Epoca e = this.epocas.get(anoEpoca);
-            e.inscreve(anoEpoca,x);
+            e.inscreve(x);
 			return true;
 		}
 		else return false;

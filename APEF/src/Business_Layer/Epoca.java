@@ -134,7 +134,7 @@ public class Epoca {
         this.campeonatos[c.getTipoEscalao()] = c;
     }
     
-    public void inscreve(int ano, Escalao e) {
+    public void inscreve(Escalao e) {
         this.campeonatos[e.getTipoEscalao()].inscreverEscalao(e);
     }
 }
