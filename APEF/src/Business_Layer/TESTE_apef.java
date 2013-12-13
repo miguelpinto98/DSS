@@ -36,8 +36,8 @@ public class TESTE_apef {
                 
 
                 APEF a = new APEF();
-                Arbitro u = new Arbitro(APEF.IDENTIFICADOR,"grupista","123456","asd@gmail.com",new GregorianCalendar());
-                ResponsavelEscola r = new ResponsavelEscola(2,"JoaoF","lolololol","jf@hotmail.com",new GregorianCalendar());
+                Arbitro u = new Arbitro("grupista","123456","asd@gmail.com",new GregorianCalendar());
+                ResponsavelEscola r = new ResponsavelEscola("JoaoF","lolololol","jf@hotmail.com",new GregorianCalendar());
                 
                 a.registarUser("maleite","atelogo","maleite@hidasa",0);
                 a.registarUser("grupista","123456","asadasdadasd@gmail.com",2);
@@ -45,9 +45,10 @@ public class TESTE_apef {
                 a.registarUser("jigs","123456","sdasdadsad@gmail.com",1);
                 a.registarUser("atum","123456","maleite@hidasa",1);
                 a.registarUser("jigsdads","123","9adsa8@gmail.com",1);
-                                
-                a.getUsers().get("maleite").setAtivo(true);
-                System.out.println(a.getUsers().get("maleite").getAtivo());
+                System.out.println(a.toString());
+                           
+                a.mudarPermissoes("maleite");
+                System.out.println(a.getUsers().get("maleite").isAtivo());
                 
                 a.login("maleite","atelogo");
                 a.logout();
@@ -55,7 +56,7 @@ public class TESTE_apef {
                 else {
                 System.out.println(a.getEmSessao().toString());
                 }
-                
+                /*
                 a.criarEscola("Escola S�� Miranda", "Braga", "Dr.Machado Matos");
                 System.out.println(a.toString());
                 
@@ -136,8 +137,8 @@ public class TESTE_apef {
         
         APEF a = new APEF();
         Epoca ep = new Epoca(2013);
+        a.inserirEpoca(ep);
         Campeonato c = new Campeonato("Campeonato APEF - Infantis", new GregorianCalendar(),0,10);
-        a.getEpocas().put(ep.getAno(),ep);
         ep.inserirCampeonato(c);
 
 		Jogador j1 = new Jogador("zzz", new GregorianCalendar(), 0,false);
@@ -167,12 +168,16 @@ public class TESTE_apef {
         selecionados.add(j11);
         selecionados.add(j12);
         selecionados.add(j13);
-        Treinador t = new Treinador();
-        HashMap<Integer,Jogador> jogadores = new HashMap<>();
-        Agenda ag =  new Agenda();
-        DadosEstatisticos d = new DadosEstatisticos();
-        Escalao e = new Escalao(0,t,jogadores,ag,d);
+      
+        Escalao e = new Escalao(0);
         
-        a.inscreverCompeticao(2013, c.getID(), e, selecionados);
-        System.out.println(c.toString());
-    }}
+        /*Epoca e2 = a.getEpocas().get(2013);
+        if(e2 != null) {
+            e2.getCampeonatos()[0].inscreverEscalao(e);
+            System.out.println("epoca nao esta a null");
+        }*/
+       
+       a.inscreverCompeticao(2013, c.getID(), e, selecionados);
+       System.out.println(c.toString());
+    }
+}

@@ -24,7 +24,7 @@ public class APEF {
 		this.escolas = a.getEscolas();
 		this.epocas = a.getEpocas();
 		this.users = a.getUsers();
-                this.emSessao = a.getEmSessao();
+        this.emSessao = a.getEmSessao();
 	}
 
 	public HashMap<String, Escola> getEscolas() {
@@ -41,7 +41,6 @@ public class APEF {
 		
 		for(Integer s : this.epocas.keySet())
 			aux.put(s, this.epocas.get(s).clone());
-		
 		return aux;
 	}
 
@@ -49,7 +48,7 @@ public class APEF {
 		HashMap<String,Utilizador> aux = new HashMap<>();
 		
 		for(String s : this.users.keySet())
-			aux.put(s, this.users.get(s));
+			aux.put(s, this.users.get(s).clone());
 		
 		return aux;
 	}
@@ -226,6 +225,12 @@ public class APEF {
 			this.epocas.put(anoEpoca, e);
 		}	
 	}
+    
+    public void inserirEpoca(Epoca e) {
+        if(!this.epocas.containsKey(e.getAno())) {
+            this.epocas.put(e.getAno(), e);
+        }
+    }
 	
 	public void mudarPermissoes(String name) {
 		this.users.get(name).setAtivo(true);		
@@ -244,11 +249,12 @@ public class APEF {
 		}
 	}
 
-	/*Isto e' um boolean para depois no swing dar um erro caso falhe alguma coisa*/ 
+	/*Isto e' um boolean para depois no swing dar um erro caso falhe alguma coisa*/
 	public boolean inscreverCompeticao(int anoEpoca, int idCompeticao, Escalao x, ArrayList<Jogador> inscritos) {
 		if(verificaJogadores(inscritos)) {
 			inscreveJogadores(idCompeticao,inscritos);
-			this.epocas.get(anoEpoca).getCampeonatos()[x.getTipoEscalao()].inscreverEscalao(x);
+            Epoca e = this.epocas.get(anoEpoca);
+            e.inscreve(anoEpoca,x);
 			return true;
 		}
 		else return false;

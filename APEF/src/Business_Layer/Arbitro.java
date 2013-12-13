@@ -37,7 +37,7 @@ public class Arbitro extends Utilizador {
     }
 
 	public String toString() {
-		StringBuilder str = new StringBuilder("-----Arbitro-----\n");
+		StringBuilder str = new StringBuilder("Arbitro\n");
 		str.append("ID: " + this.getID());
         str.append("\nNickname: " + this.getNomeUser());
         str.append("\nNome: " + this.getNome());

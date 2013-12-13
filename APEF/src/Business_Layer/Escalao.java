@@ -147,8 +147,11 @@ public class Escalao {
 		StringBuilder str = new StringBuilder(); 
 		
 		str.append("--Escalao--\n");
+        str.append("\nID: "+this.getID());
+        str.append("\nTipo: "+this.getTipoEscalao());
 		for(Jogador j : this.jogadores.values())
-			str.append(j.toString());
+		str.append(j.toString());
+        
 		
 		return str.toString(); 
 	}

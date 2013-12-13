@@ -171,6 +171,7 @@ public class Campeonato implements Competicao{
     	return new Campeonato(this);
     }
 
+    
     public String toString() {
 		StringBuilder str = new StringBuilder(); 
 		
