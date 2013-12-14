@@ -107,10 +107,8 @@ public class Home extends JFrame {
         jTable1.setRowHeight(26);
         jScrollPane3.setViewportView(jTable1);
         jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(1).setPreferredWidth(4);
-            jTable1.getColumnModel().getColumn(2).setPreferredWidth(4);
-        }
+        jTable1.getColumnModel().getColumn(1).setPreferredWidth(4);
+        jTable1.getColumnModel().getColumn(2).setPreferredWidth(4);
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -320,9 +318,16 @@ public class Home extends JFrame {
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton8ActionPerformed
-
-   
   
+/* public static void main(String args[]) {
+       
+        
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Home().setVisible(true);
+            }
+        });
+    } */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
