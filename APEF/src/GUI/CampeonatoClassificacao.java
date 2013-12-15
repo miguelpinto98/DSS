@@ -6,9 +6,9 @@ import javax.swing.JFrame;
  *
  * @author Utilizador
  */
-public class CampeonatoClassificação extends JFrame {
+public class CampeonatoClassificacao extends JFrame {
 
-    public CampeonatoClassificação() {
+    public CampeonatoClassificacao() {
         initComponents();
     }
 
