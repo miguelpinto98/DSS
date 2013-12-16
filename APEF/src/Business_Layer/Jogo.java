@@ -41,6 +41,11 @@ public class Jogo {
     	this.goleadores = new ArrayList<>();
     }
     
+    public Jogo(int c, int f){
+        this.numGolosCasa = c;
+        this.numGolosFora = f;
+    }
+
     public Jogo(Jogo j) {
     	this.idCompeticao = j.getIdCompeticao();
     	this.realizado = j.isJogoRealizado();
@@ -146,7 +151,7 @@ public class Jogo {
 	public String toString() {
 		StringBuilder str = new StringBuilder("\n##### Jogo ######");
 		
-		str.append("\nID Competicao: "+this.getIdCompeticao());
+		/**str.append("\nID Competicao: "+this.getIdCompeticao());
 		str.append("\nRealizado: "+this.isJogoRealizado());
 		str.append("\nData de Nascimento: " + this.getDiaJogo().get(GregorianCalendar.YEAR) +"/"+
 				this.getDiaJogo().get(GregorianCalendar.MONTH) +"/"+
@@ -156,10 +161,10 @@ public class Jogo {
 		str.append(this.campo.toString());
 		str.append("\nArbitro: "+this.arbitro.getNome());
 		str.append("\nEscalao Casa\n"+this.ecasa.toString());
-		str.append("\nEscalao Fora\n"+this.efora.toString());
-		str.append("\nGolos Escalao Casa: "+this.numGolosCasa);
-		str.append("\nGolos Escalao Fora: "+this.numGolosFora);
-		str.append("\nGoleadores: "+"\n");
+		str.append("\nEscalao Fora\n"+this.efora.toString());*/
+		str.append(/**Golos Escalao*/"\nEquipa Casa: "+this.numGolosCasa);
+		str.append(/**Golos Escalao*/"\nEquipa Fora: "+this.numGolosFora);
+		//str.append("\nGoleadores: "+"\n");
 		
 		return str.toString();
 	}

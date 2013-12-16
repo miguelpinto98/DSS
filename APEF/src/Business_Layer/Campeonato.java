@@ -1,5 +1,6 @@
 package Business_Layer;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -198,6 +199,85 @@ public class Campeonato implements Competicao{
         inserirEscalao(e);
         this.nrEscaloes--;
     }
+
+    public static ArrayList<Integer> moveArray(ArrayList<Integer> le) {
+        int i=0,tam = le.size();
+        ArrayList<Integer> res = new ArrayList<Integer>();
+        res.add(i,le.get(i));
+        for(i=1;i<tam;i++){
+            if (i==1) {
+                res.add(i,le.get(tam-1));
+            }
+            else res.add(i,le.get(i-1));
+        }
+        return res;
+    }
+    
+    public static ArrayList<Integer> inverteArray(ArrayList<Integer> le) {
+        int i=0, indice = le.size()-1, aux;
+        ArrayList<Integer> res = new ArrayList<Integer>();
+        
+        for(i=0;i<indice+1;i++){
+            aux = indice-i;
+            res.add(i,le.get(aux));
+        }
+        return res;
+    }
+    
+    public void geraCalendario(ArrayList<Integer> listaEscaloes){
+        int nrEscaloes = listaEscaloes.size();
+        int count = 0;
+        int nrJornadas = nrEscaloes*2-2;
+        int i,casa,fora;
+        ArrayList<Integer> copia = new ArrayList<>();
+        
+        for(i=0;i<nrEscaloes;i++){
+            copia.add(i,listaEscaloes.get(i));
+        }
+        
+        int nrJ=0;
+        while(count < nrJornadas){
+            
+            ArrayList<Integer> array1 = new ArrayList<>();
+            ArrayList<Integer> array2 = new ArrayList<>();
+            ArrayList<Integer> aux = new ArrayList<>();
+        
+            for(i=0;i<nrEscaloes;i++) {
+                if(i<(nrEscaloes/2)) {
+                    array1.add(i,copia.get(i));
+                }
+                else {
+                    aux.add(i-(nrEscaloes/2),copia.get(i));
+                    array2 = inverteArray(aux);
+                }
+            }
+            
+            copia = moveArray(copia);
+            Jornada jornada = new Jornada();
+            
+            if(count % 2 != 0) {
+                for (i=0; i<(nrEscaloes/2); i++){
+                    casa = array1.get(i);
+                    fora = array2.get(i);
+                    Jogo jogo = new Jogo(casa,fora);
+                    jornada.inserirJogo(jogo);
+                }
+            }
+            else {
+                for (i=0; i<(nrEscaloes/2); i++){
+                    casa = array2.get(i);
+                    fora = array1.get(i);
+                    Jogo jogo = new Jogo(casa,fora);
+                    jornada.inserirJogo(jogo);
+                }
+            }
+            nrJ++;
+            jornada.setNrJornada(nrJ);
+            this.calendario.inserirJornada(jornada);
+            count++;
+        }
+      }
+      
 }
 
 

@@ -1,39 +1,48 @@
 package Business_Layer;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.TreeSet;
 
-public class Jornada {
+public class Jornada implements Comparable<Jornada>{
     
     //Variaveis de Instancia
-    private TreeSet<Jogo> jogos; 
+    private int nrJornada;
+    private HashSet<Jogo> listaJogos; 
 
     //Construtores
     public Jornada() {
-        this.jogos = new TreeSet<>();
+        this.nrJornada = 0;
+        this.listaJogos = new HashSet<Jogo>();
     }
     
     public Jornada(Jornada j) {
-        this.jogos = j.getJogos();
+        this.nrJornada = j.getNrJornada();
+        this.listaJogos = j.getListaJogos();
     }
     
     //Getters
-    public TreeSet<Jogo> getJogos() {
-        TreeSet<Jogo> aux = new TreeSet<Jogo>();
-        for(Jogo j: this.jogos) 
-            aux.add(j.clone());
+    //Getters
+    public int getNrJornada() {
+        return this.nrJornada;
+    }
+    
+    public HashSet<Jogo> getListaJogos() {
+        HashSet<Jogo> aux = new HashSet<Jogo>();
+        for(Jogo e: this.listaJogos) 
+            aux.add(e);
         return aux;
     }
-
-    //Setters
-    public void setJogos(TreeSet<Jogo> jogos) {
-        this.jogos = jogos;
+    
+    //Setter
+    public void setNrJornada(int n){
+        this.nrJornada = n;
     }
-
+    
     //Equals,hashCode,Clone,toString
     public int hashCode() {
         int hash = 7;
-        hash = 41 * hash + Objects.hashCode(this.jogos);
+        hash = 41 * hash + Objects.hashCode(this.listaJogos);
         return hash;
     }
 
@@ -44,8 +53,14 @@ public class Jornada {
     		return false;
         else {
     	Jornada j = (Jornada) o;
-    	return this.jogos.equals(j.getJogos());
+    	return this.listaJogos.equals(j.getListaJogos());
         }
+    }
+    
+    public int compareTo(Jornada j) {
+        if(j.getNrJornada() < this.nrJornada) return 1;
+        if(j.getNrJornada() > this.nrJornada) return -1;
+        else return 0;
     }
     
     public Jornada clone() {
@@ -54,17 +69,20 @@ public class Jornada {
     
     public String toString() {
         StringBuilder str = new StringBuilder();
-    	str.append("--Calendario--\n") ;
+        str.append("--Jornada número: "+this.getNrJornada()+" --\n") ;
+        str.append(this.getListaJogos());
 
-    	return str.toString();
-    }
-
-    public void inserirJogo(Jogo j) {
-        if(!this.jogos.contains(j))
-            this.jogos.add(j);
+        return str.toString();
     }
 
     public void removerJogo(Jogo j) {
-        this.jogos.remove(j);
+        this.listaJogos.remove(j);
     }
+
+
+    public void inserirJogo(Jogo j) {
+        if (!this.listaJogos.contains(j))
+            this.listaJogos.add(j);
+    }
+
 }
