@@ -1,16 +1,16 @@
 package Business_Layer;
 
-import java.util.HashSet;
+import java.util.TreeSet;
 import java.util.Objects;
 
 public class Calendario {
 	
 	//Variaveis de Instancia    
-    private HashSet<Jornada> jornadas;
+    private TreeSet<Jornada> jornadas;
 
     //Construtores
 	public Calendario() {
-		this.jornadas = new HashSet<>();
+		this.jornadas = new TreeSet<>();
     }
 
     public Calendario(Calendario c) {
@@ -18,15 +18,15 @@ public class Calendario {
     }
 
     //Getters
-    public HashSet<Jornada> getJornadas() {
-    	HashSet<Jornada> aux = new HashSet<Jornada>();
+    public TreeSet<Jornada> getJornadas() {
+    	TreeSet<Jornada> aux = new TreeSet<Jornada>();
         for(Jornada j: this.jornadas) 
             aux.add(j.clone());
         return aux;
     }
 
     //Setters
-    public void setJornadas(HashSet<Jornada> j) {
+    public void setJornadas(TreeSet<Jornada> j) {
     	this.jornadas = j;
     }
     

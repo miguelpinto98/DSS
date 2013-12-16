@@ -140,20 +140,32 @@ public class TESTE_apef {
         a.inserirEpoca(ep);
         Campeonato c = new Campeonato("Campeonato APEF - Infantis", new GregorianCalendar(),0,10);
         ep.inserirCampeonato(c);
-
-		Jogador j1 = new Jogador("zzz", new GregorianCalendar(), 0,false);
-		Jogador j2 = new Jogador("xxx", new GregorianCalendar(), 0,false);
-		Jogador j3 = new Jogador("www", new GregorianCalendar(), 0,false);
-		Jogador j4 = new Jogador("yyy", new GregorianCalendar(), 0,false);
-		Jogador j5 = new Jogador("kkk", new GregorianCalendar(), 0,false);
+        ArrayList<Integer> array = new ArrayList<>();
+        array.add(1);
+        array.add(2);
+        array.add(3);
+        array.add(4);
+        array.add(5);
+        array.add(6);
+        array.add(7);
+        array.add(8);
+        
+        c.geraCalendario(array);
+        System.out.println(c.getCalendario().getJornadas().toString());
+        
+	Jogador j1 = new Jogador("zzz", new GregorianCalendar(), 0,false);
+	Jogador j2 = new Jogador("xxx", new GregorianCalendar(), 0,false);
+	Jogador j3 = new Jogador("www", new GregorianCalendar(), 0,false);
+	Jogador j4 = new Jogador("yyy", new GregorianCalendar(), 0,false);
+	Jogador j5 = new Jogador("kkk", new GregorianCalendar(), 0,false);
         Jogador j6 = new Jogador("zzz", new GregorianCalendar(), 0,false);
-		Jogador j7 = new Jogador("xxx", new GregorianCalendar(), 0,false);
-		Jogador j8 = new Jogador("www", new GregorianCalendar(), 0,false);
-		Jogador j9 = new Jogador("yyy", new GregorianCalendar(), 0,false);
-		Jogador j10 = new Jogador("kkk", new GregorianCalendar(), 0,false);
+	Jogador j7 = new Jogador("xxx", new GregorianCalendar(), 0,false);
+	Jogador j8 = new Jogador("www", new GregorianCalendar(), 0,false);
+	Jogador j9 = new Jogador("yyy", new GregorianCalendar(), 0,false);
+	Jogador j10 = new Jogador("kkk", new GregorianCalendar(), 0,false);
         Jogador j11 = new Jogador("zzz", new GregorianCalendar(), 0,false);
-		Jogador j12 = new Jogador("xxx", new GregorianCalendar(), 0,false);
-		Jogador j13 = new Jogador("www", new GregorianCalendar(), 0,false);
+	Jogador j12 = new Jogador("xxx", new GregorianCalendar(), 0,false);
+	Jogador j13 = new Jogador("www", new GregorianCalendar(), 0,false);
         ArrayList<Jogador> selecionados = new ArrayList<>();
         selecionados.add(j1);
         selecionados.add(j2);
@@ -177,7 +189,7 @@ public class TESTE_apef {
             System.out.println("epoca nao esta a null");
         }*/
        
-       a.inscreverCompeticao(2013, c.getID(), e, selecionados);
-       System.out.println(c.toString());
+       //a.inscreverCompeticao(2013, c.getID(), e, selecionados);
+       //System.out.println(c.toString());
     }
 }
