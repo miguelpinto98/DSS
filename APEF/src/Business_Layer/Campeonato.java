@@ -196,7 +196,8 @@ public class Campeonato implements Competicao{
 
     public void inscreverEscalao(Escalao e) {
         inserirEscalao(e);
-        this.nrEscaloes--;
+        this.nrEscaloes--;//nao e' preciso ter isto. depois basta ver se size()==nrEquipas
+                          //e entao pode-se "IniciarCampeonato"
     }
 }
 
