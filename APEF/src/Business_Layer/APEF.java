@@ -3,12 +3,14 @@ package Business_Layer;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 
 public class APEF {
 	private HashMap<String, Escola> escolas;
 	private HashMap<Integer, Epoca> epocas;
 	private HashMap<String, Utilizador> users;
+	private HashSet<Campo> campos; /*Sao os campos que estao associados a escolas*/
 	private Utilizador emSessao;
 
     public static int IDENTIFICADOR=1;
@@ -17,6 +19,7 @@ public class APEF {
     	this.escolas = new HashMap<>();
     	this.epocas = new HashMap<>();
     	this.users = new HashMap<>();
+    	this.campos = new HashSet<>();
         this.emSessao = null;
     }
 
@@ -24,6 +27,7 @@ public class APEF {
 		this.escolas = a.getEscolas();
 		this.epocas = a.getEpocas();
 		this.users = a.getUsers();
+		this.campos = a.getCampos();
         this.emSessao = a.getEmSessao();
 	}
 
@@ -53,6 +57,13 @@ public class APEF {
 		return aux;
 	}
 
+	public HashSet<Campo> getCampos() {
+        HashSet<Campo> aux = new HashSet<Campo>();
+        for(Campo ca: this.campos) 
+            aux.add(ca.clone());
+        return aux;
+    }
+
 	public Utilizador getEmSessao() {
 		return this.emSessao;
 	}
@@ -65,7 +76,11 @@ public class APEF {
 		this.epocas = epocas;
 	}
 	
-	public void setUsers(HashMap<String, Utilizador> users) {
+	public void setCampos(HashSet<Campo> campos) {
+		this.campos = campos;
+    }
+
+    public void setUsers(HashMap<String, Utilizador> users) {
 		this.users = users;
     }
 
@@ -233,7 +248,9 @@ public class APEF {
     }
 	
 	public void mudarPermissoes(String name) {
-		this.users.get(name).setAtivo(true);		
+		if(this.users.get(name).isAtivo()) 
+			this.users.get(name).setAtivo(false);
+		else this.users.get(name).setAtivo(true);		
 	}
 
 	/**
