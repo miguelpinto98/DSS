@@ -8,7 +8,7 @@ import java.util.Iterator;
 
 public class APEF {
 	private HashMap<String, Escola> escolas;
-	private HashMap<Integer, Epoca> epocas;
+	private HashMap<Integer, Epoca> epocas; //Não será melhor um TreeSet a ordenar por epocas?
 	private HashMap<String, Utilizador> users;
 	private HashSet<Campo> campos; /*Sao os campos que estao associados a escolas*/
 	private Utilizador emSessao;
@@ -278,7 +278,7 @@ public class APEF {
 	}
     
     /*Isto serve para confirmar se a inscricao acabou, e o admin pode agora "IniciarCampeonato"(metodo a ser 
-    definido, que ja ira verificar 1º se tem o nr de equipas pre-definido e de seguida, gerar o calendario, etc.)
+    definido, que ja ira verificar 1�� se tem o nr de equipas pre-definido e de seguida, gerar o calendario, etc.)
     */
     public boolean acabouInscricao(Campeonato c) {
         GregorianCalendar now = new GregorianCalendar();
@@ -286,4 +286,14 @@ public class APEF {
             return true;
         else return false;
     }
+
+	public void addResultadoCompeticao(Jogo j, int gcasa, int gfora) {
+		GregorianCalendar g = new GregorianCalendar();
+		int ano = g.get(GregorianCalendar.YEAR);
+		
+		if(!this.epocas.containsKey(ano));
+			ano--;
+		
+		this.epocas.get(ano).atualizaEpoca(j,gcasa,gfora);	
+	}
 }

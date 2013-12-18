@@ -65,7 +65,9 @@ public class Arbitro extends Utilizador {
 		}
 	}
 	
-	public void resultadoJogo(int casa, int fora, ArrayList<Integer> goleadores) {
-		this.agenda.addResultadoJogo(casa,fora,goleadores); 
+	public void resultadoJogo(APEF f,int gcasa, int gfora, ArrayList<Integer> goleadores) {
+		Jogo j = null;
+		j=this.agenda.addResultadoJogo(gcasa,gfora,goleadores);
+		f.addResultadoCompeticao(j,gcasa,gfora);
 	}
 } 

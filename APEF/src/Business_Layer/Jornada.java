@@ -8,15 +8,18 @@ public class Jornada implements Comparable<Jornada>{
     
     //Variaveis de Instancia
     private int nrJornada;
+    private int jogosRealizados;
     private HashSet<Jogo> listaJogos; 
 
     //Construtores
     public Jornada() {
         this.nrJornada = 0;
+        this.jogosRealizados = 0;
         this.listaJogos = new HashSet<Jogo>();
     }
     
     public Jornada(Jornada j) {
+    	this.jogosRealizados = j.getJogosRealizados();
         this.nrJornada = j.getNrJornada();
         this.listaJogos = j.getListaJogos();
     }
@@ -34,9 +37,17 @@ public class Jornada implements Comparable<Jornada>{
         return aux;
     }
     
+    public int getJogosRealizados() {
+    	return this.jogosRealizados;
+    }
+    
     //Setter
     public void setNrJornada(int n){
         this.nrJornada = n;
+    }
+    
+    public void setJornadaCompleta(int b) {
+    	this.jogosRealizados = b;
     }
     
     //Equals,hashCode,Clone,toString
@@ -69,7 +80,7 @@ public class Jornada implements Comparable<Jornada>{
     
     public String toString() {
         StringBuilder str = new StringBuilder();
-        str.append("--Jornada número: "+this.getNrJornada()+" --\n") ;
+        str.append("--Jornada n��mero: "+this.getNrJornada()+" --\n") ;
         str.append(this.getListaJogos());
 
         return str.toString();
@@ -84,5 +95,21 @@ public class Jornada implements Comparable<Jornada>{
         if (!this.listaJogos.contains(j))
             this.listaJogos.add(j);
     }
+    
+    
+
+	public boolean atualizaJornada(Jogo j) {
+		boolean encontrou = false;
+		
+		for(Jogo jg : this.listaJogos)
+			if(jg.getArbitroJogo().getNome().equals(j.getArbitroJogo().getNome()) && !encontrou) {
+				this.listaJogos.remove(jg);
+				this.listaJogos.add(j);
+				
+				this.jogosRealizados++;
+				encontrou=true;
+			}	
+		return encontrou;
+	}
 
 }

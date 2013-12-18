@@ -176,7 +176,7 @@ public abstract class Utilizador {
     public abstract boolean equals(Object o);
 
     /**Metodos*/
-    public static String encriptarPassword (String pw) {
+    public String encriptarPassword (String pw) {
         byte[] pwB = pw.getBytes() ;
         byte[] pwEnc = null ;
         String res = null ;        

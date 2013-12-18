@@ -67,4 +67,14 @@ public class Calendario {
     public void removerJornada(Jornada j) {
         this.jornadas.remove(j);
     }
+
+	public boolean atualizaCalendario(Jogo j) {
+		boolean flag = false;
+		
+		for(Jornada jr : this.jornadas)
+			if(jr.getJogosRealizados() < jr.getListaJogos().size() )
+				flag = jr.atualizaJornada(j);
+		
+		return flag;
+	}
 }

@@ -66,8 +66,9 @@ public class Agenda {
 		this.jogos.remove(j);
 	}
 
-	public void addResultadoJogo(int casa, int fora, ArrayList<Integer> goleadores) {
+	public Jogo addResultadoJogo(int casa, int fora, ArrayList<Integer> goleadores) {
 		boolean mudou = false;
+		Jogo jg = null;
 		
 		for(Jogo j : this.jogos) {
 			if(!j.isJogoRealizado() && !mudou) {
@@ -76,9 +77,11 @@ public class Agenda {
 				j.atualizaEscalao();
 				j.setRealizado(true);
 			
+				jg = j.clone();
 				mudou=true;
 			}
 		}
+		return jg;
 	}
 
 	public void atualizaAgenda(GregorianCalendar dia) {

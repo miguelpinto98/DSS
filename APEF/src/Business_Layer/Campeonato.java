@@ -278,6 +278,10 @@ public class Campeonato implements Competicao{
             count++;
         }
       }
+
+	public boolean atualizaCampeonato(Jogo j) {
+		return this.calendario.atualizaCalendario(j);
+	}
       
 }
 
