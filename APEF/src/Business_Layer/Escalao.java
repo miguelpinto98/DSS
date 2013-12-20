@@ -10,6 +10,7 @@ public class Escalao {
 	//Variaveis de Instancia
     private int id;
     private int tipoEscalao;
+    private String nomeEquipa; 
     private Treinador treinador;
     private HashMap<Integer,Jogador> jogadores;
     private Agenda agenda;          //Jogos 
@@ -19,12 +20,15 @@ public class Escalao {
     public Escalao() {
         this.id = 0;
         this.tipoEscalao = -1;
+        this.nomeEquipa = "";
     	this.treinador = new Treinador();
     	this.jogadores = new HashMap<>();
         this.agenda = new Agenda();
         this.dados = new DadosEstatisticos();
     }
     
+    //falta contrutor com a passagem do nome da equipa como parametro
+
     public Escalao(int tipo, Treinador t, HashMap<Integer,Jogador> j, Agenda a, DadosEstatisticos d) {
     	this.id = APEF.IDENTIFICADOR;
     	this.tipoEscalao = tipo;
@@ -38,6 +42,7 @@ public class Escalao {
     public Escalao(int tipo) {
         this. id = APEF.IDENTIFICADOR;
         this.tipoEscalao = tipo;
+        this.nomeEquipa = "";
         this.treinador = new Treinador();
     	this.jogadores = new HashMap<>();
         this.agenda = new Agenda();
@@ -48,6 +53,7 @@ public class Escalao {
     public Escalao(Escalao p) {
         this.id = p.getID();
         this.tipoEscalao = p.getTipoEscalao();
+        this.nomeEquipa = p.getNomeEquipa();
     	this.treinador = p.getTreinador();
     	this.jogadores = p.getJogadores();
         this.agenda = p.getAgenda();
@@ -63,6 +69,10 @@ public class Escalao {
         return this.tipoEscalao;
     }
     
+    public String getNomeEquipa(){
+        return this.nomeEquipa;
+    }
+
     public Treinador getTreinador() {
         return this.treinador;
     }
@@ -93,6 +103,10 @@ public class Escalao {
         this.tipoEscalao = n;
     }
     
+    public void setNomeEquipa(String n){
+        this.nomeEquipa = n;
+    }
+
     public void setTreinador(Treinador t) {
         this.treinador = t;
     }
@@ -149,15 +163,19 @@ public class Escalao {
 		str.append("--Escalao--\n");
         str.append("\nID: "+this.getID());
         str.append("\nTipo: "+this.getTipoEscalao());
+        str.append("\nNome Equipa: "+this.getNomeEquipa());
 		for(Jogador j : this.jogadores.values())
 		str.append(j.toString());
         
 		
 		return str.toString(); 
 	}
+
+    
     /**
     * Metodos Jogadores
     */
+    
     public void inserirJogador(Jogador j) {
     	if( !(this.jogadores.containsKey(j.getID())) )
     			this.jogadores.put(j.getID(), j);
