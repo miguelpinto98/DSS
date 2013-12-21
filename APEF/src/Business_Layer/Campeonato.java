@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Objects;
 
 public class Campeonato implements Competicao{
@@ -18,7 +19,7 @@ public class Campeonato implements Competicao{
     private HashMap<Integer,Integer> goleadores; //<id do jogador,nr golos>     
     private Classificacao classificacao;
     private GregorianCalendar dataInicio;
-    private GregorianCalendar dataFim;
+    private GregorianCalendar dataLimiteInscricoes;
 
     //Construtores
     public Campeonato() {
@@ -31,7 +32,7 @@ public class Campeonato implements Competicao{
     	this.goleadores = new HashMap<>();
         this.classificacao = null;
         this.dataInicio = new GregorianCalendar();
-        this.dataFim = new GregorianCalendar();
+        this.dataLimiteInscricoes = new GregorianCalendar();
     }
     
     public Campeonato(Campeonato ca) {
@@ -44,7 +45,7 @@ public class Campeonato implements Competicao{
     	this.goleadores = ca.getGoleadores();
         this.classificacao = ca.getClassificacao();
         this.dataInicio = ca.getDataInicio();
-        this.dataFim = ca.getDataFim();
+        this.dataLimiteInscricoes = ca.getDataLimiteInscricoes();
     }
 
     public Campeonato(String nome, GregorianCalendar limiteInscricao, int tipo, int nrEquipasMax) {
@@ -57,7 +58,7 @@ public class Campeonato implements Competicao{
         this.goleadores = new HashMap<>();
         this.classificacao = new Classificacao();
         this.dataInicio = limiteInscricao;
-        this.dataFim = limiteInscricao;
+        this.dataLimiteInscricoes = limiteInscricao;
         APEF.IDENTIFICADOR++;
     }
 
@@ -106,7 +107,7 @@ public class Campeonato implements Competicao{
     public HashSet<Escalao> getListaEscaloes() {
         HashSet<Escalao> aux = new HashSet<Escalao>();
         for(Escalao e: this.listaEscaloes) 
-            aux.add(e.clone());
+            aux.add(e);
         return aux;
     }
 
@@ -142,12 +143,12 @@ public class Campeonato implements Competicao{
         this.dataInicio = data;
     }
 
-    public GregorianCalendar getDataFim(){
-        return this.dataFim;
+    public GregorianCalendar getDataLimiteInscricoes(){
+        return this.dataLimiteInscricoes;
     }
 
-    public void setDataFim (GregorianCalendar data){
-        this.dataFim = data;
+    public void setDataLimiteInscricoes (GregorianCalendar data){
+        this.dataLimiteInscricoes = data;
     }
     
     //Equals,hashCode,Clone,toString
@@ -224,12 +225,27 @@ public class Campeonato implements Competicao{
         }
         return res;
     }
+
+    public Escalao buscaEscalao(int id) {
+        Escalao res = new Escalao();
+        boolean flag = false;
+        Iterator<Escalao> it = this.listaEscaloes.iterator(); 
+        while (it.hasNext() && !flag) {
+            Escalao e = it.next();
+            if (e.getID()==id) {
+                res = e;
+                flag = true;
+            }
+        }
+        return res;
+    }
     
     public void geraCalendario(ArrayList<Integer> listaEscaloes){
         int nrEscaloes = listaEscaloes.size();
         int count = 0;
         int nrJornadas = nrEscaloes*2-2;
-        int i,casa,fora;
+        int i;
+        Escalao casa,fora;
         ArrayList<Integer> copia = new ArrayList<>();
         
         for(i=0;i<nrEscaloes;i++){
@@ -258,17 +274,17 @@ public class Campeonato implements Competicao{
             
             if(count % 2 != 0) {
                 for (i=0; i<(nrEscaloes/2); i++){
-                    casa = array1.get(i);
-                    fora = array2.get(i);
-                    Jogo jogo = new Jogo(casa,fora);
+                    casa = buscaEscalao(array1.get(i));
+                    fora = buscaEscalao(array2.get(i));
+                    Jogo jogo = new Jogo(this.id,casa,fora);
                     jornada.inserirJogo(jogo);
                 }
             }
             else {
                 for (i=0; i<(nrEscaloes/2); i++){
-                    casa = array2.get(i);
-                    fora = array1.get(i);
-                    Jogo jogo = new Jogo(casa,fora);
+                    casa = buscaEscalao(array2.get(i));
+                    fora = buscaEscalao(array1.get(i));
+                    Jogo jogo = new Jogo(this.id,casa,fora);
                     jornada.inserirJogo(jogo);
                 }
             }
@@ -277,7 +293,7 @@ public class Campeonato implements Competicao{
             this.calendario.inserirJornada(jornada);
             count++;
         }
-      }
+    }
 
 	public boolean atualizaCampeonato(Jogo j) {
 		return this.calendario.atualizaCalendario(j);

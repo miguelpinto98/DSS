@@ -1,0 +1,22 @@
+- iniciarCampeonato
+	- verificaçoes das condiçoes necessarias para começar campeonato
+		Quais são mesmo as codições?
+		- pelo menos 3 arbitros
+		- acabouInscricoes == true
+		- acrescentem se faltar...........
+
+	- preencher agendas
+		- calendario (id) --- busca jogos para a agenda de cada escalao
+
+- o jogo não deverá de ter um id?? facilitava muito mais para procurar/pôr nas agendas ,,,
+
+- Acrescentei o (c.getNrEscaloes()==0) ao metodo acabouInscricao, pois assim vimos se estao todas as equipas inscritas 
+
+- Neste momento os jogos já estao a ser criados com Escaloes e nao com int ,,, no entanto falta ver a cena das datas e horas (ainda vou ver isso) tal como o arbitro e campo (que agora vendo os regulamentos é um para os jogos todos de uma jornada).
+
+
+
+
+FEITO - buscaEscalao (int id) ,,, alguém que veja se está correto
+
+FEITO - escalao [acrescentar nome da equipa a que se refere]

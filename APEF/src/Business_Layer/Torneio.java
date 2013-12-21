@@ -14,8 +14,9 @@ public class Torneio implements Competicao{
     private HashMap<Integer,Integer> goleadores;
     private EstatisticaCompeticao estatisticaCompeticao;
     private GregorianCalendar dataInicio;
-    private GregorianCalendar dataFim;
-    private ArrayList<Fase> fases;    
+    private GregorianCalendar dataLimiteInscricoes;
+    private ArrayList<Fase> fases;
+    private Campo campo; 
 
     public Torneio() {
         this.id = 0;
@@ -25,7 +26,8 @@ public class Torneio implements Competicao{
         this.estatisticaCompeticao = new EstatisticaCompeticao();
         this.fases = new ArrayList<>();
         this.dataInicio = new GregorianCalendar();
-        this.dataFim = new GregorianCalendar();
+        this.dataLimiteInscricoes = new GregorianCalendar();
+        this.campo = new Campo();
     }
         
 	public Torneio(Torneio t) {
@@ -36,7 +38,8 @@ public class Torneio implements Competicao{
         this.estatisticaCompeticao = t.getEstatisticaCompeticao();
         this.fases = t.getFases();
         this.dataInicio = t.getDataInicio();
-        this.dataFim = t.getDataFim();
+        this.dataLimiteInscricoes = t.getDataLimiteInscricoes();
+        this.campo = t.getCampo();
 	}
 
     public int getID() {
@@ -103,12 +106,20 @@ public class Torneio implements Competicao{
         this.dataInicio = data;
     }
 
-    public GregorianCalendar getDataFim(){
-        return this.dataFim;
+    public GregorianCalendar getDataLimiteInscricoes(){
+        return this.dataLimiteInscricoes;
     }
 
-    public void setDataFim (GregorianCalendar data){
-        this.dataFim = data;
+    public void setDataLimiteInscricoes (GregorianCalendar data){
+        this.dataLimiteInscricoes = data;
+    }
+
+    public Campo getCampo(){
+        return this.campo;
+    }
+
+    public void setCampo(Campo c){
+        this.campo = c;
     }
 
     //Equals,hashCode,Clone,toString

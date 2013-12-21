@@ -282,9 +282,30 @@ public class APEF {
     */
     public boolean acabouInscricao(Campeonato c) {
         GregorianCalendar now = new GregorianCalendar();
-        if ( c.getDataInicio().compareTo(now) > 0 )
+        if ( c.getDataLimiteInscricoes().compareTo(now) > 0 && c.getNrEscaloes()==0) 
             return true;
         else return false;
+    }
+
+    public int countArbitros() {
+		int res=0;
+		for(String s : this.users.keySet())
+			if (this.users.get(s) instanceof Arbitro) 
+				res++;
+		return res;
+    }
+
+    public boolean iniciarCampeonato(Campeonato c){
+    	boolean res=false;
+        ArrayList<Integer> array = new ArrayList<>();
+
+        if (acabouInscricao(c) && countArbitros()>=3){
+        	for(Escalao e : c.getListaEscaloes()){
+        		array.add(e.getID());
+        	}
+        	c.geraCalendario(array);
+    	}
+        return res;
     }
 
 	public void addResultadoCompeticao(Jogo j, int gcasa, int gfora) {

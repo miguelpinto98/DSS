@@ -26,9 +26,9 @@ public interface Competicao {
 
     public void setDataInicio (GregorianCalendar data);
 
-    public GregorianCalendar getDataFim();
+    public GregorianCalendar getDataLimiteInscricoes();
 
-    public void setDataFim (GregorianCalendar data);
+    public void setDataLimiteInscricoes (GregorianCalendar data);
     
     //Equals,hashCode,Clone,toString
     public int hashCode();

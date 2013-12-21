@@ -41,9 +41,10 @@ public class Jogo {
     	this.goleadores = new ArrayList<>();
     }
     
-    public Jogo(int c, int f){
-        this.numGolosCasa = c;
-        this.numGolosFora = f;
+    public Jogo(int idCompeticao, Escalao c, Escalao f){
+        this.idCompeticao = idCompeticao;
+        this.ecasa = c;
+        this.efora = f;
     }
 
     public Jogo(Jogo j) {
