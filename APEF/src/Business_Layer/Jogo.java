@@ -41,8 +41,9 @@ public class Jogo {
     	this.goleadores = new ArrayList<>();
     }
     
-    public Jogo(int idCompeticao, Escalao c, Escalao f){
+    public Jogo(int idCompeticao, GregorianCalendar g, Escalao c, Escalao f){
         this.idCompeticao = idCompeticao;
+        this.dia = g;
         this.ecasa = c;
         this.efora = f;
     }

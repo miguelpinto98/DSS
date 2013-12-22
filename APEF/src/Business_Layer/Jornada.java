@@ -18,6 +18,12 @@ public class Jornada implements Comparable<Jornada>{
         this.listaJogos = new HashSet<Jogo>();
     }
     
+    public Jornada(int nrJornada) {
+        this.nrJornada = nrJornada;
+        this.jogosRealizados = 0;
+        this.listaJogos = new HashSet<Jogo>();
+    }
+    
     public Jornada(Jornada j) {
     	this.jogosRealizados = j.getJogosRealizados();
         this.nrJornada = j.getNrJornada();

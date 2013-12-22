@@ -240,6 +240,42 @@ public class Campeonato implements Competicao{
         return res;
     }
     
+    public GregorianCalendar dataJornadaSeguinte(GregorianCalendar g){
+       GregorianCalendar res = new GregorianCalendar();
+       
+       if (g.isLeapYear(g.get(g.YEAR))) {
+                if (g.get(g.DAY_OF_YEAR) > 359){   
+                    int ano = g.get(g.YEAR)+1;
+                    int aux = 1;
+                    g.set(ano,0,aux);
+                    while(g.get(g.DAY_OF_WEEK)!=1) {
+                        g.set(ano,0,aux++);
+                    }
+                    res = g;
+                }
+                else {
+                    res = g;
+                    res.set(res.DAY_OF_YEAR,res.get(res.DAY_OF_YEAR)+7);
+                }
+      }
+       else {
+           if (g.get(g.DAY_OF_YEAR) > 358){   
+                    int ano = g.get(g.YEAR)+1;
+                    int aux = 1;
+                    g.set(ano,0,aux);
+                    while(g.get(g.DAY_OF_WEEK)!=1) {
+                        g.set(ano,0,aux++);
+                    }
+                    res = g;
+                }
+                else {
+                    res = g;
+                    res.set(res.DAY_OF_YEAR,res.get(res.DAY_OF_YEAR)+7);
+                }
+       }
+       return res;
+    }
+    
     public void geraCalendario(ArrayList<Integer> listaEscaloes){
         int nrEscaloes = listaEscaloes.size();
         int count = 0;
@@ -270,13 +306,22 @@ public class Campeonato implements Competicao{
             }
             
             copia = moveArray(copia);
-            Jornada jornada = new Jornada();
+            
+            Jornada jornada = new Jornada(count+1);
+            GregorianCalendar data = new GregorianCalendar();
+            
+            if (count==0) {
+                data = this.dataInicio;
+            }
+            else {
+                data = dataJornadaSeguinte(data);
+            }
             
             if(count % 2 != 0) {
                 for (i=0; i<(nrEscaloes/2); i++){
                     casa = buscaEscalao(array1.get(i));
                     fora = buscaEscalao(array2.get(i));
-                    Jogo jogo = new Jogo(this.id,casa,fora);
+                    Jogo jogo = new Jogo(this.id,data,casa,fora);
                     jornada.inserirJogo(jogo);
                 }
             }
@@ -284,7 +329,7 @@ public class Campeonato implements Competicao{
                 for (i=0; i<(nrEscaloes/2); i++){
                     casa = buscaEscalao(array2.get(i));
                     fora = buscaEscalao(array1.get(i));
-                    Jogo jogo = new Jogo(this.id,casa,fora);
+                    Jogo jogo = new Jogo(this.id,data,casa,fora);
                     jornada.inserirJogo(jogo);
                 }
             }
