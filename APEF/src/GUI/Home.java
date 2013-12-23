@@ -1,6 +1,13 @@
 package GUI;
 
+import Business_Layer.APEF;
+import Business_Layer.Utilizador;
+import java.awt.EventQueue;
+import java.awt.Window;
+import java.lang.reflect.Method;
 import javax.swing.JFrame;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -8,10 +15,20 @@ import javax.swing.JFrame;
  */
 public class Home extends JFrame {
 
+    public static final String OS = System.getProperty("os.name").toLowerCase();
+
+    private APEF sistema;
+    private Utilizador user;
+    
+    
     public Home() {
+        this.sistema = new APEF();
+        this.user = null;
+        setTitle("APEF - Home");
+	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
         initComponents();
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -115,8 +132,10 @@ public class Home extends JFrame {
         jTable1.setRowHeight(26);
         jScrollPane3.setViewportView(jTable1);
         jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-        jTable1.getColumnModel().getColumn(1).setPreferredWidth(4);
-        jTable1.getColumnModel().getColumn(2).setPreferredWidth(4);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(1).setPreferredWidth(4);
+            jTable1.getColumnModel().getColumn(2).setPreferredWidth(4);
+        }
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -359,10 +378,10 @@ public class Home extends JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 2, Short.MAX_VALUE))
+                .addGap(0, 24, Short.MAX_VALUE))
         );
 
-        pack();
+        setBounds(0, 0, 987, 726);
     }// </editor-fold>//GEN-END:initComponents
  
     
@@ -371,24 +390,47 @@ public class Home extends JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:     
     }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
   
     
-/* public static void main(String args[]) {
-       
-        
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Home().setVisible(true);
+public static void main(String args[]) {
+       EventQueue.invokeLater(new Runnable() {
+        @Override
+	public void run() {
+            try {
+		final Home frame = new Home();
+                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                
+                if (isMac())
+                    enableOSXFullscreen(frame);
+		
+		frame.setVisible(true);
+            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
             }
-        });
-    } */
+        }
+	});
+    }
+
+    public static boolean isMac() {
+	return (OS.indexOf("mac") >= 0);
+    }
+    
+    public static void enableOSXFullscreen(Window window) {
+	try {
+            Class<?> util = Class.forName("com.apple.eawt.FullScreenUtilities");
+            Class<?> params[] = new Class[] { Window.class, Boolean.TYPE };
+            Method method = util.getMethod("setWindowCanFullScreen", params);
+            method.invoke(util, window, true);
+        } catch (ClassNotFoundException exp) {
+	} catch (Exception exp) {
+	}
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
