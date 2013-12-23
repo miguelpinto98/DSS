@@ -30,6 +30,13 @@ public abstract class Pessoa {
         APEF.IDENTIFICADOR++;
 	}
 
+        public Pessoa(String name, int genero) {
+		this.id = APEF.IDENTIFICADOR;
+		this.nome = name;
+		this.sexo = genero;
+        APEF.IDENTIFICADOR++;
+	}
+        
 	public Pessoa(Pessoa p) {
 		this.id = p.getID();
 		this.nome = p.getNome();

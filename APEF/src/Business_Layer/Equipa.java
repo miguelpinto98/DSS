@@ -33,7 +33,15 @@ public class Equipa {
     	this.escaloes = new Escalao[maxEscaloes];
     	APEF.IDENTIFICADOR++;	
     }
-    
+
+    public Equipa(String n) {
+    	this.id = APEF.IDENTIFICADOR;
+    	this.nome = n;
+    	this.emblema = new Imagem();
+    	this.palmares = new HashMap<>();
+    	this.escaloes = new Escalao[maxEscaloes];
+    	APEF.IDENTIFICADOR++;	
+    }
 
     public Equipa(Equipa e) {
     	this.id = e.getID();
@@ -68,7 +76,7 @@ public class Equipa {
 		Escalao[] aux = new Escalao[maxEscaloes];
         int i;
         for(i=0;i<maxEscaloes;i++){
-            aux[i] = this.escaloes[i].clone();
+            aux[i] = this.escaloes[i];
         }
         return aux;
 	}
@@ -105,7 +113,7 @@ public class Equipa {
 	}
 	
 	public String toString() {
-		StringBuilder str = new StringBuilder("Equipa");
+		StringBuilder str = new StringBuilder("Equipas \n");
 		
 		str.append("Nome: "+this.nome.toString());
 		

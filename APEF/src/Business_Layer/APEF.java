@@ -35,7 +35,7 @@ public class APEF {
 		HashMap<String,Escola> aux = new HashMap<>();
 		
 		for(String s : this.escolas.keySet())
-			aux.put(s, this.escolas.get(s).clone());
+			aux.put(s, this.escolas.get(s));
 		
 		return aux;
 	}
@@ -164,23 +164,23 @@ public class APEF {
         return res;
     }
 
-	public void registarUser(String nickname, String password, String email, int tipoUser) {
+	public void registarUser(String nickname, String password, String email, int tipoUser, APEF a) {
 		GregorianCalendar g = new GregorianCalendar();
 		if(validaPassword(password)) {
 			if (tipoUser==0) { 
-				Admin user = new Admin(nickname, password, email, g);
+				Admin user = new Admin(nickname, password, email, g, a);
 				String pw = user.encriptarPassword(password);
                 user.setPass(pw);
        	    	inserirUtilizador(user);
 			}
 			if (tipoUser==1) { 
-				ResponsavelEscola user = new ResponsavelEscola(nickname, password, email,g);
+				ResponsavelEscola user = new ResponsavelEscola(nickname, password, email,g,a);
                 String pw = user.encriptarPassword(password);
                 user.setPass(pw);
                 inserirUtilizador(user);
             }
 			if (tipoUser==2) { 
-				Arbitro user = new Arbitro(nickname, password, email, g);
+				Arbitro user = new Arbitro(nickname, password, email, g,a);
                 String pw = user.encriptarPassword(password);
                 user.setPass(pw);
 	            inserirUtilizador(user);

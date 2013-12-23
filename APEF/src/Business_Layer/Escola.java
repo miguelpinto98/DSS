@@ -51,7 +51,7 @@ public class Escola {
          HashSet<Equipa> aux = new HashSet<>();
          
          for(Equipa e : this.equipas){
-             aux.add(e.clone());
+             aux.add(e);
          }
          
          return aux;
@@ -86,8 +86,8 @@ public class Escola {
         
         str.append("Escola\n");
         str.append(this.getNome() + "\n");
-	    str.append(this.getLocal() + "\n");
-	    str.append(this.getCampo() + "\n");
+	str.append(this.getLocal() + "\n");
+	str.append(this.getCampo() + "\n");
         str.append(this.getEquipas() + "\n");
         
         return str.toString(); 

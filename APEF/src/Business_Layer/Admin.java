@@ -9,11 +9,13 @@ public class Admin extends Utilizador {
 
 	public Admin(){
 		super();
+		this.gestao = new APEF();
 		this.acoes = new HashSet<HistoricoAcao>();
 	}
 
-	public Admin(String nickname, String password, String email, GregorianCalendar g){
+	public Admin(String nickname, String password, String email, GregorianCalendar g, APEF a){
 		super(null,nickname,"",email,password,"","","",g,false,false);
+		this.gestao = a;
 		this.acoes = new HashSet<HistoricoAcao>(); 
 		APEF.IDENTIFICADOR++;
 	}
@@ -21,6 +23,14 @@ public class Admin extends Utilizador {
 	public Admin(Admin a) {
 		super(a);
 		this.acoes = a.getAcoes();
+	}
+	
+	public APEF getGestao() {
+		return this.gestao;
+	}
+
+	public void setGestao(APEF a){
+		this.gestao = a;
 	}
 	
 	public HashSet<HistoricoAcao> getAcoes() {

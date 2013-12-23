@@ -39,10 +39,10 @@ public class Escalao {
         APEF.IDENTIFICADOR++;
     }
     
-    public Escalao(int tipo) {
+    public Escalao(int tipo, String nome) {
         this. id = APEF.IDENTIFICADOR;
         this.tipoEscalao = tipo;
-        this.nomeEquipa = "";
+        this.nomeEquipa = nome;
         this.treinador = new Treinador();
     	this.jogadores = new HashMap<>();
         this.agenda = new Agenda();
@@ -166,7 +166,8 @@ public class Escalao {
         str.append("\nNome Equipa: "+this.getNomeEquipa());
 		for(Jogador j : this.jogadores.values())
 		str.append(j.toString());
-        
+        str.append("\n"+this.getAgenda());
+        str.append("\n"+this.getDados());
 		
 		return str.toString(); 
 	}
@@ -180,7 +181,11 @@ public class Escalao {
     	if( !(this.jogadores.containsKey(j.getID())) )
     			this.jogadores.put(j.getID(), j);
     }
-        
+    
+    public void inserirTreinador(Treinador t) {
+        this.treinador = t;
+    }
+    
     public void removerJogador(Jogador j) { /* DEVE Faltar verificacoes */
         this.jogadores.remove(j);
     }

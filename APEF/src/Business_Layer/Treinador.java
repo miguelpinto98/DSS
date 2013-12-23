@@ -7,6 +7,10 @@ public class Treinador extends Pessoa {
         super();
     }
 
+    public Treinador(String nome, int genero) {
+        super(nome,genero);
+    }
+    
     public Treinador(Treinador t) {
     	super(t);
     }
