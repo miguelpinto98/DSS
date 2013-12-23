@@ -189,9 +189,9 @@ public class TESTE_apef {
     a.iniciarCampeonato(campeonatoInfantis);
     
     //System.out.println(a.getEscolas().get(escola.getNome()));
-    System.out.println(campeonatoInfantis);
-        
-        
+    //System.out.println(campeonatoInfantis);
+      System.out.println(a.countArbitros());  
+      System.out.println(a.daListaArbitros());  
         
         
 		/*Jogo j = new Jogo();

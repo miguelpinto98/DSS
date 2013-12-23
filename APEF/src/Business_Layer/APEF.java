@@ -298,6 +298,15 @@ public class APEF {
 		return res;
     }
     
+    public ArrayList<Utilizador> daListaArbitros(){
+        ArrayList<Utilizador> res = new ArrayList<>();
+        
+        for(String s : this.users.keySet())
+		if (this.users.get(s) instanceof Arbitro) 
+				res.add(this.users.get(s));
+        return res;
+    }
+    
     public Campo daCampoEscalao(Escalao e){
     Campo c = this.escolas.get(e.getNomeEscola()).getCampo();
     return c;
@@ -307,6 +316,8 @@ public class APEF {
     	boolean res=false;
         ArrayList<Integer> arrayEquipas = new ArrayList<>();
         ArrayList<Campo> arrayCampos = new ArrayList<>();
+        ArrayList<Utilizador> arrayArbitros = new ArrayList<>();
+        arrayArbitros = daListaArbitros();
         
         if (acabouInscricao(c) && countArbitros()>=3){
         	for(Escalao e : c.getListaEscaloes()){
@@ -314,7 +325,7 @@ public class APEF {
                         arrayCampos.add(daCampoEscalao(e));
         	}
                 
-        	c.geraCalendario(arrayEquipas, arrayCampos);
+        	c.geraCalendario(arrayEquipas, arrayCampos, arrayArbitros);
     	}
         return res;
     }
