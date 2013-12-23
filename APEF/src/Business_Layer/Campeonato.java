@@ -323,6 +323,8 @@ public class Campeonato implements Competicao{
                     fora = buscaEscalao(array2.get(i));
                     Jogo jogo = new Jogo(this.id,data,casa,fora);
                     jornada.inserirJogo(jogo);
+                    jogo.getEscalaoCasa().preencheAgendaEscalao(jogo);
+                    jogo.getEscalaoFora().preencheAgendaEscalao(jogo);
                 }
             }
             else {
@@ -331,6 +333,8 @@ public class Campeonato implements Competicao{
                     fora = buscaEscalao(array1.get(i));
                     Jogo jogo = new Jogo(this.id,data,casa,fora);
                     jornada.inserirJogo(jogo);
+                    jogo.getEscalaoCasa().preencheAgendaEscalao(jogo);
+                    jogo.getEscalaoFora().preencheAgendaEscalao(jogo);                
                 }
             }
             nrJ++;
@@ -343,7 +347,6 @@ public class Campeonato implements Competicao{
 	public boolean atualizaCampeonato(Jogo j) {
 		return this.calendario.atualizaCalendario(j);
 	}
-      
 }
 
 

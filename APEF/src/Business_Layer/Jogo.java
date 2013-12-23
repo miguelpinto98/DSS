@@ -3,7 +3,7 @@ package Business_Layer;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
-public class Jogo {
+public class Jogo implements Comparable<Jogo>{
     private int idCompeticao;
     private boolean realizado; /* Comeca a falso */
     private GregorianCalendar dia; /* Dia e hora de jogo */
@@ -203,4 +203,9 @@ public class Jogo {
 		this.efora.adicionaDadosEscalao(this.numGolosFora,this.numGolosCasa,this.goleadores,this.dia);
 	}
 
+	public int compareTo(Jogo j) {
+        if(j.getDiaJogo().compareTo(this.dia) > 0 ) return 1;
+        if(j.getDiaJogo().compareTo(this.dia) < 0) return -1;
+        else return 0;
+    }
 }

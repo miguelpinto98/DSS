@@ -2,16 +2,16 @@ package Business_Layer;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
-import java.util.HashSet; /*FAZER UM COMPARE PARA ORDENAR POR DATA*/
+import java.util.TreeSet;
 
 public class Agenda {
-	private HashSet<Jogo> jogos;
+	private TreeSet<Jogo> jogos;
         
         public Agenda(){
-            this.jogos = new HashSet<>();
+            this.jogos = new TreeSet<>();
         }
         
-        public Agenda(HashSet<Jogo> j){
+        public Agenda(TreeSet<Jogo> j){
             this.jogos = j;
         }
         
@@ -19,14 +19,14 @@ public class Agenda {
             this.jogos = a.getJogos();
         }
 
-        public HashSet<Jogo> getJogos() {
-            HashSet<Jogo> aux = new HashSet<Jogo>();
+        public TreeSet<Jogo> getJogos() {
+            TreeSet<Jogo> aux = new TreeSet<Jogo>();
             for(Jogo j: this.jogos) aux.add(j);
             return aux;
         }
     
-        public void setJogos(HashSet<Jogo> jogo){
-            this.jogos = new HashSet<Jogo>();
+        public void setJogos(TreeSet<Jogo> jogo){
+            this.jogos = new TreeSet<Jogo>();
             for(Jogo j : jogo) this.jogos.add(j);
         }
     

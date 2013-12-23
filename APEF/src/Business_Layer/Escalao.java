@@ -209,6 +209,10 @@ public class Escalao {
 			if(this.jogadores.containsKey(n))
 				this.jogadores.get(n).addGolosJogador();
 	}
+    
+    public void preencheAgendaEscalao(Jogo j) {
+        agenda.inserirJogo(j);
+    }
 	
 	/*FALTA METODO PARA MEXER NO CALENDARIO DO Escalao*/
 }

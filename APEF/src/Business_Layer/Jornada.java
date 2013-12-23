@@ -117,5 +117,4 @@ public class Jornada implements Comparable<Jornada>{
 			}	
 		return encontrou;
 	}
-
 }
