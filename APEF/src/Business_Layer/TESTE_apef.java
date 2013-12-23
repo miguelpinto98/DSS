@@ -22,7 +22,7 @@ public class TESTE_apef {
     a.inserirEscola(escola);
     Equipa equipa = new Equipa("Benfica");
     a.getEscolas().get(escola.getNome()).inserirEquipa(equipa);
-    Escalao escalao = new Escalao(0,equipa.getNome());
+    Escalao escalao = new Escalao(0,equipa.getNome(),escola.getNome());
     Jogador j1 = new Jogador("Mario", new GregorianCalendar(), 0,false);
     Jogador j2 = new Jogador("Leite", new GregorianCalendar(), 0,false);
     Jogador j3 = new Jogador("Miguel", new GregorianCalendar(), 0,false);
@@ -59,7 +59,7 @@ public class TESTE_apef {
     a.inserirEscola(escola2);
     Equipa equipa2 = new Equipa("Porto");
     a.getEscolas().get(escola2.getNome()).inserirEquipa(equipa2);
-    Escalao escalao2 = new Escalao(0,equipa2.getNome());
+    Escalao escalao2 = new Escalao(0,equipa2.getNome(),escola2.getNome());
     Jogador j21 = new Jogador("Mario", new GregorianCalendar(), 0,false);
     Jogador j22 = new Jogador("Leite", new GregorianCalendar(), 0,false);
     Jogador j23 = new Jogador("Miguel", new GregorianCalendar(), 0,false);
@@ -97,7 +97,7 @@ public class TESTE_apef {
     a.inserirEscola(escola3);
     Equipa equipa3 = new Equipa("Palmeiras FC");
     a.getEscolas().get(escola3.getNome()).inserirEquipa(equipa3);
-    Escalao escalao3 = new Escalao(0,equipa3.getNome());
+    Escalao escalao3 = new Escalao(0,equipa3.getNome(),escola3.getNome());
     Jogador j31 = new Jogador("Mario", new GregorianCalendar(), 0,false);
     Jogador j32 = new Jogador("Leite", new GregorianCalendar(), 0,false);
     Jogador j33 = new Jogador("Miguel", new GregorianCalendar(), 0,false);
@@ -135,7 +135,7 @@ public class TESTE_apef {
     a.inserirEscola(escola4);
     Equipa equipa4 = new Equipa("SC Negreiros");
     a.getEscolas().get(escola4.getNome()).inserirEquipa(equipa4);
-    Escalao escalao4 = new Escalao(0,equipa4.getNome());
+    Escalao escalao4 = new Escalao(0,equipa4.getNome(),escola4.getNome());
     Jogador j41 = new Jogador("Mario", new GregorianCalendar(), 0,false);
     Jogador j42 = new Jogador("Leite", new GregorianCalendar(), 0,false);
     Jogador j43 = new Jogador("Miguel", new GregorianCalendar(), 0,false);
@@ -188,8 +188,8 @@ public class TESTE_apef {
     
     a.iniciarCampeonato(campeonatoInfantis);
     
-    System.out.println(a.getEscolas().get(escola.getNome()));
-    System.out.println(escalao);
+    //System.out.println(a.getEscolas().get(escola.getNome()));
+    System.out.println(campeonatoInfantis);
         
         
         

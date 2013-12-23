@@ -297,16 +297,24 @@ public class APEF {
 				res++;
 		return res;
     }
+    
+    public Campo daCampoEscalao(Escalao e){
+    Campo c = this.escolas.get(e.getNomeEscola()).getCampo();
+    return c;
+    }
 
     public boolean iniciarCampeonato(Campeonato c){
     	boolean res=false;
-        ArrayList<Integer> array = new ArrayList<>();
-
+        ArrayList<Integer> arrayEquipas = new ArrayList<>();
+        ArrayList<Campo> arrayCampos = new ArrayList<>();
+        
         if (acabouInscricao(c) && countArbitros()>=3){
         	for(Escalao e : c.getListaEscaloes()){
-        		array.add(e.getID());
+        		arrayEquipas.add(e.getID());
+                        arrayCampos.add(daCampoEscalao(e));
         	}
-        	c.geraCalendario(array);
+                
+        	c.geraCalendario(arrayEquipas, arrayCampos);
     	}
         return res;
     }

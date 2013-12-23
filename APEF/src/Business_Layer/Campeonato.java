@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Objects;
-import sun.util.calendar.Gregorian;
 
 public class Campeonato implements Competicao{
     
@@ -181,6 +180,7 @@ public class Campeonato implements Competicao{
 		str.append("--Campeonato--\n");
         str.append("\nID: "+this.getID());
         str.append("\nNome: "+this.getNome());
+        str.append("\n"+this.getCalendario());
         str.append("\nNrEquipas: "+this.getNrEscaloes());
         str.append("\nParticipantes: "+this.getListaEscaloes());
 		
@@ -277,7 +277,7 @@ public class Campeonato implements Competicao{
        return res;
     }
     
-    public void geraCalendario(ArrayList<Integer> listaEscaloes){
+    public void geraCalendario(ArrayList<Integer> listaEscaloes, ArrayList<Campo> listaCampos){
         int nrEscaloes = listaEscaloes.size();
         int count = 0;
         int nrJornadas = nrEscaloes*2-2;
@@ -318,11 +318,16 @@ public class Campeonato implements Competicao{
                 data = dataJornadaSeguinte(data,count);
             }
             
+            int varAux;
+            if(count<nrEscaloes) { varAux=count; }
+            else varAux=count-nrEscaloes;
+            
             if(count % 2 != 0) {
                 for (i=0; i<(nrEscaloes/2); i++){
                     casa = buscaEscalao(array1.get(i));
                     fora = buscaEscalao(array2.get(i));
-                    Jogo jogo = new Jogo(this.id,data,casa,fora);
+                    Campo campo = listaCampos.get(varAux);
+                    Jogo jogo = new Jogo(this.id,data,campo,casa,fora);
                     jornada.inserirJogo(jogo);
                     jogo.getEscalaoCasa().preencheAgendaEscalao(jogo);
                     jogo.getEscalaoFora().preencheAgendaEscalao(jogo);
@@ -332,7 +337,8 @@ public class Campeonato implements Competicao{
                 for (i=0; i<(nrEscaloes/2); i++){
                     casa = buscaEscalao(array2.get(i));
                     fora = buscaEscalao(array1.get(i));
-                    Jogo jogo = new Jogo(this.id,data,casa,fora);
+                    Campo campo = listaCampos.get(varAux);
+                    Jogo jogo = new Jogo(this.id,data,campo,casa,fora);
                     jornada.inserirJogo(jogo);
                     jogo.getEscalaoCasa().preencheAgendaEscalao(jogo);
                     jogo.getEscalaoFora().preencheAgendaEscalao(jogo);                

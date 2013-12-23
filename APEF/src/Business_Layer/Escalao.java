@@ -10,6 +10,7 @@ public class Escalao {
 	//Variaveis de Instancia
     private int id;
     private int tipoEscalao;
+    private String nomeEscola;
     private String nomeEquipa; 
     private Treinador treinador;
     private HashMap<Integer,Jogador> jogadores;
@@ -20,6 +21,7 @@ public class Escalao {
     public Escalao() {
         this.id = 0;
         this.tipoEscalao = -1;
+        this.nomeEscola = "";
         this.nomeEquipa = "";
     	this.treinador = new Treinador();
     	this.jogadores = new HashMap<>();
@@ -27,8 +29,6 @@ public class Escalao {
         this.dados = new DadosEstatisticos();
     }
     
-    //falta contrutor com a passagem do nome da equipa como parametro
-
     public Escalao(int tipo, Treinador t, HashMap<Integer,Jogador> j, Agenda a, DadosEstatisticos d) {
     	this.id = APEF.IDENTIFICADOR;
     	this.tipoEscalao = tipo;
@@ -39,10 +39,11 @@ public class Escalao {
         APEF.IDENTIFICADOR++;
     }
     
-    public Escalao(int tipo, String nome) {
+    public Escalao(int tipo, String nomeEquipa, String nomeEscola) {
         this. id = APEF.IDENTIFICADOR;
         this.tipoEscalao = tipo;
-        this.nomeEquipa = nome;
+        this.nomeEscola = nomeEscola;
+        this.nomeEquipa = nomeEquipa;
         this.treinador = new Treinador();
     	this.jogadores = new HashMap<>();
         this.agenda = new Agenda();
@@ -53,6 +54,7 @@ public class Escalao {
     public Escalao(Escalao p) {
         this.id = p.getID();
         this.tipoEscalao = p.getTipoEscalao();
+        this.nomeEscola = p.getNomeEscola();
         this.nomeEquipa = p.getNomeEquipa();
     	this.treinador = p.getTreinador();
     	this.jogadores = p.getJogadores();
@@ -67,6 +69,10 @@ public class Escalao {
     
     public int getTipoEscalao(){
         return this.tipoEscalao;
+    }
+    
+    public String getNomeEscola(){
+        return this.nomeEscola;
     }
     
     public String getNomeEquipa(){
@@ -101,6 +107,10 @@ public class Escalao {
     
     public void setTipoEscalao(int n){
         this.tipoEscalao = n;
+    }
+    
+    public void setNomeEscola(String n){
+        this.nomeEscola = n;
     }
     
     public void setNomeEquipa(String n){
