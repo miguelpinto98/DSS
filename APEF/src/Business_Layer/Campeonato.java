@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Objects;
+import sun.util.calendar.Gregorian;
 
 public class Campeonato implements Competicao{
     
@@ -240,7 +241,7 @@ public class Campeonato implements Competicao{
         return res;
     }
     
-    public GregorianCalendar dataJornadaSeguinte(GregorianCalendar g){
+    public GregorianCalendar dataJornadaSeguinte(GregorianCalendar g, int jr){
        GregorianCalendar res = new GregorianCalendar();
        
        if (g.isLeapYear(g.get(g.YEAR))) {
@@ -255,7 +256,7 @@ public class Campeonato implements Competicao{
                 }
                 else {
                     res = g;
-                    res.set(res.DAY_OF_YEAR,res.get(res.DAY_OF_YEAR)+7);
+                    res.set(res.DAY_OF_YEAR,res.get(res.DAY_OF_YEAR)+7*jr);
                 }
       }
        else {
@@ -270,7 +271,7 @@ public class Campeonato implements Competicao{
                 }
                 else {
                     res = g;
-                    res.set(res.DAY_OF_YEAR,res.get(res.DAY_OF_YEAR)+7);
+                    res.set(res.DAY_OF_YEAR,res.get(res.DAY_OF_YEAR)+7*jr);
                 }
        }
        return res;
@@ -314,7 +315,7 @@ public class Campeonato implements Competicao{
                 data = this.dataInicio;
             }
             else {
-                data = dataJornadaSeguinte(data);
+                data = dataJornadaSeguinte(data,count);
             }
             
             if(count % 2 != 0) {

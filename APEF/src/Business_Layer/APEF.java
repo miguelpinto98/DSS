@@ -282,7 +282,7 @@ public class APEF {
     */
     public boolean acabouInscricao(Campeonato c) {
         GregorianCalendar now = new GregorianCalendar();
-        if ( c.getDataLimiteInscricoes().compareTo(now) > 0 && c.getNrEscaloes()==0) 
+        if ( c.getDataLimiteInscricoes().before(now) && c.getNrEscaloes()==0) 
             return true;
         else return false;
     }

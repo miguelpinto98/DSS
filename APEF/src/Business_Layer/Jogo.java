@@ -153,19 +153,19 @@ public class Jogo implements Comparable<Jogo>{
 	public String toString() {
 		StringBuilder str = new StringBuilder("\n##### Jogo ######");
 		
-		/**str.append("\nID Competicao: "+this.getIdCompeticao());
+		/*str.append("\nID Competicao: "+this.getIdCompeticao());*/
 		str.append("\nRealizado: "+this.isJogoRealizado());
-		str.append("\nData de Nascimento: " + this.getDiaJogo().get(GregorianCalendar.YEAR) +"/"+
+		str.append("\nData: " + this.getDiaJogo().get(GregorianCalendar.YEAR) +"/"+
 				this.getDiaJogo().get(GregorianCalendar.MONTH) +"/"+
 				this.getDiaJogo().get(GregorianCalendar.DAY_OF_MONTH)+" "+
 				this.getDiaJogo().get(GregorianCalendar.HOUR)+":"+
 				this.getDiaJogo().get(GregorianCalendar.MINUTE));
-		str.append(this.campo.toString());
-		str.append("\nArbitro: "+this.arbitro.getNome());
-		str.append("\nEscalao Casa\n"+this.ecasa.toString());
-		str.append("\nEscalao Fora\n"+this.efora.toString());*/
-		str.append(/**Golos Escalao*/"\nEquipa Casa: "+this.numGolosCasa);
-		str.append(/**Golos Escalao*/"\nEquipa Fora: "+this.numGolosFora);
+		//str.append("\nCampo: " + this.campo.toString());
+		//str.append("\nArbitro: "+this.arbitro.getNome());
+		//str.append("\nEscalao Casa\n"+this.ecasa.toString());
+		//str.append("\nEscalao Fora\n"+this.efora.toString());
+		str.append(/**Golos Escalao*/"\nEquipa Casa: "+this.ecasa.getNomeEquipa());
+		str.append(/**Golos Escalao*/"\nEquipa Fora: "+this.efora.getNomeEquipa());
 		//str.append("\nGoleadores: "+"\n");
 		
 		return str.toString();
@@ -204,8 +204,8 @@ public class Jogo implements Comparable<Jogo>{
 	}
 
 	public int compareTo(Jogo j) {
-        if(j.getDiaJogo().compareTo(this.dia) > 0 ) return 1;
-        if(j.getDiaJogo().compareTo(this.dia) < 0) return -1;
+        if(j.getDiaJogo().compareTo(this.dia) <= 0 ) return 1;
+        if(j.getDiaJogo().compareTo(this.dia) >= 0) return -1;
         else return 0;
     }
 }
