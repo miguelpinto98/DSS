@@ -6,17 +6,47 @@
 
 package GUI;
 
+import Business_Layer.APEF;
+import Business_Layer.Utilizador;
+import Business_Layer.Admin;
+import Business_Layer.Arbitro;
+import Business_Layer.ResponsavelEscola;
+import GUI.Escola.EscolasMenuAdmin;
+
 /**
  *
  * @author miguelpinto
  */
 public class Home2 extends javax.swing.JFrame {
 
+    public static final String OS = System.getProperty("os.name").toLowerCase();
+
+    private APEF sistema;
+    private Utilizador user;
+    
     /**
      * Creates new form Home2
      */
     public Home2() {
-        initComponents();
+        this.user = new Admin();
+        
+        initComponents();        
+       
+        if(this.user != null) {
+            System.out.println("AQYU");
+            if(this.user instanceof Admin) {
+                reloadTabEscolasAdmin();
+            }
+            if(this.user instanceof ResponsavelEscola) {;}
+            if(this.user instanceof Arbitro) {;}     
+        }
+    }
+    
+    public void reloadTabEscolasAdmin() {
+        this.JTabEscolas.remove(this.JPanelEscolaConvidado);
+        this.JTabEscolas.add("Escola", new EscolasMenuAdmin());
+        this.JTabEscolas.updateUI();
+        this.JTabEscolas.validate();
     }
 
     /**
@@ -40,7 +70,7 @@ public class Home2 extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jXSearchField1 = new org.jdesktop.swingx.JXSearchField();
         jPanel2 = new javax.swing.JPanel();
-        jTabbedPane6 = new javax.swing.JTabbedPane();
+        JTabEscolas = new javax.swing.JTabbedPane();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -48,13 +78,10 @@ public class Home2 extends javax.swing.JFrame {
         jTable2 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jPanel7 = new javax.swing.JPanel();
+        JPanelEscolaConvidado = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
-        jPanel10 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
 
@@ -183,9 +210,9 @@ public class Home2 extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
-        jTabbedPane6.setBackground(new java.awt.Color(255, 255, 255));
-        jTabbedPane6.setTabPlacement(javax.swing.JTabbedPane.LEFT);
-        jTabbedPane6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        JTabEscolas.setBackground(new java.awt.Color(255, 255, 255));
+        JTabEscolas.setTabPlacement(javax.swing.JTabbedPane.LEFT);
+        JTabEscolas.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -267,20 +294,20 @@ public class Home2 extends javax.swing.JFrame {
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap(130, Short.MAX_VALUE)
+                .addContainerGap(133, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(133, Short.MAX_VALUE))
+                .addContainerGap(136, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(46, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -288,12 +315,12 @@ public class Home2 extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane6.addTab("Home", jPanel6);
+        JTabEscolas.addTab("Home", jPanel6);
 
-        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
+        JPanelEscolaConvidado.setBackground(new java.awt.Color(255, 255, 255));
 
         jList1.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -302,63 +329,37 @@ public class Home2 extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jList1);
 
-        jLabel5.setText("Panel -> Botoes consultar, editar");
+        jButton4.setText("Consultar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
-        jLabel6.setText("adicionar, remover, consoante ");
-
-        jLabel7.setText("tipo de utilizador");
-
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jLabel5))
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(jLabel6))
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(79, 79, 79)
-                        .addComponent(jLabel7)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel6)
-                .addGap(32, 32, 32)
-                .addComponent(jLabel7)
-                .addContainerGap(35, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
+        javax.swing.GroupLayout JPanelEscolaConvidadoLayout = new javax.swing.GroupLayout(JPanelEscolaConvidado);
+        JPanelEscolaConvidado.setLayout(JPanelEscolaConvidadoLayout);
+        JPanelEscolaConvidadoLayout.setHorizontalGroup(
+            JPanelEscolaConvidadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JPanelEscolaConvidadoLayout.createSequentialGroup()
                 .addGap(36, 36, 36)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62)
-                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(318, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(125, Short.MAX_VALUE))
         );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE))
+        JPanelEscolaConvidadoLayout.setVerticalGroup(
+            JPanelEscolaConvidadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JPanelEscolaConvidadoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(JPanelEscolaConvidadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(JPanelEscolaConvidadoLayout.createSequentialGroup()
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        jTabbedPane6.addTab("Escolas", jPanel7);
+        JTabEscolas.addTab("Escolas", JPanelEscolaConvidado);
 
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -366,14 +367,14 @@ public class Home2 extends javax.swing.JFrame {
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 889, Short.MAX_VALUE)
+            .addGap(0, 898, Short.MAX_VALUE)
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 429, Short.MAX_VALUE)
+            .addGap(0, 366, Short.MAX_VALUE)
         );
 
-        jTabbedPane6.addTab("Campeonatos", jPanel8);
+        JTabEscolas.addTab("Campeonatos", jPanel8);
 
         jPanel9.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -381,14 +382,14 @@ public class Home2 extends javax.swing.JFrame {
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 889, Short.MAX_VALUE)
+            .addGap(0, 898, Short.MAX_VALUE)
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 429, Short.MAX_VALUE)
+            .addGap(0, 366, Short.MAX_VALUE)
         );
 
-        jTabbedPane6.addTab("Torneios", jPanel9);
+        JTabEscolas.addTab("Torneios", jPanel9);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -396,14 +397,14 @@ public class Home2 extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane6)
+                .addComponent(JTabEscolas, javax.swing.GroupLayout.DEFAULT_SIZE, 941, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(jTabbedPane6)
+                .addComponent(JTabEscolas, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -427,6 +428,10 @@ public class Home2 extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -464,32 +469,29 @@ public class Home2 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel JPanelEscolaConvidado;
+    private javax.swing.JTabbedPane JTabEscolas;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JList jList1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTabbedPane jTabbedPane6;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private org.jdesktop.swingx.JXSearchField jXSearchField1;
