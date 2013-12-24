@@ -13,6 +13,8 @@ import Business_Layer.Arbitro;
 import Business_Layer.ResponsavelEscola;
 import GUI.Escola.EscolasMenuAdmin;
 import GUI.Users.JMenuAdmin;
+import GUI.Users.JMenuArbitro;
+import GUI.Users.JMenuResponsavelEscola;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Window;
@@ -36,7 +38,7 @@ public class Home2 extends javax.swing.JFrame {
      * Creates new form Home2
      */
     public Home2() {
-        this.user = new Admin();
+        this.user = null;
         
         initComponents();        
        
@@ -45,8 +47,12 @@ public class Home2 extends javax.swing.JFrame {
                 reloadHeaderUserAdmin();
                 reloadTabEscolasAdmin();
             }
-            if(this.user instanceof ResponsavelEscola) {;}
-            if(this.user instanceof Arbitro) {;}     
+            if(this.user instanceof ResponsavelEscola) {
+                reloadHeaderUserRespEscola();
+            }
+            if(this.user instanceof Arbitro) {
+                reloadHeaderUserArbitro();
+            }     
         }
     }
     
@@ -63,7 +69,21 @@ public class Home2 extends javax.swing.JFrame {
         this.JPanelHeader.updateUI();
         this.JPanelHeader.validate();
     }
+    
+    public void reloadHeaderUserRespEscola() {
+        this.JPanelHeader.remove(this.JPanelUserLogout);
+        this.JPanelHeader.add(new JMenuResponsavelEscola(this, user), BorderLayout.CENTER);
+        this.JPanelHeader.updateUI();
+        this.JPanelHeader.validate();
+    }
 
+    public void reloadHeaderUserArbitro() {
+        this.JPanelHeader.remove(this.JPanelUserLogout);
+        this.JPanelHeader.add(new JMenuArbitro(this, user), BorderLayout.CENTER);
+        this.JPanelHeader.updateUI();
+        this.JPanelHeader.validate();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
