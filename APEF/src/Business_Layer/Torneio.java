@@ -9,6 +9,7 @@ public class Torneio implements Competicao{
     
     //Variaveis de Instancia
     private int id;
+    private int tipoEscalao;
     private String nome;
     private int nrEscaloes;
     private HashMap<Integer,Integer> goleadores;
@@ -20,6 +21,7 @@ public class Torneio implements Competicao{
 
     public Torneio() {
         this.id = 0;
+        this.tipoEscalao = -1;
         this.nome = "";
         this.nrEscaloes = 0;
         this.goleadores = new HashMap<>();
@@ -29,9 +31,23 @@ public class Torneio implements Competicao{
         this.dataLimiteInscricoes = new GregorianCalendar();
         this.campo = new Campo();
     }
-        
+    
+    public Torneio(String nome, GregorianCalendar limite, int tipo, int nrEquipas, Campo campo){
+        this.id = APEF.IDENTIFICADOR;
+        this.tipoEscalao = tipo;
+        this.nome = nome;
+        this.nrEscaloes = nrEquipas;
+        this.goleadores = new HashMap<>();
+        this.estatisticaCompeticao = new EstatisticaCompeticao();
+        this.fases = new ArrayList<>();
+        this.dataInicio = new GregorianCalendar();
+        this.dataLimiteInscricoes = limite;
+        this.campo = campo;
+    }   
+
 	public Torneio(Torneio t) {
         this.id = t.getID();
+        this.tipoEscalao = t.getTipoEscalao();
         this.nome = t.getNome();
         this.nrEscaloes = t.getNrEscaloes();
         this.goleadores = t.getGoleadores();
@@ -48,6 +64,14 @@ public class Torneio implements Competicao{
 
     public void setID(int id) {
         this.id = id;
+    }
+
+    public int getTipoEscalao() {
+        return this.tipoEscalao;
+    }
+
+    public void setTipoEscalao(int t) {
+        this.tipoEscalao = t;
     }
 
     public String getNome() {

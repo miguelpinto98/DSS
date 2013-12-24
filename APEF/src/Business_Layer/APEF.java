@@ -330,21 +330,31 @@ public class APEF {
         ArrayList<Campo> arrayCampos = new ArrayList<>();
         ArrayList<Utilizador> arrayArbitros = new ArrayList<>();
         arrayArbitros = daListaArbitros();
-        
-        if (acabouInscricao(c) && countArbitros()>=((arrayEquipas.size())/2)){
+        int nrEscaloes = c.getListaEscaloes().size();
+
+        if (acabouInscricao(c) && countArbitros()>=((nrEscaloes)/2)){
         	for(Escalao e : c.getListaEscaloes()){
         		arrayEquipas.add(e.getID());
                         arrayCampos.add(daCampoEscalao(e));
         	}
                 
         	c.geraCalendario(arrayEquipas, arrayCampos, arrayArbitros);
-            c.setNrEscaloes(c.getListaEscaloes().size());
+            c.setNrEscaloes(nrEscaloes);
             
             for(Escalao e : c.getListaEscaloes()) {
                 c.getClassificacao().getClassificacao().getEstatistica().put(e.getID(), new DadosEstatisticos());
             }
     	}
         return res;
+    }
+    
+    public Torneio firstFaseTorneioTipo1 (Torneio t){
+        Torneio torneio = new Torneio();
+        /** 
+         * torneio tipo 1: grupos e depois eliminatorias
+         * 
+         */
+        return torneio;
     }
 
 	public void addResultadoCompeticao(Jogo j, int gcasa, int gfora) {
