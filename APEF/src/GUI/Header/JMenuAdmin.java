@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package GUI.Users;
+package GUI.Header;
 
 import Business_Layer.Utilizador;
 import GUI.Home2;

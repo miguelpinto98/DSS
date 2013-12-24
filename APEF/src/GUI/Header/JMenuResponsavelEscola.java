@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package GUI.Users;
+package GUI.Header;
 
 import Business_Layer.Utilizador;
 import GUI.Home2;
@@ -13,16 +13,16 @@ import GUI.Home2;
  *
  * @author miguelpinto
  */
-public class JMenuArbitro extends javax.swing.JPanel {
+public class JMenuResponsavelEscola extends javax.swing.JPanel {
 
     /**
-     * Creates new form JMenuArbitro
+     * Creates new form JMenuResponsavelEscola
      */
-    public JMenuArbitro() {
+    public JMenuResponsavelEscola() {
         initComponents();
     }
 
-    public JMenuArbitro(Home2 aThis, Utilizador user) {
+    public JMenuResponsavelEscola(Home2 aThis, Utilizador user) {
         initComponents();
     }
 
@@ -38,24 +38,19 @@ public class JMenuArbitro extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
 
         jButton1.setText("Sair");
 
         jButton2.setText("Perfil");
 
-        jButton3.setText("Agenda");
-
-        jButton4.setText("Adicionar Resultado");
+        jButton3.setText("Gerir Escola");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(181, Short.MAX_VALUE)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                .addContainerGap(406, Short.MAX_VALUE)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -70,9 +65,8 @@ public class JMenuArbitro extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -81,6 +75,5 @@ public class JMenuArbitro extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     // End of variables declaration//GEN-END:variables
 }
