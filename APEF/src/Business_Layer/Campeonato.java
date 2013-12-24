@@ -285,6 +285,7 @@ public class Campeonato implements Competicao{
                 
             int nrAleatorio = (int) (Math.random()*listaArbitros.size());
             arbitro = listaArbitros.get(nrAleatorio);
+            
             if ((listaArbitrosEscolhidos.contains(arbitro))==false){
                 flag=false;
                 }
@@ -299,7 +300,7 @@ public class Campeonato implements Competicao{
         int i, varAux;
         Escalao casa,fora;
         ArrayList<Integer> copia = new ArrayList<>();
-        ArrayList<Utilizador> arbitrosEscolhidos = new ArrayList<>();
+        
         
         for(i=0;i<nrEscaloes;i++){
             copia.add(i,listaEscaloes.get(i));
@@ -311,7 +312,8 @@ public class Campeonato implements Competicao{
             ArrayList<Integer> array1 = new ArrayList<>();
             ArrayList<Integer> array2 = new ArrayList<>();
             ArrayList<Integer> aux = new ArrayList<>();
-        
+            ArrayList<Utilizador> arbitrosEscolhidos = new ArrayList<>();
+            
             for(i=0;i<nrEscaloes;i++) {
                 if(i<(nrEscaloes/2)) {
                     array1.add(i,copia.get(i));
@@ -338,16 +340,17 @@ public class Campeonato implements Competicao{
             if(count<nrEscaloes) { varAux=count; }
             else varAux=count-nrEscaloes;
             
-            Utilizador arbitro = daArbitroAleatorio(listaArbitros,arbitrosEscolhidos);
-            arbitrosEscolhidos.add(arbitro);
-            
             if(count % 2 != 0) {
                 for (i=0; i<(nrEscaloes/2); i++){
                     casa = buscaEscalao(array1.get(i));
                     fora = buscaEscalao(array2.get(i));
                     Campo campo = listaCampos.get(varAux);
-                    Jogo jogo = new Jogo(this.id,data,campo,casa,fora);
+                    Utilizador arbitro = daArbitroAleatorio(listaArbitros,arbitrosEscolhidos);
+                    Arbitro arb = (Arbitro) arbitro;
+                    arbitrosEscolhidos.add(arbitro);
+                    Jogo jogo = new Jogo(this.id,data,campo,arb,casa,fora);
                     jornada.inserirJogo(jogo);
+                    jogo.getArbitroJogo().preencheAgendaArbitro(jogo);
                     jogo.getEscalaoCasa().preencheAgendaEscalao(jogo);
                     jogo.getEscalaoFora().preencheAgendaEscalao(jogo);
                 }
@@ -357,8 +360,12 @@ public class Campeonato implements Competicao{
                     casa = buscaEscalao(array2.get(i));
                     fora = buscaEscalao(array1.get(i));
                     Campo campo = listaCampos.get(varAux);
-                    Jogo jogo = new Jogo(this.id,data,campo,casa,fora);
+                    Utilizador arbitro = daArbitroAleatorio(listaArbitros,arbitrosEscolhidos);
+                    Arbitro arb = (Arbitro) arbitro;
+                    arbitrosEscolhidos.add(arbitro);
+                    Jogo jogo = new Jogo(this.id,data,campo,arb,casa,fora);
                     jornada.inserirJogo(jogo);
+                    jogo.getArbitroJogo().preencheAgendaArbitro(jogo);
                     jogo.getEscalaoCasa().preencheAgendaEscalao(jogo);
                     jogo.getEscalaoFora().preencheAgendaEscalao(jogo);                
                 }

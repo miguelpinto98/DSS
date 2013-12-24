@@ -319,13 +319,14 @@ public class APEF {
         ArrayList<Utilizador> arrayArbitros = new ArrayList<>();
         arrayArbitros = daListaArbitros();
         
-        if (acabouInscricao(c) && countArbitros()>=3){
+        if (acabouInscricao(c) && countArbitros()>=((arrayEquipas.size())/2)){
         	for(Escalao e : c.getListaEscaloes()){
         		arrayEquipas.add(e.getID());
                         arrayCampos.add(daCampoEscalao(e));
         	}
                 
         	c.geraCalendario(arrayEquipas, arrayCampos, arrayArbitros);
+                c.setNrEscaloes(c.getListaEscaloes().size());
     	}
         return res;
     }

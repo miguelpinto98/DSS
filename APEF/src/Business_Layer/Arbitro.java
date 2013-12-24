@@ -70,4 +70,9 @@ public class Arbitro extends Utilizador {
 		j=this.agenda.addResultadoJogo(gcasa,gfora,goleadores);
 		f.addResultadoCompeticao(j,gcasa,gfora);
 	}
+        
+        public void preencheAgendaArbitro(Jogo j) {
+        agenda.inserirJogo(j);
+    }
+        
 } 

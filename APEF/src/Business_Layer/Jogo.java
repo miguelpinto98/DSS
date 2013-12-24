@@ -163,7 +163,7 @@ public class Jogo implements Comparable<Jogo>{
 				//this.getDiaJogo().get(GregorianCalendar.HOUR)+":"+
 				//this.getDiaJogo().get(GregorianCalendar.MINUTE));
 		str.append("\nCampo: " + this.campo.toString());
-		//str.append("\nArbitro: "+this.arbitro.getNome());
+		str.append("\nArbitro: "+this.arbitro.getNomeUser());
 		str.append("\nEscalao Casa\n"+this.ecasa.getNomeEquipa());
 		str.append("\nEscalao Fora\n"+this.efora.getNomeEquipa());
 		str.append("\nGolos Escalao Casa: "+this.numGolosCasa);
