@@ -1,5 +1,6 @@
 package Business_Layer;
 
+import DAO.ConexaoBD;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -20,16 +21,18 @@ public class APEF {
     	this.epocas = new HashMap<>();
     	this.users = new HashMap<>();
     	this.campos = new HashSet<>();
+        //this.iniciarConexao();
+        //this.registaUtilizador();
         this.emSessao = null;
     }
 
-	public APEF(APEF a) {
-		this.escolas = a.getEscolas();
-		this.epocas = a.getEpocas();
-		this.users = a.getUsers();
-		this.campos = a.getCampos();
+    public APEF(APEF a) {
+	this.escolas = a.getEscolas();
+        this.epocas = a.getEpocas();
+	this.users = a.getUsers();
+	this.campos = a.getCampos();
         this.emSessao = a.getEmSessao();
-	}
+    }
 
 	public HashMap<String, Escola> getEscolas() {
 		HashMap<String,Escola> aux = new HashMap<>();
@@ -294,16 +297,35 @@ public class APEF {
 				res++;
 		return res;
     }
+    
+    public ArrayList<Utilizador> daListaArbitros(){
+        ArrayList<Utilizador> res = new ArrayList<>();
+        
+        for(String s : this.users.keySet())
+		if (this.users.get(s) instanceof Arbitro) 
+				res.add(this.users.get(s));
+        return res;
+    }
+    
+    public Campo daCampoEscalao(Escalao e){
+    Campo c = this.escolas.get(e.getNomeEscola()).getCampo();
+    return c;
+    }
 
     public boolean iniciarCampeonato(Campeonato c){
     	boolean res=false;
-        ArrayList<Integer> array = new ArrayList<>();
-
+        ArrayList<Integer> arrayEquipas = new ArrayList<>();
+        ArrayList<Campo> arrayCampos = new ArrayList<>();
+        ArrayList<Utilizador> arrayArbitros = new ArrayList<>();
+        arrayArbitros = daListaArbitros();
+        
         if (acabouInscricao(c) && countArbitros()>=3){
         	for(Escalao e : c.getListaEscaloes()){
-        		array.add(e.getID());
+        		arrayEquipas.add(e.getID());
+                        arrayCampos.add(daCampoEscalao(e));
         	}
-        	c.geraCalendario(array);
+                
+        	c.geraCalendario(arrayEquipas, arrayCampos, arrayArbitros);
     	}
         return res;
     }
@@ -317,4 +339,13 @@ public class APEF {
 		
 		this.epocas.get(ano).atualizaEpoca(j,gcasa,gfora);	
 	}
+        
+    /* LIGAÇÃO BASE DE DADOS*/    
+    public void iniciarConexao() {
+	ConexaoBD.iniciarConexao();
+    }
+
+    public void terminarConexao() {
+        ConexaoBD.terminarConexao();
+    }      
 }

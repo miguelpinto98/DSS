@@ -86,7 +86,7 @@ public class Jornada implements Comparable<Jornada>{
     
     public String toString() {
         StringBuilder str = new StringBuilder();
-        str.append("--Jornada n��mero: "+this.getNrJornada()+" --\n") ;
+        str.append("--Jornada numero: "+this.getNrJornada()+" --\n") ;
         str.append(this.getListaJogos());
 
         return str.toString();

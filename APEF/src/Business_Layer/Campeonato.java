@@ -180,6 +180,7 @@ public class Campeonato implements Competicao{
 		str.append("--Campeonato--\n");
         str.append("\nID: "+this.getID());
         str.append("\nNome: "+this.getNome());
+        str.append("\n"+this.getCalendario());
         str.append("\nNrEquipas: "+this.getNrEscaloes());
         str.append("\nParticipantes: "+this.getListaEscaloes());
 		
@@ -276,13 +277,29 @@ public class Campeonato implements Competicao{
        return res;
     }
     
-    public void geraCalendario(ArrayList<Integer> listaEscaloes){
+    public Utilizador daArbitroAleatorio(ArrayList<Utilizador> listaArbitros, ArrayList<Utilizador> listaArbitrosEscolhidos) {
+    
+        boolean flag=true;
+        Utilizador arbitro = new Arbitro();
+            while(flag){
+                
+            int nrAleatorio = (int) (Math.random()*listaArbitros.size());
+            arbitro = listaArbitros.get(nrAleatorio);
+            if ((listaArbitrosEscolhidos.contains(arbitro))==false){
+                flag=false;
+                }
+            }
+        return arbitro;
+    }
+    
+    public void geraCalendario(ArrayList<Integer> listaEscaloes, ArrayList<Campo> listaCampos, ArrayList<Utilizador> listaArbitros){
         int nrEscaloes = listaEscaloes.size();
         int count = 0;
         int nrJornadas = nrEscaloes*2-2;
-        int i;
+        int i, varAux;
         Escalao casa,fora;
         ArrayList<Integer> copia = new ArrayList<>();
+        ArrayList<Utilizador> arbitrosEscolhidos = new ArrayList<>();
         
         for(i=0;i<nrEscaloes;i++){
             copia.add(i,listaEscaloes.get(i));
@@ -308,7 +325,7 @@ public class Campeonato implements Competicao{
             copia = moveArray(copia);
             
             Jornada jornada = new Jornada(count+1);
-            GregorianCalendar data = new GregorianCalendar();
+            GregorianCalendar data = new GregorianCalendar(); 
             
             if (count==0) {
                 data = this.dataInicio;
@@ -317,11 +334,19 @@ public class Campeonato implements Competicao{
                 data = dataJornadaSeguinte(data,count);
             }
             
+            
+            if(count<nrEscaloes) { varAux=count; }
+            else varAux=count-nrEscaloes;
+            
+            Utilizador arbitro = daArbitroAleatorio(listaArbitros,arbitrosEscolhidos);
+            arbitrosEscolhidos.add(arbitro);
+            
             if(count % 2 != 0) {
                 for (i=0; i<(nrEscaloes/2); i++){
                     casa = buscaEscalao(array1.get(i));
                     fora = buscaEscalao(array2.get(i));
-                    Jogo jogo = new Jogo(this.id,data,casa,fora);
+                    Campo campo = listaCampos.get(varAux);
+                    Jogo jogo = new Jogo(this.id,data,campo,casa,fora);
                     jornada.inserirJogo(jogo);
                     jogo.getEscalaoCasa().preencheAgendaEscalao(jogo);
                     jogo.getEscalaoFora().preencheAgendaEscalao(jogo);
@@ -331,7 +356,8 @@ public class Campeonato implements Competicao{
                 for (i=0; i<(nrEscaloes/2); i++){
                     casa = buscaEscalao(array2.get(i));
                     fora = buscaEscalao(array1.get(i));
-                    Jogo jogo = new Jogo(this.id,data,casa,fora);
+                    Campo campo = listaCampos.get(varAux);
+                    Jogo jogo = new Jogo(this.id,data,campo,casa,fora);
                     jornada.inserirJogo(jogo);
                     jogo.getEscalaoCasa().preencheAgendaEscalao(jogo);
                     jogo.getEscalaoFora().preencheAgendaEscalao(jogo);                

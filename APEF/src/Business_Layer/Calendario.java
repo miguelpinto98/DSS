@@ -55,6 +55,9 @@ public class Calendario {
     public String toString() {
     	StringBuilder str = new StringBuilder();
     	str.append("--Calendario--\n") ;
+        for (Jornada j : this.jornadas){
+            str.append(j);
+        }
 
     	return str.toString();
     } 

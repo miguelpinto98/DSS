@@ -41,8 +41,9 @@ public class Jogo implements Comparable<Jogo>{
     	this.goleadores = new ArrayList<>();
     }
     
-    public Jogo(int idCompeticao, GregorianCalendar g, Escalao c, Escalao f){
+    public Jogo(int idCompeticao, GregorianCalendar g, Campo campo, Escalao c, Escalao f){
         this.idCompeticao = idCompeticao;
+        this.campo = campo;
         this.dia = g;
         this.ecasa = c;
         this.efora = f;
@@ -153,20 +154,21 @@ public class Jogo implements Comparable<Jogo>{
 	public String toString() {
 		StringBuilder str = new StringBuilder("\n##### Jogo ######");
 		
-		/*str.append("\nID Competicao: "+this.getIdCompeticao());*/
+		str.append("\nID Competicao: "+this.getIdCompeticao());
 		str.append("\nRealizado: "+this.isJogoRealizado());
-		str.append("\nData: " + this.getDiaJogo().get(GregorianCalendar.YEAR) +"/"+
-				this.getDiaJogo().get(GregorianCalendar.MONTH) +"/"+
-				this.getDiaJogo().get(GregorianCalendar.DAY_OF_MONTH)+" "+
-				this.getDiaJogo().get(GregorianCalendar.HOUR)+":"+
-				this.getDiaJogo().get(GregorianCalendar.MINUTE));
-		//str.append("\nCampo: " + this.campo.toString());
+                int aux = this.getDiaJogo().get(this.getDiaJogo().MONTH) + 1;
+		str.append("\nData: " + this.getDiaJogo().get(this.getDiaJogo().YEAR) +"/"+
+				aux +"/"+
+				this.getDiaJogo().get(this.getDiaJogo().DAY_OF_MONTH));
+				//this.getDiaJogo().get(GregorianCalendar.HOUR)+":"+
+				//this.getDiaJogo().get(GregorianCalendar.MINUTE));
+		str.append("\nCampo: " + this.campo.toString());
 		//str.append("\nArbitro: "+this.arbitro.getNome());
-		//str.append("\nEscalao Casa\n"+this.ecasa.toString());
-		//str.append("\nEscalao Fora\n"+this.efora.toString());
-		str.append(/**Golos Escalao*/"\nEquipa Casa: "+this.ecasa.getNomeEquipa());
-		str.append(/**Golos Escalao*/"\nEquipa Fora: "+this.efora.getNomeEquipa());
-		//str.append("\nGoleadores: "+"\n");
+		str.append("\nEscalao Casa\n"+this.ecasa.getNomeEquipa());
+		str.append("\nEscalao Fora\n"+this.efora.getNomeEquipa());
+		str.append("\nGolos Escalao Casa: "+this.numGolosCasa);
+		str.append("\nGolos Escalao Fora: "+this.numGolosFora);
+		str.append("\nGoleadores: "+"\n");
 		
 		return str.toString();
 	}
