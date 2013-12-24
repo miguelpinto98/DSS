@@ -16,15 +16,13 @@ import javax.swing.JPanel;
  */
 public class JMenuAdmin extends JPanel {
 
+    private Home2 root;
     /**
      * Creates new form Admin
      */
-    public JMenuAdmin() {
+    public JMenuAdmin(Home2 root, Utilizador user) {
         initComponents();
-    }
-
-    public JMenuAdmin(Home2 aThis, Utilizador user) {
-        initComponents();
+        this.root = root;
     }
 
     /**
@@ -36,14 +34,19 @@ public class JMenuAdmin extends JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        sair = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createEtchedBorder());
         setPreferredSize(new java.awt.Dimension(1022, 52));
 
-        jButton1.setText("Sair");
+        sair.setText("Sair");
+        sair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sairActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Perfil");
         jButton2.setSize(new java.awt.Dimension(97, 35));
@@ -65,7 +68,7 @@ public class JMenuAdmin extends JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(sair, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(17, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -78,7 +81,7 @@ public class JMenuAdmin extends JPanel {
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(sair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -87,10 +90,19 @@ public class JMenuAdmin extends JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairActionPerformed
+        // TODO add your handling code here:
+        Home2.REGISTADO = false;
+        Home2.UTILIZADOR = null;
+        root.setUser(null);
+        root.verificaUser(null);
+        root.getSistema().logout();
+    }//GEN-LAST:event_sairActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton sair;
     // End of variables declaration//GEN-END:variables
 }

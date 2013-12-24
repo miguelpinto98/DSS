@@ -20,7 +20,9 @@ import GUI.Header.JRegistar;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Window;
+import java.awt.event.KeyEvent;
 import java.lang.reflect.Method;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JDialog;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -56,6 +58,7 @@ public final class Home2 extends javax.swing.JFrame {
         
         initComponents();        
         verificaUser(user);
+        this.jComboBox1.setModel(new DefaultComboBoxModel<Object>(new String[]{"Escolas","Jogadores"}));
     }
     
     public void verificaUser(Utilizador user) {
@@ -71,6 +74,17 @@ public final class Home2 extends javax.swing.JFrame {
                 reloadHeaderUserArbitro();
             }     
         }
+        else 
+            reloadHeader();
+    }
+    
+    public void reloadHeader() {
+        this.JPanelHeader.removeAll();
+        this.JPanelHeader.add(this.TitleHeader, BorderLayout.NORTH);
+        this.JPanelHeader.add(this.JPanelUserLogout, BorderLayout.CENTER);
+        this.JPanelHeader.add(this.searchPanel, BorderLayout.SOUTH);
+        this.JPanelHeader.updateUI();
+        this.JPanelHeader.validate();
     }
     
     public void reloadTabEscolasAdmin() {
@@ -109,6 +123,10 @@ public final class Home2 extends javax.swing.JFrame {
         this.user = user;
     }
     
+    private void pesquisar() {
+        
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -119,9 +137,9 @@ public final class Home2 extends javax.swing.JFrame {
     private void initComponents() {
 
         JPanelHeader = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
+        TitleHeader = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
+        searchPanel = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox();
         jXSearchField1 = new org.jdesktop.swingx.JXSearchField();
@@ -148,35 +166,40 @@ public final class Home2 extends javax.swing.JFrame {
 
         JPanelHeader.setLayout(new java.awt.BorderLayout());
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        TitleHeader.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Associação Portuguesa de Escolas de Futebol");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout TitleHeaderLayout = new javax.swing.GroupLayout(TitleHeader);
+        TitleHeader.setLayout(TitleHeaderLayout);
+        TitleHeaderLayout.setHorizontalGroup(
+            TitleHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TitleHeaderLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1006, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        TitleHeaderLayout.setVerticalGroup(
+            TitleHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TitleHeaderLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        JPanelHeader.add(jPanel1, java.awt.BorderLayout.PAGE_START);
+        JPanelHeader.add(TitleHeader, java.awt.BorderLayout.PAGE_START);
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel3.setPreferredSize(new java.awt.Dimension(1022, 52));
+        searchPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        searchPanel.setPreferredSize(new java.awt.Dimension(1022, 52));
 
         jButton3.setText("Pesquisar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox1.setPreferredSize(new java.awt.Dimension(97, 29));
@@ -192,12 +215,17 @@ public final class Home2 extends javax.swing.JFrame {
                 jXSearchField1ActionPerformed(evt);
             }
         });
+        jXSearchField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jXSearchField1KeyPressed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout searchPanelLayout = new javax.swing.GroupLayout(searchPanel);
+        searchPanel.setLayout(searchPanelLayout);
+        searchPanelLayout.setHorizontalGroup(
+            searchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, searchPanelLayout.createSequentialGroup()
                 .addContainerGap(402, Short.MAX_VALUE)
                 .addComponent(jXSearchField1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
@@ -206,18 +234,18 @@ public final class Home2 extends javax.swing.JFrame {
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(16, Short.MAX_VALUE))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        searchPanelLayout.setVerticalGroup(
+            searchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(searchPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(searchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jXSearchField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
-        JPanelHeader.add(jPanel3, java.awt.BorderLayout.PAGE_END);
+        JPanelHeader.add(searchPanel, java.awt.BorderLayout.PAGE_END);
 
         JPanelUserLogout.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -488,6 +516,18 @@ public final class Home2 extends javax.swing.JFrame {
         frame.setVisible(true);
     }//GEN-LAST:event_registarActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        pesquisar();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jXSearchField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jXSearchField1KeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode()==KeyEvent.VK_ENTER) {
+            pesquisar();
+        }
+    }//GEN-LAST:event_jXSearchField1KeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -530,6 +570,7 @@ public final class Home2 extends javax.swing.JFrame {
     private javax.swing.JPanel JPanelHeader;
     private javax.swing.JPanel JPanelUserLogout;
     private javax.swing.JTabbedPane JTabEscolas;
+    private javax.swing.JPanel TitleHeader;
     private javax.swing.JButton entrar;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -538,9 +579,7 @@ public final class Home2 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JList jList1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
@@ -551,6 +590,10 @@ public final class Home2 extends javax.swing.JFrame {
     private javax.swing.JTable jTable2;
     private org.jdesktop.swingx.JXSearchField jXSearchField1;
     private javax.swing.JButton registar;
+    private javax.swing.JPanel searchPanel;
     // End of variables declaration//GEN-END:variables
+
+
+    
 
 }
