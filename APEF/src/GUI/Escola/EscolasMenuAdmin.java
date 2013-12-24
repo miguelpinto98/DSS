@@ -6,6 +6,9 @@
 
 package GUI.Escola;
 
+import Business_Layer.Utilizador;
+import GUI.Home2;
+
 /**
  *
  * @author miguelpinto
@@ -16,6 +19,10 @@ public class EscolasMenuAdmin extends javax.swing.JPanel {
      * Creates new form EscolasMenuConvidado
      */
     public EscolasMenuAdmin() {
+        initComponents();
+    }
+
+    public EscolasMenuAdmin(Home2 aThis, Utilizador user) {
         initComponents();
     }
 
