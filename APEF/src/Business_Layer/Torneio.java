@@ -3,6 +3,7 @@ package Business_Layer;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Objects;
 
 public class Torneio implements Competicao{
@@ -13,6 +14,7 @@ public class Torneio implements Competicao{
     private String nome;
     private int nrEscaloes;
     private HashMap<Integer,Integer> goleadores;
+    private HashSet<Escalao> listaEscaloes;
     private EstatisticaCompeticao estatisticaCompeticao;
     private GregorianCalendar dataInicio;
     private GregorianCalendar dataLimiteInscricoes;
@@ -25,6 +27,7 @@ public class Torneio implements Competicao{
         this.nome = "";
         this.nrEscaloes = 0;
         this.goleadores = new HashMap<>();
+        this.listaEscaloes = new HashSet<>();
         this.estatisticaCompeticao = new EstatisticaCompeticao();
         this.fases = new ArrayList<>();
         this.dataInicio = new GregorianCalendar();
@@ -38,6 +41,7 @@ public class Torneio implements Competicao{
         this.nome = nome;
         this.nrEscaloes = nrEquipas;
         this.goleadores = new HashMap<>();
+        this.listaEscaloes = new HashSet<>();
         this.estatisticaCompeticao = new EstatisticaCompeticao();
         this.fases = new ArrayList<>();
         this.dataInicio = new GregorianCalendar();
@@ -51,6 +55,7 @@ public class Torneio implements Competicao{
         this.nome = t.getNome();
         this.nrEscaloes = t.getNrEscaloes();
         this.goleadores = t.getGoleadores();
+        this.listaEscaloes = t.getListaEscaloes();
         this.estatisticaCompeticao = t.getEstatisticaCompeticao();
         this.fases = t.getFases();
         this.dataInicio = t.getDataInicio();
@@ -100,6 +105,17 @@ public class Torneio implements Competicao{
 
     public void setGoleadores(HashMap<Integer, Integer> goleadores) {
         this.goleadores = goleadores;
+    }
+    
+    public HashSet<Escalao> getListaEscaloes() {
+        HashSet<Escalao> aux = new HashSet<Escalao>();
+        for(Escalao e: this.listaEscaloes) 
+            aux.add(e);
+        return aux;
+    }
+
+    public void setListaEscaloes (HashSet<Escalao> le){
+        this.listaEscaloes = le;
     }
 
     public EstatisticaCompeticao getEstatisticaCompeticao(){
@@ -174,5 +190,22 @@ public class Torneio implements Competicao{
         str.append("--Torneio--\n");
         
         return str.toString(); 
-    } 
+    }
+    
+    /** Metodos */
+    public void inserirEscalao(Escalao e) {
+        if(!this.listaEscaloes.contains(e))
+            this.listaEscaloes.add(e);
+    }
+
+    public void removerEscalao(Escalao e) {
+        this.listaEscaloes.remove(e);
+    }
+
+    public void inscreverEscalao(Escalao e) {
+        inserirEscalao(e);
+        this.nrEscaloes--;//no caso dos torneios temos de ver melhor isto ,,, 
+                          // nao se sabe quantas equipas vai ter logo nao podes inicia-lo com um valor ,,,
+                          // mais vale fazer o inverso, começar a 0 e incrementar
+    }
 }

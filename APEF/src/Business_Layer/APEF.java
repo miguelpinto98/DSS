@@ -335,7 +335,7 @@ public class APEF {
         if (acabouInscricao(c) && countArbitros()>=((nrEscaloes)/2)){
         	for(Escalao e : c.getListaEscaloes()){
         		arrayEquipas.add(e.getID());
-                        arrayCampos.add(daCampoEscalao(e));
+                arrayCampos.add(daCampoEscalao(e));
         	}
                 
         	c.geraCalendario(arrayEquipas, arrayCampos, arrayArbitros);
@@ -349,12 +349,36 @@ public class APEF {
     }
     
     public Torneio firstFaseTorneioTipo1 (Torneio t){
-        Torneio torneio = new Torneio();
+        ArrayList<Integer> arrayEquipas = new ArrayList<>();
+        ArrayList<Integer> equipasGrupo1 = new ArrayList<>();
+        ArrayList<Integer> equipasGrupo2 = new ArrayList<>();
+        ArrayList<Campo> camposGrupo1 = new ArrayList<>();
+        ArrayList<Campo> camposGrupo2 = new ArrayList<>();
+
+        for(Escalao e : t.getListaEscaloes()){
+        		arrayEquipas.add(e.getID());
+        	}
+
+        int i,nrEquipas;
+        nrEquipas = arrayEquipas.size();
+        
+        for(i=0;i<(nrEquipas/2);i++){
+        	equipasGrupo1.add(arrayEquipas.get(i));
+        }
+
+        for(i=(nrEquipas/2);i<(nrEquipas);i++){
+        	equipasGrupo1.add(arrayEquipas.get(i));
+        }
+
+        Grupo g1 = new Grupo();
+        Grupo g2 = new Grupo();
+
+        
         /** 
          * torneio tipo 1: grupos e depois eliminatorias
          * 
          */
-        return torneio;
+        return t;
     }
 
 	public void addResultadoCompeticao(Jogo j, int gcasa, int gfora) {
