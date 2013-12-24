@@ -391,6 +391,7 @@ public class Campeonato implements Competicao{
     
 	public boolean atualizaCampeonato(Jogo j) {
         this.atualizaGoleadores(j);
+        this.classificacao.actualizaClassificacao(j);
 		return this.calendario.atualizaCalendario(j);
 	}
 }
