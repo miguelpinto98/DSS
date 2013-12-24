@@ -12,25 +12,30 @@ import Business_Layer.Admin;
 import Business_Layer.Arbitro;
 import Business_Layer.ResponsavelEscola;
 import GUI.Escola.EscolasMenuAdmin;
-import GUI.Users.JMenuAdmin;
-import GUI.Users.JMenuArbitro;
-import GUI.Users.JMenuResponsavelEscola;
+import GUI.Header.JEntrar;
+import GUI.Header.JMenuAdmin;
+import GUI.Header.JMenuArbitro;
+import GUI.Header.JMenuResponsavelEscola;
+import GUI.Header.JRegistar;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Window;
 import java.lang.reflect.Method;
+import javax.swing.JDialog;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.text.html.CSS;
 
 /**
  *
  * @author miguelpinto
  */
-public class Home2 extends javax.swing.JFrame {
+public final class Home2 extends javax.swing.JFrame {
 
     public static final String OS = System.getProperty("os.name").toLowerCase();
 
+    public static boolean REGISTADO = false;
+    public static String UTILIZADOR = null; 
+    
     private APEF sistema;
     private Utilizador user;
     
@@ -38,19 +43,31 @@ public class Home2 extends javax.swing.JFrame {
      * Creates new form Home2
      */
     public Home2() {
+        this.sistema = new APEF();
         this.user = null;
+
+        /* TESTE */
+        this.sistema.registarUser("maleite","pw1234","maleite@gmail.com",0,sistema);
+        this.sistema.registarUser("174Miguel","pw1234","miguel@gmail.com",1,sistema);
+        this.sistema.registarUser("63linda","pw1234","63@gmail.com",2,sistema);
+        this.sistema.registarUser("diana","pw1234","demossbb@gmail.com",2,sistema);
+        this.sistema.registarUser("serafim","pw1234","smcp@gmail.com",2,sistema);
+        this.sistema.registarUser("atum","pw1234","atum@gmail.com",0,sistema);
         
         initComponents();        
-       
-        if(this.user != null) {
-            if(this.user instanceof Admin) {
+        verificaUser(user);
+    }
+    
+    public void verificaUser(Utilizador user) {
+        if(user != null) {
+            if(user instanceof Admin) {
                 reloadHeaderUserAdmin();
                 reloadTabEscolasAdmin();
             }
-            if(this.user instanceof ResponsavelEscola) {
+            if(user instanceof ResponsavelEscola) {
                 reloadHeaderUserRespEscola();
             }
-            if(this.user instanceof Arbitro) {
+            if(user instanceof Arbitro) {
                 reloadHeaderUserArbitro();
             }     
         }
@@ -84,6 +101,14 @@ public class Home2 extends javax.swing.JFrame {
         this.JPanelHeader.validate();
     }
     
+    public APEF getSistema() {
+        return this.sistema;
+    }
+    
+    public void setUser(Utilizador user) {
+        this.user = user;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -101,8 +126,8 @@ public class Home2 extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox();
         jXSearchField1 = new org.jdesktop.swingx.JXSearchField();
         JPanelUserLogout = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        registar = new javax.swing.JButton();
+        entrar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         JTabEscolas = new javax.swing.JTabbedPane();
         jPanel6 = new javax.swing.JPanel();
@@ -187,7 +212,7 @@ public class Home2 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jXSearchField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -196,9 +221,19 @@ public class Home2 extends javax.swing.JFrame {
 
         JPanelUserLogout.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jButton1.setText("Registar");
+        registar.setText("Registar");
+        registar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registarActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Entrar");
+        entrar.setText("Entrar");
+        entrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                entrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout JPanelUserLogoutLayout = new javax.swing.GroupLayout(JPanelUserLogout);
         JPanelUserLogout.setLayout(JPanelUserLogoutLayout);
@@ -206,9 +241,9 @@ public class Home2 extends javax.swing.JFrame {
             JPanelUserLogoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPanelUserLogoutLayout.createSequentialGroup()
                 .addContainerGap(625, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(entrar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(registar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(18, Short.MAX_VALUE))
         );
         JPanelUserLogoutLayout.setVerticalGroup(
@@ -216,8 +251,8 @@ public class Home2 extends javax.swing.JFrame {
             .addGroup(JPanelUserLogoutLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(JPanelUserLogoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(registar, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                    .addComponent(entrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -440,6 +475,19 @@ public class Home2 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jXSearchField1ActionPerformed
 
+    /* Janela Para Fazer Login */
+    private void entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarActionPerformed
+        JDialog frame = new JEntrar(this);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+    }//GEN-LAST:event_entrarActionPerformed
+
+    private void registarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registarActionPerformed
+        JDialog frame = new JRegistar(this);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+    }//GEN-LAST:event_registarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -482,8 +530,7 @@ public class Home2 extends javax.swing.JFrame {
     private javax.swing.JPanel JPanelHeader;
     private javax.swing.JPanel JPanelUserLogout;
     private javax.swing.JTabbedPane JTabEscolas;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton entrar;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JComboBox jComboBox1;
@@ -503,7 +550,7 @@ public class Home2 extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private org.jdesktop.swingx.JXSearchField jXSearchField1;
+    private javax.swing.JButton registar;
     // End of variables declaration//GEN-END:variables
 
-    
 }

@@ -8,11 +8,11 @@ import java.util.HashSet;
 import java.util.Iterator;
 
 public class APEF {
-	private HashMap<String, Escola> escolas;
-	private HashMap<Integer, Epoca> epocas; //Não será melhor um TreeSet a ordenar por epocas?
-	private HashMap<String, Utilizador> users;
-	private HashSet<Campo> campos; /*Sao os campos que estao associados a escolas*/
-	private Utilizador emSessao;
+    private HashMap<String, Escola> escolas;
+    private HashMap<Integer, Epoca> epocas; //Não será melhor um TreeSet a ordenar por epocas?
+    private HashMap<String, Utilizador> users;
+    private HashSet<Campo> campos; /*Sao os campos que estao associados a escolas*/
+    private Utilizador emSessao;
 
     public static int IDENTIFICADOR=1;
     
@@ -198,18 +198,30 @@ public class APEF {
 	public boolean validaLogin(String nickname, String password){
 		return (existeNickname(nickname) && this.users.get(nickname).passwordCorresponde(password));
 	}
-
-	public void login(String nickname, String password){
-		if (validaLogin(nickname,password)) {
-			  if ((this.users.get(nickname).isAtivo())) { 
-			  	this.emSessao = this.users.get(nickname);
-			  	if(this.users.get(nickname).isAtivo() && !this.users.get(nickname).isCamposPreenchidos())
-			  			{ /** metodo prencher campos*/ }
-			  }
-			  else { System.out.println("espera validacao"); }
-			}
-		else System.out.println("LOGIN INVALIDO");
-	}
+    
+    /* Ainda Falta Fazer Uma Verificação */
+    public boolean login(String nickname, String password){
+        boolean lg = false;
+        
+        if (validaLogin(nickname,password)) {
+            if ((this.users.get(nickname).isAtivo())) { 
+		this.emSessao = this.users.get(nickname);
+                lg = true;
+		if(this.users.get(nickname).isAtivo() && !this.users.get(nickname).isCamposPreenchidos()) {
+                    /** metodo prencher campos*/
+                    lg = true;
+                }
+            }
+            else { 
+                System.out.println("espera validacao");
+                lg = true;
+            }
+        }
+	else //System.out.println("LOGIN INVALIDO");
+            lg = false;
+        
+        return lg;
+    }
 	
 	public void logout(){
 		this.emSessao = null;
