@@ -60,6 +60,17 @@ public class EstatisticaCompeticao {
         if( !(this.estatistica.containsKey(idEquipa)))
                 this.estatistica.put(idEquipa, d);
     }
+    
+    public void atualizaEstatisticaCompeticao(Escalao casa, int golosCasa, Escalao fora, int golosFora) {
+        DadosEstatisticos ecasa = this.estatistica.get(casa.getID());
+        DadosEstatisticos efora = this.estatistica.get(fora.getID());
+        
+        ecasa.addDadosEstatisticos(golosCasa,golosFora);
+        efora.addDadosEstatisticos(golosFora, golosCasa);
+        
+        this.estatistica.put(casa.getID(),ecasa);
+        this.estatistica.put(fora.getID(),efora);
+    }
 }
 
   

@@ -376,8 +376,21 @@ public class Campeonato implements Competicao{
             count++;
         }
     }
-
+    
+    public void atualizaGoleadores(Jogo j) {
+        int contador;
+        for(Integer id: j.getGoleadoresJogo()) {
+            if(this.goleadores.containsKey(id)) {
+                contador = this.goleadores.get(id);
+                this.goleadores.put(id, contador+1);
+            }
+            else
+                this.goleadores.put(id, 1); 
+        }
+    }
+    
 	public boolean atualizaCampeonato(Jogo j) {
+        this.atualizaGoleadores(j);
 		return this.calendario.atualizaCalendario(j);
 	}
 }

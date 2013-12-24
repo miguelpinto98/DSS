@@ -41,5 +41,9 @@ public class Classificacao {
 		s.append(this.getClassificacao().toString());
 		return s.toString();
 	}
+    
+    public void actualizaClassificacao(Jogo j) {
+        this.classificacao.atualizaEstatisticaCompeticao(j.getEscalaoCasa(),j.getNumGolosJogoCasa(),j.getEscalaoFora(),j.getNumGolosJogoFora());
+    }
 
 }

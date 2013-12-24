@@ -109,4 +109,14 @@ public class DadosEstatisticos {
 				this.empates++;
 		}
 	}
+    
+    public int pontos() {
+        int pts = 3*this.vitorias + this.empates;
+        return pts;
+    }
+    
+    public int diferencaGolos() {
+        int dif = this.gmarcados - this.gsofridos;
+        return dif;
+    }
 }

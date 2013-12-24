@@ -326,7 +326,11 @@ public class APEF {
         	}
                 
         	c.geraCalendario(arrayEquipas, arrayCampos, arrayArbitros);
-                c.setNrEscaloes(c.getListaEscaloes().size());
+            c.setNrEscaloes(c.getListaEscaloes().size());
+            
+            for(Escalao e : c.getListaEscaloes()) {
+                c.getClassificacao().getClassificacao().getEstatistica().put(e.getID(), new DadosEstatisticos());
+            }
     	}
         return res;
     }
