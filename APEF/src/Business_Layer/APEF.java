@@ -352,32 +352,29 @@ public class APEF {
         ArrayList<Integer> arrayEquipas = new ArrayList<>();
         ArrayList<Integer> equipasGrupo1 = new ArrayList<>();
         ArrayList<Integer> equipasGrupo2 = new ArrayList<>();
-        ArrayList<Campo> camposGrupo1 = new ArrayList<>();
-        ArrayList<Campo> camposGrupo2 = new ArrayList<>();
+        /**Torneio torneio = new Torneio(t); 
+        não sei precisa disto ou basta modificar e retornar o t
+		*/
 
         for(Escalao e : t.getListaEscaloes()){
         		arrayEquipas.add(e.getID());
         	}
 
         int i,nrEquipas;
-        nrEquipas = arrayEquipas.size();
+        nrEquipas = t.getNrEscaloes();
         
         for(i=0;i<(nrEquipas/2);i++){
         	equipasGrupo1.add(arrayEquipas.get(i));
         }
 
         for(i=(nrEquipas/2);i<(nrEquipas);i++){
-        	equipasGrupo1.add(arrayEquipas.get(i));
+        	equipasGrupo2.add(arrayEquipas.get(i));
         }
 
-        Grupo g1 = new Grupo();
-        Grupo g2 = new Grupo();
+        Grupo g1 = new Grupo("Grupo A",equipasGrupo1);
+        Grupo g2 = new Grupo("Grupo B",equipasGrupo2);
 
         
-        /** 
-         * torneio tipo 1: grupos e depois eliminatorias
-         * 
-         */
         return t;
     }
 

@@ -1,5 +1,7 @@
 package Business_Layer;
 
+import java.util.ArrayList;
+
 public class Grupo extends Fase {    
     
     //Variaveis de Instancia
@@ -8,7 +10,12 @@ public class Grupo extends Fase {
     //Construtores
     public Grupo() {
     	super();
-    	this.classificacao = null;
+    	this.classificacao = new Classificacao();
+    }
+
+    public Grupo(String n, ArrayList<Integer> le){
+        super(n,le);
+        this.classificacao = new Classificacao();
     }
 
     public Grupo(Grupo g) {
@@ -46,7 +53,7 @@ public class Grupo extends Fase {
     public String toString() {
     	StringBuilder str = new StringBuilder();
     	str.append("--Grupo--") ;
-        str.append(this.getListaEquipas());
+        str.append(this.getListaEscaloes());
         str.append(this.getCalendario()+"  ");
         str.append(this.getClassificacao());
     	return str.toString();

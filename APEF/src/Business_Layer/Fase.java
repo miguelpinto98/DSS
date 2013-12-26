@@ -1,23 +1,30 @@
 package Business_Layer;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
 public abstract class Fase {
     
     //Variaveis de Instancia
     private String nome;
-    private HashSet<Equipa> listaEquipas;
+    private ArrayList<Integer> listaEscaloes;
     private Calendario calendario;
 
     public Fase() {
         this.nome = "";
-        this.listaEquipas = new HashSet<>();
+        this.listaEscaloes = new ArrayList<>();
         this.calendario = new Calendario();
     }
-        
+
+    public Fase(String nome, ArrayList<Integer> le) {
+        this.nome = nome;
+        this.listaEscaloes = le;
+        this.calendario = new Calendario();
+    }
+
     public Fase(Fase f) {
         this.nome = f.getNome();
-        this.listaEquipas = f.getListaEquipas();
+        this.listaEscaloes = f.getListaEscaloes();
         this.calendario = f.getCalendario();
     }
 
@@ -29,15 +36,15 @@ public abstract class Fase {
         this.nome = n;
     }
     
-    public HashSet<Equipa> getListaEquipas() {
-        HashSet<Equipa> aux = new HashSet<Equipa>();
-        for(Equipa e: this.listaEquipas) 
-            aux.add(e.clone());
+    public ArrayList<Integer> getListaEscaloes() {
+        ArrayList<Integer> aux = new ArrayList<Integer>();
+        for(Integer e: this.listaEscaloes) 
+            aux.add(e);
         return aux;
     }
 
-    public void setListaEquipas (HashSet<Equipa> le){
-        this.listaEquipas = le;
+    public void setListaEquipas (ArrayList<Integer> le){
+        this.listaEscaloes = le;
     }
 
     public Calendario getCalendario() {
@@ -56,12 +63,12 @@ public abstract class Fase {
 
     public abstract String toString();
 
-    public void inserirEquipa(Equipa e) {
-        if (!this.listaEquipas.contains(e))
-            this.listaEquipas.add(e);
+    public void inserirEscalao(Escalao e) {
+        if (!this.listaEscaloes.contains(e))
+            this.listaEscaloes.add(e.getID());
     }
     
-    public void removerEquipa(Equipa e) {
-        this.listaEquipas.remove(e);
+    public void removerEquipa(Escalao e) {
+        this.listaEscaloes.remove(e.getID());
     }
 }

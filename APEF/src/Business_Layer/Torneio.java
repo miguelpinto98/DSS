@@ -204,7 +204,7 @@ public class Torneio implements Competicao{
 
     public void inscreverEscalao(Escalao e) {
         inserirEscalao(e);
-        this.nrEscaloes--;//no caso dos torneios temos de ver melhor isto ,,, 
+        this.nrEscaloes++;//no caso dos torneios temos de ver melhor isto ,,, 
                           // nao se sabe quantas equipas vai ter logo nao podes inicia-lo com um valor ,,,
                           // mais vale fazer o inverso, começar a 0 e incrementar
     }

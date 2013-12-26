@@ -1,6 +1,6 @@
 package Business_Layer;
 
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.Iterator;
 
 public class Escola {
@@ -9,14 +9,14 @@ public class Escola {
     private String nome;
     private String local;
     private Campo campo;
-    private HashSet<Equipa> equipas;
+    private HashMap<String,Equipa> equipas;
     
     //Construtor vazio
     public Escola(){
         this.nome = "";
         this.local = "";
         this.campo = new Campo();
-        this.equipas = new HashSet<>();
+        this.equipas = new HashMap<>();
     }
     
     //Construtor de copia
@@ -31,7 +31,7 @@ public class Escola {
         this.nome = nome;
         this.local = local;
         this.campo = campo;
-        this.equipas = new HashSet<Equipa>();
+        this.equipas = new HashMap<>();
     }
 
     //getters
@@ -47,11 +47,11 @@ public class Escola {
          return this.campo;
      }
      
-     public HashSet<Equipa> getEquipas() {
-         HashSet<Equipa> aux = new HashSet<>();
+     public HashMap<String,Equipa> getEquipas() {
+         HashMap<String,Equipa> aux = new HashMap<>();
          
-         for(Equipa e : this.equipas){
-             aux.add(e);
+         for(String s : this.equipas.keySet()){
+             aux.put(s,this.equipas.get(s));
          }
          
          return aux;
@@ -71,7 +71,7 @@ public class Escola {
          this.campo = c;
      }
      
-     public void setEquipas(HashSet<Equipa> e){
+     public void setEquipas(HashMap<String,Equipa> e){
          this.equipas = e;
      }
 
@@ -106,7 +106,7 @@ public class Escola {
     /**
     *Metodos Equipa
     */
-    public boolean existeEquipa(String n) {
+    /**public boolean existeEquipa(String n) {
         boolean res=false;
         Iterator<Equipa> it = this.equipas.iterator(); 
         while (it.hasNext() && !res) {
@@ -116,11 +116,11 @@ public class Escola {
             }
         }
         return res;
-    }
+    }*/
 
     public void inserirEquipa(Equipa a) {
-        if(!existeEquipa(a.getNome())) {
-            this.equipas.add(a);
+        if(!this.equipas.containsKey(a.getNome())) {
+            this.equipas.put(a.getNome(),a);
         }
     }
     

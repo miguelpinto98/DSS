@@ -31,7 +31,7 @@ public class Eliminatoria extends Fase {
     public String toString() {
         StringBuilder str = new StringBuilder();
         str.append("--Eliminatoria--") ;
-        str.append(this.getListaEquipas());
+        str.append(this.getListaEscaloes());
         str.append(this.getCalendario()+"  ");
         return str.toString();
     }   
