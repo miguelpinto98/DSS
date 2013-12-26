@@ -6,6 +6,7 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
 public class APEF {
     private HashMap<String, Escola> escolas;
@@ -230,12 +231,15 @@ public class APEF {
 	/**
 	*Metodos Escola
 	*/
-    public void inserirEscola(Escola a) {
+    public boolean inserirEscola(Escola a) {
     	if( !(this.escolas.containsKey(a.getNome())) ){
-    		this.escolas.put(a.getNome(),a);
+            this.escolas.put(a.getNome(),a);
+            return true;
     	}
-    	else
-    		System.out.println("Escola ja existe");
+        else{
+            System.out.println("Escola ja existe");
+            return false;
+        }
     }
 
     public void removerEscola(Escola escola) {
@@ -434,5 +438,26 @@ public class APEF {
     			}
     		}
     	return res;
+    }
+
+    public ArrayList<Jogo> proximosJogos(int i) {
+        ArrayList<Jogo> res = new ArrayList<>();
+        Jogo j = null;
+        
+        for(Utilizador arb : this.users.values())
+            if(arb instanceof Arbitro) {
+                Agenda a = ((Arbitro) arb).getAgenda();
+    		j = a.getProximoJogo();
+                    if(j!=null) {
+    			res.add(j);
+    			if(res.size()==i)
+                            return res;
+                    }
+            }
+        return res;
+    }
+    
+    public Set<String> listaEscolas() {        
+        return this.escolas.keySet();
     }
 }

@@ -8,7 +8,7 @@ import org.joda.time.DateTime;
 import org.joda.time.Days;
 
 public class Agenda {
-	private TreeSet<Jogo> jogos;
+    private TreeSet<Jogo> jogos;
         
         public Agenda(){
             this.jogos = new TreeSet<>();
@@ -104,4 +104,18 @@ public class Agenda {
 		}
 		return j;
 	}
+
+    Jogo getProximoJogo() {
+        Jogo j = null;
+	GregorianCalendar g = null;
+		
+	for(Jogo jg : this.jogos){
+            g = jg.getDiaJogo();
+            DateTime dj = new DateTime(g.get(g.YEAR),g.get(g.MONTH),g.get(g.DAY_OF_MONTH),g.get(g.HOUR_OF_DAY),g.get(g.MINUTE));
+            
+            if(!jg.isJogoRealizado() && Days.daysBetween(new DateTime(), dj).getDays()<7);
+		return jg;
+            }
+	return j;
+    }
 }

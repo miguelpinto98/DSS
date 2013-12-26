@@ -10,7 +10,9 @@ import Business_Layer.APEF;
 import Business_Layer.Utilizador;
 import Business_Layer.Admin;
 import Business_Layer.Arbitro;
+import Business_Layer.Campo;
 import Business_Layer.Escalao;
+import Business_Layer.Escola;
 import Business_Layer.Jogo;
 import Business_Layer.ResponsavelEscola;
 import GUI.Escola.EscolasMenuAdmin;
@@ -26,10 +28,18 @@ import java.awt.event.KeyEvent;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.Set;
+import javax.swing.AbstractListModel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.ListModel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.event.ListDataListener;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -53,6 +63,19 @@ public final class Home2 extends javax.swing.JFrame {
     public Home2() {
         this.sistema = new APEF();
         this.user = null;
+        
+        /* ESCOLAS */
+        Escola e1 = new Escola("Escola Secundária da Lixa", "Lixa", new Campo("Lixa Futebol"));
+        Escola e2 = new Escola("Escola Secundária de Felgueiras", "Felgueiras", new Campo("Dr. Machado Matos"));
+        Escola e3 = new Escola("Universidade do Minho", "Braga", new Campo("Rodovia"));
+        Escola e4 = new Escola();
+        Escola e5 = new Escola();
+        
+        boolean a = this.sistema.inserirEscola(e1);
+        a = this.sistema.inserirEscola(e2);
+        a = this.sistema.inserirEscola(e3);
+        a = this.sistema.inserirEscola(e4);
+        a = this.sistema.inserirEscola(e5);
 
         /* TESTE USERS*/
         this.sistema.registarUser("maleite","pw1234","maleite@gmail.com",0,sistema);
@@ -81,6 +104,12 @@ public final class Home2 extends javax.swing.JFrame {
         verificaUser(user);
         this.jComboBox1.setModel(new DefaultComboBoxModel<Object>(new String[]{"Escolas","Jogadores"}));
         
+        /* CENTRAR UMA COLUNA
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+        JTabResultados.getColumn("Dia").setCellRenderer( centerRenderer );
+        */
+        
         /* Últimos Resultados */
         ArrayList<Jogo> ures = this.sistema.jogosRealizados(15);
         
@@ -91,9 +120,26 @@ public final class Home2 extends javax.swing.JFrame {
         for(Jogo j : tj) {
             x.addRow(new Object[]{j.getEscalaoCasa().getNomeEquipa(),j.getNumGolosJogoCasa(),j.getNumGolosJogoFora(),j.getEscalaoFora().getNomeEquipa()});
         }
-        JTabResultados.setModel(x);
+        JTabResultados.setModel(x); 
+        
         
         /* Próximos Jogos */
+        ArrayList<Jogo> pjogos = this.sistema.proximosJogos(15);
+        columnNames = new String[] {"Casa","Dia","Fora"};
+        data = new Object[][] {};
+        x = new DefaultTableModel(data, columnNames);
+        
+        
+        for(Jogo j : tj) {
+            x.addRow(new Object[]{j.getEscalaoCasa().getNomeEquipa(),"XX",j.getEscalaoFora().getNomeEquipa()});
+        }
+        jTabProximos.setModel(x);
+        
+        /* XXXX */
+        
+        reloadListaEscolas();
+        
+   
 
     }
     
@@ -173,6 +219,21 @@ public final class Home2 extends javax.swing.JFrame {
         
     }
     
+    /* TAB ESCOLAS */
+    public void reloadListaEscolas() {
+        Set<String> lesc = this.sistema.listaEscolas();
+        DefaultListModel<String> str = new DefaultListModel<>();
+        
+        for(String e : lesc) 
+            str.addElement(e);
+        
+        listaEscolas.setModel(str);
+    }
+    
+    public String devolveSeleccionadosEscolas() {
+        return (listaEscolas.getSelectedIndex() != -1) ? (listaEscolas.getSelectedValue().toString()) : null ;
+   
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -195,12 +256,12 @@ public final class Home2 extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         JTabEscolas = new javax.swing.JTabbedPane();
         jPanel6 = new javax.swing.JPanel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         JTabResultados = new org.jdesktop.swingx.JXTable();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTabProximos = new org.jdesktop.swingx.JXTable();
         JPanelEscolaConvidado = new javax.swing.JPanel();
         panelListaEscolas = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -348,46 +409,13 @@ public final class Home2 extends javax.swing.JFrame {
         JTabEscolas.setFocusable(false);
         JTabEscolas.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
-        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel6.setBackground(new java.awt.Color(248, 247, 247));
         jPanel6.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        jTable2.setBackground(new java.awt.Color(240, 240, 240));
-        jTable2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "", "", "", ""
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Object.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jTable2.setColumnSelectionAllowed(true);
-        jTable2.setRowHeight(26);
-        jScrollPane4.setViewportView(jTable2);
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Últimos Resultados");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("Próximos Jogos");
 
         JTabResultados.setBackground(new java.awt.Color(240, 240, 240));
@@ -410,50 +438,127 @@ public final class Home2 extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Casa", "Golos", "Golos", "Fora"
+                "Equipa Casa", "Golos", "Golos", "Equipa Fora"
             }
         ) {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
+        JTabResultados.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         JTabResultados.setEditable(false);
         JTabResultados.setRowHeight(20);
         JTabResultados.setRowMargin(2);
         JTabResultados.setShowGrid(true);
+        JTabResultados.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(JTabResultados);
+        if (JTabResultados.getColumnModel().getColumnCount() > 0) {
+            JTabResultados.getColumnModel().getColumn(0).setResizable(false);
+            JTabResultados.getColumnModel().getColumn(0).setHeaderValue("Equipa Casa");
+            JTabResultados.getColumnModel().getColumn(1).setPreferredWidth(37);
+            JTabResultados.getColumnModel().getColumn(1).setMaxWidth(37);
+            JTabResultados.getColumnModel().getColumn(1).setHeaderValue("Golos");
+            JTabResultados.getColumnModel().getColumn(2).setPreferredWidth(37);
+            JTabResultados.getColumnModel().getColumn(2).setMaxWidth(37);
+            JTabResultados.getColumnModel().getColumn(2).setHeaderValue("Golos");
+            JTabResultados.getColumnModel().getColumn(3).setResizable(false);
+            JTabResultados.getColumnModel().getColumn(3).setHeaderValue("Equipa Fora");
+        }
+
+        jTabProximos.setBackground(new java.awt.Color(240, 240, 240));
+        jTabProximos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Equipa Casa", "Dia", "Equipa Visitante"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTabProximos.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        jTabProximos.setColumnMargin(2);
+        jTabProximos.setEditable(false);
+        jTabProximos.setEditingColumn(1);
+        jTabProximos.setEditingRow(1);
+        jTabProximos.setName(""); // NOI18N
+        jTabProximos.setRowHeight(20);
+        jTabProximos.setRowHeight(20);
+        jTabProximos.setRowMargin(2);
+        jTabProximos.setShowGrid(true);
+        jTabProximos.getTableHeader().setReorderingAllowed(false);
+        jScrollPane5.setViewportView(jTabProximos);
+        if (jTabProximos.getColumnModel().getColumnCount() > 0) {
+            jTabProximos.getColumnModel().getColumn(0).setResizable(false);
+            jTabProximos.getColumnModel().getColumn(1).setResizable(false);
+            jTabProximos.getColumnModel().getColumn(2).setResizable(false);
+        }
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap(154, Short.MAX_VALUE)
+                .addContainerGap(161, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(155, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(98, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
+                .addContainerGap(22, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(66, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
 
         JTabEscolas.addTab("Home", jPanel6);
@@ -464,10 +569,15 @@ public final class Home2 extends javax.swing.JFrame {
         panelListaEscolas.setBackground(new java.awt.Color(248, 247, 247));
         panelListaEscolas.setPreferredSize(new java.awt.Dimension(500, 450));
 
-        listaEscolas.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
+        listaEscolas.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                listaEscolasAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+                listaEscolasAncestorRemoved(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
         });
         jScrollPane1.setViewportView(listaEscolas);
 
@@ -662,6 +772,14 @@ public final class Home2 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void listaEscolasAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_listaEscolasAncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_listaEscolasAncestorAdded
+
+    private void listaEscolasAncestorRemoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_listaEscolasAncestorRemoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_listaEscolasAncestorRemoved
+
     /**
      * @param args the command line arguments
      */
@@ -727,8 +845,8 @@ public final class Home2 extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JScrollPane jScrollPane5;
+    private org.jdesktop.swingx.JXTable jTabProximos;
     private org.jdesktop.swingx.JXSearchField jXSearchField1;
     private javax.swing.JList listaEscolas;
     private javax.swing.JPanel panelListaEscolas;

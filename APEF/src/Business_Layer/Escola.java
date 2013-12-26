@@ -10,6 +10,7 @@ public class Escola {
     private String local;
     private Campo campo;
     private HashMap<String,Equipa> equipas;
+    private boolean ativa;
     
     //Construtor vazio
     public Escola(){
@@ -17,6 +18,7 @@ public class Escola {
         this.local = "";
         this.campo = new Campo();
         this.equipas = new HashMap<>();
+        this.ativa = false;
     }
     
     //Construtor de copia
@@ -30,7 +32,7 @@ public class Escola {
     public Escola(String nome, String local, Campo campo) {
         this.nome = nome;
         this.local = local;
-        this.campo = campo;
+        this.campo = campo.clone();
         this.equipas = new HashMap<>();
     }
 
