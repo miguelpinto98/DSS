@@ -8,6 +8,8 @@ package GUI.Header;
 
 import Business_Layer.Utilizador;
 import GUI.Home2;
+import GUI.JPerfil;
+import javax.swing.JDialog;
 import javax.swing.JPanel;
 
 /**
@@ -88,6 +90,9 @@ public class JMenuAdmin extends JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        JDialog frame = new JPerfil(this.root);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairActionPerformed

@@ -393,10 +393,28 @@ public class APEF {
         
     /* LIGAÇÃO BASE DE DADOS*/    
     public void iniciarConexao() {
-	ConexaoBD.iniciarConexao();
+    	ConexaoBD.iniciarConexao();
     }
 
     public void terminarConexao() {
         ConexaoBD.terminarConexao();
-    }      
+    }
+    
+    /* DEVOLVE LISTA DE JOGOS POR REALIZAR (15)*/
+    public ArrayList<Jogo> jogosRealizados(int num) {
+    	ArrayList<Jogo> res = new ArrayList<>();
+    	Jogo j = null;
+    	
+    	for(Utilizador arb : this.users.values())
+    		if(arb instanceof Arbitro) {
+    			Agenda a = ((Arbitro) arb).getAgenda();
+    			j = a.getUltimoJogoRealizado();
+    			if(j!=null) {
+    				res.add(j);
+    				if(res.size()==num)
+    					return res;
+    			}
+    		}
+    	return res;
+    }
 }
