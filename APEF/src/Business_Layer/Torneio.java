@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Objects;
 
 public class Torneio implements Competicao{
@@ -208,4 +209,19 @@ public class Torneio implements Competicao{
                           // nao se sabe quantas equipas vai ter logo nao podes inicia-lo com um valor ,,,
                           // mais vale fazer o inverso, começar a 0 e incrementar
     }
+    
+    public Escalao buscaEscalao(int id) {
+        Escalao res = new Escalao();
+        boolean flag = false;
+        Iterator<Escalao> it = this.listaEscaloes.iterator(); 
+        while (it.hasNext() && !flag) {
+            Escalao e = it.next();
+            if (e.getID()==id) {
+                res = e;
+                flag = true;
+            }
+        }
+        return res;
+    }
+    
 }

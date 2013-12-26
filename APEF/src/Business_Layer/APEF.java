@@ -350,11 +350,12 @@ public class APEF {
     
     public Torneio firstFaseTorneioTipo1 (Torneio t){
         ArrayList<Integer> arrayEquipas = new ArrayList<>();
-        ArrayList<Integer> equipasGrupo1 = new ArrayList<>();
-        ArrayList<Integer> equipasGrupo2 = new ArrayList<>();
-        /**Torneio torneio = new Torneio(t); 
-        não sei precisa disto ou basta modificar e retornar o t
-		*/
+        ArrayList<Integer> arrayEquipasGrupo1 = new ArrayList<>();
+        ArrayList<Integer> arrayEquipasGrupo2 = new ArrayList<>();
+        HashSet<Escalao> equipasGrupo1 = new HashSet<>();
+        HashSet<Escalao> equipasGrupo2 = new HashSet<>();
+        ArrayList<Utilizador> arrayArbitros = new ArrayList<>();
+        arrayArbitros = daListaArbitros();
 
         for(Escalao e : t.getListaEscaloes()){
         		arrayEquipas.add(e.getID());
@@ -364,16 +365,36 @@ public class APEF {
         nrEquipas = t.getNrEscaloes();
         
         for(i=0;i<(nrEquipas/2);i++){
-        	equipasGrupo1.add(arrayEquipas.get(i));
+        	equipasGrupo1.add(t.buscaEscalao(arrayEquipas.get(i)));
         }
 
         for(i=(nrEquipas/2);i<(nrEquipas);i++){
-        	equipasGrupo2.add(arrayEquipas.get(i));
+        	equipasGrupo2.add(t.buscaEscalao(arrayEquipas.get(i)));
         }
 
         Grupo g1 = new Grupo("Grupo A",equipasGrupo1);
         Grupo g2 = new Grupo("Grupo B",equipasGrupo2);
+        
+        for (Escalao e : equipasGrupo1){
+        	g1.getClassificacao().getClassificacao().getEstatistica().put(e.getID(), new DadosEstatisticos());
+                arrayEquipasGrupo1.add(e.getID());
+        }
 
+        for (Escalao e : equipasGrupo2){
+        	g2.getClassificacao().getClassificacao().getEstatistica().put(e.getID(), new DadosEstatisticos());
+                arrayEquipasGrupo2.add(e.getID());
+        }
+
+        Fase f1 = (Fase) g1;
+        Fase f2 = (Fase) g2;
+        
+        HashSet<Utilizador> arbitrosEscolhidos = f1.geraCalendario(t.getID(),t.getDataInicio(),arrayEquipasGrupo1,t.getCampo(),arrayArbitros);
+        /**arrayArbitros = funcao que retira os arbitrosEscolhidos do arrayArbitros ,,, 
+         * substituindo o arrayArbitros por um LinkedList é permitido retirar elementos e o array ajusta-se não deixando espaços "vazios" (acho eu que funciona assim) */
+        f2.geraCalendario(t.getID(),t.getDataInicio(),arrayEquipasGrupo2,t.getCampo(),arrayArbitros);
+        
+        t.getFases().add(f1);
+        t.getFases().add(f2);
         
         return t;
     }

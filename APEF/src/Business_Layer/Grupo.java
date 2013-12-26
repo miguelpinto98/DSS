@@ -1,6 +1,7 @@
 package Business_Layer;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Grupo extends Fase {    
     
@@ -13,7 +14,7 @@ public class Grupo extends Fase {
     	this.classificacao = new Classificacao();
     }
 
-    public Grupo(String n, ArrayList<Integer> le){
+    public Grupo(String n, HashSet<Escalao> le){
         super(n,le);
         this.classificacao = new Classificacao();
     }
