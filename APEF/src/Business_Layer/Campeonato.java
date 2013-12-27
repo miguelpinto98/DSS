@@ -1,6 +1,7 @@
 package Business_Layer;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -395,6 +396,52 @@ public class Campeonato implements Competicao{
         this.classificacao.actualizaClassificacao(j);
 		return this.calendario.atualizaCalendario(j);
 	}
+    
+    public ArrayList<Integer> melhoresMarcadoresAux() {
+        HashMap<Integer,Integer> aux = this.goleadores;
+        ArrayList<Integer> res = new ArrayList<>();
+        int maxGolos = Collections.max(aux.values());
+
+		Iterator<Integer> it = this.goleadores.keySet().iterator();
+        while (it.hasNext()) {
+            Integer id = it.next();
+            if (maxGolos == this.goleadores.get(id)) {
+                res.add(id);
+                aux.remove(id);
+            }
+        }
+        return res; 
+    }
+    
+    public Jogador buscaJogador(int id) {
+        Jogador res = new Jogador();
+        boolean flag = false;
+        
+        Iterator<Escalao> it = this.listaEscaloes.iterator(); 
+        while (it.hasNext() && !flag) {
+            Escalao e = it.next();
+            Iterator<Integer> it2 = e.getJogadores().keySet().iterator(); 
+            while (it2.hasNext() && !flag) {
+                Integer i = it2.next();
+                if (i==id) {
+                    res = e.getJogadores().get(id);
+                    flag = true;
+                }
+            }
+        }
+        return res;
+    }
+        
+    public ArrayList<Jogador> melhoresMarcardores() {
+        ArrayList<Jogador> res = new ArrayList<>();
+        ArrayList<Integer> aux = melhoresMarcadoresAux();
+        Jogador j = new Jogador();
+        for (int i = 0; i < aux.size(); i++) {
+            j = buscaJogador(aux.get(i));
+            res.add(i,j);
+        }
+        return res;
+    }
+    
+    
 }
-
-
