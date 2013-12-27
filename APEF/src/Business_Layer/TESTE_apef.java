@@ -193,7 +193,14 @@ public class TESTE_apef {
       //System.out.println(a.countArbitros());  
     //System.out.println(a.getUsers().get("diana"));  
         
-        
+   /*FORMA
+    DadosEstatisticos d = new DadosEstatisticos(); 
+    char[] teste = new char[] { 'a', 'l', 'p', 'h', 'a'};    
+    char c = 'V';
+    d.setForma(teste);
+    d.atualizaForma('E');
+    
+    System.out.println(d);
 		/*Jogo j = new Jogo();
 		ArrayList<Integer> al = new ArrayList<>();
 		
