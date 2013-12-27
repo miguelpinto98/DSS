@@ -328,7 +328,8 @@ public class Campeonato implements Competicao{
             copia = moveArray(copia);
             
             Jornada jornada = new Jornada(count+1);
-            GregorianCalendar data = this.dataInicio; 
+            GregorianCalendar data = new GregorianCalendar(); 
+            data = this.dataInicio;
             
             if (count==0) {
                 data = this.dataInicio;
