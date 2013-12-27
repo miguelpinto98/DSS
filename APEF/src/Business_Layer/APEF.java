@@ -6,6 +6,7 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
 public class APEF {
     private HashMap<String, Escola> escolas;
@@ -230,12 +231,15 @@ public class APEF {
 	/**
 	*Metodos Escola
 	*/
-    public void inserirEscola(Escola a) {
+    public boolean inserirEscola(Escola a) {
     	if( !(this.escolas.containsKey(a.getNome())) ){
-    		this.escolas.put(a.getNome(),a);
+            this.escolas.put(a.getNome(),a);
+            return true;
     	}
-    	else
-    		System.out.println("Escola ja existe");
+        else{
+            System.out.println("Escola ja existe");
+            return false;
+        }
     }
 
     public void removerEscola(Escola escola) {
@@ -335,7 +339,7 @@ public class APEF {
         if (acabouInscricao(c) && countArbitros()>=((nrEscaloes)/2)){
         	for(Escalao e : c.getListaEscaloes()){
         		arrayEquipas.add(e.getID());
-                        arrayCampos.add(daCampoEscalao(e));
+                arrayCampos.add(daCampoEscalao(e));
         	}
                 
         	c.geraCalendario(arrayEquipas, arrayCampos, arrayArbitros);
@@ -349,12 +353,54 @@ public class APEF {
     }
     
     public Torneio firstFaseTorneioTipo1 (Torneio t){
-        Torneio torneio = new Torneio();
-        /** 
-         * torneio tipo 1: grupos e depois eliminatorias
-         * 
-         */
-        return torneio;
+        ArrayList<Integer> arrayEquipas = new ArrayList<>();
+        ArrayList<Integer> arrayEquipasGrupo1 = new ArrayList<>();
+        ArrayList<Integer> arrayEquipasGrupo2 = new ArrayList<>();
+        HashSet<Escalao> equipasGrupo1 = new HashSet<>();
+        HashSet<Escalao> equipasGrupo2 = new HashSet<>();
+        ArrayList<Utilizador> arrayArbitros = new ArrayList<>();
+        arrayArbitros = daListaArbitros();
+
+        for(Escalao e : t.getListaEscaloes()){
+        		arrayEquipas.add(e.getID());
+        	}
+
+        int i,nrEquipas;
+        nrEquipas = t.getNrEscaloes();
+        
+        for(i=0;i<(nrEquipas/2);i++){
+        	equipasGrupo1.add(t.buscaEscalao(arrayEquipas.get(i)));
+        }
+
+        for(i=(nrEquipas/2);i<(nrEquipas);i++){
+        	equipasGrupo2.add(t.buscaEscalao(arrayEquipas.get(i)));
+        }
+
+        Grupo g1 = new Grupo("Grupo A",equipasGrupo1);
+        Grupo g2 = new Grupo("Grupo B",equipasGrupo2);
+        
+        for (Escalao e : equipasGrupo1){
+        	g1.getClassificacao().getClassificacao().getEstatistica().put(e.getID(), new DadosEstatisticos());
+                arrayEquipasGrupo1.add(e.getID());
+        }
+
+        for (Escalao e : equipasGrupo2){
+        	g2.getClassificacao().getClassificacao().getEstatistica().put(e.getID(), new DadosEstatisticos());
+                arrayEquipasGrupo2.add(e.getID());
+        }
+
+        Fase f1 = (Fase) g1;
+        Fase f2 = (Fase) g2;
+        
+        HashSet<Utilizador> arbitrosEscolhidos = f1.geraCalendario(t.getID(),t.getDataInicio(),arrayEquipasGrupo1,t.getCampo(),arrayArbitros);
+        /**arrayArbitros = funcao que retira os arbitrosEscolhidos do arrayArbitros ,,, 
+         * substituindo o arrayArbitros por um LinkedList é permitido retirar elementos e o array ajusta-se não deixando espaços "vazios" (acho eu que funciona assim) */
+        f2.geraCalendario(t.getID(),t.getDataInicio(),arrayEquipasGrupo2,t.getCampo(),arrayArbitros);
+        
+        t.getFases().add(f1);
+        t.getFases().add(f2);
+        
+        return t;
     }
 
 	public void addResultadoCompeticao(Jogo j, int gcasa, int gfora) {
@@ -369,10 +415,49 @@ public class APEF {
         
     /* LIGAÇÃO BASE DE DADOS*/    
     public void iniciarConexao() {
-	ConexaoBD.iniciarConexao();
+    	ConexaoBD.iniciarConexao();
     }
 
     public void terminarConexao() {
         ConexaoBD.terminarConexao();
-    }      
+    }
+    
+    /* DEVOLVE LISTA DE JOGOS POR REALIZAR (15)*/
+    public ArrayList<Jogo> jogosRealizados(int num) {
+    	ArrayList<Jogo> res = new ArrayList<>();
+    	Jogo j = null;
+    	
+    	for(Utilizador arb : this.users.values())
+    		if(arb instanceof Arbitro) {
+    			Agenda a = ((Arbitro) arb).getAgenda();
+    			j = a.getUltimoJogoRealizado();
+    			if(j!=null) {
+    				res.add(j);
+    				if(res.size()==num)
+    					return res;
+    			}
+    		}
+    	return res;
+    }
+
+    public ArrayList<Jogo> proximosJogos(int i) {
+        ArrayList<Jogo> res = new ArrayList<>();
+        Jogo j = null;
+        
+        for(Utilizador arb : this.users.values())
+            if(arb instanceof Arbitro) {
+                Agenda a = ((Arbitro) arb).getAgenda();
+    		j = a.getProximoJogo();
+                    if(j!=null) {
+    			res.add(j);
+    			if(res.size()==i)
+                            return res;
+                    }
+            }
+        return res;
+    }
+    
+    public Set<String> listaEscolas() {        
+        return this.escolas.keySet();
+    }
 }

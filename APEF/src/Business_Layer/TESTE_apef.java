@@ -185,13 +185,16 @@ public class TESTE_apef {
     GregorianCalendar g = new GregorianCalendar();
     g.set(2013, 11, 20);
     campeonatoInfantis.setDataLimiteInscricoes(g);
-    
+    /**GregorianCalendar gg = new GregorianCalendar();
+    gg.set(2013, 1, 3);
+    campeonatoInfantis.setDataLimiteInscricoes(gg);
+    */
     a.iniciarCampeonato(campeonatoInfantis);
     
     //System.out.println(a.getEscolas().get(escola.getNome()));
     //System.out.println(campeonatoInfantis);
       //System.out.println(a.countArbitros());  
-    //System.out.println(a.getUsers().get("diana"));  
+    System.out.println(a.getUsers().get("diana"));  
         
    /*FORMA
     DadosEstatisticos d = new DadosEstatisticos(); 
