@@ -192,9 +192,9 @@ public class TESTE_apef {
     a.iniciarCampeonato(campeonatoInfantis);
     
     //System.out.println(a.getEscolas().get(escola.getNome()));
-    //System.out.println(campeonatoInfantis);
+    System.out.println(campeonatoInfantis);
       //System.out.println(a.countArbitros());  
-    System.out.println(a.getUsers().get("diana"));  
+    //System.out.println(a.getUsers().get("diana"));  
         
    /*FORMA
     DadosEstatisticos d = new DadosEstatisticos(); 

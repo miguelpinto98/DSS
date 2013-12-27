@@ -242,7 +242,7 @@ public class Campeonato implements Competicao{
         return res;
     }
     
-    public GregorianCalendar dataJornadaSeguinte(GregorianCalendar g, int jr){
+    public GregorianCalendar dataJornadaSeguinte(GregorianCalendar g){
        GregorianCalendar res = new GregorianCalendar();
        
        if (g.isLeapYear(g.get(g.YEAR))) {
@@ -257,7 +257,7 @@ public class Campeonato implements Competicao{
                 }
                 else {
                     res = g;
-                    res.set(res.DAY_OF_YEAR,res.get(res.DAY_OF_YEAR)+7*jr);
+                    res.set(res.DAY_OF_YEAR,res.get(res.DAY_OF_YEAR)+7);
                 }
       }
        else {
@@ -272,7 +272,7 @@ public class Campeonato implements Competicao{
                 }
                 else {
                     res = g;
-                    res.set(res.DAY_OF_YEAR,res.get(res.DAY_OF_YEAR)+7*jr);
+                    res.set(res.DAY_OF_YEAR,res.get(res.DAY_OF_YEAR)+7);
                 }
        }
        return res;
@@ -328,13 +328,13 @@ public class Campeonato implements Competicao{
             copia = moveArray(copia);
             
             Jornada jornada = new Jornada(count+1);
-            GregorianCalendar data = new GregorianCalendar(); 
+            GregorianCalendar data = this.dataInicio; 
             
             if (count==0) {
                 data = this.dataInicio;
             }
             else {
-                data = dataJornadaSeguinte(data,count);
+                data = dataJornadaSeguinte(data);
             }
             
             
