@@ -9,12 +9,14 @@ public class Jogador extends Pessoa {
     private int nrGolos;
     private ArrayList<Integer> competicoes;
     private boolean emprestado;
+    private String nomeEquipa;
 
     //Construtores
     public Jogador() {
     	super();
     	this.nrGolos = 0;
         this.emprestado = false;
+        this.nomeEquipa = "";
     }
    
     public Jogador(String nome, GregorianCalendar g, int sexo, boolean emprestado) {
@@ -28,6 +30,7 @@ public class Jogador extends Pessoa {
     	super(t);
     	this.nrGolos = t.getNrGolos();
         this.emprestado = t.getEmprestado();
+        this.nomeEquipa = t.getNomeEquipa();
     }
 
     //Getters
@@ -37,6 +40,10 @@ public class Jogador extends Pessoa {
 
     public boolean getEmprestado() {
         return this.emprestado;
+    }
+    
+    public String getNomeEquipa() {
+        return this.nomeEquipa;
     }
     //Setters
     public void setNrGolos(int n) {
