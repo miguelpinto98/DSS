@@ -10,6 +10,7 @@ import Business_Layer.Utilizador;
 import GUI.Header.JEntrar;
 import GUI.Home2;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JList;
 
 /**
@@ -34,17 +35,17 @@ public class EscolasMenuAdmin extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton4 = new javax.swing.JButton();
+        consultas = new javax.swing.JButton();
         addEscola = new javax.swing.JButton();
         editarEscola = new javax.swing.JButton();
         removerEscola = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(248, 247, 247));
 
-        jButton4.setText("Consultar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        consultas.setText("Consultar");
+        consultas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                consultasActionPerformed(evt);
             }
         });
 
@@ -78,7 +79,7 @@ public class EscolasMenuAdmin extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(editarEscola, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
                     .addComponent(addEscola, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
+                    .addComponent(consultas, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
                     .addComponent(removerEscola, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE))
                 .addContainerGap(42, Short.MAX_VALUE))
         );
@@ -86,7 +87,7 @@ public class EscolasMenuAdmin extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(29, Short.MAX_VALUE)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(consultas, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(addEscola, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
@@ -97,9 +98,16 @@ public class EscolasMenuAdmin extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void consultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+        String str = this.root.devolveSeleccionadosEscolas();
+        
+        if(str != null) {
+            JFrame frame = new jConsultasEscola(this.root,str);
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
+        } 
+    }//GEN-LAST:event_consultasActionPerformed
 
     private void editarEscolaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarEscolaActionPerformed
         // TODO add your handling code here:
@@ -133,8 +141,8 @@ public class EscolasMenuAdmin extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addEscola;
+    private javax.swing.JButton consultas;
     private javax.swing.JButton editarEscola;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton removerEscola;
     // End of variables declaration//GEN-END:variables
 }

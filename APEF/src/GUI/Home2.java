@@ -11,11 +11,13 @@ import Business_Layer.Utilizador;
 import Business_Layer.Admin;
 import Business_Layer.Arbitro;
 import Business_Layer.Campo;
+import Business_Layer.Equipa;
 import Business_Layer.Escalao;
 import Business_Layer.Escola;
 import Business_Layer.Jogo;
 import Business_Layer.ResponsavelEscola;
 import GUI.Escola.EscolasMenuAdmin;
+import GUI.Escola.jConsultasEscola;
 import GUI.Header.JEntrar;
 import GUI.Header.JMenuAdmin;
 import GUI.Header.JMenuArbitro;
@@ -33,8 +35,10 @@ import javax.swing.AbstractListModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JPanel;
 import javax.swing.ListModel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -46,7 +50,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author miguelpinto
  */
-public final class Home2 extends javax.swing.JFrame {
+public final class Home2 extends JFrame {
 
     public static final String OS = System.getProperty("os.name").toLowerCase();
 
@@ -59,7 +63,6 @@ public final class Home2 extends javax.swing.JFrame {
     /**
      * Creates new form Home2
      */
-    @SuppressWarnings("empty-statement")
     public Home2() {
         this.sistema = new APEF();
         this.user = null;
@@ -76,6 +79,15 @@ public final class Home2 extends javax.swing.JFrame {
         a = this.sistema.inserirEscola(e3);
         a = this.sistema.inserirEscola(e4);
         a = this.sistema.inserirEscola(e5);
+        
+        /* EQUIPAS */
+        Equipa eq1 = new Equipa("Gelbots");
+        Equipa eq2 = new Equipa("LEI");
+        Equipa eq3 = new Equipa("CeSIUM");
+        
+        this.sistema.getEscolas().get("Universidade do Minho").inserirEquipa(eq1);
+        this.sistema.getEscolas().get("Universidade do Minho").inserirEquipa(eq2);
+        this.sistema.getEscolas().get("Universidade do Minho").inserirEquipa(eq3);
 
         /* TESTE USERS*/
         this.sistema.registarUser("maleite","pw1234","maleite@gmail.com",0,sistema);
@@ -87,11 +99,11 @@ public final class Home2 extends javax.swing.JFrame {
         
         /* TESTE JOGO COM ESCALOES */
         ArrayList<Jogo> tj = new ArrayList<>();
-        Escalao eq1 = new Escalao(0, "LEI", "UMINHO");
-        Escalao eq2 = new Escalao(0, "ESF", "ESF");
+        Escalao esc1 = new Escalao(0, "LEI", "UMINHO");
+        Escalao esc2 = new Escalao(0, "ESF", "ESF");
         
-        Jogo j1 = new Jogo(1000, new GregorianCalendar(2013, 12, 21), null, null, eq1, eq2);
-        Jogo j2 = new Jogo(1000, new GregorianCalendar(2013, 12, 21), null, null, eq1, eq2);
+        Jogo j1 = new Jogo(1000, new GregorianCalendar(2013, 12, 21), null, null, esc1, esc2);
+        Jogo j2 = new Jogo(1000, new GregorianCalendar(2013, 12, 21), null, null, esc2, esc1);
         
         j2.setNumGolosJogoCasa(10);
         j2.setRealizado(true);
@@ -234,6 +246,13 @@ public final class Home2 extends javax.swing.JFrame {
         return (listaEscolas.getSelectedIndex() != -1) ? (listaEscolas.getSelectedValue().toString()) : null ;
    
     }
+    
+    /* UTILS */
+    public JPanel devolveHeader() {
+        return this.JPanelHeader;
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -267,7 +286,7 @@ public final class Home2 extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         listaEscolas = new javax.swing.JList();
         botoesConvidadoEscola = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        consultaEscola = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         ComboEpocasCampeonato = new javax.swing.JComboBox();
@@ -569,16 +588,6 @@ public final class Home2 extends javax.swing.JFrame {
         panelListaEscolas.setBackground(new java.awt.Color(248, 247, 247));
         panelListaEscolas.setPreferredSize(new java.awt.Dimension(500, 450));
 
-        listaEscolas.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                listaEscolasAncestorAdded(evt);
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-                listaEscolasAncestorRemoved(evt);
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
         jScrollPane1.setViewportView(listaEscolas);
 
         javax.swing.GroupLayout panelListaEscolasLayout = new javax.swing.GroupLayout(panelListaEscolas);
@@ -602,12 +611,12 @@ public final class Home2 extends javax.swing.JFrame {
 
         botoesConvidadoEscola.setBackground(new java.awt.Color(248, 247, 247));
 
-        jButton1.setText("Consultar");
-        jButton1.setPreferredSize(new java.awt.Dimension(100, 30));
-        jButton1.setSize(new java.awt.Dimension(100, 30));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        consultaEscola.setText("Consultar");
+        consultaEscola.setPreferredSize(new java.awt.Dimension(100, 30));
+        consultaEscola.setSize(new java.awt.Dimension(100, 30));
+        consultaEscola.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                consultaEscolaActionPerformed(evt);
             }
         });
 
@@ -617,14 +626,14 @@ public final class Home2 extends javax.swing.JFrame {
             botoesConvidadoEscolaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, botoesConvidadoEscolaLayout.createSequentialGroup()
                 .addContainerGap(96, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(consultaEscola, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(87, Short.MAX_VALUE))
         );
         botoesConvidadoEscolaLayout.setVerticalGroup(
             botoesConvidadoEscolaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(botoesConvidadoEscolaLayout.createSequentialGroup()
                 .addContainerGap(34, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(consultaEscola, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(366, Short.MAX_VALUE))
         );
 
@@ -768,17 +777,16 @@ public final class Home2 extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jXSearchField1KeyPressed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void consultaEscolaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaEscolaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void listaEscolasAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_listaEscolasAncestorAdded
-        // TODO add your handling code here:
-    }//GEN-LAST:event_listaEscolasAncestorAdded
-
-    private void listaEscolasAncestorRemoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_listaEscolasAncestorRemoved
-        // TODO add your handling code here:
-    }//GEN-LAST:event_listaEscolasAncestorRemoved
+        String str = devolveSeleccionadosEscolas();
+        
+        if(str != null) {
+            JFrame frame = new jConsultasEscola(this,str);
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
+        } 
+    }//GEN-LAST:event_consultaEscolaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -826,8 +834,8 @@ public final class Home2 extends javax.swing.JFrame {
     private org.jdesktop.swingx.JXTable JTabResultados;
     private javax.swing.JPanel TitleHeader;
     private javax.swing.JPanel botoesConvidadoEscola;
+    private javax.swing.JButton consultaEscola;
     private javax.swing.JButton entrar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
