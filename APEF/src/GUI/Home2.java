@@ -93,13 +93,13 @@ public final class Home2 extends JFrame {
         this.sistema.getEscolas().get("Universidade do Minho").inserirEquipa(eq2);
         this.sistema.getEscolas().get("Universidade do Minho").inserirEquipa(eq3);
 
-        /* TESTE USERS*/
-        this.sistema.registarUser("maleite","pw1234","maleite@gmail.com",0,sistema);
-        this.sistema.registarUser("174Miguel","pw1234","miguel@gmail.com",1,sistema);
-        this.sistema.registarUser("63linda","pw1234","63@gmail.com",2,sistema);
-        this.sistema.registarUser("diana","pw1234","demossbb@gmail.com",2,sistema);
-        this.sistema.registarUser("serafim","pw1234","smcp@gmail.com",2,sistema);
-        this.sistema.registarUser("atum","pw1234","atum@gmail.com",0,sistema);
+        /* TESTE USERS */
+        this.sistema.registarUser("maleite","pw1234","maleite@gmail.com",0);
+        this.sistema.registarUser("174Miguel","pw1234","miguel@gmail.com",1);
+        this.sistema.registarUser("63linda","pw1234","63@gmail.com",2);
+        this.sistema.registarUser("diana","pw1234","demossbb@gmail.com",2);
+        this.sistema.registarUser("serafim","pw1234","smcp@gmail.com",2);
+        this.sistema.registarUser("atum","pw1234","atum@gmail.com",0);
         
         /* TESTE JOGO COM ESCALOES */
         ArrayList<Jogo> tj = new ArrayList<>();
@@ -116,10 +116,13 @@ public final class Home2 extends JFrame {
         tj.add(j2);
         
         /* Inicia Aplicação */
-        initComponents();        
+        initComponents();  
         verificaUser(user);
         this.jComboBox1.setModel(new DefaultComboBoxModel<Object>(new String[]{"Escolas","Jogadores"}));
         this.JPanelEscolaConvidado.setBackground(new java.awt.Color(248, 247, 247));
+        
+        GregorianCalendar g = new GregorianCalendar();
+        this.data.setText(g.get(g.DAY_OF_MONTH)+"/"+g.get(g.MONTH)+"/"+g.get(g.YEAR));
         
         /* CENTRAR UMA COLUNA
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
@@ -311,6 +314,7 @@ public final class Home2 extends JFrame {
         jButton3 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox();
         jXSearchField1 = new org.jdesktop.swingx.JXSearchField();
+        data = new javax.swing.JLabel();
         JPanelUserLogout = new javax.swing.JPanel();
         registar = new javax.swing.JButton();
         entrar = new javax.swing.JButton();
@@ -405,12 +409,16 @@ public final class Home2 extends JFrame {
             }
         });
 
+        data.setText("data");
+
         javax.swing.GroupLayout searchPanelLayout = new javax.swing.GroupLayout(searchPanel);
         searchPanel.setLayout(searchPanelLayout);
         searchPanelLayout.setHorizontalGroup(
             searchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, searchPanelLayout.createSequentialGroup()
-                .addContainerGap(412, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(data, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 165, Short.MAX_VALUE)
                 .addComponent(jXSearchField1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -422,10 +430,14 @@ public final class Home2 extends JFrame {
             searchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(searchPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(searchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jXSearchField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(searchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(searchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jXSearchField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, searchPanelLayout.createSequentialGroup()
+                        .addGap(0, 20, Short.MAX_VALUE)
+                        .addComponent(data)))
                 .addContainerGap())
         );
 
@@ -452,7 +464,7 @@ public final class Home2 extends JFrame {
         JPanelUserLogoutLayout.setHorizontalGroup(
             JPanelUserLogoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPanelUserLogoutLayout.createSequentialGroup()
-                .addContainerGap(639, Short.MAX_VALUE)
+                .addGap(639, 639, 639)
                 .addComponent(entrar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
                 .addComponent(registar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -460,11 +472,11 @@ public final class Home2 extends JFrame {
         );
         JPanelUserLogoutLayout.setVerticalGroup(
             JPanelUserLogoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(JPanelUserLogoutLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPanelUserLogoutLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(JPanelUserLogoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(registar, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
-                    .addComponent(entrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(JPanelUserLogoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(registar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                    .addComponent(entrar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -1007,6 +1019,7 @@ public final class Home2 extends JFrame {
     private javax.swing.JPanel botoesConvidadoEscola;
     private javax.swing.JButton buttonClassificacao;
     private javax.swing.JButton consultaEscola;
+    private javax.swing.JLabel data;
     private javax.swing.JButton entrar;
     private javax.swing.JPanel headerCampeonato;
     private javax.swing.JButton jButton3;

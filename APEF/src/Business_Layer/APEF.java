@@ -149,10 +149,7 @@ public class APEF {
 		return (existeNickname(nickname) || existeEmail(email));
 	}
 
-	public void inserirUtilizador(Utilizador user) {
-		if ( !(existeUtilizador(user.getNomeUser(),user.getEmail())) ) {
-                    this.users.put(user.getNomeUser(),user);        }
-	}
+	
 
 	public static boolean validaPassword(String pw) {
         boolean res = true;
@@ -168,37 +165,52 @@ public class APEF {
         return res;
     }
 
-	public void registarUser(String nickname, String password, String email, int tipoUser, APEF a) {
-		GregorianCalendar g = new GregorianCalendar();
-		if(validaPassword(password)) {
-			if (tipoUser==0) { 
-				Admin user = new Admin(nickname, password, email, g, a);
-				String pw = user.encriptarPassword(password);
+    public boolean registarUser(String nickname, String password, String email, int tipoUser) {
+	GregorianCalendar g = new GregorianCalendar();
+        boolean inserido = false;
+	
+        if(validaPassword(password)) {
+            if (tipoUser==0) { 
+                Admin user = new Admin(nickname, password, email, g,this);
+		String pw = user.encriptarPassword(password);
                 user.setPass(pw);
-       	    	inserirUtilizador(user);
-			}
-			if (tipoUser==1) { 
-				ResponsavelEscola user = new ResponsavelEscola(nickname, password, email,g,a);
-                String pw = user.encriptarPassword(password);
-                user.setPass(pw);
-                inserirUtilizador(user);
+       	    	inserido = inserirUtilizador(user);
             }
-			if (tipoUser==2) { 
-				Arbitro user = new Arbitro(nickname, password, email, g,a);
+            if (tipoUser==1) { 
+		ResponsavelEscola user = new ResponsavelEscola(nickname, password, email,g,this);
                 String pw = user.encriptarPassword(password);
                 user.setPass(pw);
-	            inserirUtilizador(user);
-	        }	
-		}
+                inserido = inserirUtilizador(user);
+            }
+            if (tipoUser==2) { 
+		Arbitro user = new Arbitro(nickname, password, email, g,this);
+                String pw = user.encriptarPassword(password);
+                user.setPass(pw);
+	        inserido = inserirUtilizador(user);
+            }	
 	}
+        
+        return inserido;
+    }
+    
+    public boolean inserirUtilizador(Utilizador user) {
+        boolean ins = false;
+        
+        if ( !(existeUtilizador(user.getNomeUser(),user.getEmail())) ) {
+            this.users.put(user.getNomeUser(),user);
+            ins = true;
+        }
+        
+        return ins;
+    }
 
-	public void removerUtilizador(Utilizador user) {
-		this.users.remove(user.getNomeUser());
-	}
+    public void removerUtilizador(Utilizador user) {
+	this.users.remove(user.getNomeUser());
+    }
 
-	public boolean validaLogin(String nickname, String password){
-		return (existeNickname(nickname) && this.users.get(nickname).passwordCorresponde(password));
-	}
+    public boolean validaLogin(String nickname, String password){
+	return (existeNickname(nickname) && this.users.get(nickname).passwordCorresponde(password));
+    }
     
     /* Ainda Falta Fazer Uma Verificação */
     public boolean login(String nickname, String password){
