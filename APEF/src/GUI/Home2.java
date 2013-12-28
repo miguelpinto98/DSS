@@ -233,6 +233,11 @@ public final class Home2 extends JFrame {
         this.user = user;
     }
     
+    public Utilizador getUtilizador() {
+        return this.user;
+    }
+            
+    
     private void pesquisar() {
         
     }
@@ -256,6 +261,14 @@ public final class Home2 extends JFrame {
     /* UTILS */
     public JPanel devolveHeader() {
         return this.JPanelHeader;
+    }
+    
+    public JPanel devolveSearchPanel() {
+        return this.searchPanel;
+    }
+    
+    public JPanel devolveUserConvidado() {
+        return this.JPanelUserLogout;
     }
     
     /* TAB CAMPEONATO */

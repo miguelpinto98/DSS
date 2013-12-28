@@ -31,19 +31,65 @@ public class JPlantelAgenda extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 878, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 289, Short.MAX_VALUE)
-        );
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jXTable1 = new org.jdesktop.swingx.JXTable();
+
+        setBorder(javax.swing.BorderFactory.createTitledBorder("Agenda"));
+        setLayout(new java.awt.BorderLayout());
+
+        jXTable1.setBackground(new java.awt.Color(244, 244, 244));
+        jXTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Equipa Casa", "Dia/Hora", "Campo", "Equipa Fora"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jXTable1.setEditable(false);
+        jXTable1.setShowGrid(true);
+        jXTable1.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(jXTable1);
+        if (jXTable1.getColumnModel().getColumnCount() > 0) {
+            jXTable1.getColumnModel().getColumn(0).setResizable(false);
+            jXTable1.getColumnModel().getColumn(1).setResizable(false);
+            jXTable1.getColumnModel().getColumn(2).setResizable(false);
+            jXTable1.getColumnModel().getColumn(3).setResizable(false);
+        }
+
+        add(jScrollPane1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
+    private org.jdesktop.swingx.JXTable jXTable1;
     // End of variables declaration//GEN-END:variables
 }

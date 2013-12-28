@@ -39,7 +39,7 @@ public class JPlantelTreinador extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jPanelAdmin = new javax.swing.JPanel();
+        jOptionsTreinador = new javax.swing.JPanel();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Treinador"));
         setLayout(new java.awt.BorderLayout());
@@ -101,18 +101,18 @@ public class JPlantelTreinador extends javax.swing.JPanel {
 
         add(jPanel1, java.awt.BorderLayout.LINE_START);
 
-        javax.swing.GroupLayout jPanelAdminLayout = new javax.swing.GroupLayout(jPanelAdmin);
-        jPanelAdmin.setLayout(jPanelAdminLayout);
-        jPanelAdminLayout.setHorizontalGroup(
-            jPanelAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jOptionsTreinadorLayout = new javax.swing.GroupLayout(jOptionsTreinador);
+        jOptionsTreinador.setLayout(jOptionsTreinadorLayout);
+        jOptionsTreinadorLayout.setHorizontalGroup(
+            jOptionsTreinadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 466, Short.MAX_VALUE)
         );
-        jPanelAdminLayout.setVerticalGroup(
-            jPanelAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jOptionsTreinadorLayout.setVerticalGroup(
+            jOptionsTreinadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 265, Short.MAX_VALUE)
         );
 
-        add(jPanelAdmin, java.awt.BorderLayout.CENTER);
+        add(jOptionsTreinador, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -124,7 +124,7 @@ public class JPlantelTreinador extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jOptionsTreinador;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanelAdmin;
     // End of variables declaration//GEN-END:variables
 }

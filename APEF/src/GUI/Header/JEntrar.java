@@ -6,6 +6,7 @@ package GUI.Header;
 
 import Business_Layer.APEF;
 import Business_Layer.Utilizador;
+import GUI.Escola.jConsultasEscola;
 import GUI.Home2;
 import javax.swing.JDialog;
 

@@ -6,9 +6,13 @@
 
 package GUI.Escola;
 
+import Business_Layer.Admin;
+import Business_Layer.Arbitro;
 import Business_Layer.Equipa;
 import Business_Layer.Escola;
+import Business_Layer.ResponsavelEscola;
 import Business_Layer.Utilizador;
+import GUI.Header.JMenuAdmin;
 import GUI.Home2;
 import GUI.Plantel.JPlantelAgenda;
 import GUI.Plantel.JPlantelDadosEstatisticos;
@@ -30,14 +34,41 @@ public final class jConsultasEscola extends javax.swing.JFrame {
     public jConsultasEscola(Home2 root, String str) {
         this.root = root;
         this.esc = this.root.getSistema().getEscolas().get(str);
+        this.user = this.root.getUtilizador();
         initComponents();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.root.setEnabled(true);
+        
+        verificaUser(this.user);
+
         
         reloadDetalhes();
         ativarComboEscolas();
         reloadOpcaoTreinadorConvidado();
         
+    }
+    
+    public void verificaUser(Utilizador user) {
+        
+        if(user != null) {
+            if(user instanceof Admin) {
+                this.remove(this.panelUsers);
+                this.jPanel1.add(new JMenuAdmin(this.root, user),BorderLayout.CENTER);
+                this.jPanel1.updateUI();
+                this.jPanel1.validate();
+            }
+            if(user instanceof ResponsavelEscola)
+                ;
+            if(user instanceof Arbitro)
+                ;
+        } else {
+            this.jPanel1.removeAll();
+            this.jPanel1.add(this.jPanel2, BorderLayout.NORTH);
+            this.jPanel1.add(this.root.devolveUserConvidado(),BorderLayout.CENTER);
+            this.jPanel1.add(this.root.devolveSearchPanel(),BorderLayout.SOUTH);
+            this.jPanel1.updateUI();
+            this.jPanel1.validate();
+        }
     }
     
     public void reloadDetalhes() {
