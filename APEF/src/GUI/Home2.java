@@ -16,6 +16,10 @@ import Business_Layer.Escalao;
 import Business_Layer.Escola;
 import Business_Layer.Jogo;
 import Business_Layer.ResponsavelEscola;
+import GUI.Campeonato.JCampeonatoCalendario;
+import GUI.Campeonato.JCampeonatoClassificacao;
+import GUI.Campeonato.JCampeonatoEstatistica;
+import GUI.Campeonato.JCampeonatoJornadas;
 import GUI.Escola.EscolasMenuAdmin;
 import GUI.Escola.jConsultasEscola;
 import GUI.Header.JEntrar;
@@ -115,6 +119,7 @@ public final class Home2 extends JFrame {
         initComponents();        
         verificaUser(user);
         this.jComboBox1.setModel(new DefaultComboBoxModel<Object>(new String[]{"Escolas","Jogadores"}));
+        this.JPanelEscolaConvidado.setBackground(new java.awt.Color(248, 247, 247));
         
         /* CENTRAR UMA COLUNA
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
@@ -150,9 +155,7 @@ public final class Home2 extends JFrame {
         /* XXXX */
         
         reloadListaEscolas();
-        
-   
-
+        reloadPagInicialCampeonato();
     }
     
     public void verificaUser(Utilizador user) {
@@ -252,6 +255,45 @@ public final class Home2 extends JFrame {
         return this.JPanelHeader;
     }
     
+    /* TAB CAMPEONATO */
+    public void reloadPagInicialCampeonato() {
+        this.jPanel8.removeAll();
+        this.jPanel8.add(this.headerCampeonato, BorderLayout.NORTH);
+        this.jPanel8.add(this.panelMelhoresMarcadores, BorderLayout.EAST);
+        this.jPanel8.add(new JCampeonatoClassificacao(this,user),BorderLayout.CENTER);
+        this.jPanel8.updateUI();
+        this.jPanel8.validate();
+    }
+    
+    public void reloadButtonJornada() {
+        this.jPanel8.removeAll();
+        this.jPanel8.add(this.headerCampeonato, BorderLayout.NORTH);
+        this.jPanel8.add(this.panelMelhoresMarcadores, BorderLayout.EAST);
+        this.jPanel8.add(new JCampeonatoJornadas(this,user),BorderLayout.CENTER);
+        this.jPanel8.updateUI();
+        this.jPanel8.validate();
+    }
+    
+    public void reloadButtonEstatistica() {
+        this.jPanel8.removeAll();
+        this.jPanel8.add(this.headerCampeonato, BorderLayout.NORTH);
+        this.jPanel8.add(this.panelMelhoresMarcadores, BorderLayout.EAST);
+        this.jPanel8.add(new JCampeonatoEstatistica(this,user),BorderLayout.CENTER);
+        this.jPanel8.updateUI();
+        this.jPanel8.validate();
+    }
+    
+    public void reloadButtonCalendario() {
+        this.jPanel8.removeAll();
+        this.jPanel8.add(this.headerCampeonato, BorderLayout.NORTH);
+        this.jPanel8.add(this.panelMelhoresMarcadores, BorderLayout.EAST);
+        this.jPanel8.add(new JCampeonatoCalendario(this,user),BorderLayout.CENTER);
+        this.jPanel8.updateUI();
+        this.jPanel8.validate();
+    }
+    
+    /* */
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -288,18 +330,18 @@ public final class Home2 extends JFrame {
         botoesConvidadoEscola = new javax.swing.JPanel();
         consultaEscola = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
-        jPanel7 = new javax.swing.JPanel();
+        headerCampeonato = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox();
+        jComboEpocaCampeonato = new javax.swing.JComboBox();
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jPanel10 = new javax.swing.JPanel();
+        buttonClassificacao = new javax.swing.JButton();
+        jButtonJornada = new javax.swing.JButton();
+        jButtonEstatistica = new javax.swing.JButton();
+        jButtonCalendario = new javax.swing.JButton();
+        panelMelhoresMarcadores = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jPanel11 = new javax.swing.JPanel();
+        panelAlteracaoesCamp = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jComboBox2 = new javax.swing.JComboBox();
@@ -650,80 +692,100 @@ public final class Home2 extends JFrame {
         jPanel8.setBackground(new java.awt.Color(248, 247, 247));
         jPanel8.setLayout(new java.awt.BorderLayout());
 
-        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
+        headerCampeonato.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel5.setText("Campeonato");
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboEpocaCampeonato.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Classificação");
+        buttonClassificacao.setBackground(new java.awt.Color(255, 255, 255));
+        buttonClassificacao.setText("Classificação");
+        buttonClassificacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonClassificacaoActionPerformed(evt);
+            }
+        });
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Jornadas");
+        jButtonJornada.setBackground(new java.awt.Color(255, 255, 255));
+        jButtonJornada.setText("Jornadas");
+        jButtonJornada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonJornadaActionPerformed(evt);
+            }
+        });
 
-        jButton4.setBackground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("Estatística");
+        jButtonEstatistica.setBackground(new java.awt.Color(255, 255, 255));
+        jButtonEstatistica.setText("Estatística");
+        jButtonEstatistica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEstatisticaActionPerformed(evt);
+            }
+        });
 
-        jButton5.setBackground(new java.awt.Color(255, 255, 255));
-        jButton5.setText("Calendário");
+        jButtonCalendario.setBackground(new java.awt.Color(255, 255, 255));
+        jButtonCalendario.setText("Calendário");
+        jButtonCalendario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCalendarioActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(164, 164, 164)
-                .addComponent(jButton1)
+                .addGap(134, 134, 134)
+                .addComponent(buttonClassificacao)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonJornada, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonEstatistica, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jButtonCalendario, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(428, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5))
+                    .addComponent(buttonClassificacao)
+                    .addComponent(jButtonJornada)
+                    .addComponent(jButtonEstatistica)
+                    .addComponent(jButtonCalendario))
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
+        javax.swing.GroupLayout headerCampeonatoLayout = new javax.swing.GroupLayout(headerCampeonato);
+        headerCampeonato.setLayout(headerCampeonatoLayout);
+        headerCampeonatoLayout.setHorizontalGroup(
+            headerCampeonatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(headerCampeonatoLayout.createSequentialGroup()
                 .addGap(285, 285, 285)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 291, Short.MAX_VALUE)
-                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jComboEpocaCampeonato, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
+        headerCampeonatoLayout.setVerticalGroup(
+            headerCampeonatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(headerCampeonatoLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(headerCampeonatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboEpocaCampeonato, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel8.add(jPanel7, java.awt.BorderLayout.PAGE_START);
+        jPanel8.add(headerCampeonato, java.awt.BorderLayout.PAGE_START);
 
-        jPanel10.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder("Melhores Jogadores"));
+        panelMelhoresMarcadores.setBackground(new java.awt.Color(255, 255, 255));
+        panelMelhoresMarcadores.setBorder(javax.swing.BorderFactory.createTitledBorder("Melhores Jogadores"));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -750,39 +812,39 @@ public final class Home2 extends JFrame {
             jTable1.getColumnModel().getColumn(0).setMaxWidth(26);
         }
 
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelMelhoresMarcadoresLayout = new javax.swing.GroupLayout(panelMelhoresMarcadores);
+        panelMelhoresMarcadores.setLayout(panelMelhoresMarcadoresLayout);
+        panelMelhoresMarcadoresLayout.setHorizontalGroup(
+            panelMelhoresMarcadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelMelhoresMarcadoresLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)
+        panelMelhoresMarcadoresLayout.setVerticalGroup(
+            panelMelhoresMarcadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
         );
 
-        jPanel8.add(jPanel10, java.awt.BorderLayout.LINE_END);
+        jPanel8.add(panelMelhoresMarcadores, java.awt.BorderLayout.LINE_END);
 
-        jPanel11.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel11.setMaximumSize(new java.awt.Dimension(703, 338));
-        jPanel11.setMinimumSize(new java.awt.Dimension(703, 338));
-        jPanel11.setPreferredSize(new java.awt.Dimension(703, 338));
+        panelAlteracaoesCamp.setBackground(new java.awt.Color(255, 255, 255));
+        panelAlteracaoesCamp.setMaximumSize(new java.awt.Dimension(703, 338));
+        panelAlteracaoesCamp.setMinimumSize(new java.awt.Dimension(703, 338));
+        panelAlteracaoesCamp.setPreferredSize(new java.awt.Dimension(703, 338));
 
-        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
-        jPanel11.setLayout(jPanel11Layout);
-        jPanel11Layout.setHorizontalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout panelAlteracaoesCampLayout = new javax.swing.GroupLayout(panelAlteracaoesCamp);
+        panelAlteracaoesCamp.setLayout(panelAlteracaoesCampLayout);
+        panelAlteracaoesCampLayout.setHorizontalGroup(
+            panelAlteracaoesCampLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 724, Short.MAX_VALUE)
         );
-        jPanel11Layout.setVerticalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 359, Short.MAX_VALUE)
+        panelAlteracaoesCampLayout.setVerticalGroup(
+            panelAlteracaoesCampLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 363, Short.MAX_VALUE)
         );
 
-        jPanel8.add(jPanel11, java.awt.BorderLayout.CENTER);
+        jPanel8.add(panelAlteracaoesCamp, java.awt.BorderLayout.CENTER);
 
         JTabEscolas.addTab("Campeonatos", jPanel8);
 
@@ -878,6 +940,26 @@ public final class Home2 extends JFrame {
         } 
     }//GEN-LAST:event_consultaEscolaActionPerformed
 
+    private void buttonClassificacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonClassificacaoActionPerformed
+        // TODO add your handling code here:
+        reloadPagInicialCampeonato();
+    }//GEN-LAST:event_buttonClassificacaoActionPerformed
+
+    private void jButtonJornadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonJornadaActionPerformed
+        // TODO add your handling code here:
+        reloadButtonJornada();
+    }//GEN-LAST:event_jButtonJornadaActionPerformed
+
+    private void jButtonEstatisticaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEstatisticaActionPerformed
+        // TODO add your handling code here:
+        reloadButtonEstatistica();
+    }//GEN-LAST:event_jButtonEstatisticaActionPerformed
+
+    private void jButtonCalendarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCalendarioActionPerformed
+        // TODO add your handling code here:
+        reloadButtonCalendario();
+    }//GEN-LAST:event_jButtonCalendarioActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -923,41 +1005,38 @@ public final class Home2 extends JFrame {
     private org.jdesktop.swingx.JXTable JTabResultados;
     private javax.swing.JPanel TitleHeader;
     private javax.swing.JPanel botoesConvidadoEscola;
+    private javax.swing.JButton buttonClassificacao;
     private javax.swing.JButton consultaEscola;
     private javax.swing.JButton entrar;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JPanel headerCampeonato;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButtonCalendario;
+    private javax.swing.JButton jButtonEstatistica;
+    private javax.swing.JButton jButtonJornada;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JComboBox jComboBox3;
+    private javax.swing.JComboBox jComboEpocaCampeonato;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane7;
     private org.jdesktop.swingx.JXTable jTabProximos;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable3;
     private org.jdesktop.swingx.JXSearchField jXSearchField1;
     private javax.swing.JList listaEscolas;
+    private javax.swing.JPanel panelAlteracaoesCamp;
     private javax.swing.JPanel panelListaEscolas;
+    private javax.swing.JPanel panelMelhoresMarcadores;
     private javax.swing.JButton registar;
     private javax.swing.JPanel searchPanel;
     // End of variables declaration//GEN-END:variables

@@ -6,16 +6,19 @@
 
 package GUI.Campeonato;
 
+import Business_Layer.Utilizador;
+import GUI.Home2;
+
 /**
  *
  * @author Utilizador
  */
 public class JCampeonatoCalendario extends javax.swing.JPanel {
 
-    /**
-     * Creates new form JCampeonatoJornadas
-     */
-    public JCampeonatoCalendario() {
+    private Home2 root;
+    
+    public JCampeonatoCalendario(Home2 aThis, Utilizador user) {
+        this.root = aThis;
         initComponents();
     }
 
@@ -155,7 +158,7 @@ public class JCampeonatoCalendario extends javax.swing.JPanel {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(28, Short.MAX_VALUE)
+                .addContainerGap(43, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)

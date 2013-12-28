@@ -6,16 +6,19 @@
 
 package GUI.Campeonato;
 
+import Business_Layer.Utilizador;
+import GUI.Home2;
+
 /**
  *
  * @author Utilizador
  */
 public class JCampeonatoEstatistica extends javax.swing.JPanel {
 
-    /**
-     * Creates new form JCampeonatoJornadas
-     */
-    public JCampeonatoEstatistica() {
+    private Home2 root;
+    
+    public JCampeonatoEstatistica(Home2 aThis, Utilizador user) {
+        this.root = aThis;
         initComponents();
     }
 
@@ -95,7 +98,7 @@ public class JCampeonatoEstatistica extends javax.swing.JPanel {
                             .addComponent(jLabel9)
                             .addComponent(jLabel10)
                             .addComponent(jLabel11))))
-                .addContainerGap(585, Short.MAX_VALUE))
+                .addContainerGap(665, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,7 +125,7 @@ public class JCampeonatoEstatistica extends javax.swing.JPanel {
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel11)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         add(jPanel1, java.awt.BorderLayout.CENTER);

@@ -6,16 +6,19 @@
 
 package GUI.Campeonato;
 
+import Business_Layer.Utilizador;
+import GUI.Home2;
+
 /**
  *
  * @author Utilizador
  */
 public class JCampeonatoClassificacao extends javax.swing.JPanel {
 
-    /**
-     * Creates new form JCampeonatoClassificacao
-     */
-    public JCampeonatoClassificacao() {
+    private Home2 root;
+
+    public JCampeonatoClassificacao(Home2 aThis, Utilizador user) {
+        this.root = aThis;
         initComponents();
     }
 
