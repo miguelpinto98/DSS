@@ -184,6 +184,7 @@ public class Campeonato implements Competicao{
         str.append("\n"+this.getCalendario());
         str.append("\nNrEquipas: "+this.getNrEscaloes());
         str.append("\nParticipantes: "+this.getListaEscaloes());
+        str.append("\nClassificacao:"+this.getClassificacao().getClassificacao());
 		
 		return str.toString(); 
 	}

@@ -1,10 +1,10 @@
 package Business_Layer;
 
-public class DadosEstatisticos {
+public class DadosEstatisticos implements Comparable<DadosEstatisticos> {
     
     private static final int maxForma = 5;
 
-
+    private int idEscalao;
     private int vitorias;
     private int derrotas;
     private int empates;
@@ -13,6 +13,7 @@ public class DadosEstatisticos {
     private char[] forma;
 
     public DadosEstatisticos(){
+        this.idEscalao = 0;
     	this.vitorias = 0;
     	this.derrotas = 0;
     	this.empates = 0;
@@ -28,6 +29,7 @@ public class DadosEstatisticos {
     } 
 
     public DadosEstatisticos(DadosEstatisticos d){
+        this.idEscalao = d.getIdEscalao();
     	this.vitorias = d.getVitorias();
     	this.derrotas = d.getDerrotas();
     	this.empates = d.getEmpates();
@@ -36,6 +38,9 @@ public class DadosEstatisticos {
         this.forma = d.getForma();
     }
 
+    public int getIdEscalao() {
+        return this.idEscalao;
+    }
     public int getVitorias(){
     	return this.vitorias;
     }
@@ -63,6 +68,10 @@ public class DadosEstatisticos {
             aux[i] = this.forma[i];
         }
         return aux;
+    }
+    
+    public void setIdEscalao(int id) {
+        this.idEscalao = id;
     }
     
     public void setForma(char[] f) {
@@ -96,7 +105,7 @@ public class DadosEstatisticos {
 			return false;
 		else {
 			DadosEstatisticos a = (DadosEstatisticos) o;
-			return (this.vitorias == a.getVitorias() && 
+			return (this.idEscalao == a.getIdEscalao() && this.vitorias == a.getVitorias() && 
 				this.derrotas == a.getDerrotas() &&
 				this.empates == a.getEmpates() &&
 				this.gmarcados == a.getGmarcados() &&
@@ -112,6 +121,7 @@ public class DadosEstatisticos {
     	StringBuilder s = new StringBuilder();
 
     	s.append("Dados Estatisticos \n");
+        s.append(this.getIdEscalao() + "\n");
     	s.append(this.getVitorias() + "\n");
     	s.append(this.getDerrotas() + "\n");
     	s.append(this.getEmpates() + "\n");
@@ -130,7 +140,7 @@ public class DadosEstatisticos {
         
     }
 
-	public void addDadosEstatisticos(int numGolosMarcados, int numGolosSofridos) {
+	public DadosEstatisticos addDadosEstatisticos(int numGolosMarcados, int numGolosSofridos) {
 		this.gmarcados = this.gmarcados + numGolosMarcados;
 		this.gsofridos = this.gsofridos + numGolosSofridos;
 		
@@ -148,6 +158,7 @@ public class DadosEstatisticos {
                 this.atualizaForma('E');
             }
 		}
+        return (this);
 	}
     
     public int pontos() {
@@ -158,5 +169,15 @@ public class DadosEstatisticos {
     public int diferencaGolos() {
         int dif = this.gmarcados - this.gsofridos;
         return dif;
+    }
+    
+    public int compareTo(DadosEstatisticos d) {
+        int pontosThis = this.pontos();
+        int pontosD = d.pontos();
+    
+        if(pontosD > pontosThis) return 1;
+        if(pontosD < pontosThis) return -1;
+        
+        else return 0;
     }
 }

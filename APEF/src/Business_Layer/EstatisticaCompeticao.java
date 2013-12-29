@@ -2,28 +2,29 @@ package Business_Layer;
 
 import java.util.HashMap;
 import java.util.Objects;
+import java.util.TreeSet;
 
 public class EstatisticaCompeticao {
-    private HashMap<Integer,DadosEstatisticos> estatistica; //<id equipas, dados estatisticos>
+    private TreeSet<DadosEstatisticos> estatistica; //<id equipas, dados estatisticos>
 
     public EstatisticaCompeticao() {
-    	this.estatistica = new HashMap<Integer,DadosEstatisticos>();
+    	this.estatistica = new TreeSet<DadosEstatisticos>();
     }
 
     public EstatisticaCompeticao(EstatisticaCompeticao ec){
     	this.estatistica = ec.getEstatistica();
     }
 
-    public HashMap<Integer,DadosEstatisticos> getEstatistica(){
-    	HashMap<Integer,DadosEstatisticos> aux = new HashMap<Integer,DadosEstatisticos>();
+    public TreeSet<DadosEstatisticos> getEstatistica(){
+    	TreeSet<DadosEstatisticos> aux = new TreeSet<DadosEstatisticos>();
     	
-    	for (Integer i : this.estatistica.keySet())
-    	{ aux.put(i,this.estatistica.get(i).clone()); }
+    	for (DadosEstatisticos i : this.estatistica)
+    	{ aux.add(i.clone()); }
 
     	return aux;
     }
 
-    public void setEstatistica(HashMap<Integer,DadosEstatisticos> h){
+    public void setEstatistica(TreeSet<DadosEstatisticos> h){
     	this.estatistica = h;
     }
 
@@ -53,23 +54,32 @@ public class EstatisticaCompeticao {
     public String toString(){
     StringBuilder s = new StringBuilder();
         s.append("Estatistica da Competicao:" + this.getEstatistica());
+        for(DadosEstatisticos d : this.estatistica)
+			s.append(d.toString());
         return s.toString();
     }
-
-    public void inserirDadosEstatisticos(int idEquipa, DadosEstatisticos d) {
-        if( !(this.estatistica.containsKey(idEquipa)))
-                this.estatistica.put(idEquipa, d);
-    }
-    
+  
     public void atualizaEstatisticaCompeticao(Escalao casa, int golosCasa, Escalao fora, int golosFora) {
-        DadosEstatisticos ecasa = this.estatistica.get(casa.getID());
-        DadosEstatisticos efora = this.estatistica.get(fora.getID());
+        DadosEstatisticos novoCasa;  
+        DadosEstatisticos novoFora;
         
-        ecasa.addDadosEstatisticos(golosCasa,golosFora);
-        efora.addDadosEstatisticos(golosFora, golosCasa);
+        for(DadosEstatisticos dadosCasa : this.estatistica) {
+            if(casa.getID() == dadosCasa.getIdEscalao()) {
+                dadosCasa.addDadosEstatisticos(golosCasa,golosFora);
+                novoCasa = dadosCasa;
+                this.estatistica.remove(dadosCasa);
+                this.estatistica.add(novoCasa);
+            }
+        }
         
-        this.estatistica.put(casa.getID(),ecasa);
-        this.estatistica.put(fora.getID(),efora);
+        for(DadosEstatisticos dadosFora : this.estatistica) {
+            if(fora.getID() == dadosFora.getIdEscalao()) {
+                dadosFora.addDadosEstatisticos(golosCasa,golosFora);
+                novoFora = dadosFora;
+                this.estatistica.remove(dadosFora);
+                this.estatistica.add(novoFora);
+            }
+        }
     }
 }
 

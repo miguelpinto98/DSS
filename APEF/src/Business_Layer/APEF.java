@@ -346,7 +346,9 @@ public class APEF {
             c.setNrEscaloes(nrEscaloes);
             
             for(Escalao e : c.getListaEscaloes()) {
-                c.getClassificacao().getClassificacao().getEstatistica().put(e.getID(), new DadosEstatisticos());
+                DadosEstatisticos d = new DadosEstatisticos();
+                d.setIdEscalao(e.getID());
+                c.getClassificacao().getClassificacao().getEstatistica().add(d);
             }
     	}
         return res;
@@ -380,12 +382,16 @@ public class APEF {
         Grupo g2 = new Grupo("Grupo B",equipasGrupo2);
         
         for (Escalao e : equipasGrupo1){
-        	g1.getClassificacao().getClassificacao().getEstatistica().put(e.getID(), new DadosEstatisticos());
+            DadosEstatisticos d = new DadosEstatisticos();
+            d.setIdEscalao(e.getID());
+        	g1.getClassificacao().getClassificacao().getEstatistica().add(d);
                 arrayEquipasGrupo1.add(e.getID());
         }
 
         for (Escalao e : equipasGrupo2){
-        	g2.getClassificacao().getClassificacao().getEstatistica().put(e.getID(), new DadosEstatisticos());
+            DadosEstatisticos d = new DadosEstatisticos();
+            d.setIdEscalao(e.getID());
+        	g2.getClassificacao().getClassificacao().getEstatistica().add(d);
                 arrayEquipasGrupo2.add(e.getID());
         }
 
