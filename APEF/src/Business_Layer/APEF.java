@@ -523,4 +523,8 @@ public class APEF {
         }
         return res;
     }
+
+    public boolean criarEquipa(String esc, Equipa e) {
+        return this.escolas.get(esc).inserirEquipa(e);
+    }
 }

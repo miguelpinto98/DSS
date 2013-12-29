@@ -194,7 +194,7 @@ public class TESTE_apef {
     System.out.println(a.emprestarJogador(j41, "Porto", 0));
     System.out.println(campeonatoInfantis);
     //System.out.println(a.getEscolas().get(escola.getNome()));
-    GregorianCalendar teste = new GregorianCalendar();
+    /*GregorianCalendar teste = new GregorianCalendar();
     int ano = teste.get(teste.YEAR);
         System.out.println(ano); 
       //System.out.println(a.countArbitros());  
