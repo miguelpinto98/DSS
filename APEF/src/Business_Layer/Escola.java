@@ -120,10 +120,13 @@ public class Escola {
         return res;
     }*/
 
-    public void inserirEquipa(Equipa a) {
+    public boolean inserirEquipa(Equipa a) {
+        boolean res = false;
         if(!this.equipas.containsKey(a.getNome())) {
             this.equipas.put(a.getNome(),a);
+            res = true;
         }
+        return res;
     }
     
     public void removerEquipa(Equipa a) {

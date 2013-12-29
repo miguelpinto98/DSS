@@ -478,4 +478,9 @@ public class APEF {
     public Set<String> listaEscolas() {        
         return this.escolas.keySet();
     }
+    
+    /* */
+    public boolean criarEquipa(String esc, Equipa e) {
+        return this.escolas.get(esc).inserirEquipa(e);
+    }
 }

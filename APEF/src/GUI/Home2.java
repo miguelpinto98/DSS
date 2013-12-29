@@ -21,7 +21,6 @@ import GUI.Campeonato.JCampeonatoClassificacao;
 import GUI.Campeonato.JCampeonatoEstatistica;
 import GUI.Campeonato.JCampeonatoJornadas;
 import GUI.Escola.EscolasMenuAdmin;
-import GUI.Escola.jConsultasEscola;
 import GUI.Header.JEntrar;
 import GUI.Header.JMenuAdmin;
 import GUI.Header.JMenuArbitro;
@@ -959,7 +958,7 @@ public final class Home2 extends JFrame {
         String str = devolveSeleccionadosEscolas();
         
         if(str != null) {
-            JFrame frame = new jConsultasEscola(this,str);
+            JFrame frame = new ConsultasEscola(this,str);
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);
         } 

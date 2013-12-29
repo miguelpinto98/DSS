@@ -6,6 +6,7 @@
 
 package GUI.Escola;
 
+import GUI.ConsultasEscola;
 import Business_Layer.Utilizador;
 import GUI.Header.JEntrar;
 import GUI.Home2;
@@ -103,7 +104,7 @@ public class EscolasMenuAdmin extends javax.swing.JPanel {
         String str = this.root.devolveSeleccionadosEscolas();
         
         if(str != null) {
-            JFrame frame = new jConsultasEscola(this.root,str);
+            JFrame frame = new ConsultasEscola(this.root,str);
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);
         } 
