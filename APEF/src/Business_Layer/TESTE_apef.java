@@ -168,12 +168,12 @@ public class TESTE_apef {
  
 
     //Users do sistema
-    a.registarUser("maleite","pw1234","maleite@gmail.com",0,a);
-    a.registarUser("174Miguel","pw1234","miguel@gmail.com",1,a);
-    a.registarUser("63linda","pw1234","63@gmail.com",2,a);
-    a.registarUser("diana","pw1234","demossbb@gmail.com",2,a);
-    a.registarUser("serafim","pw1234","smcp@gmail.com",2,a);
-    a.registarUser("atum","pw1234","atum@gmail.com",0,a);
+    a.registarUser("maleite","pw1234","maleite@gmail.com",0);
+    a.registarUser("174Miguel","pw1234","miguel@gmail.com",1);
+    a.registarUser("63linda","pw1234","63@gmail.com",2);
+    a.registarUser("diana","pw1234","demossbb@gmail.com",2);
+    a.registarUser("serafim","pw1234","smcp@gmail.com",2);
+    a.registarUser("atum","pw1234","atum@gmail.com",0);
 
     
     //Testar "metodos"

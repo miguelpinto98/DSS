@@ -8,12 +8,12 @@ package GUI.Perfil;
  *
  * @author andre_000
  */
-public class JPerfil extends javax.swing.JPanel {
+public class JPerfilEdit extends javax.swing.JPanel {
 
     /**
      * Creates new form JPerfil
      */
-    public JPerfil() {
+    public JPerfilEdit() {
         initComponents();
     }
 
@@ -275,7 +275,7 @@ public class JPerfil extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(130, 130, 130)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         add(jPanel1, java.awt.BorderLayout.CENTER);

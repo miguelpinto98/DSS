@@ -17,7 +17,9 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="181" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="bemvindo" min="-2" pref="138" max="-2" attributes="0"/>
+              <EmptySpace pref="37" max="32767" attributes="0"/>
               <Component id="jButton4" min="-2" pref="150" max="-2" attributes="0"/>
               <EmptySpace pref="75" max="32767" attributes="0"/>
               <Component id="jButton3" min="-2" pref="150" max="-2" attributes="0"/>
@@ -38,6 +40,7 @@
                   <Component id="jButton2" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                   <Component id="jButton3" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                   <Component id="jButton4" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                  <Component id="bemvindo" alignment="3" pref="36" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -66,6 +69,11 @@
     <Component class="javax.swing.JButton" name="jButton4">
       <Properties>
         <Property name="text" type="java.lang.String" value="Adicionar Resultado"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="bemvindo">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Bem-Vindo User"/>
       </Properties>
     </Component>
   </SubComponents>
