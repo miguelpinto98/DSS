@@ -27,6 +27,21 @@ public class DadosEstatisticos implements Comparable<DadosEstatisticos> {
         this.forma[4] = '-';
 
     } 
+    
+    public DadosEstatisticos(int id){
+        this.idEscalao = id;
+    	this.vitorias = 0;
+    	this.derrotas = 0;
+    	this.empates = 0;
+    	this.gmarcados = 0;
+    	this.gsofridos = 0;
+        this.forma = new char[maxForma];
+        this.forma[0] = '-';
+        this.forma[1] = '-';
+        this.forma[2] = '-';
+        this.forma[3] = '-';
+        this.forma[4] = '-';
+    }
 
     public DadosEstatisticos(DadosEstatisticos d){
         this.idEscalao = d.getIdEscalao();
@@ -121,7 +136,7 @@ public class DadosEstatisticos implements Comparable<DadosEstatisticos> {
     	StringBuilder s = new StringBuilder();
 
     	s.append("Dados Estatisticos \n");
-        s.append(this.getIdEscalao() + "\n");
+        s.append("ID Escalao: " + this.getIdEscalao() + "\n");
     	s.append(this.getVitorias() + "\n");
     	s.append(this.getDerrotas() + "\n");
     	s.append(this.getEmpates() + "\n");
@@ -171,13 +186,65 @@ public class DadosEstatisticos implements Comparable<DadosEstatisticos> {
         return dif;
     }
     
-    public int compareTo(DadosEstatisticos d) {
-        int pontosThis = this.pontos();
-        int pontosD = d.pontos();
+    public int criterio(DadosEstatisticos d) {
+        if( this.pontos() != d.pontos() ) 
+            return 0;
+        else
+            if( (this.pontos() == d.pontos()) && (this.diferencaGolos() != d.diferencaGolos()) ) 
+                return 1;
+            else
+                if( (this.pontos() == d.pontos()) && (this.diferencaGolos() == d.diferencaGolos()) && (this.gmarcados != d.getGmarcados()) )
+                    return 2;
+                else
+                    if( (this.pontos() == d.pontos()) && (this.diferencaGolos() == d.diferencaGolos()) && (this.gmarcados == d.getGmarcados()) && (this.gsofridos != d.getGsofridos()) )
+                        return 3;
+                    else return -1;
+    }
     
-        if(pontosD > pontosThis) return 1;
-        if(pontosD < pontosThis) return -1;
-        
+      public int ordenaNormal(DadosEstatisticos d) {
+        if(d.getIdEscalao() < this.idEscalao) return 1;
+        if(d.getIdEscalao()> this.idEscalao) return -1;
         else return 0;
+    }
+    
+    public int ordenaPontos(DadosEstatisticos d) {
+        if(d.pontos() < this.pontos()) return 1;
+        if(d.pontos() > this.pontos()) return -1;
+        else return ordenaNormal(d);
+    }
+    
+    public int ordenaDif(DadosEstatisticos d) {
+        if(d.diferencaGolos()< this.diferencaGolos()) return 1;
+        if(d.diferencaGolos()> this.diferencaGolos()) return -1;
+        else return ordenaNormal(d);
+    }
+    
+    public int ordenaMelhorAtaque(DadosEstatisticos d) {
+        if(d.getGmarcados() < this.gmarcados) return 1;
+        if(d.getGmarcados() > this.gmarcados) return -1;
+        else return ordenaNormal(d);
+    }
+    
+    public int ordenaMelhorDefesa(DadosEstatisticos d) {
+        if(d.getGsofridos() < this.gsofridos) return 1;
+        if(d.getGsofridos() > this.gsofridos) return -1;
+        else return ordenaNormal(d);
+    }
+    
+    public int compareTo(DadosEstatisticos d) {
+        int res=0;
+        switch(criterio(d)) {
+            case 0: res = ordenaPontos(d);
+                break;
+            case 1: res = ordenaDif(d);
+                break;
+            case 2: res = ordenaMelhorAtaque(d);
+                break;
+            case 3: res = ordenaMelhorDefesa(d);
+                break;
+            case -1: res = ordenaNormal(d);
+                break;
+        }
+        return res;
     }
 }

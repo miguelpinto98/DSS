@@ -189,10 +189,11 @@ public class TESTE_apef {
     gg.set(2013, 1, 3);
     campeonatoInfantis.setDataLimiteInscricoes(gg);
     */
-    //a.iniciarCampeonato(campeonatoInfantis);
-    
-    //System.out.println(a.getEscolas().get(escola.getNome()));
+    a.iniciarCampeonato(campeonatoInfantis);
+
     System.out.println(campeonatoInfantis);
+    //System.out.println(a.getEscolas().get(escola.getNome()));
+     
       //System.out.println(a.countArbitros());  
     //System.out.println(a.getUsers().get("diana"));  
         

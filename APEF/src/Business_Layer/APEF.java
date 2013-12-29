@@ -356,11 +356,10 @@ public class APEF {
                 
         	c.geraCalendario(arrayEquipas, arrayCampos, arrayArbitros);
             c.setNrEscaloes(nrEscaloes);
-            
+           
             for(Escalao e : c.getListaEscaloes()) {
-                DadosEstatisticos d = new DadosEstatisticos();
-                d.setIdEscalao(e.getID());
-                c.getClassificacao().getClassificacao().getEstatistica().add(d);
+                DadosEstatisticos x = new DadosEstatisticos(e.getID());
+                c.getClassificacao().inserirDados(x);
             }
     	}
         return res;
@@ -396,14 +395,14 @@ public class APEF {
         for (Escalao e : equipasGrupo1){
             DadosEstatisticos d = new DadosEstatisticos();
             d.setIdEscalao(e.getID());
-        	g1.getClassificacao().getClassificacao().getEstatistica().add(d);
+        	g1.getClassificacao().getEstatistica().add(d);
                 arrayEquipasGrupo1.add(e.getID());
         }
 
         for (Escalao e : equipasGrupo2){
             DadosEstatisticos d = new DadosEstatisticos();
             d.setIdEscalao(e.getID());
-        	g2.getClassificacao().getClassificacao().getEstatistica().add(d);
+        	g2.getClassificacao().getEstatistica().add(d);
                 arrayEquipasGrupo2.add(e.getID());
         }
 

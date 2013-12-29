@@ -47,7 +47,7 @@ public class Escalao {
         this.treinador = new Treinador();
     	this.jogadores = new HashMap<>();
         this.agenda = new Agenda();
-        this.dados = new DadosEstatisticos(); 
+        this.dados = new DadosEstatisticos(APEF.IDENTIFICADOR); 
         APEF.IDENTIFICADOR++;
     }
 
