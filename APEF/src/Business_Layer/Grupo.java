@@ -6,17 +6,17 @@ import java.util.HashSet;
 public class Grupo extends Fase {    
     
     //Variaveis de Instancia
-    private Classificacao classificacao;
+    private EstatisticaCompeticao classificacao;
 
     //Construtores
     public Grupo() {
     	super();
-    	this.classificacao = new Classificacao();
+    	this.classificacao = new EstatisticaCompeticao();
     }
 
     public Grupo(String n, HashSet<Escalao> le){
         super(n,le);
-        this.classificacao = new Classificacao();
+        this.classificacao = new EstatisticaCompeticao();
     }
 
     public Grupo(Grupo g) {
@@ -26,11 +26,11 @@ public class Grupo extends Fase {
 
     //Getters Setters
 
-    public Classificacao getClassificacao() {
+    public EstatisticaCompeticao getClassificacao() {
         return this.classificacao;
     }
 
-    public void setClassificacao(Classificacao classificacao) {
+    public void setClassificacao(EstatisticaCompeticao classificacao) {
         this.classificacao = classificacao;
     }
 

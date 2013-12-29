@@ -19,7 +19,7 @@ public class EstatisticaCompeticao {
     	TreeSet<DadosEstatisticos> aux = new TreeSet<DadosEstatisticos>();
     	
     	for (DadosEstatisticos i : this.estatistica)
-    	{ aux.add(i.clone()); }
+    	{ aux.add(i); }
 
     	return aux;
     }
@@ -52,13 +52,23 @@ public class EstatisticaCompeticao {
     }
 
     public String toString(){
-    StringBuilder s = new StringBuilder();
-        s.append("Estatistica da Competicao:" + this.getEstatistica());
-        for(DadosEstatisticos d : this.estatistica)
-			s.append(d.toString());
+        StringBuilder s = new StringBuilder();
+        s.append("Estatistica da Competicao:");
+        for(DadosEstatisticos d : this.estatistica) {
+			s.append(d);
+        }
         return s.toString();
     }
-  
+    
+    public void inserirDados(DadosEstatisticos d) {
+        if (!this.estatistica.contains(d))
+            this.estatistica.add(d);
+    }
+    
+    public void actualizaClassificacao(Jogo j) {
+        this.atualizaEstatisticaCompeticao(j.getEscalaoCasa(),j.getNumGolosJogoCasa(),j.getEscalaoFora(),j.getNumGolosJogoFora());
+    }
+    
     public void atualizaEstatisticaCompeticao(Escalao casa, int golosCasa, Escalao fora, int golosFora) {
         DadosEstatisticos novoCasa;  
         DadosEstatisticos novoFora;

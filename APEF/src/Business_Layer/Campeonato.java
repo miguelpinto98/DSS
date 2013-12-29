@@ -18,7 +18,7 @@ public class Campeonato implements Competicao{
     private Calendario calendario;
     private HashSet<Escalao> listaEscaloes;
     private HashMap<Integer,Integer> goleadores; //<id do jogador,nr golos>     
-    private Classificacao classificacao;
+    private EstatisticaCompeticao classificacao;
     private GregorianCalendar dataInicio;
     private GregorianCalendar dataLimiteInscricoes;
 
@@ -57,7 +57,7 @@ public class Campeonato implements Competicao{
         this.calendario = new Calendario();
         this.listaEscaloes = new HashSet<>();
         this.goleadores = new HashMap<>();
-        this.classificacao = new Classificacao();
+        this.classificacao = new EstatisticaCompeticao();
         this.dataInicio = limiteInscricao;
         this.dataLimiteInscricoes = limiteInscricao;
         APEF.IDENTIFICADOR++;
@@ -116,11 +116,11 @@ public class Campeonato implements Competicao{
         this.listaEscaloes = le;
     }
     
-    public Classificacao getClassificacao() {
+    public EstatisticaCompeticao getClassificacao() {
         return this.classificacao;
     }
 
-    public void setClassificacao(Classificacao classificacao) {
+    public void setClassificacao(EstatisticaCompeticao classificacao) {
         this.classificacao = classificacao;
     }
 
@@ -184,7 +184,7 @@ public class Campeonato implements Competicao{
         str.append("\n"+this.getCalendario());
         str.append("\nNrEquipas: "+this.getNrEscaloes());
         str.append("\nParticipantes: "+this.getListaEscaloes());
-        str.append("\nClassificacao:"+this.getClassificacao().getClassificacao());
+        str.append("\nClassificacao:"+this.classificacao);
 		
 		return str.toString(); 
 	}
