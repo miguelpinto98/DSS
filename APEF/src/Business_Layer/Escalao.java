@@ -186,18 +186,46 @@ public class Escalao {
     /**
     * Metodos Jogadores
     */
+    public int idadeEscalao() {
+        int res=0;
+        switch (this.tipoEscalao) {
+            case 0 : res = 12;
+                break;
+            case 1 : res = 10;
+                break;
+            case 2 : res = 8;
+                break;
+            case 3 : res = 6;
+        }
+        return res;
+    }
     
-    public void inserirJogador(Jogador j) {
-    	if( !(this.jogadores.containsKey(j.getID())) )
+    public boolean inserirJogador(Jogador j) {
+        boolean flag = false;
+        GregorianCalendar atual = new GregorianCalendar();
+        int anoAtual = atual.get(atual.YEAR);
+        int anoNasc = j.getDataNasc().get(j.getDataNasc().YEAR);
+        
+    	if( !(this.jogadores.containsKey(j.getID())) && (anoAtual-anoNasc) <= idadeEscalao()) {
     			this.jogadores.put(j.getID(), j);
+                flag = true;
+        }
+        
+        return flag;
     }
     
     public void inserirTreinador(Treinador t) {
         this.treinador = t;
     }
     
-    public void removerJogador(Jogador j) { /* DEVE Faltar verificacoes */
-        this.jogadores.remove(j);
+    public boolean removerJogador(Jogador j) {
+        boolean res = false;
+        if(this.jogadores.size() > 12) {
+            this.jogadores.remove(j);
+            res = true;
+        }
+        
+        return res;
     }
 
     public void removerTreinador() {

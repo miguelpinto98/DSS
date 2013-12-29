@@ -477,4 +477,50 @@ public class APEF {
     public Set<String> listaEscolas() {        
         return this.escolas.keySet();
     }
+    
+    public boolean emprestarJogador(Jogador j, String nomeEquipa, int escalao) {
+        boolean flag = false, res = false;
+        Equipa equipa = new Equipa();
+        Iterator<Escola> it = this.escolas.values().iterator(); 
+		while (it.hasNext() && !flag) {
+            Escola e = it.next();
+            Iterator<String> it2 = e.getEquipas().keySet().iterator(); 
+            while (it2.hasNext() && !flag) {
+                String eq = it2.next();
+                if(eq==nomeEquipa) {
+                    equipa = e.getEquipas().get(nomeEquipa);
+                    flag = true;
+                    res = equipa.getEscaloes()[escalao].inserirJogador(j);
+                }
+            }
+        }
+        if(res) {
+            j.setEmprestado(true);
+            j.setNomeEquipaEmprestimo(nomeEquipa);
+        }
+        return res;
+    }
+    
+    public boolean cancelarEmprestimo(Jogador j, int tipoEscalao) {
+        boolean flag = false, res = false;
+        Equipa equipa = new Equipa();
+        Iterator<Escola> it = this.escolas.values().iterator(); 
+		while (it.hasNext() && !flag) {
+            Escola e = it.next();
+            Iterator<String> it2 = e.getEquipas().keySet().iterator(); 
+            while (it2.hasNext() && !flag) {
+                String eq = it2.next();
+                if(eq==j.getNomeEquipaEmprestimo()) {
+                    equipa = e.getEquipas().get(j.getNomeEquipaEmprestimo());
+                    flag = true;
+                    res = equipa.getEscaloes()[tipoEscalao].removerJogador(j);
+                }
+            }
+        }
+        if(res) {
+            j.setEmprestado(false);
+            j.setNomeEquipaEmprestimo("");
+        }
+        return res;
+    }
 }

@@ -15,7 +15,8 @@ public class TESTE_apef {
     a.inserirEpoca(ep);
     Campeonato campeonatoInfantis = new Campeonato("Campeonato APEF - Infantis", new GregorianCalendar(),0,4);
     ep.inserirCampeonato(campeonatoInfantis);
-    
+    GregorianCalendar g2 = new GregorianCalendar();
+    g2.set(1992, 11, 20);
     //EQUIPA - 1
     Campo campo = new Campo("Complexo Poli-Desportivo");
     Escola escola = new Escola("Externato S.Miguel de Refojos", "Cabeceiras de Basto", campo);
@@ -136,7 +137,7 @@ public class TESTE_apef {
     Equipa equipa4 = new Equipa("SC Negreiros");
     a.getEscolas().get(escola4.getNome()).inserirEquipa(equipa4);
     Escalao escalao4 = new Escalao(0,equipa4.getNome(),escola4.getNome());
-    Jogador j41 = new Jogador("Mario", new GregorianCalendar(), 0,false);
+    Jogador j41 = new Jogador("Marioooooooooooooooooooooooooo", g2, 0,false);
     Jogador j42 = new Jogador("Leite", new GregorianCalendar(), 0,false);
     Jogador j43 = new Jogador("Miguel", new GregorianCalendar(), 0,false);
     Jogador j44 = new Jogador("Luis", new GregorianCalendar(), 0,false);
@@ -190,10 +191,12 @@ public class TESTE_apef {
     campeonatoInfantis.setDataLimiteInscricoes(gg);
     */
     a.iniciarCampeonato(campeonatoInfantis);
-
+    System.out.println(a.emprestarJogador(j41, "Porto", 0));
     System.out.println(campeonatoInfantis);
     //System.out.println(a.getEscolas().get(escola.getNome()));
-     
+    GregorianCalendar teste = new GregorianCalendar();
+    int ano = teste.get(teste.YEAR);
+        System.out.println(ano); 
       //System.out.println(a.countArbitros());  
     //System.out.println(a.getUsers().get("diana"));  
         

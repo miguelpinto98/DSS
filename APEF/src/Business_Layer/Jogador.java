@@ -10,6 +10,7 @@ public class Jogador extends Pessoa {
     private ArrayList<Integer> competicoes;
     private boolean emprestado;
     private String nomeEquipa;
+    private String nomeEquipaEmprestimo;
 
     //Construtores
     public Jogador() {
@@ -17,6 +18,7 @@ public class Jogador extends Pessoa {
     	this.nrGolos = 0;
         this.emprestado = false;
         this.nomeEquipa = "";
+        this.nomeEquipaEmprestimo = "";
     }
    
     public Jogador(String nome, GregorianCalendar g, int sexo, boolean emprestado) {
@@ -31,6 +33,7 @@ public class Jogador extends Pessoa {
     	this.nrGolos = t.getNrGolos();
         this.emprestado = t.getEmprestado();
         this.nomeEquipa = t.getNomeEquipa();
+        this.nomeEquipaEmprestimo = t.getNomeEquipaEmprestimo();
     }
 
     //Getters
@@ -45,6 +48,10 @@ public class Jogador extends Pessoa {
     public String getNomeEquipa() {
         return this.nomeEquipa;
     }
+    
+    public String getNomeEquipaEmprestimo() {
+        return this.getNomeEquipaEmprestimo();
+    }
     //Setters
     public void setNrGolos(int n) {
     	this.nrGolos = n;
@@ -52,6 +59,14 @@ public class Jogador extends Pessoa {
 
     public void setEmprestado(boolean e) {
         this.emprestado = e;
+    }
+    
+    public void setNomeEquipa(String s) {
+        this.nomeEquipaEmprestimo = s;
+    }
+    
+    public void setNomeEquipaEmprestimo(String s) {
+        this.nomeEquipaEmprestimo = s;
     }
 
     //Equals,Clone,toString
