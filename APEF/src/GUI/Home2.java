@@ -9,13 +9,17 @@ package GUI;
 import Business_Layer.APEF;
 import Business_Layer.Utilizador;
 import Business_Layer.Admin;
+import Business_Layer.Agenda;
 import Business_Layer.Arbitro;
 import Business_Layer.Campo;
+import Business_Layer.DadosEstatisticos;
 import Business_Layer.Equipa;
 import Business_Layer.Escalao;
 import Business_Layer.Escola;
+import Business_Layer.Jogador;
 import Business_Layer.Jogo;
 import Business_Layer.ResponsavelEscola;
+import Business_Layer.Treinador;
 import GUI.Campeonato.JCampeonatoCalendario;
 import GUI.Campeonato.JCampeonatoClassificacao;
 import GUI.Campeonato.JCampeonatoEstatistica;
@@ -33,6 +37,7 @@ import java.awt.event.KeyEvent;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.Set;
 import javax.swing.AbstractListModel;
 import javax.swing.DefaultComboBoxModel;
@@ -91,6 +96,26 @@ public final class Home2 extends JFrame {
         this.sistema.getEscolas().get("Universidade do Minho").inserirEquipa(eq1);
         this.sistema.getEscolas().get("Universidade do Minho").inserirEquipa(eq2);
         this.sistema.getEscolas().get("Universidade do Minho").inserirEquipa(eq3);
+        
+        /* ESCALOES */
+        Jogador jog1 = new Jogador("Mario", new GregorianCalendar(), 0,false);
+        Jogador jog2 = new Jogador("Leite", new GregorianCalendar(), 0,false);
+        Jogador jog3 = new Jogador("Miguel", new GregorianCalendar(), 0,false);
+        Jogador jog4 = new Jogador("Luis", new GregorianCalendar(), 0,false);
+        Jogador jog5 = new Jogador("Pinto", new GregorianCalendar(), 0,false);
+        
+        Escalao escalao1 = new Escalao(0, new Treinador("Manuel Maria", 1), new HashMap<Integer, Jogador>(), new Agenda(), new DadosEstatisticos());
+        Escalao escalao2 = new Escalao(3, "CeSIUM", "Universidade do Minho");
+        
+        escalao1.inserirJogador(jog1);
+        escalao1.inserirJogador(jog2);
+        escalao1.inserirJogador(jog3);
+        escalao1.inserirJogador(jog4);
+        escalao1.inserirJogador(jog5);
+        
+        this.sistema.getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").inserirEscalao(escalao1);
+        this.sistema.getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").inserirEscalao(escalao2);
+        
 
         /* TESTE USERS */
         this.sistema.registarUser("maleite","pw1234","maleite@gmail.com",0);
@@ -121,7 +146,7 @@ public final class Home2 extends JFrame {
         this.JPanelEscolaConvidado.setBackground(new java.awt.Color(248, 247, 247));
         
         GregorianCalendar g = new GregorianCalendar();
-        this.data.setText(g.get(g.DAY_OF_MONTH)+"/"+g.get(g.MONTH)+"/"+g.get(g.YEAR));
+        this.data.setText(g.get(g.DAY_OF_MONTH)+"/"+(g.get(g.MONTH)+1)+"/"+g.get(g.YEAR));
         
         /* CENTRAR UMA COLUNA
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
@@ -354,6 +379,7 @@ public final class Home2 extends JFrame {
         jButtonJornada = new javax.swing.JButton();
         jButtonEstatistica = new javax.swing.JButton();
         jButtonCalendario = new javax.swing.JButton();
+        jComboEpocaCampeonato2 = new javax.swing.JComboBox();
         panelMelhoresMarcadores = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -785,20 +811,25 @@ public final class Home2 extends JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jComboEpocaCampeonato2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "escalao 1", "escalao 3", "escalao4", " " }));
+
         javax.swing.GroupLayout headerCampeonatoLayout = new javax.swing.GroupLayout(headerCampeonato);
         headerCampeonato.setLayout(headerCampeonatoLayout);
         headerCampeonatoLayout.setHorizontalGroup(
             headerCampeonatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(headerCampeonatoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboEpocaCampeonato, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(headerCampeonatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(headerCampeonatoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboEpocaCampeonato, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(headerCampeonatoLayout.createSequentialGroup()
+                        .addGap(127, 127, 127)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 167, Short.MAX_VALUE)
+                        .addComponent(jComboEpocaCampeonato2, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
-            .addGroup(headerCampeonatoLayout.createSequentialGroup()
-                .addGap(127, 127, 127)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(369, Short.MAX_VALUE))
         );
         headerCampeonatoLayout.setVerticalGroup(
             headerCampeonatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -807,8 +838,14 @@ public final class Home2 extends JFrame {
                 .addGroup(headerCampeonatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboEpocaCampeonato, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(headerCampeonatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(headerCampeonatoLayout.createSequentialGroup()
+                        .addGap(0, 3, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(headerCampeonatoLayout.createSequentialGroup()
+                        .addComponent(jComboEpocaCampeonato2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
 
         jPanel8.add(headerCampeonato, java.awt.BorderLayout.PAGE_START);
@@ -1063,6 +1100,7 @@ public final class Home2 extends JFrame {
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboEpocaCampeonato;
     private javax.swing.JComboBox jComboEpocaCampeonato1;
+    private javax.swing.JComboBox jComboEpocaCampeonato2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

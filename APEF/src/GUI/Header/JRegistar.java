@@ -49,14 +49,14 @@ public class JRegistar extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         confemail = new javax.swing.JTextField();
         nomeUtilizador = new javax.swing.JTextField();
-        pass = new javax.swing.JTextField();
-        confpass = new javax.swing.JTextField();
         email = new javax.swing.JTextField();
         cancela = new javax.swing.JButton();
         confirma = new javax.swing.JButton();
         error = new javax.swing.JLabel();
         resp = new javax.swing.JRadioButton();
         arb = new javax.swing.JRadioButton();
+        pass = new javax.swing.JPasswordField();
+        confpass = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("APEF - Novo Utilizador");
@@ -107,11 +107,9 @@ public class JRegistar extends javax.swing.JDialog {
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setText("Email");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
-        getContentPane().add(confemail, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 210, -1));
-        getContentPane().add(nomeUtilizador, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 210, -1));
-        getContentPane().add(pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 100, 210, -1));
-        getContentPane().add(confpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 210, -1));
-        getContentPane().add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, 210, -1));
+        getContentPane().add(confemail, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, 210, -1));
+        getContentPane().add(nomeUtilizador, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 210, -1));
+        getContentPane().add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, 210, -1));
 
         cancela.setText("Cancelar");
         cancela.addActionListener(new java.awt.event.ActionListener() {
@@ -119,7 +117,7 @@ public class JRegistar extends javax.swing.JDialog {
                 cancelaActionPerformed(evt);
             }
         });
-        getContentPane().add(cancela, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 270, 110, -1));
+        getContentPane().add(cancela, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 280, 100, -1));
 
         confirma.setText("Confirmar");
         confirma.addActionListener(new java.awt.event.ActionListener() {
@@ -127,7 +125,7 @@ public class JRegistar extends javax.swing.JDialog {
                 confirmaActionPerformed(evt);
             }
         });
-        getContentPane().add(confirma, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 270, 120, -1));
+        getContentPane().add(confirma, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 280, 100, -1));
 
         error.setFont(new java.awt.Font("Lucida Grande", 3, 11)); // NOI18N
         error.setText("  ");
@@ -140,7 +138,13 @@ public class JRegistar extends javax.swing.JDialog {
         arb.setText("Árbitro");
         getContentPane().add(arb, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
 
-        setBounds(0, 0, 428, 327);
+        pass.setText("jPasswordField1");
+        getContentPane().add(pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 210, -1));
+
+        confpass.setText("jPasswordField2");
+        getContentPane().add(confpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, 210, -1));
+
+        setBounds(0, 0, 411, 335);
     }// </editor-fold>//GEN-END:initComponents
 
     private void confirmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmaActionPerformed
@@ -203,7 +207,7 @@ public class JRegistar extends javax.swing.JDialog {
     private javax.swing.JButton cancela;
     private javax.swing.JTextField confemail;
     private javax.swing.JButton confirma;
-    private javax.swing.JTextField confpass;
+    private javax.swing.JPasswordField confpass;
     private javax.swing.JTextField email;
     private javax.swing.JLabel error;
     private javax.swing.JLabel jLabel1;
@@ -214,7 +218,7 @@ public class JRegistar extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField nomeUtilizador;
-    private javax.swing.JTextField pass;
+    private javax.swing.JPasswordField pass;
     private javax.swing.JRadioButton resp;
     // End of variables declaration//GEN-END:variables
 }

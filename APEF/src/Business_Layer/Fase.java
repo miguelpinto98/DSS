@@ -75,7 +75,6 @@ public abstract class Fase {
     }
 
     /**Metodos*/
-
     public static ArrayList<Integer> moveArray(ArrayList<Integer> le) {
         int i=0,tam = le.size();
         ArrayList<Integer> res = new ArrayList<Integer>();
@@ -223,5 +222,5 @@ public abstract class Fase {
             count++;
         }
         return resArbitros;
-    }
+    }   
 }

@@ -34,6 +34,7 @@ public abstract class Pessoa {
 		this.id = APEF.IDENTIFICADOR;
 		this.nome = name;
 		this.sexo = genero;
+                this.dataNascimento = new GregorianCalendar();
         APEF.IDENTIFICADOR++;
 	}
         
@@ -59,7 +60,7 @@ public abstract class Pessoa {
     }
 
     public GregorianCalendar getDataNasc() {
-    	return (GregorianCalendar) dataNascimento.clone();
+    	return this.dataNascimento;
 	}
     
     public int getSexo() {

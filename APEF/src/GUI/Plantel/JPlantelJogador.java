@@ -6,8 +6,13 @@
 
 package GUI.Plantel;
 
+import Business_Layer.Escalao;
+import Business_Layer.Jogador;
 import Business_Layer.Utilizador;
 import GUI.Home2;
+import java.util.Collection;
+import java.util.Set;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -16,10 +21,24 @@ import GUI.Home2;
 public class JPlantelJogador extends javax.swing.JPanel {
 
     private Home2 root;
+    private Escalao escalao;
 
-    public JPlantelJogador(Home2 root, Utilizador user) {
+    public JPlantelJogador(Home2 root, Escalao esc, Utilizador user) {
         this.root = root;
+        this.escalao = esc;
         initComponents();
+        
+        atualizaJogadores();
+    }
+    
+    public void atualizaJogadores() {
+        Collection<Jogador> lesc = this.escalao.getJogadores().values();
+        DefaultListModel<String> str = new DefaultListModel<>();
+        
+        for(Jogador j : lesc) 
+            str.addElement(j.getNome());
+        
+        listaJogadores.setModel(str);  
     }
 
     /**

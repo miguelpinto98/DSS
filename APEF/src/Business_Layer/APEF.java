@@ -427,13 +427,14 @@ public class APEF {
                 arrayEquipasGrupo2.add(e.getID());
         }
 
-        Fase f1 = (Fase) g1;
-        Fase f2 = (Fase) g2;
         
-        HashSet<Utilizador> arbitrosEscolhidos = f1.geraCalendario(t.getID(),t.getDataInicio(),arrayEquipasGrupo1,t.getCampo(),arrayArbitros);
+        HashSet<Utilizador> arbitrosEscolhidos = g1.geraCalendario(t.getID(),t.getDataInicio(),arrayEquipasGrupo1,t.getCampo(),arrayArbitros);
         ArrayList<Utilizador> arrayArbitrosDisponiveis = new ArrayList<>();
         arrayArbitrosDisponiveis = daArbitrosDisponiveis(arbitrosEscolhidos, arrayArbitros);
-        f2.geraCalendario(t.getID(),t.getDataInicio(),arrayEquipasGrupo2,t.getCampo(),arrayArbitrosDisponiveis);
+        g2.geraCalendario(t.getID(),t.getDataInicio(),arrayEquipasGrupo2,t.getCampo(),arrayArbitrosDisponiveis);
+        
+        Fase f1 = (Fase) g1;
+        Fase f2 = (Fase) g2;
         
         t.getFases().add(f1);
         t.getFases().add(f2);
