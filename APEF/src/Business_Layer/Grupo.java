@@ -60,4 +60,13 @@ public class Grupo extends Fase {
     	return str.toString();
     }  	
     //Metodos
+    
+     
+    public boolean atualizaGrupoTipo1(Jogo j) {
+        boolean res=false;
+        if(this.getCalendario().atualizaCalendario(j))
+            this.classificacao.actualizaClassificacao(j);
+        return res;
+    }
+        
 }

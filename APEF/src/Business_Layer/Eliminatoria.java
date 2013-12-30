@@ -36,4 +36,8 @@ public class Eliminatoria extends Fase {
         return str.toString();
     }   
     //Metodos
+    
+    public boolean atualizaEliminatoriaTipo1(Jogo j) {
+        return this.getCalendario().atualizaCalendario(j);
+    }
 }

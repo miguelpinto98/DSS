@@ -392,12 +392,16 @@ public class Campeonato implements Competicao{
     }
     
 	public boolean atualizaCampeonato(Jogo j) {
+        boolean res = false;
         if(j.getIdCompeticao() == this.id) {
-            this.atualizaGoleadores(j);
-            this.classificacao.actualizaClassificacao(j);
-            return this.calendario.atualizaCalendario(j); 
+            if(this.calendario.atualizaCalendario(j)) { 
+                this.atualizaGoleadores(j);
+                this.classificacao.actualizaClassificacao(j);
+                res = true;
+            }
+            return res;
         }
-        else return false;
+        else return res;
 	}
     
     public ArrayList<Integer> melhoresMarcadoresAux() {

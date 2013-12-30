@@ -153,7 +153,7 @@ public class Epoca {
 			encontrou = this.campeonatos[idEscalao].atualizaCampeonato(j);
 			for(Torneio t: this.torneios.get(idEscalao)) {
                 if(t.getID() == j.getIdCompeticao()) {
-                    encontrouT = t.atualizaTorneio(j);
+                    encontrouT = t.atualizaTorneioTipo1(j);
                 }
             }
         }

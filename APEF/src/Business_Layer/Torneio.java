@@ -293,9 +293,27 @@ public class Torneio implements Competicao{
         }
         return res;
     }
-    public boolean atualizaTorneio(Jogo j) {
-        this.atualizaGoleadores(j);
-        this.estatisticaCompeticao.actualizaClassificacao(j);
-        return this.fases.get(this.getNFase()).atualizaFase(j);
+    
+    public boolean atualizaTorneioTipo1(Jogo j) {
+        int i = this.getNFase();
+        boolean res = false;
+        Grupo a = (Grupo) this.fases.get(i);
+        Eliminatoria e = (Eliminatoria) this.fases.get(i);
+        if(i == 0) {
+            res = a.atualizaGrupoTipo1(j);
+            if(!res) {
+                Grupo b = (Grupo) this.fases.get(1);
+                res = b.atualizaGrupoTipo1(j);
+            }
+         }
+        else
+            res=e.atualizaEliminatoriaTipo1(j);
+            
+        if(res) {
+            this.atualizaGoleadores(j);
+            this.estatisticaCompeticao.actualizaClassificacao(j);
+        }
+        return res;
     }
 }
+        
