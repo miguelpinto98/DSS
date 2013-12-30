@@ -6,17 +6,24 @@
 
 package GUI.Torneio;
 
+import Business_Layer.Utilizador;
+
 /**
  *
  * @author Utilizador
  */
 public class JTorneioEstatistica extends javax.swing.JPanel {
-
-    /**
-     * Creates new form JTorneioEstatistica
-     */
-    public JTorneioEstatistica() {
+    private JTorneioInfo j;
+    private Utilizador user;
+   
+    public JTorneioEstatistica(JTorneioInfo j, Utilizador u) {
+        this.j=j;
+        this.user=u;
+        
+        setVisible(true);
         initComponents();
+        
+        
     }
 
     /**
@@ -139,7 +146,7 @@ public class JTorneioEstatistica extends javax.swing.JPanel {
                                     .addComponent(jLabel16)
                                     .addComponent(jLabel14)
                                     .addComponent(jLabel13))))))
-                .addContainerGap(508, Short.MAX_VALUE))
+                .addContainerGap(488, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -180,7 +187,7 @@ public class JTorneioEstatistica extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(jLabel15))
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         add(jPanel1, java.awt.BorderLayout.CENTER);
