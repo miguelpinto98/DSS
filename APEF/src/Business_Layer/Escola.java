@@ -130,7 +130,7 @@ public class Escola {
     }
     
     public void removerEquipa(Equipa a) {
-        this.equipas.remove(a);
+        this.equipas.remove(a.getNome());
     }
     
     
