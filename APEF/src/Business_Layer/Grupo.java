@@ -107,32 +107,6 @@ public class Grupo extends Fase {
         return res;
     }
     
-    public GregorianCalendar dataJornadaSeguinte(GregorianCalendar g, int jr){
-       GregorianCalendar res = new GregorianCalendar();
-       int hora;
-       res = g;
-       hora = res.get(res.HOUR) + 1*jr;
-       res.set(res.HOUR,hora);
-       
-       return res;
-    }
-    
-    public Utilizador daArbitroAleatorio(ArrayList<Utilizador> listaArbitros, ArrayList<Utilizador> listaArbitrosEscolhidos) {
-    
-        boolean flag=true;
-        Utilizador arbitro = new Arbitro();
-            while(flag){
-                
-            int nrAleatorio = (int) (Math.random()*listaArbitros.size());
-            arbitro = listaArbitros.get(nrAleatorio);
-            
-            if ((listaArbitrosEscolhidos.contains(arbitro))==false){
-                flag=false;
-                }
-            }
-        return arbitro;
-    }
-    
     public HashSet<Utilizador> geraCalendario(int idComp, GregorianCalendar dataInicio, ArrayList<Integer> listaEscaloes, Campo ca, ArrayList<Utilizador> listaArbitros){
         int nrEscaloes = listaEscaloes.size();
         int count = 0;
@@ -169,7 +143,7 @@ public class Grupo extends Fase {
             
             Jornada jornada = new Jornada(count+1);
             GregorianCalendar data = new GregorianCalendar(); 
-            data = dataInicio;
+            data = dataJornadaSeguinte(dataInicio, nrJ);
             if(count % 2 != 0) {
                 for (i=0; i<(nrEscaloes/2); i++){
                     casa = buscaEscalao(array1.get(i));
@@ -208,5 +182,16 @@ public class Grupo extends Fase {
             count++;
         }
         return resArbitros;
+    }
+    
+    public ArrayList<Integer> doisMelhores() {
+        ArrayList<Integer> aux = new ArrayList<>();
+        DadosEstatisticos d1 = this.classificacao.getEstatistica().first();
+        DadosEstatisticos d2 = this.classificacao.getEstatistica().higher(this.classificacao.getEstatistica().first());
+        
+        aux.add(0, d1.getIdEscalao());
+        aux.add(1, d2.getIdEscalao());
+        
+        return aux;
     }
 }

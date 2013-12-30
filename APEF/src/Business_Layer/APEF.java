@@ -151,7 +151,7 @@ public class APEF {
 
 	
 
-	public static boolean validaPassword(String pw) {
+	public boolean validaPassword(String pw) {
         boolean res = true;
         int i = 0;
         
@@ -328,7 +328,7 @@ public class APEF {
         else return false;
     }
     
-    public boolean acabouInscricaoTorneioTipo1(Torneio t) {
+    public static boolean acabouInscricaoTorneioTipo1(Torneio t) {
         GregorianCalendar now = new GregorianCalendar();
         if (t.getDataLimiteInscricoes().before(now) && (t.getNrEscaloes()==8 || t.getNrEscaloes()==10)) 
             return true;
@@ -419,18 +419,6 @@ public class APEF {
 
         int i,nrEquipas;
         nrEquipas = t.getNrEscaloes();
-        /**
-        for(i=0;i<nrEquipas;i++){
-            if(i<nrEquipas/2) {	
-                equipasGrupo1.add(t.buscaEscalao(arrayEquipas.get(i)));
-            }
-            else {
-                for(i=nrEquipas/2;i<nrEquipas;i++){
-                    if(i>=nrEquipas)
-                        equipasGrupo2.add(t.buscaEscalao(arrayEquipas.get(i)));
-                }
-            }
-        }*/
         
         for(i=0;i<nrEquipas/2;i++){	
                 equipasGrupo1.add(t.buscaEscalao(arrayEquipas.get(i)));
@@ -467,6 +455,8 @@ public class APEF {
 
         t.inserirGrupo(f1);
         t.inserirGrupo(f2);
+        
+        t.setArbs(arrayArbitrosDisponiveis);
         
         return t;
     }
@@ -578,4 +568,5 @@ public class APEF {
     public boolean criarEquipa(String esc, Equipa e) {
         return this.escolas.get(esc).inserirEquipa(e);
     }
+    
 }

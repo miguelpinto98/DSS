@@ -159,9 +159,9 @@ public class Jogo implements Comparable<Jogo>{
                 int aux = this.getDiaJogo().get(this.getDiaJogo().MONTH) + 1;
 		str.append("\nData: " + this.getDiaJogo().get(this.getDiaJogo().YEAR) +"/"+
 				aux +"/"+
-				this.getDiaJogo().get(this.getDiaJogo().DAY_OF_MONTH));
-				//this.getDiaJogo().get(GregorianCalendar.HOUR)+":"+
-				//this.getDiaJogo().get(GregorianCalendar.MINUTE));
+				this.getDiaJogo().get(this.getDiaJogo().DAY_OF_MONTH)+" "+
+				this.getDiaJogo().get(GregorianCalendar.HOUR)+" "+
+				this.getDiaJogo().get(GregorianCalendar.MINUTE));
 		str.append("\nCampo: " + this.campo.toString());
 		str.append("\nArbitro: "+this.arbitro.getNomeUser());
 		str.append("\nEscalao Casa\n"+this.ecasa.getNomeEquipa());

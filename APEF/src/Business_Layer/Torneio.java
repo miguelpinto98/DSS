@@ -22,7 +22,8 @@ public class Torneio implements Competicao{
     private GregorianCalendar dataLimiteInscricoes;
     private int nFase;
     private ArrayList<Fase> fases;
-    private Campo campo; 
+    private Campo campo;
+    private ArrayList<Utilizador> arbs;
 
     public Torneio() {
         this.id = 0;
@@ -37,6 +38,7 @@ public class Torneio implements Competicao{
         this.dataInicio = new GregorianCalendar();
         this.dataLimiteInscricoes = new GregorianCalendar();
         this.campo = new Campo();
+        this.arbs = new ArrayList<>();
     }
     
     public Torneio(String nome, GregorianCalendar inicio, GregorianCalendar limite, int tipo, int nrEquipas, Campo campo){
@@ -52,6 +54,7 @@ public class Torneio implements Competicao{
         this.dataInicio = inicio;
         this.dataLimiteInscricoes = limite;
         this.campo = campo;
+        this.arbs = new ArrayList<>();
     }   
 
 	public Torneio(Torneio t) {
@@ -67,6 +70,7 @@ public class Torneio implements Competicao{
         this.dataInicio = t.getDataInicio();
         this.dataLimiteInscricoes = t.getDataLimiteInscricoes();
         this.campo = t.getCampo();
+        this.arbs = t.getArbs();
 	}
 
     public int getID() {
@@ -138,6 +142,19 @@ public class Torneio implements Competicao{
             aux.add(f.clone());
         }
         return aux;
+    }
+    
+    public ArrayList<Utilizador> getArbs(){
+        ArrayList<Utilizador> aux = new ArrayList<>();
+
+        for(Utilizador f : this.arbs){
+            aux.add(f);
+        }
+        return aux;
+    }
+    
+    public void setArbs(ArrayList<Utilizador> a) {
+        this.arbs = a;
     }
     
     public int getNFase() {
@@ -300,9 +317,31 @@ public class Torneio implements Competicao{
         return res;
     }
     
+     public Torneio secondFaseTorneioTipo1 (ArrayList<Integer> grupoA, ArrayList<Integer> grupoB) {
+        HashSet<Escalao> equipas = new HashSet<>();
+        ArrayList<Utilizador> arbs = new ArrayList<>();
+        arbs = this.getArbs();
+                
+        for (int i = 0; i < grupoA.size(); i++) {
+            equipas.add(this.buscaEscalao(grupoA.get(i)));
+        }
+        for (int i = 0; i < grupoB.size(); i++) {
+            equipas.add(this.buscaEscalao(grupoB.get(i)));
+        }
+        Eliminatoria meiaFinal = new Eliminatoria("Meia-Final",equipas);
+        meiaFinal.geraCalendario(this.getID(), this.getDataInicio(), arbs, grupoA, grupoB, this.getCampo());
+        Fase f = (Fase) meiaFinal;
+        this.getFases().add(f);
+        
+    return this;
+    }
+    
     public boolean atualizaTorneioTipo1(Jogo j) {
         int i = this.getNFase();
+        ArrayList<Integer> equipas1 = new ArrayList<>();
+        ArrayList<Integer> equipas2 = new ArrayList<>();
         boolean res = false;
+        boolean res2 = false;
         Grupo a = (Grupo) this.fases.get(i);
         Eliminatoria e = (Eliminatoria) this.fases.get(i);
         if(i == 0) {
@@ -310,6 +349,10 @@ public class Torneio implements Competicao{
             if(!res) {
                 Grupo b = (Grupo) this.fases.get(1);
                 res = b.atualizaGrupoTipo1(j);
+                res2 = b.ultimoJogo();
+                if(res2) 
+                    equipas2 = b.doisMelhores();
+                    equipas1 = a.doisMelhores();
             }
          }
         else
@@ -319,11 +362,15 @@ public class Torneio implements Competicao{
             this.atualizaGoleadores(j);
             this.estatisticaCompeticao.actualizaClassificacao(j);
         }
+        
+        if (res2) 
+            this.secondFaseTorneioTipo1(equipas1,equipas2);
         return res;
     }
     
     public void inserirGrupo (Fase f){
         this.fases.add(f);
     }
+    
 }
         
