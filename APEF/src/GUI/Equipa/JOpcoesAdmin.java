@@ -4,28 +4,45 @@
  * and open the template in the editor.
  */
 
-package GUI.Escola;
+package GUI.Equipa;
 
+import Business_Layer.Escola;
 import Business_Layer.Utilizador;
+import GUI.ConsultasEscola;
 import GUI.Equipa.jAdicionarEquipa;
 import GUI.Home2;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JDialog;
 
 /**
  *
  * @author miguelpinto
  */
-public class JOpcoesAdminEscola extends javax.swing.JPanel {
+public class JOpcoesAdmin extends javax.swing.JPanel {
 
     private Home2 root;
     private Utilizador user;
+    private Escola escola;
 
-    public JOpcoesAdminEscola(Home2 root, Utilizador user) {
+    public JOpcoesAdmin(Home2 root, Escola esc, Utilizador user, ConsultasEscola ce) {
         this.root = root;
+        this.escola = esc;
         this.user = user;
         initComponents();
+        
+        ativarComboEscolas();
+        
     }
 
+    public void ativarComboEscolas() {
+        DefaultComboBoxModel<String> dcb = new DefaultComboBoxModel<>();
+        
+        for(String s : this.escola.getEquipas().keySet())
+            dcb.addElement(s);
+        
+        this.comboEquipas.setModel(dcb);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

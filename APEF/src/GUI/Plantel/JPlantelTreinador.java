@@ -6,8 +6,11 @@
 
 package GUI.Plantel;
 
+import Business_Layer.Escalao;
+import Business_Layer.Treinador;
 import Business_Layer.Utilizador;
 import GUI.Home2;
+import java.util.GregorianCalendar;
 
 /**
  *
@@ -16,10 +19,32 @@ import GUI.Home2;
 public class JPlantelTreinador extends javax.swing.JPanel {
 
     private Home2 root;
+    private Escalao escalao;
 
-    public JPlantelTreinador(Home2 root, Utilizador user) {
+    public JPlantelTreinador(Home2 root, Escalao esc,Utilizador user) {
         this.root = root;
+        this.escalao = esc;
         initComponents();
+        
+        atualizaDadosTreinador(this.escalao.getTreinador());
+    }
+    
+    public void atualizaDadosTreinador(Treinador t) {
+        this.nome.setText(t.getNome());
+        
+        GregorianCalendar g = t.getDataNasc();
+        this.data.setText(g.get(g.YEAR)+"/"+(g.get(g.MONTH)+1)+"/"+g.get(g.DAY_OF_MONTH));
+   
+        String res=null;
+        if(t.getSexo() == 0)
+            res = "Não definido";
+        else {
+            if(t.getSexo() == 1)
+                res = "Masculino";
+            else
+                res = "Feminino";
+        }  
+        this.sexo.setText(res);
     }
 
     /**
@@ -36,9 +61,9 @@ public class JPlantelTreinador extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        nome = new javax.swing.JLabel();
+        data = new javax.swing.JLabel();
+        sexo = new javax.swing.JLabel();
         jOptionsTreinador = new javax.swing.JPanel();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Treinador"));
@@ -55,11 +80,11 @@ public class JPlantelTreinador extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jLabel3.setText("Sexo");
 
-        jLabel4.setText(" Manuel Quim Arraas da Ponte");
+        nome.setText(" Manuel Quim Arraas da Ponte");
 
-        jLabel5.setText("10/15/1900");
+        data.setText("10/15/1900");
 
-        jLabel6.setText("Não Definido");
+        sexo.setText("Não Definido");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -74,9 +99,9 @@ public class JPlantelTreinador extends javax.swing.JPanel {
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(nome, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
+                    .addComponent(data, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(sexo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -87,14 +112,14 @@ public class JPlantelTreinador extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(data, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(sexo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
                 .addContainerGap(8, Short.MAX_VALUE))
         );
@@ -118,13 +143,13 @@ public class JPlantelTreinador extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel avatar;
+    private javax.swing.JLabel data;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jOptionsTreinador;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel nome;
+    private javax.swing.JLabel sexo;
     // End of variables declaration//GEN-END:variables
 }
