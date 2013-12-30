@@ -375,6 +375,17 @@ public class APEF {
         return res;
     }
     
+    public static ArrayList<Utilizador> daArbitrosDisponiveis (HashSet<Utilizador> arbitrosEscolhidos, ArrayList<Utilizador> arrayArbitros){
+        ArrayList<Utilizador> res = new ArrayList<>();
+        
+        for(Utilizador u : arrayArbitros){
+            if(!(arbitrosEscolhidos.contains(u))){
+                res.add(u);
+            }
+        }
+        return res;
+    }
+    
     public Torneio firstFaseTorneioTipo1 (Torneio t){
         ArrayList<Integer> arrayEquipas = new ArrayList<>();
         ArrayList<Integer> arrayEquipasGrupo1 = new ArrayList<>();
@@ -420,9 +431,9 @@ public class APEF {
         Fase f2 = (Fase) g2;
         
         HashSet<Utilizador> arbitrosEscolhidos = f1.geraCalendario(t.getID(),t.getDataInicio(),arrayEquipasGrupo1,t.getCampo(),arrayArbitros);
-        /**arrayArbitros = funcao que retira os arbitrosEscolhidos do arrayArbitros ,,, 
-         * substituindo o arrayArbitros por um LinkedList é permitido retirar elementos e o array ajusta-se não deixando espaços "vazios" (acho eu que funciona assim) */
-        f2.geraCalendario(t.getID(),t.getDataInicio(),arrayEquipasGrupo2,t.getCampo(),arrayArbitros);
+        ArrayList<Utilizador> arrayArbitrosDisponiveis = new ArrayList<>();
+        arrayArbitrosDisponiveis = daArbitrosDisponiveis(arbitrosEscolhidos, arrayArbitros);
+        f2.geraCalendario(t.getID(),t.getDataInicio(),arrayEquipasGrupo2,t.getCampo(),arrayArbitrosDisponiveis);
         
         t.getFases().add(f1);
         t.getFases().add(f2);
