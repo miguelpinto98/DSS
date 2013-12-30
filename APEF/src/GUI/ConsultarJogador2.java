@@ -1,20 +1,37 @@
 package GUI;
 
+import Business_Layer.APEF;
+import Business_Layer.Escalao;
 import Business_Layer.Jogador;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ConsultarJogador2 extends javax.swing.JPanel {
-
+    
+    private ConsultarJogador cj;
+    private Home2 root;
+    private Escalao escalao;
+        
         Jogador jogador;
         
-      public ConsultarJogador2(Jogador jogador) throws ParseException {
-          this.jogador = jogador;
+      public ConsultarJogador2(Home2 root, Escalao e, Jogador jogador, ConsultarJogador cj) throws ParseException {
+          this.root = root;
+          this.escalao = e;
+          this.cj = cj;
+          this.jogador = this.root.getSistema().getEscolas().get(escalao.getNomeEscola()).getEquipas().get(escalao.getNomeEquipa()).getEscaloes()[escalao.getTipoEscalao()].getJogadores().get(jogador.getID());
+
           initComponents();
-          this.nome_t.setText(this.jogador.getNome());
+          
+          reloadDadosJogador();     
+    }
+    
+    public void reloadDadosJogador() throws ParseException {
+    this.nome_t.setText(this.jogador.getNome());
           
           String s = null; 
           if(this.jogador.getSexo()==0) {s="Não Definido";}
@@ -29,12 +46,7 @@ public class ConsultarJogador2 extends javax.swing.JPanel {
           SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy");
           Date date1 = df.parse(dia+"."+mes+"."+ano);
           this.nascimento_t.setDate(date1);
-          
-       
-          
-            
     }
-      
      
   
     @SuppressWarnings("unchecked")
@@ -181,7 +193,11 @@ public class ConsultarJogador2 extends javax.swing.JPanel {
         mudaSexo();
         mudaNascimento();
         //mudaFoto();        
-        validadeDados.setText("Dados Alterados com Sucesso");  
+        validadeDados.setText("Dados Alterados com Sucesso");
+        
+        
+        this.cj.reload();
+        this.cj.getPlantelJogador().atualizaJogadores();
     }//GEN-LAST:event_concluidoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

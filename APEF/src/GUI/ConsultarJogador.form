@@ -208,24 +208,12 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="nascimento_t">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="12-33-1324"/>
-              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="sexo_t">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="N&#xe3;o Definido"/>
-              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="clube_t">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Palmeirinhas"/>
-              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="nome_t">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Jos&#xe9; Manuel Gon&#xe7;alves Ferreira"/>
-              </Properties>
             </Component>
           </SubComponents>
         </Container>

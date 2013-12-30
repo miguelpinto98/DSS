@@ -98,7 +98,7 @@ public final class Home2 extends JFrame {
         this.sistema.getEscolas().get("Universidade do Minho").inserirEquipa(eq3);
         
         /* ESCALOES */
-        Jogador jog1 = new Jogador("Mario", new GregorianCalendar(), 2,false);
+        Jogador jog1 = new Jogador("Mário", new GregorianCalendar(), 2, false , "Os Fraquinhos");
         Jogador jog2 = new Jogador("Leite", new GregorianCalendar(), 0,false);
         Jogador jog3 = new Jogador("Miguel", new GregorianCalendar(), 0,false);
         Jogador jog4 = new Jogador("Luis", new GregorianCalendar(), 0,false);

@@ -31,6 +31,8 @@ public class Escalao {
     
     public Escalao(int tipo, Treinador t, HashMap<Integer,Jogador> j, Agenda a, DadosEstatisticos d) {
     	this.id = APEF.IDENTIFICADOR;
+        this.nomeEscola = "Universidade do Minho";
+        this.nomeEquipa = "CeSIUM";
     	this.tipoEscalao = tipo;
     	this.treinador = t;
     	this.jogadores = j;

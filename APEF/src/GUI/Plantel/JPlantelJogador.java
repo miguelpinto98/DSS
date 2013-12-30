@@ -11,9 +11,12 @@ import Business_Layer.Jogador;
 import Business_Layer.Utilizador;
 import GUI.ConsultarJogador;
 import GUI.Home2;
+import java.text.ParseException;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JDialog;
 
@@ -37,7 +40,7 @@ public class JPlantelJogador extends javax.swing.JPanel {
     }
     
     public void atualizaJogadores() {
-        Collection<Jogador> lesc = this.escalao.getJogadores().values();
+        Collection<Jogador> lesc = this.root.getSistema().getEscolas().get(this.escalao.getNomeEscola()).getEquipas().get(this.escalao.getNomeEquipa()).getEscaloes()[this.escalao.getTipoEscalao()].getJogadores().values();
         DefaultListModel<String> str = new DefaultListModel<>();
         
         for(Jogador j : lesc) 
@@ -140,8 +143,14 @@ public class JPlantelJogador extends javax.swing.JPanel {
             System.out.println("ARRROZ");
         }
         
-        JDialog frame = new ConsultarJogador(this.root,this.user,j);
+        JDialog frame = null;
+        try {
+            frame = new ConsultarJogador(this.root, this.escalao, this.user, j,this);
+        } catch (ParseException ex) {
+            Logger.getLogger(JPlantelJogador.class.getName()).log(Level.SEVERE, null, ex);
+        }
         frame.setVisible(true);
+        atualizaJogadores();
     }//GEN-LAST:event_consultaJogActionPerformed
 
 

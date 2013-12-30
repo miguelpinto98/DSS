@@ -1,10 +1,16 @@
 package GUI;
 
 import Business_Layer.Admin;
+import Business_Layer.Escalao;
 import Business_Layer.Jogador;
 import Business_Layer.ResponsavelEscola;
 import Business_Layer.Utilizador;
+import GUI.Plantel.JPlantelJogador;
 import java.awt.BorderLayout;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 
 public final class ConsultarJogador extends javax.swing.JDialog {
@@ -12,27 +18,53 @@ public final class ConsultarJogador extends javax.swing.JDialog {
     private Home2 root;
     private Utilizador user;
     private Jogador jogador;
+    private Escalao esc;
+    private JPlantelJogador pj;
     
-    public ConsultarJogador(Home2 root, Utilizador user, Jogador j){
+    public ConsultarJogador(Home2 root, Escalao e, Utilizador user, Jogador j, JPlantelJogador pla) throws ParseException{
         this.root = root;
+        this.esc=e;
         this.user = user;
         this.jogador = j;
-               
+        this.pj = pla;
         initComponents();
+        
+        reload();
+          
         
         verificaUser();
     }
     
-    public void verificaUser(){
+    public void reload() {
+        this.nome_t.setText(this.jogador.getNome());
+          this.clube_t.setText(this.jogador.getNomeEquipa());
+          
+          String s = null; 
+          if(this.jogador.getSexo()==0) {s="Não Definido";}
+          if(this.jogador.getSexo()==1) {s="Masculino";}
+          if(this.jogador.getSexo()==2) {s="Feminino";}          
+          this.sexo_t.setText(s);
+          
+          GregorianCalendar aux = this.jogador.getDataNasc();
+          int ano = aux.get(GregorianCalendar.YEAR);
+          int mes = aux.get(GregorianCalendar.MONTH);
+          int dia = aux.get(GregorianCalendar.DAY_OF_MONTH);
+          this.nascimento_t.setText(dia+"."+mes+"."+ano);
+    }
+    
+    public void verificaUser() throws ParseException{
             if(this.user != null){
                 if(this.user instanceof Admin || this.user instanceof ResponsavelEscola) {
                     this.remove(this.jPanel1);
-                    this.add(new ConsultarJogador2(this.jogador), BorderLayout.CENTER);
+                    this.add(new ConsultarJogador2(root, this.esc, this.jogador, this), BorderLayout.CENTER);
                 }
             }
             else 
                 this.remove(this.jPanel1);}
 
+    public JPlantelJogador getPlantelJogador() {
+        return this.pj;
+    }
    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -105,14 +137,6 @@ public final class ConsultarJogador extends javax.swing.JDialog {
         clube_l.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         clube_l.setForeground(new java.awt.Color(102, 102, 102));
         clube_l.setText("Clube:");
-
-        nascimento_t.setText("12-33-1324");
-
-        sexo_t.setText("Não Definido");
-
-        clube_t.setText("Palmeirinhas");
-
-        nome_t.setText("José Manuel Gonçalves Ferreira");
 
         javax.swing.GroupLayout dados_pessoaisLayout = new javax.swing.GroupLayout(dados_pessoais);
         dados_pessoais.setLayout(dados_pessoaisLayout);
