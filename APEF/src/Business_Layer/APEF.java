@@ -328,7 +328,7 @@ public class APEF {
         else return false;
     }
     
-    public static boolean acabouInscricaoTorneioTipo1(Torneio t) {
+    public boolean acabouInscricaoTorneioTipo1(Torneio t) {
         GregorianCalendar now = new GregorianCalendar();
         if (t.getDataLimiteInscricoes().before(now) && (t.getNrEscaloes()==8 || t.getNrEscaloes()==10)) 
             return true;
