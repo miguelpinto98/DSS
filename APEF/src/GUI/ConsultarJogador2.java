@@ -1,18 +1,38 @@
 package GUI;
 
 import Business_Layer.Jogador;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class ConsultarJogador2 extends javax.swing.JPanel {
 
         Jogador jogador;
         
-      public ConsultarJogador2(Jogador jogador) {
+      public ConsultarJogador2(Jogador jogador) throws ParseException {
           this.jogador = jogador;
-
-        initComponents();
-        
-        this.nome_t.setText(this.jogador.getNome());
+          initComponents();
+          this.nome_t.setText(this.jogador.getNome());
+          
+          String s = null; 
+          if(this.jogador.getSexo()==0) {s="Não Definido";}
+          if(this.jogador.getSexo()==1) {s="Masculino";}
+          if(this.jogador.getSexo()==2) {s="Feminino";}          
+          this.sexo_t.setSelectedItem(s);
+          
+          GregorianCalendar aux = this.jogador.getDataNasc();
+          int ano = aux.get(GregorianCalendar.YEAR);
+          int mes = aux.get(GregorianCalendar.MONTH);
+          int dia = aux.get(GregorianCalendar.DAY_OF_MONTH);
+          SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+          Date date1 = df.parse(dia+"."+mes+"."+ano);
+          this.nascimento_t.setDate(date1);
+          
+       
+          
+            
     }
       
      
@@ -46,7 +66,7 @@ public class ConsultarJogador2 extends javax.swing.JPanel {
         sexo.setForeground(new java.awt.Color(102, 102, 102));
         sexo.setText("Sexo:");
 
-        concluido.setText("Concluído");
+        concluido.setText("Alterar");
         concluido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 concluidoActionPerformed(evt);
@@ -128,50 +148,40 @@ public class ConsultarJogador2 extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-     private int mudaNome(int ok){
+     private void mudaNome(){
         String n = nome_t.getText();
-            if (n!=null) this.jogador.setNome(n);
-            else {validadeDados.setText("Nome Incorreto"); ok=1;}
-        return ok;}
+        if (n!=null) this.jogador.setNome(n);}
     
-    
-     private int mudaSexo(int ok){
+    private void mudaSexo(){
         String n = sexo_t.getSelectedItem().toString();
             if (n.equals("Masculino")) this.jogador.setSexo(1);
-            if (n.equals("Feminino")) this.jogador.setSexo(2);
-            if (n.equals("Não Definido")) {validadeDados.setText("Sexo Indefinido"); ok=1;}
-        return ok;}
+            if (n.equals("Feminino")) this.jogador.setSexo(2);}
      
-     private int mudaNascimento(int ok){
-         GregorianCalendar sistema = new GregorianCalendar();
-         //GregorianCalendar selecionada = nascimento_t.get
-//                 if(sistema.after(selecionada))
-         {
-                     
-                 }
-         
-            
-         
+    public static GregorianCalendar DateToCalendar(Date date){ 
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        return (GregorianCalendar)cal;
+}
+    
+     private void mudaNascimento(){
+         Date sistema = new Date();
+         Date selecionada = nascimento_t.getDate();
+            if(sistema.after(selecionada)) this.jogador.setDataNasc(DateToCalendar(sistema));}
      
-     return ok;}
+     private void mudaFoto(){
      
-     private int mudaFoto(int ok){
-     
-     return ok;}
+     }
      
      
      
     
     
     private void concluidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_concluidoActionPerformed
-        int ok=0;
-        
-        //if ((nome_c.isSelected()==true) && ok==0) this.mudaNome(ok);       
-        //if ((sexo_c.isSelected()==true) && ok==0) this.mudaSexo(ok);        
-        //if ((nascimento_c.isSelected()==true && ok==0)) this.mudaNascimento(ok);        
-        //if ((foto_c.isSelected()==true) && ok==0)this.mudaFoto(ok);
-        
-        if(ok==0) validadeDados.setText("Dados Alterados com Sucesso");  
+        mudaNome();
+        mudaSexo();
+        mudaNascimento();
+        //mudaFoto();        
+        validadeDados.setText("Dados Alterados com Sucesso");  
     }//GEN-LAST:event_concluidoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

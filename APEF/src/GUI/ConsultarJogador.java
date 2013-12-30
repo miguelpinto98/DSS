@@ -39,6 +39,8 @@ public final class ConsultarJogador extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
+        header = new javax.swing.JPanel();
+        header_texto = new javax.swing.JLabel();
         dados_pessoais = new javax.swing.JPanel();
         avatar = new javax.swing.JLabel();
         nome_l = new javax.swing.JLabel();
@@ -59,6 +61,30 @@ public final class ConsultarJogador extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel2.setLayout(new java.awt.BorderLayout());
+
+        header.setBackground(new java.awt.Color(153, 153, 153));
+
+        header_texto.setBackground(new java.awt.Color(153, 153, 153));
+        header_texto.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        header_texto.setForeground(new java.awt.Color(255, 255, 255));
+        header_texto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        header_texto.setText("Perfil Jogador");
+
+        javax.swing.GroupLayout headerLayout = new javax.swing.GroupLayout(header);
+        header.setLayout(headerLayout);
+        headerLayout.setHorizontalGroup(
+            headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(header_texto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 805, Short.MAX_VALUE)
+        );
+        headerLayout.setVerticalGroup(
+            headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(headerLayout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(header_texto)
+                .addContainerGap(45, Short.MAX_VALUE))
+        );
+
+        jPanel2.add(header, java.awt.BorderLayout.PAGE_START);
 
         dados_pessoais.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados Pessoais", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 14), new java.awt.Color(102, 102, 102))); // NOI18N
 
@@ -189,7 +215,7 @@ public final class ConsultarJogador extends javax.swing.JDialog {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            .addGap(0, 119, Short.MAX_VALUE)
         );
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
@@ -205,6 +231,8 @@ public final class ConsultarJogador extends javax.swing.JDialog {
     private javax.swing.JList comp_realizadas;
     private javax.swing.JPanel competicoes;
     private javax.swing.JPanel dados_pessoais;
+    private javax.swing.JPanel header;
+    private javax.swing.JLabel header_texto;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
