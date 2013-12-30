@@ -224,4 +224,8 @@ public abstract class Fase {
         }
         return resArbitros;
     }
+    
+    public boolean atualizaFase(Jogo j) {
+        return this.calendario.atualizaCalendario(j);
+    }
 }

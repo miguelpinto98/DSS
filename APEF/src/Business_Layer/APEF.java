@@ -298,11 +298,21 @@ public class APEF {
 	}
 
 	/*Isto e' um boolean para depois no swing dar um erro caso falhe alguma coisa*/
-	public boolean inscreverCompeticao(int anoEpoca, int idCompeticao, Escalao x, ArrayList<Jogador> inscritos) {
+	public boolean inscreverCompeticaoCampeonato(int anoEpoca, int idCompeticao, Escalao x, ArrayList<Jogador> inscritos) {
 		if(verificaJogadores(inscritos)) {
 			inscreveJogadores(idCompeticao,inscritos);
             Epoca e = this.epocas.get(anoEpoca);
-            e.inscreve(x);
+            e.inscreveEmCampeonato(x);
+			return true;
+		}
+		else return false;
+	}
+    
+    public boolean inscreverCompeticaoTorneio(int anoEpoca, int idCompeticao, Escalao x, ArrayList<Jogador> inscritos) {
+		if(verificaJogadores(inscritos)) {
+			inscreveJogadores(idCompeticao,inscritos);
+            Epoca e = this.epocas.get(anoEpoca);
+            e.inscreveEmTorneio(x,idCompeticao);
 			return true;
 		}
 		else return false;
@@ -420,14 +430,14 @@ public class APEF {
         return t;
     }
 
-	public void addResultadoCompeticao(Jogo j, int gcasa, int gfora) {
+	public void addResultadoCompeticao(Jogo j) {
 		GregorianCalendar g = new GregorianCalendar();
 		int ano = g.get(GregorianCalendar.YEAR);
 		
 		if(!this.epocas.containsKey(ano));
 			ano--;
 		
-		this.epocas.get(ano).atualizaEpoca(j,gcasa,gfora);	
+		this.epocas.get(ano).atualizaEpoca(j);	
 	}
         
     /* LIGAÇÃO BASE DE DADOS*/    

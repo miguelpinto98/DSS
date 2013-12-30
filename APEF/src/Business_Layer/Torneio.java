@@ -1,6 +1,7 @@
 package Business_Layer;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -19,6 +20,7 @@ public class Torneio implements Competicao{
     private EstatisticaCompeticao estatisticaCompeticao;
     private GregorianCalendar dataInicio;
     private GregorianCalendar dataLimiteInscricoes;
+    private int nFase;
     private ArrayList<Fase> fases;
     private Campo campo; 
 
@@ -31,6 +33,7 @@ public class Torneio implements Competicao{
         this.listaEscaloes = new HashSet<>();
         this.estatisticaCompeticao = new EstatisticaCompeticao();
         this.fases = new ArrayList<>();
+        this.nFase = 0;
         this.dataInicio = new GregorianCalendar();
         this.dataLimiteInscricoes = new GregorianCalendar();
         this.campo = new Campo();
@@ -45,6 +48,7 @@ public class Torneio implements Competicao{
         this.listaEscaloes = new HashSet<>();
         this.estatisticaCompeticao = new EstatisticaCompeticao();
         this.fases = new ArrayList<>();
+        this.nFase = 0;
         this.dataInicio = new GregorianCalendar();
         this.dataLimiteInscricoes = limite;
         this.campo = campo;
@@ -59,6 +63,7 @@ public class Torneio implements Competicao{
         this.listaEscaloes = t.getListaEscaloes();
         this.estatisticaCompeticao = t.getEstatisticaCompeticao();
         this.fases = t.getFases();
+        this.nFase = t.getNFase();
         this.dataInicio = t.getDataInicio();
         this.dataLimiteInscricoes = t.getDataLimiteInscricoes();
         this.campo = t.getCampo();
@@ -134,7 +139,14 @@ public class Torneio implements Competicao{
         }
         return aux;
     }
+    
+    public int getNFase() {
+        return this.nFase;
+    }
 
+    public void setNFase(int n) {
+        this.nFase = n;
+    }
     public void setFases (ArrayList<Fase> al){
         this.fases = al;
     }
@@ -224,4 +236,66 @@ public class Torneio implements Competicao{
         return res;
     }
     
+    public void atualizaGoleadores(Jogo j) {
+        int contador;
+        for(Integer id: j.getGoleadoresJogo()) {
+            if(this.goleadores.containsKey(id)) {
+                contador = this.goleadores.get(id);
+                this.goleadores.put(id, contador+1);
+            }
+            else
+                this.goleadores.put(id, 1); 
+        }
+    }
+    
+    public ArrayList<Integer> melhoresMarcadoresAux() {
+        HashMap<Integer,Integer> aux = this.goleadores;
+        ArrayList<Integer> res = new ArrayList<>();
+        int maxGolos = Collections.max(aux.values());
+
+		Iterator<Integer> it = this.goleadores.keySet().iterator();
+        while (it.hasNext()) {
+            Integer id = it.next();
+            if (maxGolos == this.goleadores.get(id)) {
+                res.add(id);
+                aux.remove(id);
+            }
+        }
+        return res; 
+    }
+    
+    public Jogador buscaJogador(int id) {
+        Jogador res = new Jogador();
+        boolean flag = false;
+        
+        Iterator<Escalao> it = this.listaEscaloes.iterator(); 
+        while (it.hasNext() && !flag) {
+            Escalao e = it.next();
+            Iterator<Integer> it2 = e.getJogadores().keySet().iterator(); 
+            while (it2.hasNext() && !flag) {
+                Integer i = it2.next();
+                if (i==id) {
+                    res = e.getJogadores().get(id);
+                    flag = true;
+                }
+            }
+        }
+        return res;
+    }
+        
+    public ArrayList<Jogador> melhoresMarcardores() {
+        ArrayList<Jogador> res = new ArrayList<>();
+        ArrayList<Integer> aux = melhoresMarcadoresAux();
+        Jogador j = new Jogador();
+        for (int i = 0; i < aux.size(); i++) {
+            j = buscaJogador(aux.get(i));
+            res.add(i,j);
+        }
+        return res;
+    }
+    public boolean atualizaTorneio(Jogo j) {
+        this.atualizaGoleadores(j);
+        this.estatisticaCompeticao.actualizaClassificacao(j);
+        return this.fases.get(this.getNFase()).atualizaFase(j);
+    }
 }

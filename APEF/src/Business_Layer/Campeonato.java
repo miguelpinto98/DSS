@@ -201,8 +201,7 @@ public class Campeonato implements Competicao{
 
     public void inscreverEscalao(Escalao e) {
         inserirEscalao(e);
-        this.nrEscaloes--;//nao e' preciso ter isto. depois basta ver se size()==nrEquipas
-                          //e entao pode-se "IniciarCampeonato"
+        this.nrEscaloes--;
     }
 
     public static ArrayList<Integer> moveArray(ArrayList<Integer> le) {
@@ -393,9 +392,12 @@ public class Campeonato implements Competicao{
     }
     
 	public boolean atualizaCampeonato(Jogo j) {
-        this.atualizaGoleadores(j);
-        this.classificacao.actualizaClassificacao(j);
-		return this.calendario.atualizaCalendario(j);
+        if(j.getIdCompeticao() == this.id) {
+            this.atualizaGoleadores(j);
+            this.classificacao.actualizaClassificacao(j);
+            return this.calendario.atualizaCalendario(j); 
+        }
+        else return false;
 	}
     
     public ArrayList<Integer> melhoresMarcadoresAux() {

@@ -134,18 +134,29 @@ public class Epoca {
         this.campeonatos[c.getTipoEscalao()] = c;
     }
     
-    public void inscreve(Escalao e) {
+    public void inscreveEmCampeonato(Escalao e) {
         this.campeonatos[e.getTipoEscalao()].inscreverEscalao(e);
     }
+    
+    public void inscreveEmTorneio(Escalao e, int id) {
+        for(Torneio t: this.torneios.get(e.getTipoEscalao())) {
+            if(t.getID() == id)
+                t.inscreverEscalao(e);
+        }
+    }
 
-	public void atualizaEpoca(Jogo j, int gcasa, int gfora) {
-		int idComp = j.getIdCompeticao();
+	public void atualizaEpoca(Jogo j) {
 		int idEscalao = j.getEscalaoCasa().getTipoEscalao();
-		boolean encontrou = false;
+		boolean encontrou = false, encontrouT = false;
 		
-		while(!encontrou) {
+		while(!encontrou && !encontrouT) {
 			encontrou = this.campeonatos[idEscalao].atualizaCampeonato(j);
-			//encontrou = this.torneios.get(idEscalao).atualizaTorneio();
-		}
-	}
+			for(Torneio t: this.torneios.get(idEscalao)) {
+                if(t.getID() == j.getIdCompeticao()) {
+                    encontrouT = t.atualizaTorneio(j);
+                }
+            }
+        }
+    }
 }
+
