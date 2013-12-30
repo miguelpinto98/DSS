@@ -19,6 +19,7 @@ import Business_Layer.Escola;
 import Business_Layer.Jogador;
 import Business_Layer.Jogo;
 import Business_Layer.ResponsavelEscola;
+import Business_Layer.Torneio;
 import Business_Layer.Treinador;
 import GUI.Campeonato.JCampeonatoCalendario;
 import GUI.Campeonato.JCampeonatoClassificacao;
@@ -30,6 +31,7 @@ import GUI.Header.JMenuAdmin;
 import GUI.Header.JMenuArbitro;
 import GUI.Header.JMenuResponsavelEscola;
 import GUI.Header.JRegistar;
+import GUI.Torneio.JPrincipalTorneio;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Window;
@@ -87,6 +89,10 @@ public final class Home2 extends JFrame {
         a = this.sistema.inserirEscola(e3);
         a = this.sistema.inserirEscola(e4);
         a = this.sistema.inserirEscola(e5);
+        
+        /**TORNEIOS*/
+        Torneio t1 = new Torneio("Uminho Cup",new GregorianCalendar(),new GregorianCalendar(),2,2,new Campo("UM"));
+        
         
         /* EQUIPAS */
         Equipa eq1 = new Equipa("Gelbots");
@@ -183,6 +189,7 @@ public final class Home2 extends JFrame {
         
         reloadListaEscolas();
         reloadPagInicialCampeonato();
+        reloadTorneios();
     }
     
     public void verificaUser(Utilizador user) {
@@ -278,7 +285,7 @@ public final class Home2 extends JFrame {
     }
     
     public String devolveSeleccionadosEscolas() {
-        return (listaEscolas.getSelectedIndex() != -1) ? (listaEscolas.getSelectedValue().toString()) : null ;
+        return (listaEscolas.getSelectedIndex() != -1) ? (listaEscolas.getSelectedValue().toString()) : null ; 
    
     }
     
@@ -312,7 +319,7 @@ public final class Home2 extends JFrame {
         this.jPanel8.add(new JCampeonatoJornadas(this,user),BorderLayout.CENTER);
         this.jPanel8.updateUI();
         this.jPanel8.validate();
-    }
+    } 
     
     public void reloadButtonEstatistica() {
         this.jPanel8.removeAll();
@@ -332,7 +339,13 @@ public final class Home2 extends JFrame {
         this.jPanel8.validate();
     }
     
-    /* */
+    /*TAB TORNEIOS*/
+    
+    public void reloadTorneios(){
+        this.JTabEscolas.remove(jPanel9);
+        this.JTabEscolas.add("Torneios",new JPrincipalTorneio(this,user));
+    }
+    
     
     
     /**
