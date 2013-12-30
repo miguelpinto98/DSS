@@ -1,6 +1,7 @@
 package GUI;
 
 import Business_Layer.Admin;
+import Business_Layer.Jogador;
 import Business_Layer.ResponsavelEscola;
 import Business_Layer.Utilizador;
 import java.awt.BorderLayout;
@@ -10,21 +11,27 @@ public final class ConsultarJogador extends javax.swing.JDialog {
     
     private Home2 root;
     private Utilizador user;
+    private Jogador jogador;
     
-    public ConsultarJogador(Home2 root, Integer IdJogador){
-        this.root = root;        
+    public ConsultarJogador(Home2 root, Utilizador user, Jogador j){
+        this.root = root;
+        this.user = user;
+        this.jogador = j;
                
+        initComponents();
+        
+        verificaUser();
     }
     
-    public void verificaUser(Utilizador user){
-            if(user != null){
-                if(user instanceof Admin || user instanceof ResponsavelEscola) {
-                    this.jPanel2.add(new ConsultarJogador2(), BorderLayout.SOUTH);
+    public void verificaUser(){
+            if(this.user != null){
+                if(this.user instanceof Admin || this.user instanceof ResponsavelEscola) {
+                    this.remove(this.jPanel1);
+                    this.add(new ConsultarJogador2(this.jogador), BorderLayout.CENTER);
                 }
-                else ;
             }
-        
-            else ;}
+            else 
+                this.remove(this.jPanel1);}
 
    
     @SuppressWarnings("unchecked")
@@ -32,8 +39,6 @@ public final class ConsultarJogador extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        header = new javax.swing.JPanel();
-        header_texto = new javax.swing.JLabel();
         dados_pessoais = new javax.swing.JPanel();
         avatar = new javax.swing.JLabel();
         nome_l = new javax.swing.JLabel();
@@ -49,34 +54,11 @@ public final class ConsultarJogador extends javax.swing.JDialog {
         comp_realizadas = new javax.swing.JList();
         jScrollPane1 = new javax.swing.JScrollPane();
         comp_ativas = new javax.swing.JList();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel2.setLayout(new java.awt.BorderLayout());
-
-        header.setBackground(new java.awt.Color(153, 153, 153));
-
-        header_texto.setBackground(new java.awt.Color(153, 153, 153));
-        header_texto.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        header_texto.setForeground(new java.awt.Color(255, 255, 255));
-        header_texto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        header_texto.setText("Perfil Jogador");
-
-        javax.swing.GroupLayout headerLayout = new javax.swing.GroupLayout(header);
-        header.setLayout(headerLayout);
-        headerLayout.setHorizontalGroup(
-            headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(header_texto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 805, Short.MAX_VALUE)
-        );
-        headerLayout.setVerticalGroup(
-            headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(headerLayout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(header_texto)
-                .addContainerGap(45, Short.MAX_VALUE))
-        );
-
-        jPanel2.add(header, java.awt.BorderLayout.PAGE_START);
 
         dados_pessoais.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados Pessoais", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 14), new java.awt.Color(102, 102, 102))); // NOI18N
 
@@ -195,8 +177,22 @@ public final class ConsultarJogador extends javax.swing.JDialog {
         );
 
         jPanel2.add(competicoes, java.awt.BorderLayout.CENTER);
+        competicoes.getAccessibleContext().setAccessibleDescription("");
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.PAGE_START);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 805, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 110, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -209,8 +205,7 @@ public final class ConsultarJogador extends javax.swing.JDialog {
     private javax.swing.JList comp_realizadas;
     private javax.swing.JPanel competicoes;
     private javax.swing.JPanel dados_pessoais;
-    private javax.swing.JPanel header;
-    private javax.swing.JLabel header_texto;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

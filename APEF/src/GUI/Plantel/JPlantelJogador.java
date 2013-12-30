@@ -9,10 +9,13 @@ package GUI.Plantel;
 import Business_Layer.Escalao;
 import Business_Layer.Jogador;
 import Business_Layer.Utilizador;
+import GUI.ConsultarJogador;
 import GUI.Home2;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.Set;
 import javax.swing.DefaultListModel;
+import javax.swing.JDialog;
 
 /**
  *
@@ -21,10 +24,12 @@ import javax.swing.DefaultListModel;
 public class JPlantelJogador extends javax.swing.JPanel {
 
     private Home2 root;
+    private Utilizador user;
     private Escalao escalao;
 
     public JPlantelJogador(Home2 root, Escalao esc, Utilizador user) {
         this.root = root;
+        this.user = user;
         this.escalao = esc;
         initComponents();
         
@@ -64,6 +69,11 @@ public class JPlantelJogador extends javax.swing.JPanel {
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
+        listaJogadores.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                listaJogadoresKeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(listaJogadores);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -79,13 +89,18 @@ public class JPlantelJogador extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         add(jPanel1, java.awt.BorderLayout.LINE_START);
 
         consultaJog.setText("Consultar");
+        consultaJog.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultaJogActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -93,7 +108,7 @@ public class JPlantelJogador extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(consultaJog, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
+                .addComponent(consultaJog, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -101,11 +116,33 @@ public class JPlantelJogador extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(consultaJog, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(219, Short.MAX_VALUE))
+                .addContainerGap(215, Short.MAX_VALUE))
         );
 
         add(jPanel2, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void listaJogadoresKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_listaJogadoresKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_listaJogadoresKeyPressed
+
+    private void consultaJogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaJogActionPerformed
+        // TODO add your handling code here:
+        String jog = (String) this.listaJogadores.getSelectedValue();
+        Iterator t = this.escalao.getJogadores().values().iterator();
+        boolean encontrou = false;
+        Jogador j = null;
+        
+        while(t.hasNext() && !encontrou) {
+            j = (Jogador) t.next();
+            if(j.getNome().equals(jog))
+                encontrou = true;
+            System.out.println("ARRROZ");
+        }
+        
+        JDialog frame = new ConsultarJogador(this.root,this.user,j);
+        frame.setVisible(true);
+    }//GEN-LAST:event_consultaJogActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -9,6 +9,7 @@ public class ConsultarJogador2 extends javax.swing.JPanel {
         
       public ConsultarJogador2(Jogador jogador) {
           this.jogador = jogador;
+
         initComponents();
         
         this.nome_t.setText(this.jogador.getNome());
@@ -143,8 +144,9 @@ public class ConsultarJogador2 extends javax.swing.JPanel {
      
      private int mudaNascimento(int ok){
          GregorianCalendar sistema = new GregorianCalendar();
-         GregorianCalendar selecionada = nascimento_t.get
-                 if(sistema.after(selecionada)){
+         //GregorianCalendar selecionada = nascimento_t.get
+//                 if(sistema.after(selecionada))
+         {
                      
                  }
          
@@ -164,10 +166,10 @@ public class ConsultarJogador2 extends javax.swing.JPanel {
     private void concluidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_concluidoActionPerformed
         int ok=0;
         
-        if ((nome_c.isSelected()==true) && ok==0) this.mudaNome(ok);       
-        if ((sexo_c.isSelected()==true) && ok==0) this.mudaSexo(ok);        
-        if ((nascimento_c.isSelected()==true && ok==0)) this.mudaNascimento(ok);        
-        if ((foto_c.isSelected()==true) && ok==0)this.mudaFoto(ok);
+        //if ((nome_c.isSelected()==true) && ok==0) this.mudaNome(ok);       
+        //if ((sexo_c.isSelected()==true) && ok==0) this.mudaSexo(ok);        
+        //if ((nascimento_c.isSelected()==true && ok==0)) this.mudaNascimento(ok);        
+        //if ((foto_c.isSelected()==true) && ok==0)this.mudaFoto(ok);
         
         if(ok==0) validadeDados.setText("Dados Alterados com Sucesso");  
     }//GEN-LAST:event_concluidoActionPerformed
