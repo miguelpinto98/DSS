@@ -235,9 +235,9 @@
       </Constraints>
     </Component>
     <Component class="javax.swing.JPasswordField" name="pass">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jPasswordField1"/>
-      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="passActionPerformed"/>
+      </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="170" y="110" width="210" height="-1"/>
@@ -245,9 +245,6 @@
       </Constraints>
     </Component>
     <Component class="javax.swing.JPasswordField" name="confpass">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jPasswordField2"/>
-      </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="170" y="140" width="210" height="-1"/>

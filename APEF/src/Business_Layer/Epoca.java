@@ -134,6 +134,12 @@ public class Epoca {
         this.campeonatos[c.getTipoEscalao()] = c;
     }
     
+    public void inserirTorneio(Torneio t){
+        HashSet<Torneio> ts = new HashSet<>();
+        ts.add(t);
+        this.torneios.add(t.getTipoEscalao(), ts);
+    }
+    
     public void inscreveEmCampeonato(Escalao e) {
         this.campeonatos[e.getTipoEscalao()].inscreverEscalao(e);
     }

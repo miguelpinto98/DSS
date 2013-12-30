@@ -22,8 +22,8 @@ public class Treinador extends Pessoa {
     	if ( (o == null) || (this.getClass() != o.getClass()) )
     		return false;
         else {
-    	Jogador jogador = (Jogador) o;
-    	return this.getID() == (jogador.getID());
+    	Treinador t = (Treinador) o;
+    	return this.getID() == (t.getID());
         }
     }
 

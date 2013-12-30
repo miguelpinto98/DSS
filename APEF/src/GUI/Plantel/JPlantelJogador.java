@@ -19,6 +19,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
+
 
 /**
  *
@@ -36,7 +38,15 @@ public class JPlantelJogador extends javax.swing.JPanel {
         this.escalao = esc;
         initComponents();
         
-        atualizaJogadores();
+        if(escalao != null)
+            atualizaJogadores();
+        else {
+            this.jPanel1.setVisible(false);
+            this.consultaJog.setVisible(false);
+            
+            JLabel text = new JLabel("Nenhum Plantel Registado Nesta Equipa!");
+            this.add(text);
+        }       
     }
     
     public void atualizaJogadores() {

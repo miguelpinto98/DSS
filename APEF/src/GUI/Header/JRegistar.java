@@ -23,7 +23,6 @@ public class JRegistar extends javax.swing.JDialog {
         this.sys = sistema;
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
-        sys.setEnabled(false);
     }
 
     /**
@@ -138,10 +137,12 @@ public class JRegistar extends javax.swing.JDialog {
         arb.setText("Árbitro");
         getContentPane().add(arb, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
 
-        pass.setText("jPasswordField1");
+        pass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passActionPerformed(evt);
+            }
+        });
         getContentPane().add(pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 210, -1));
-
-        confpass.setText("jPasswordField2");
         getContentPane().add(confpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, 210, -1));
 
         setBounds(0, 0, 411, 335);
@@ -152,10 +153,20 @@ public class JRegistar extends javax.swing.JDialog {
         APEF sistema = sys.getSistema();
 
         String nomeUser = this.nomeUtilizador.getText();
-        String pw = this.pass.getText();
-        String confpw = this.confpass.getText();
+        char[] pw1 = this.pass.getPassword();
+        char[] confpw1 = this.confpass.getPassword();
         String mail = this.email.getText();
         String confmail = this.confemail.getText();
+        
+        StringBuilder p = new StringBuilder();
+        for(char c : pw1)
+            p.append(c);
+        String pw = p.toString();
+        
+        p = new StringBuilder();
+        for(char c : confpw1)
+            p.append(c);
+        String confpw = p.toString();
         
         boolean a = arb.isSelected();
         boolean re = resp.isSelected();
@@ -196,6 +207,10 @@ public class JRegistar extends javax.swing.JDialog {
         this.sys.setEnabled(true);
         dispose();
     }//GEN-LAST:event_cancelaActionPerformed
+
+    private void passActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton arb;

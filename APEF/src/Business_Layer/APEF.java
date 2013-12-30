@@ -321,13 +321,20 @@ public class APEF {
     /*Isto serve para confirmar se a inscricao acabou, e o admin pode agora "IniciarCampeonato"(metodo a ser 
     definido, que ja ira verificar 1�� se tem o nr de equipas pre-definido e de seguida, gerar o calendario, etc.)
     */
-    public boolean acabouInscricao(Campeonato c) {
+    public boolean acabouInscricaoCampeonato(Campeonato c) {
         GregorianCalendar now = new GregorianCalendar();
-        if ( c.getDataLimiteInscricoes().before(now) && c.getNrEscaloes()==0) 
+        if ( c.getDataLimiteInscricoes().before(now) && c.getDataInicio().after(now) && c.getNrEscaloes()==0) 
             return true;
         else return false;
     }
-
+    
+    public boolean acabouInscricaoTorneioTipo1(Torneio t) {
+        GregorianCalendar now = new GregorianCalendar();
+        if (t.getDataLimiteInscricoes().before(now) && (t.getNrEscaloes()==8 || t.getNrEscaloes()==10)) 
+            return true;
+        else return false;
+    }
+    
     public int countArbitros() {
 		int res=0;
 		for(String s : this.users.keySet())
@@ -358,7 +365,7 @@ public class APEF {
         arrayArbitros = daListaArbitros();
         int nrEscaloes = c.getListaEscaloes().size();
 
-        if (acabouInscricao(c) && countArbitros()>=((nrEscaloes)/2)){
+        if (acabouInscricaoCampeonato(c) && countArbitros()>=((nrEscaloes)/2)){
         	for(Escalao e : c.getListaEscaloes()){
         		arrayEquipas.add(e.getID());
                 arrayCampos.add(daCampoEscalao(e));
@@ -386,6 +393,17 @@ public class APEF {
         return res;
     }
     
+    public boolean iniciarTorneioTipo1(Torneio t){
+    	boolean res=false;
+        int nrEscaloes = t.getListaEscaloes().size();
+        if (acabouInscricaoTorneioTipo1(t) && countArbitros()>=((nrEscaloes)/2)){
+        	firstFaseTorneioTipo1(t);
+                res=true;
+
+    	}
+        return res;
+    }
+    
     public Torneio firstFaseTorneioTipo1 (Torneio t){
         ArrayList<Integer> arrayEquipas = new ArrayList<>();
         ArrayList<Integer> arrayEquipasGrupo1 = new ArrayList<>();
@@ -401,30 +419,41 @@ public class APEF {
 
         int i,nrEquipas;
         nrEquipas = t.getNrEscaloes();
+        /**
+        for(i=0;i<nrEquipas;i++){
+            if(i<nrEquipas/2) {	
+                equipasGrupo1.add(t.buscaEscalao(arrayEquipas.get(i)));
+            }
+            else {
+                for(i=nrEquipas/2;i<nrEquipas;i++){
+                    if(i>=nrEquipas)
+                        equipasGrupo2.add(t.buscaEscalao(arrayEquipas.get(i)));
+                }
+            }
+        }*/
         
-        for(i=0;i<(nrEquipas/2);i++){
-        	equipasGrupo1.add(t.buscaEscalao(arrayEquipas.get(i)));
+        for(i=0;i<nrEquipas/2;i++){	
+                equipasGrupo1.add(t.buscaEscalao(arrayEquipas.get(i)));
+            }
+        for(i=nrEquipas/2;i<nrEquipas;i++){
+            equipasGrupo2.add(t.buscaEscalao(arrayEquipas.get(i)));
         }
-
-        for(i=(nrEquipas/2);i<(nrEquipas);i++){
-        	equipasGrupo2.add(t.buscaEscalao(arrayEquipas.get(i)));
-        }
-
+        
         Grupo g1 = new Grupo("Grupo A",equipasGrupo1);
         Grupo g2 = new Grupo("Grupo B",equipasGrupo2);
         
         for (Escalao e : equipasGrupo1){
-            DadosEstatisticos d = new DadosEstatisticos();
-            d.setIdEscalao(e.getID());
-        	g1.getClassificacao().getEstatistica().add(d);
                 arrayEquipasGrupo1.add(e.getID());
+                DadosEstatisticos x = new DadosEstatisticos(e.getID());
+                g1.getClassificacao().inserirDados(x);
+                t.getEstatisticaCompeticao().inserirDados(x);
         }
 
         for (Escalao e : equipasGrupo2){
-            DadosEstatisticos d = new DadosEstatisticos();
-            d.setIdEscalao(e.getID());
-        	g2.getClassificacao().getEstatistica().add(d);
                 arrayEquipasGrupo2.add(e.getID());
+                DadosEstatisticos x = new DadosEstatisticos(e.getID());
+                g2.getClassificacao().inserirDados(x);
+                t.getEstatisticaCompeticao().inserirDados(x);
         }
 
         
@@ -433,11 +462,11 @@ public class APEF {
         arrayArbitrosDisponiveis = daArbitrosDisponiveis(arbitrosEscolhidos, arrayArbitros);
         g2.geraCalendario(t.getID(),t.getDataInicio(),arrayEquipasGrupo2,t.getCampo(),arrayArbitrosDisponiveis);
         
-        Fase f1 = (Fase) g1;
-        Fase f2 = (Fase) g2;
-        
-        t.getFases().add(f1);
-        t.getFases().add(f2);
+        Fase f1 = (Grupo) g1;
+        Fase f2 = (Grupo) g2;
+
+        t.inserirGrupo(f1);
+        t.inserirGrupo(f2);
         
         return t;
     }

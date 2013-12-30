@@ -167,7 +167,12 @@ public class ConsultarJogador2 extends javax.swing.JPanel {
     private void mudaSexo(){
         String n = sexo_t.getSelectedItem().toString();
             if (n.equals("Masculino")) this.jogador.setSexo(1);
-            if (n.equals("Feminino")) this.jogador.setSexo(2);}
+
+            if (n.equals("Feminino")) this.jogador.setSexo(2);
+            if (n.equals("Não Definido")) {validadeDados.setText("Sexo Indefinido");}
+       }
+     
+     
      
     public static GregorianCalendar DateToCalendar(Date date){ 
         Calendar cal = Calendar.getInstance();

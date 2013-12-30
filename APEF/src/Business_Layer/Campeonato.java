@@ -49,7 +49,7 @@ public class Campeonato implements Competicao{
         this.dataLimiteInscricoes = ca.getDataLimiteInscricoes();
     }
 
-    public Campeonato(String nome, GregorianCalendar limiteInscricao, int tipo, int nrEquipasMax) {
+    public Campeonato(String nome, GregorianCalendar inicio, GregorianCalendar limiteInscricao, int tipo, int nrEquipasMax) {
         this.id = APEF.IDENTIFICADOR;
         this.tipoEscalao = tipo;
         this.nome = nome;
@@ -58,7 +58,7 @@ public class Campeonato implements Competicao{
         this.listaEscaloes = new HashSet<>();
         this.goleadores = new HashMap<>();
         this.classificacao = new EstatisticaCompeticao();
-        this.dataInicio = limiteInscricao;
+        this.dataInicio = inicio;
         this.dataLimiteInscricoes = limiteInscricao;
         APEF.IDENTIFICADOR++;
     }

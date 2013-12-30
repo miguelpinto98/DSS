@@ -39,7 +39,7 @@ public class Torneio implements Competicao{
         this.campo = new Campo();
     }
     
-    public Torneio(String nome, GregorianCalendar limite, int tipo, int nrEquipas, Campo campo){
+    public Torneio(String nome, GregorianCalendar inicio, GregorianCalendar limite, int tipo, int nrEquipas, Campo campo){
         this.id = APEF.IDENTIFICADOR;
         this.tipoEscalao = tipo;
         this.nome = nome;
@@ -49,7 +49,7 @@ public class Torneio implements Competicao{
         this.estatisticaCompeticao = new EstatisticaCompeticao();
         this.fases = new ArrayList<>();
         this.nFase = 0;
-        this.dataInicio = new GregorianCalendar();
+        this.dataInicio = inicio;
         this.dataLimiteInscricoes = limite;
         this.campo = campo;
     }   
@@ -135,7 +135,7 @@ public class Torneio implements Competicao{
         ArrayList<Fase> aux = new ArrayList<>();
 
         for(Fase f : this.fases){
-            aux.add(f);
+            aux.add(f.clone());
         }
         return aux;
     }
@@ -201,7 +201,13 @@ public class Torneio implements Competicao{
         StringBuilder str = new StringBuilder(); 
         
         str.append("--Torneio--\n");
-        
+        str.append("\nID: "+this.getID());
+        str.append("\nNome: "+this.getNome());
+        str.append("\nNrEquipas: "+this.getNrEscaloes());
+        str.append("\nParticipantes: "+this.getListaEscaloes());
+        str.append("\nClassificacao:"+this.estatisticaCompeticao);
+        for(Fase x : this.fases)
+            str.append(x.toString());
         return str.toString(); 
     }
     
@@ -314,6 +320,10 @@ public class Torneio implements Competicao{
             this.estatisticaCompeticao.actualizaClassificacao(j);
         }
         return res;
+    }
+    
+    public void inserirGrupo (Fase f){
+        this.fases.add(f);
     }
 }
         

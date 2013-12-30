@@ -11,6 +11,7 @@ import Business_Layer.Treinador;
 import Business_Layer.Utilizador;
 import GUI.Home2;
 import java.util.GregorianCalendar;
+import javax.swing.JLabel;
 
 /**
  *
@@ -26,7 +27,10 @@ public class JPlantelTreinador extends javax.swing.JPanel {
         this.escalao = esc;
         initComponents();
         
-        atualizaDadosTreinador(this.escalao.getTreinador());
+        if(this.escalao != null)
+            atualizaDadosTreinador(this.escalao.getTreinador());
+        else
+            atualizaDadosTreinadorNULL();
     }
     
     public void atualizaDadosTreinador(Treinador t) {
@@ -45,6 +49,19 @@ public class JPlantelTreinador extends javax.swing.JPanel {
                 res = "Feminino";
         }  
         this.sexo.setText(res);
+    }
+    
+    public void atualizaDadosTreinadorNULL() {
+        this.avatar.setVisible(false);
+        this.data.setVisible(false);
+        this.sexo.setVisible(false);
+        this.jLabel1.setVisible(false);
+        this.jLabel2.setVisible(false);
+        this.jLabel3.setVisible(false);
+        this.nome.setText("Nenhuma Plantel Registado!");
+        
+        JLabel text = new JLabel("Nenhum Plantel Registado Nesta Equipa!");
+        this.add(text);
     }
 
     /**

@@ -20,18 +20,19 @@ import javax.swing.JDialog;
  */
 public class JOpcoesAdmin extends javax.swing.JPanel {
 
+    private ConsultasEscola cEscola;
     private Home2 root;
     private Utilizador user;
     private Escola escola;
 
-    public JOpcoesAdmin(Home2 root, Escola esc, Utilizador user, ConsultasEscola ce) {
+    public JOpcoesAdmin(ConsultasEscola aThis, Home2 root, Escola esc, Utilizador user, ConsultasEscola aThis0) {
+        this.cEscola = aThis;
         this.root = root;
         this.escola = esc;
         this.user = user;
         initComponents();
         
         ativarComboEscolas();
-        
     }
 
     public void ativarComboEscolas() {
@@ -40,8 +41,9 @@ public class JOpcoesAdmin extends javax.swing.JPanel {
         for(String s : this.escola.getEquipas().keySet())
             dcb.addElement(s);
         
-        this.comboEquipas.setModel(dcb);
+        this.comboEquipas1.setModel(dcb);
     }
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -140,10 +142,6 @@ public class JOpcoesAdmin extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_comboEquipasActionPerformed
 
-    private void comboEquipas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboEquipas1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboEquipas1ActionPerformed
-
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton7ActionPerformed
@@ -153,6 +151,12 @@ public class JOpcoesAdmin extends javax.swing.JPanel {
         JDialog frame = new jAdicionarEquipa(this.root, this.user);
         frame.setVisible(true);
     }//GEN-LAST:event_adicionarEquipaActionPerformed
+
+    private void comboEquipas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboEquipas1ActionPerformed
+        // TODO add your handling code here:
+        String s = this.comboEquipas1.getSelectedItem().toString();
+        cEscola.reloadPanelEquipaGeral(s);
+    }//GEN-LAST:event_comboEquipas1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

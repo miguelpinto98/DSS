@@ -137,7 +137,7 @@ public class Grupo extends Fase {
         int nrEscaloes = listaEscaloes.size();
         int count = 0;
         int nrJornadas = nrEscaloes-1;
-        int i, varAux;
+        int i;
         Escalao casa,fora;
         ArrayList<Integer> copia = new ArrayList<>();
         HashSet<Utilizador> resArbitros = new HashSet<>();
@@ -169,15 +169,7 @@ public class Grupo extends Fase {
             
             Jornada jornada = new Jornada(count+1);
             GregorianCalendar data = new GregorianCalendar(); 
-            
-            if (count==0) {
-                data = dataInicio;
-            }
-            else {
-                data = dataJornadaSeguinte(data,count);
-            }
-            
-            
+            data = dataInicio;
             if(count % 2 != 0) {
                 for (i=0; i<(nrEscaloes/2); i++){
                     casa = buscaEscalao(array1.get(i));
