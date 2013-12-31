@@ -386,6 +386,8 @@ public class Torneio implements Competicao{
         if (res3)
             this.thirdFaseTorneioTipo1(e.vencedores());
         
+        
+        
         return res;
     }
 
