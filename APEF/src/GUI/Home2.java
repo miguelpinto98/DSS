@@ -281,7 +281,7 @@ public final class Home2 extends JFrame {
         
         for(String e : lesc) 
             str.addElement(e);
-        
+       
         listaEscolas.setModel(str);
     }
     
@@ -381,7 +381,7 @@ public final class Home2 extends JFrame {
         JPanelEscolaConvidado = new javax.swing.JPanel();
         panelListaEscolas = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        listaEscolas = new javax.swing.JList();
+        listaEscolas = new javax.swing.JList<String>();
         botoesConvidadoEscola = new javax.swing.JPanel();
         consultaEscola = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
@@ -702,6 +702,7 @@ public final class Home2 extends JFrame {
         panelListaEscolas.setBackground(new java.awt.Color(248, 247, 247));
         panelListaEscolas.setPreferredSize(new java.awt.Dimension(500, 450));
 
+        listaEscolas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(listaEscolas);
 
         javax.swing.GroupLayout panelListaEscolasLayout = new javax.swing.GroupLayout(panelListaEscolas);
@@ -1133,7 +1134,7 @@ public final class Home2 extends JFrame {
     private org.jdesktop.swingx.JXTable jTabProximos;
     private javax.swing.JTable jTable1;
     private org.jdesktop.swingx.JXSearchField jXSearchField1;
-    private javax.swing.JList listaEscolas;
+    private javax.swing.JList<String> listaEscolas;
     private javax.swing.JPanel panelAlteracaoesCamp;
     private javax.swing.JPanel panelListaEscolas;
     private javax.swing.JPanel panelMelhoresMarcadores;
