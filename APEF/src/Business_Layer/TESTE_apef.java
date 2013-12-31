@@ -360,7 +360,7 @@ public class TESTE_apef {
     
     a.iniciarTorneioTipo1(infantis);
     //System.out.println(a.firstFaseTorneioTipo1(infantis));
-    System.out.println(infantis.getFases());
+    //System.out.println(infantis.getFases());
     //System.out.println(infantis.getFases());
     
     /**GregorianCalendar gg = new GregorianCalendar();

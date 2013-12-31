@@ -335,6 +335,13 @@ public class APEF {
         else return false;
     }
     
+    public boolean acabouInscricaoTorneioTipo2(Torneio t) {
+        GregorianCalendar now = new GregorianCalendar();
+        if (t.getDataLimiteInscricoes().before(now) && t.getNrEscaloes()<33) 
+            return true;
+        else return false;
+    }
+    
     public int countArbitros() {
 		int res=0;
 		for(String s : this.users.keySet())
@@ -404,6 +411,17 @@ public class APEF {
         return res;
     }
     
+    public boolean iniciarTorneioTipo2(Torneio t){
+    	boolean res=false;
+        int nrEscaloes = t.getListaEscaloes().size();
+        if (acabouInscricaoTorneioTipo2(t) && countArbitros()>=((nrEscaloes)/2)){
+        	   eliminatoriaTorneioTipo2(t);
+                res=true;
+
+    	}
+        return res;
+    }
+    
     public Torneio firstFaseTorneioTipo1 (Torneio t){
         ArrayList<Integer> arrayEquipas = new ArrayList<>();
         ArrayList<Integer> arrayEquipasGrupo1 = new ArrayList<>();
@@ -460,7 +478,63 @@ public class APEF {
         
         return t;
     }
-
+    
+    public String daNomeEliminatoria(int x){
+        String res = "";
+        switch (x){
+            case 32: res="1/16 DE FINAL";
+                break;
+            case 16: res="OITAVOS-DE-FINAL";
+                break;
+            case 8: res="QUARTOS-DE-FINAL";
+                break;
+            case 4: res="MEIA-FINAL";
+                break;
+        }
+        return res;
+    }
+    
+    public Torneio eliminatoriaTorneioTipo2 (Torneio t) {
+        HashSet<Escalao> equipas = new HashSet<>();
+        ArrayList<Integer> arrayEquipas = new ArrayList<>();
+        equipas = t.getListaEscaloes();
+        int nrEquipas = equipas.size();
+        for(Escalao e: equipas){
+            arrayEquipas.add(e.getID());
+            DadosEstatisticos x = new DadosEstatisticos(e.getID());
+            t.getEstatisticaCompeticao().inserirDados(x);
+        }
+        
+        ArrayList<Utilizador> arbs = new ArrayList<>();
+        arbs = daListaArbitros();
+        String nomeEliminatoria = daNomeEliminatoria(nrEquipas);
+        Eliminatoria elimi = new Eliminatoria(nomeEliminatoria,equipas);
+        elimi.geraCalendarioTipo2(t.getID(), t.getDataInicio(), arbs, arrayEquipas, t.getCampo());
+        Fase f = (Fase) elimi;
+        
+        t.getFases().add(f);
+        
+    return t;
+    }
+    
+    public Torneio secondEliminatoriaTorneioTipo2 (Torneio t, ArrayList<Integer> listaEquipas) {
+        HashSet<Escalao> equipas = new HashSet<>();
+        ArrayList<Utilizador> arbs = new ArrayList<>();
+        arbs = daListaArbitros();
+        int i=0;
+        for(i=0;i<listaEquipas.size();i++){
+            equipas.add(t.buscaEscalao(listaEquipas.get(i)));
+        }
+        String nomeEliminatoria = daNomeEliminatoria(listaEquipas.size());
+        Eliminatoria elimi = new Eliminatoria(nomeEliminatoria,equipas);
+        elimi.geraCalendarioTipo2(t.getID(), t.getDataInicio(), arbs, listaEquipas, t.getCampo());
+        Fase f = (Fase) elimi;
+        
+        t.getFases().add(f);
+        
+    return t;
+    }
+    
 	public void addResultadoCompeticao(Jogo j) {
 		GregorianCalendar g = new GregorianCalendar();
 		int ano = g.get(GregorianCalendar.YEAR);
