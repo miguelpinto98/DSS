@@ -29,18 +29,6 @@ public class Escalao {
         this.dados = new DadosEstatisticos();
     }
     
-    public Escalao(int tipo, Treinador t, HashMap<Integer,Jogador> j, Agenda a, DadosEstatisticos d) {
-    	this.id = APEF.IDENTIFICADOR;
-        this.nomeEscola = "Universidade do Minho";
-        this.nomeEquipa = "CeSIUM";
-    	this.tipoEscalao = tipo;
-    	this.treinador = t;
-    	this.jogadores = j;
-    	this.agenda = a;
-    	this.dados = d;
-        APEF.IDENTIFICADOR++;
-    }
-    
     public Escalao(int tipo, String nomeEquipa, String nomeEscola) {
         this. id = APEF.IDENTIFICADOR;
         this.tipoEscalao = tipo;
@@ -62,6 +50,17 @@ public class Escalao {
     	this.jogadores = p.getJogadores();
         this.agenda = p.getAgenda();
         this.dados = p.getDados();
+    }
+    
+    public Escalao(int tipo, String nEscola, String nEquipa, Treinador t) {
+        this.id = APEF.IDENTIFICADOR; APEF.IDENTIFICADOR++;
+        this.tipoEscalao = tipo;
+        this.nomeEscola = nEscola;
+        this.nomeEquipa = nEquipa;
+        this.treinador = t;
+        this.jogadores = new HashMap<>();
+        this.agenda = new Agenda();
+        this.dados = new DadosEstatisticos(); 
     }
 
     //Getters

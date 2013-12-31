@@ -62,7 +62,7 @@ public class JOpcoesAdmin extends javax.swing.JPanel {
 
         comboEquipas = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
-        comboEquipas1 = new javax.swing.JComboBox();
+        comboEquipas1 = new javax.swing.JComboBox<String>();
         jSeparator1 = new javax.swing.JSeparator();
         palmares = new javax.swing.JButton();
         adicionarEquipa = new javax.swing.JButton();
@@ -221,7 +221,7 @@ public class JOpcoesAdmin extends javax.swing.JPanel {
     private javax.swing.JButton adicionarEquipa;
     private org.jdesktop.swingx.JXImageView avataer;
     private javax.swing.JComboBox comboEquipas;
-    private javax.swing.JComboBox comboEquipas1;
+    private javax.swing.JComboBox<String> comboEquipas1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JSeparator jSeparator1;

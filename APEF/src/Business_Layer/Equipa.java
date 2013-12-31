@@ -1,6 +1,9 @@
 package Business_Layer;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 
 public class Equipa {
@@ -147,4 +150,20 @@ public class Equipa {
 	public void removerEscalao(Escalao a) {
 		this.escaloes[a.getTipoEscalao()] = null;
 	}
+    
+    public boolean criarEscalao(int tipo, String nEscola, String nEquipa, String nTreinador, Date d, int sexo, Imagem img) {
+        Calendar g = new GregorianCalendar();
+        g.setTime(d);
+        
+        Treinador t = new Treinador(nTreinador,img, (GregorianCalendar) g,sexo);
+        Escalao e = null;
+        boolean res = false;
+        
+        if(this.nome.equals(nEquipa)) {
+            e = new Escalao(tipo, nEscola, nEquipa, t);
+            this.escaloes[tipo] = e;
+            res = true;
+        }     
+        return res;
+    }       
 }

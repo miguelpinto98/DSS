@@ -3,40 +3,36 @@ package Business_Layer;
 import java.util.GregorianCalendar;
 
 public abstract class Pessoa {
-    
-	//Variaveis de Instancia
     private int id;
     private String nome;
     private Imagem foto;
     private GregorianCalendar dataNascimento;
     private int sexo; //0 - nao esta definido, 1 - masc , 2 - fem
 
-    //Construtores
-	public Pessoa() {
-		this.id = -1;
-		this.nome = "";
-		this.foto = null;
-		this.dataNascimento = new GregorianCalendar();
-		this.sexo = 0;
-	}
+    public Pessoa() {
+	this.id = -1;
+	this.nome = "";
+	this.foto = null;
+	this.dataNascimento = new GregorianCalendar();
+	this.sexo = 0;
+    }
 
-	public Pessoa(String name, Imagem img, 
-					GregorianCalendar data, int genero) {
-		this.id = APEF.IDENTIFICADOR;
-		this.nome = name;
-		this.foto = img;
-		this.dataNascimento = data;
-		this.sexo = genero;
+    public Pessoa(String name, Imagem img, GregorianCalendar data, int genero) {
+	this.id = APEF.IDENTIFICADOR;
+	this.nome = name;
+	this.foto = img;
+	this.dataNascimento = data;
+	this.sexo = genero;
         APEF.IDENTIFICADOR++;
-	}
+    }
 
-        public Pessoa(String name, int genero) {
-		this.id = APEF.IDENTIFICADOR;
-		this.nome = name;
-		this.sexo = genero;
-                this.dataNascimento = new GregorianCalendar();
+    public Pessoa(String name, int genero) {
+	this.id = APEF.IDENTIFICADOR;
+	this.nome = name;
+	this.sexo = genero;
+        this.dataNascimento = new GregorianCalendar();
         APEF.IDENTIFICADOR++;
-	}
+    }
         
 	public Pessoa(Pessoa p) {
 		this.id = p.getID();

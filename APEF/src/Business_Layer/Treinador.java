@@ -1,5 +1,7 @@
 package Business_Layer;
 
+import java.util.GregorianCalendar;
+
 public class Treinador extends Pessoa {
       
     //Constructors
@@ -7,8 +9,8 @@ public class Treinador extends Pessoa {
         super();
     }
 
-    public Treinador(String nome, int genero) {
-        super(nome,genero);
+    public Treinador(String nome, Imagem img ,GregorianCalendar n,int genero) {
+        super(nome,img,n,genero);
     }
     
     public Treinador(Treinador t) {

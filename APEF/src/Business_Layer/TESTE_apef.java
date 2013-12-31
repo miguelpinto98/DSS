@@ -50,7 +50,7 @@ public class TESTE_apef {
     escalao.inserirJogador(j11);
     escalao.inserirJogador(j12);
     escalao.inserirJogador(j13);
-    Treinador treinador = new Treinador("Mourinho",0);
+    Treinador treinador = new Treinador("Mourinho",new Imagem(), new GregorianCalendar(), 0);
     escalao.inserirTreinador(treinador);
     equipa.inserirEscalao(escalao);
     
@@ -87,7 +87,7 @@ public class TESTE_apef {
     escalao2.inserirJogador(j211);
     escalao2.inserirJogador(j212);
     escalao2.inserirJogador(j213);
-    Treinador treinador2 = new Treinador("Pep Guardiola",0);
+    Treinador treinador2 = new Treinador("Pep Guardiola", new Imagem(), new GregorianCalendar(), 0);
     escalao2.inserirTreinador(treinador2);
     equipa2.inserirEscalao(escalao2);
     
@@ -125,7 +125,7 @@ public class TESTE_apef {
     escalao3.inserirJogador(j311);
     escalao3.inserirJogador(j312);
     escalao3.inserirJogador(j313);
-    Treinador treinador3 = new Treinador("Ancelotti",0);
+    Treinador treinador3 = new Treinador("Ancelotti", new Imagem(), new GregorianCalendar(), 0);
     escalao3.inserirTreinador(treinador3);
     equipa3.inserirEscalao(escalao3);
     
@@ -163,7 +163,7 @@ public class TESTE_apef {
     escalao4.inserirJogador(j411);
     escalao4.inserirJogador(j412);
     escalao4.inserirJogador(j413);
-    Treinador treinador4 = new Treinador("Jorge Jesus",0);
+    Treinador treinador4 = new Treinador("Jorge Jesus", new Imagem(), new GregorianCalendar(), 0);
     escalao4.inserirTreinador(treinador4);
     equipa4.inserirEscalao(escalao4);
   
@@ -200,7 +200,7 @@ public class TESTE_apef {
     escalao5.inserirJogador(j511);
     escalao5.inserirJogador(j512);
     escalao5.inserirJogador(j513);
-    Treinador treinador5 = new Treinador("QUIM QUIM",0);
+    Treinador treinador5 = new Treinador("QUIM QUIM", new Imagem(), new GregorianCalendar(), 0);
     escalao5.inserirTreinador(treinador5);
     equipa5.inserirEscalao(escalao5);
     //EQUIPA - 6
@@ -236,7 +236,7 @@ public class TESTE_apef {
     escalao6.inserirJogador(j411);
     escalao6.inserirJogador(j412);
     escalao6.inserirJogador(j413);
-    Treinador treinador6 = new Treinador("Jorge JesusSSSSSSSSSSSS",0);
+    Treinador treinador6 = new Treinador("Jorge JesusSSSSSSSSSSSS", new Imagem(), new GregorianCalendar(), 0);
     escalao6.inserirTreinador(treinador6);
     equipa6.inserirEscalao(escalao6);
      //EQUIPA - 4
@@ -272,7 +272,7 @@ public class TESTE_apef {
     escalao7.inserirJogador(j411);
     escalao7.inserirJogador(j412);
     escalao7.inserirJogador(j413);
-    Treinador treinador7 = new Treinador("Jorge",0);
+    Treinador treinador7 = new Treinador("Jorge", new Imagem(), new GregorianCalendar(), 0);
     escalao7.inserirTreinador(treinador7);
     equipa7.inserirEscalao(escalao7);
      //EQUIPA - 8
@@ -308,7 +308,7 @@ public class TESTE_apef {
     escalao8.inserirJogador(j411);
     escalao8.inserirJogador(j412);
     escalao8.inserirJogador(j413);
-    Treinador treinador8 = new Treinador("MAAAAAAATOS",0);
+    Treinador treinador8 = new Treinador("MAAAAAAATOS", new Imagem(), new GregorianCalendar(), 0);
     escalao8.inserirTreinador(treinador8);
     equipa8.inserirEscalao(escalao8);
     

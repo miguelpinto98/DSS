@@ -6,22 +6,43 @@
 
 package GUI.Plantel;
 
+import Business_Layer.Equipa;
+import Business_Layer.Escalao;
 import Business_Layer.Escola;
+import Business_Layer.Imagem;
+import Business_Layer.Treinador;
+import GUI.ConsultasEscola;
 import GUI.Home2;
+import java.util.Date;
 
 /**
  *
  * @author miguelpinto
  */
-public class JCriarPlantel extends javax.swing.JDialog {
+public final class JCriarPlantel extends javax.swing.JDialog {
 
     private Home2 root;
     private Escola escola;
+    private Equipa equipa;
+    private ConsultasEscola ce;
 
-    public JCriarPlantel(Home2 root, Escola esc) {
+    public JCriarPlantel(Home2 root, Escola esc, Equipa equipa, ConsultasEscola ce) {
         this.root = root;
         this.escola = esc;
+        this.equipa = equipa;
+        this.ce = ce;
         initComponents();
+        
+        verificaEscalaoesDisponiveis();
+    }
+        
+    public void verificaEscalaoesDisponiveis() {
+        Escalao[] esc = this.equipa.getEscaloes();
+        
+        
+        for(int i=0; i<esc.length; i++)
+            if(esc[i] == null)
+                this.comboEscaloesDisponiveis.addItem(ce.devolveEscalaoTipo(i));
     }
 
     /**
@@ -36,7 +57,7 @@ public class JCriarPlantel extends javax.swing.JDialog {
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         title = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox();
+        comboEscaloesDisponiveis = new javax.swing.JComboBox<String>();
         jPanel2 = new javax.swing.JPanel();
         criar = new javax.swing.JButton();
         cancelar = new javax.swing.JButton();
@@ -62,8 +83,6 @@ public class JCriarPlantel extends javax.swing.JDialog {
         title.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         title.setText("Adicionar Plantel");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -73,7 +92,7 @@ public class JCriarPlantel extends javax.swing.JDialog {
                 .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(comboEscaloesDisponiveis, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -82,15 +101,25 @@ public class JCriarPlantel extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(comboEscaloesDisponiveis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
         criar.setText("Criar");
+        criar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                criarActionPerformed(evt);
+            }
+        });
 
         cancelar.setText("Cancelar");
+        cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelarActionPerformed(evt);
+            }
+        });
 
         error.setFont(new java.awt.Font("Lucida Grande", 1, 10)); // NOI18N
         error.setText("    ");
@@ -217,16 +246,39 @@ public class JCriarPlantel extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void criarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_criarActionPerformed
+        // TODO add your handling code here:
+        int selEscalao = this.ce.devolveTipoEscalao((String) this.comboEscaloesDisponiveis.getSelectedItem());
+        
+        Imagem img = new Imagem();
+        
+        String name = this.nome.getText();
+        Date date = this.data.getDate();
+        int sel = this.comboSexo.getSelectedIndex()+1;
+        
+        this.equipa.criarEscalao(selEscalao, this.escola.getNome(), this.equipa.getNome(), name, date, sel, img);
+        
+        this.ce.devolveComboEscalao().addItem(this.ce.devolveEscalaoTipo(selEscalao));
+        this.ce.verificaButtonCriar();
+        dispose();
+    }//GEN-LAST:event_criarActionPerformed
+
+    private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        this.root.setEnabled(true);
+    }//GEN-LAST:event_cancelarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton alterar;
     private org.jdesktop.swingx.JXImageView avatar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton cancelar;
+    private javax.swing.JComboBox<String> comboEscaloesDisponiveis;
     private javax.swing.JComboBox comboSexo;
     private javax.swing.JButton criar;
     private org.jdesktop.swingx.JXDatePicker data;
     private javax.swing.JLabel error;
-    private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

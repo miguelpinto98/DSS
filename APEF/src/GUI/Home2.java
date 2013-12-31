@@ -16,6 +16,7 @@ import Business_Layer.DadosEstatisticos;
 import Business_Layer.Equipa;
 import Business_Layer.Escalao;
 import Business_Layer.Escola;
+import Business_Layer.Imagem;
 import Business_Layer.Jogador;
 import Business_Layer.Jogo;
 import Business_Layer.ResponsavelEscola;
@@ -38,6 +39,7 @@ import java.awt.Window;
 import java.awt.event.KeyEvent;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Set;
@@ -110,16 +112,16 @@ public final class Home2 extends JFrame {
         Jogador jog4 = new Jogador("Luis", new GregorianCalendar(), 0,false);
         Jogador jog5 = new Jogador("Pinto", new GregorianCalendar(), 0,false);
         
-        Escalao escalao1 = new Escalao(0, new Treinador("Manuel Maria", 1), new HashMap<Integer, Jogador>(), new Agenda(), new DadosEstatisticos());
+        eq3.criarEscalao(0, "Universidade do Minho", "CeSIUM","Manuel Pato", new Date(), 0, new Imagem());
         Escalao escalao2 = new Escalao(3, "CeSIUM", "Universidade do Minho");
         
-        escalao1.inserirJogador(jog1);
-        escalao1.inserirJogador(jog2);
-        escalao1.inserirJogador(jog3);
-        escalao1.inserirJogador(jog4);
-        escalao1.inserirJogador(jog5);
+        eq3.getEscaloes()[0].inserirJogador(jog1);
+        eq3.getEscaloes()[0].inserirJogador(jog2);
+        eq3.getEscaloes()[0].inserirJogador(jog3);
+        eq3.getEscaloes()[0].inserirJogador(jog4);
+        eq3.getEscaloes()[0].inserirJogador(jog5);
         
-        this.sistema.getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").inserirEscalao(escalao1);
+        //this.sistema.getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").inserirEscalao(escalao1);
         this.sistema.getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").inserirEscalao(escalao2);
         
 
