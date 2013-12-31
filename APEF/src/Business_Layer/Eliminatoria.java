@@ -81,4 +81,31 @@ public class Eliminatoria extends Fase {
         
         getCalendario().inserirJornada(j);       
     }
+    
+    public void geraFinal(int idComp, GregorianCalendar dataInicio, ArrayList<Utilizador> arbitros, HashSet<Escalao> finalistas, Campo x) {
+        ArrayList<Utilizador> escolhidos = new ArrayList<>();
+        ArrayList<Escalao> aux = new ArrayList<>();
+        for(Escalao e : finalistas) {
+            aux.add(e);
+        }
+        
+        Utilizador arbitro = daArbitroAleatorio(arbitros,escolhidos);
+        Arbitro arb = (Arbitro) arbitro;
+        escolhidos.add(arbitro);
+        Jornada j = new Jornada();
+        Jogo jogo = new Jogo(idComp,dataInicio,x,arb,aux.get(0),aux.get(1));
+        j.inserirJogo(jogo);
+        
+    }
+    
+    public HashSet<Escalao> vencedores() {
+        HashSet<Escalao> aux = new HashSet<>();
+        for(Jogo j : this.getCalendario().getJornadas().first().getListaJogos()) {
+            if(j.getNumGolosJogoCasa()>j.getNumGolosJogoFora())
+                aux.add(j.getEscalaoCasa());
+            else
+                aux.add(j.getEscalaoFora());
+        } 
+        return aux;
+    }
 }
