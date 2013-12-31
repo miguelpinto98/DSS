@@ -6,16 +6,21 @@
 
 package GUI.Plantel;
 
+import Business_Layer.Escalao;
+import GUI.Home2;
+
 /**
  *
  * @author miguelpinto
  */
 public class JPlantelTreinadorOpcoes extends javax.swing.JPanel {
 
-    /**
-     * Creates new form JPlantelTreinadorOpcoes
-     */
-    public JPlantelTreinadorOpcoes() {
+    private Home2 root;
+    private Escalao escalao;
+
+    JPlantelTreinadorOpcoes(Home2 root, Escalao escalao) {
+        this.root = root;
+        this.escalao = escalao;
         initComponents();
     }
 
@@ -28,12 +33,12 @@ public class JPlantelTreinadorOpcoes extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        editar = new javax.swing.JButton();
+        subsitituir = new javax.swing.JButton();
 
-        jButton1.setText("Editar Informações");
+        editar.setText("Editar Informações");
 
-        jButton2.setText("Substituir");
+        subsitituir.setText("Substituir");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -42,24 +47,24 @@ public class JPlantelTreinadorOpcoes extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE))
+                    .addComponent(subsitituir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(editar, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(editar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(subsitituir, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(141, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton editar;
+    private javax.swing.JButton subsitituir;
     // End of variables declaration//GEN-END:variables
 }

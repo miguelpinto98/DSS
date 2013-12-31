@@ -6,10 +6,13 @@
 
 package GUI.Plantel;
 
+import Business_Layer.Admin;
 import Business_Layer.Escalao;
+import Business_Layer.ResponsavelEscola;
 import Business_Layer.Treinador;
 import Business_Layer.Utilizador;
 import GUI.Home2;
+import java.awt.BorderLayout;
 import java.util.GregorianCalendar;
 import javax.swing.JLabel;
 
@@ -21,16 +24,31 @@ public class JPlantelTreinador extends javax.swing.JPanel {
 
     private Home2 root;
     private Escalao escalao;
+    private Utilizador user;
 
     public JPlantelTreinador(Home2 root, Escalao esc,Utilizador user) {
         this.root = root;
         this.escalao = esc;
+        this.user = user;
         initComponents();
         
-        if(this.escalao != null)
+        if(this.escalao != null) {
             atualizaDadosTreinador(this.escalao.getTreinador());
+            verificaOpcoes();
+        }
         else
             atualizaDadosTreinadorNULL();
+    }
+    
+    public void verificaOpcoes() {
+        if(this.user != null) {
+            if(this.user instanceof Admin || this.user instanceof ResponsavelEscola) {
+                this.remove(this.jOptionsTreinador);
+                this.add(new JPlantelTreinadorOpcoes(this.root, this.escalao),BorderLayout.EAST);
+                this.updateUI();
+                this.validate();
+            }
+        }
     }
     
     public void atualizaDadosTreinador(Treinador t) {
@@ -55,11 +73,11 @@ public class JPlantelTreinador extends javax.swing.JPanel {
         this.avatar.setVisible(false);
         this.data.setVisible(false);
         this.sexo.setVisible(false);
+        this.nome.setVisible(false);
         this.jLabel1.setVisible(false);
         this.jLabel2.setVisible(false);
         this.jLabel3.setVisible(false);
-        this.nome.setText("Nenhuma Plantel Registado!");
-        
+
         JLabel text = new JLabel("Nenhum Plantel Registado Nesta Equipa!");
         this.add(text);
     }

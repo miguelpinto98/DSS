@@ -6,11 +6,14 @@
 
 package GUI.Plantel;
 
+import Business_Layer.Admin;
 import Business_Layer.Escalao;
 import Business_Layer.Jogador;
+import Business_Layer.ResponsavelEscola;
 import Business_Layer.Utilizador;
 import GUI.ConsultarJogador;
 import GUI.Home2;
+import java.awt.BorderLayout;
 import java.text.ParseException;
 import java.util.Collection;
 import java.util.Iterator;
@@ -38,15 +41,24 @@ public class JPlantelJogador extends javax.swing.JPanel {
         this.escalao = esc;
         initComponents();
         
-        if(escalao != null)
+        if(escalao != null) {
             atualizaJogadores();
+            verificaOpcoes();
+        }
         else {
             this.jPanel1.setVisible(false);
             this.consultaJog.setVisible(false);
-            
-            JLabel text = new JLabel("Nenhum Plantel Registado Nesta Equipa!");
-            this.add(text);
+            this.add(new JLabel("Nenhum Plantel Registado Nesta Equipa!"));
         }       
+    }
+    
+    public void verificaOpcoes() {
+        if(this.user != null) {
+            if(this.user instanceof Admin || this.user instanceof ResponsavelEscola) {
+                this.remove(this.panelOpcoes);
+                this.add(new jPlantelJogadorOpcoes(this.root, this.escalao), BorderLayout.EAST);
+            }
+        }
     }
     
     public void atualizaJogadores() {
@@ -71,7 +83,7 @@ public class JPlantelJogador extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         listaJogadores = new javax.swing.JList();
-        jPanel2 = new javax.swing.JPanel();
+        panelOpcoes = new javax.swing.JPanel();
         consultaJog = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Jogadores"));
@@ -115,24 +127,24 @@ public class JPlantelJogador extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelOpcoesLayout = new javax.swing.GroupLayout(panelOpcoes);
+        panelOpcoes.setLayout(panelOpcoesLayout);
+        panelOpcoesLayout.setHorizontalGroup(
+            panelOpcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelOpcoesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(consultaJog, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        panelOpcoesLayout.setVerticalGroup(
+            panelOpcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelOpcoesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(consultaJog, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(215, Short.MAX_VALUE))
         );
 
-        add(jPanel2, java.awt.BorderLayout.CENTER);
+        add(panelOpcoes, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     private void listaJogadoresKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_listaJogadoresKeyPressed
@@ -167,8 +179,8 @@ public class JPlantelJogador extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton consultaJog;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList listaJogadores;
+    private javax.swing.JPanel panelOpcoes;
     // End of variables declaration//GEN-END:variables
 }

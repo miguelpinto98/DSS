@@ -11,6 +11,7 @@ import Business_Layer.Escola;
 import Business_Layer.Utilizador;
 import GUI.ConsultasEscola;
 import GUI.Equipa.jAdicionarEquipa;
+import GUI.Escola.jPalmares;
 import GUI.Home2;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -63,7 +64,7 @@ public class JOpcoesAdmin extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         comboEquipas1 = new javax.swing.JComboBox();
         jSeparator1 = new javax.swing.JSeparator();
-        jButton7 = new javax.swing.JButton();
+        palmares = new javax.swing.JButton();
         adicionarEquipa = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         remover = new javax.swing.JButton();
@@ -86,11 +87,11 @@ public class JOpcoesAdmin extends javax.swing.JPanel {
             }
         });
 
-        jButton7.setText("Palmarés");
-        jButton7.setToolTipText("");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        palmares.setText("Palmarés");
+        palmares.setToolTipText("");
+        palmares.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                palmaresActionPerformed(evt);
             }
         });
 
@@ -137,7 +138,7 @@ public class JOpcoesAdmin extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(remover, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(palmares, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(adicionarEquipa, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -167,7 +168,7 @@ public class JOpcoesAdmin extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(3, 3, 3)
-                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(palmares, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -176,9 +177,16 @@ public class JOpcoesAdmin extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_comboEquipasActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void palmaresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_palmaresActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7ActionPerformed
+        String str = (String) this.comboEquipas.getSelectedItem();
+        
+        if(str != null) {
+            JDialog frame = new jPalmares(this.root, this.escola.getEquipas().get(str), str);
+            frame.setVisible(true);
+            frame.setLocationRelativeTo(null);
+        }
+    }//GEN-LAST:event_palmaresActionPerformed
 
     private void adicionarEquipaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adicionarEquipaActionPerformed
         // TODO add your handling code here:
@@ -215,10 +223,10 @@ public class JOpcoesAdmin extends javax.swing.JPanel {
     private javax.swing.JComboBox comboEquipas;
     private javax.swing.JComboBox comboEquipas1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JButton palmares;
     private javax.swing.JButton remover;
     // End of variables declaration//GEN-END:variables
 }
