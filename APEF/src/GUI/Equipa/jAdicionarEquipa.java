@@ -8,12 +8,16 @@ package GUI.Equipa;
 
 import Business_Layer.APEF;
 import Business_Layer.Equipa;
+import Business_Layer.Escola;
 import Business_Layer.Imagem;
 import Business_Layer.Utilizador;
 import GUI.Home2;
 import java.awt.BorderLayout;
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Path;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 
@@ -25,13 +29,17 @@ public class jAdicionarEquipa extends javax.swing.JDialog {
 
     private Home2 root;
     private Utilizador user;
+    private Escola escola;
+    private JOpcoesAdmin jad;
 
-    public jAdicionarEquipa(Home2 root, Utilizador user) {
+    public jAdicionarEquipa(Home2 root, Utilizador user, Escola escola, JOpcoesAdmin jad) {
         this.root = root;
         this.user = user;
+        this.escola = escola;
+        this.jad = jad;
         initComponents();
         
-        setAlwaysOnTop(true);
+        /* Cuidado */
         this.root.setEnabled(false);
     }
 
@@ -197,11 +205,21 @@ public class jAdicionarEquipa extends javax.swing.JDialog {
         String nome = this.nomeEquipa.getText();
 
         if(!nome.equals("")) {
+            if(!this.escola.getEquipas().containsKey(nome)) {
             Equipa e = new Equipa(nome, new Imagem(this.avatar.getName(), this.avatar.getImageString()));
-        }
+            boolean res = this.escola.inserirEquipa(e);
             
+            if(res) {
+                this.error.setText("Equipa adicionada com Sucesso");
+                this.jad.getCombo().addItem(e.getNome());
+                dispose();
+                this.root.setEnabled(true);
+            } else
+                this.error.setText("Equipa já existe na escola");
+            }
+        } else
+            this.error.setText("Dados inválidos");
             
-        
     }//GEN-LAST:event_adicionarActionPerformed
 
     private void alterarAvatarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alterarAvatarActionPerformed
@@ -209,9 +227,15 @@ public class jAdicionarEquipa extends javax.swing.JDialog {
         JFileChooser file = new JFileChooser();
         file.showOpenDialog(new JDialog());
         file.setVisible(true);
+                
+        File f = file.getSelectedFile();
+        try {
+            if(f.isFile())
+                this.avatar.setImage(f);
+        } catch (IOException ex) {
+        }
         
         
-        File f = file.getSelectedFile();        
     }//GEN-LAST:event_alterarAvatarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

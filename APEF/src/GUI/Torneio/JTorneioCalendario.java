@@ -6,16 +6,21 @@
 
 package GUI.Torneio;
 
+import Business_Layer.Utilizador;
+
 /**
  *
  * @author Utilizador
  */
 public class JTorneioCalendario extends javax.swing.JPanel {
-
-    /**
-     * Creates new form JTorneioEstatistica
-     */
-    public JTorneioCalendario() {
+    private JTorneioInfo i;
+    private Utilizador user;
+   
+    public JTorneioCalendario(JTorneioInfo i, Utilizador user) {
+        this.i=i;
+        this.user=user;
+        
+        setVisible(true);
         initComponents();
     }
 

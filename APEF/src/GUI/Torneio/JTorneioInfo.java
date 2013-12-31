@@ -23,8 +23,21 @@ public class JTorneioInfo extends javax.swing.JFrame {
         initComponents();
     }
 
+     public void reloadInfo() {
+        this.jPanel5.removeAll();
+        this.jPanel5.add(new JTorneioinfo2(this, user),BorderLayout.CENTER);
+        this.validate();
+    }
+    
     public void reloadEstatistica() {
-        this.remove(this.jPanel5);
+        this.jPanel5.removeAll();
+        this.jPanel5.add(new JTorneioEstatistica(this, user),BorderLayout.CENTER);
+        this.validate();
+    }
+    
+    public void reloadCalendario() {
+        this.jPanel5.removeAll();
+        this.jPanel5.add(new JTorneioCalendario(this, user),BorderLayout.CENTER);
         this.validate();
     }
 
@@ -87,6 +100,11 @@ public class JTorneioInfo extends javax.swing.JFrame {
         getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
         jButton1.setText("Informação");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Estatística");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -96,6 +114,11 @@ public class JTorneioInfo extends javax.swing.JFrame {
         });
 
         jButton5.setText("Calendário");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -123,7 +146,10 @@ public class JTorneioInfo extends javax.swing.JFrame {
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.LINE_END);
 
+        jPanel5.setLayout(new java.awt.BorderLayout());
+
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Informação"));
+        jPanel3.setMinimumSize(new java.awt.Dimension(712, 368));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("Nome do torneio:");
@@ -169,7 +195,7 @@ public class JTorneioInfo extends javax.swing.JFrame {
                     .addComponent(jLabel9)
                     .addComponent(jLabel8)
                     .addComponent(jLabel7))
-                .addContainerGap(485, Short.MAX_VALUE))
+                .addContainerGap(505, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,25 +220,10 @@ public class JTorneioInfo extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jLabel11))
-                .addContainerGap(183, Short.MAX_VALUE))
+                .addContainerGap(205, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        jPanel5.add(jPanel3, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(jPanel5, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
@@ -221,6 +232,16 @@ public class JTorneioInfo extends javax.swing.JFrame {
         // TODO add your handling code here:
         reloadEstatistica();
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        reloadInfo();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        reloadCalendario();
+    }//GEN-LAST:event_jButton5ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

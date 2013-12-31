@@ -146,7 +146,7 @@ public class JTorneioEstatistica extends javax.swing.JPanel {
                                     .addComponent(jLabel16)
                                     .addComponent(jLabel14)
                                     .addComponent(jLabel13))))))
-                .addContainerGap(488, Short.MAX_VALUE))
+                .addContainerGap(490, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -17,12 +17,14 @@ import Business_Layer.Utilizador;
 import GUI.Equipa.JOpcoesAdmin;
 import GUI.Header.JMenuAdmin;
 import GUI.Home2;
+import GUI.Plantel.JCriarPlantel;
 import GUI.Plantel.JPlantelAgenda;
 import GUI.Plantel.JPlantelDadosEstatisticos;
 import GUI.Plantel.JPlantelJogador;
 import GUI.Plantel.JPlantelTreinador;
 import java.awt.BorderLayout;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JDialog;
 
 /**
  *
@@ -51,12 +53,13 @@ public final class ConsultasEscola extends javax.swing.JFrame {
         reloadDetalhes();
         ativarComboEscolas();
         
-        String eq = this.comboEquipas.getSelectedItem().toString();
+        String eq = (String) this.comboEquipas.getSelectedItem();
         ComboEscalao(eq);
         
-        String equ = this.comboEquipas.getSelectedItem().toString();
-        String esc = this.comboEscalao.getSelectedItem().toString();
-        this.escalao = this.esc.getEquipas().get(equ).getEscaloes()[devolveTipoEscalao(esc)];
+        String equ = (String) this.comboEquipas.getSelectedItem();
+        String esc = (String) this.comboEscalao.getSelectedItem();
+        if(equ != null && esc != null)
+            this.escalao = this.esc.getEquipas().get(equ).getEscaloes()[devolveTipoEscalao(esc)];
         reloadOpcaoTreinadorConvidado();
         
         verificaUser(this.user);
@@ -118,14 +121,17 @@ public final class ConsultasEscola extends javax.swing.JFrame {
     }
     
     public void ComboEscalao(String eq) {
+        DefaultComboBoxModel<String> dcb = new DefaultComboBoxModel<>();
+
+        if(eq != null) {
         Equipa e = this.esc.getEquipas().get(eq);
         Escalao[] es = e.getEscaloes();
-        DefaultComboBoxModel<String> dcb = new DefaultComboBoxModel<>();
         
         for(int i=0; i<4; i++)
             if(es[i] != null)
                 dcb.addElement(devolveEscalaoTipo(i));
-
+        }
+        
         this.comboEscalao.setModel(dcb);  
     }
     
@@ -219,7 +225,7 @@ public final class ConsultasEscola extends javax.swing.JFrame {
         jButtonJogadores = new javax.swing.JButton();
         jButtonAgenda = new javax.swing.JButton();
         jButtonDadosEst = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        criarPlantel = new javax.swing.JButton();
         jPanelPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -348,7 +354,12 @@ public final class ConsultasEscola extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Criar");
+        criarPlantel.setText("Criar");
+        criarPlantel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                criarPlantelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelOpcoesLayout = new javax.swing.GroupLayout(jPanelOpcoes);
         jPanelOpcoes.setLayout(jPanelOpcoesLayout);
@@ -375,7 +386,7 @@ public final class ConsultasEscola extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(comboEscalao, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(criarPlantel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap())))
         );
         jPanelOpcoesLayout.setVerticalGroup(
@@ -384,7 +395,7 @@ public final class ConsultasEscola extends javax.swing.JFrame {
                 .addGroup(jPanelOpcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(comboEscalao, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(criarPlantel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -465,12 +476,19 @@ public final class ConsultasEscola extends javax.swing.JFrame {
         verificaEscalaoSeleccionado(equipa, esc);
     }//GEN-LAST:event_comboEscalaoActionPerformed
 
+    private void criarPlantelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_criarPlantelActionPerformed
+        // TODO add your handling code here:
+        JDialog frame = new JCriarPlantel(this.root, this.esc );
+        frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
+    }//GEN-LAST:event_criarPlantelActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel campo;
     private javax.swing.JComboBox comboEquipas;
     private javax.swing.JComboBox comboEscalao;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton criarPlantel;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButtonAgenda;
     private javax.swing.JButton jButtonDadosEst;

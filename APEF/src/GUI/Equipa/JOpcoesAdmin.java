@@ -6,12 +6,14 @@
 
 package GUI.Equipa;
 
+import Business_Layer.Equipa;
 import Business_Layer.Escola;
 import Business_Layer.Utilizador;
 import GUI.ConsultasEscola;
 import GUI.Equipa.jAdicionarEquipa;
 import GUI.Home2;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 
 /**
@@ -32,10 +34,10 @@ public class JOpcoesAdmin extends javax.swing.JPanel {
         this.user = user;
         initComponents();
         
-        ativarComboEscolas();
+        ComboEscolas();
     }
 
-    public void ativarComboEscolas() {
+    public void ComboEscolas() {
         DefaultComboBoxModel<String> dcb = new DefaultComboBoxModel<>();
         
         for(String s : this.escola.getEquipas().keySet())
@@ -44,6 +46,9 @@ public class JOpcoesAdmin extends javax.swing.JPanel {
         this.comboEquipas1.setModel(dcb);
     }
     
+    public JComboBox getCombo() {
+        return this.comboEquipas1;
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -61,7 +66,9 @@ public class JOpcoesAdmin extends javax.swing.JPanel {
         jButton7 = new javax.swing.JButton();
         adicionarEquipa = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        remover = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JSeparator();
+        avataer = new org.jdesktop.swingx.JXImageView();
 
         comboEquipas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Equipa 1", "Equipa 2", "Item 3", "Item 4" }));
         comboEquipas.addActionListener(new java.awt.event.ActionListener() {
@@ -72,7 +79,7 @@ public class JOpcoesAdmin extends javax.swing.JPanel {
 
         jLabel4.setText("Seleccione uma Equipa");
 
-        comboEquipas1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Equipa 1", "Equipa 2", "Item 3", "Item 4" }));
+        comboEquipas1.setSelectedItem(comboEquipas1.getSelectedItem());
         comboEquipas1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboEquipas1ActionPerformed(evt);
@@ -94,9 +101,25 @@ public class JOpcoesAdmin extends javax.swing.JPanel {
             }
         });
 
-        jButton2.setText("Editar");
+        jButton2.setText("Alterar Imagem");
 
-        jButton3.setText("Remover");
+        remover.setText("Remover");
+        remover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removerActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout avataerLayout = new javax.swing.GroupLayout(avataer);
+        avataer.setLayout(avataerLayout);
+        avataerLayout.setHorizontalGroup(
+            avataerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        avataerLayout.setVerticalGroup(
+            avataerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -108,15 +131,22 @@ public class JOpcoesAdmin extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(14, 14, 14))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jSeparator2)
+                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(remover, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(adicionarEquipa, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(avataer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28))
                             .addComponent(comboEquipas1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addComponent(jSeparator1)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,14 +155,18 @@ public class JOpcoesAdmin extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(comboEquipas1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(avataer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(adicionarEquipa, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(remover, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(3, 3, 3)
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -148,25 +182,43 @@ public class JOpcoesAdmin extends javax.swing.JPanel {
 
     private void adicionarEquipaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adicionarEquipaActionPerformed
         // TODO add your handling code here:
-        JDialog frame = new jAdicionarEquipa(this.root, this.user);
+        JDialog frame = new jAdicionarEquipa(this.root, this.user, this.escola,this);
         frame.setVisible(true);
+        
+        this.cEscola.reloadPanelEquipaGeral(null);
     }//GEN-LAST:event_adicionarEquipaActionPerformed
 
     private void comboEquipas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboEquipas1ActionPerformed
         // TODO add your handling code here:
-        String s = this.comboEquipas1.getSelectedItem().toString();
-        cEscola.reloadPanelEquipaGeral(s);
+        String s = (String) this.comboEquipas1.getSelectedItem();
+        
+        if(s != null) {
+            cEscola.reloadPanelEquipaGeral(s);
+        }
     }//GEN-LAST:event_comboEquipas1ActionPerformed
+
+    private void removerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removerActionPerformed
+        // TODO add your handling code here:
+        String equipa = (String) this.comboEquipas1.getSelectedItem();
+        
+        if(equipa != null) {
+        Equipa e = escola.getEquipas().get(equipa);
+        JDialog frame = new JRemoverEquipa(this.root, this.user, this.escola,this,e);
+        frame.setVisible(true);
+        }
+    }//GEN-LAST:event_removerActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton adicionarEquipa;
+    private org.jdesktop.swingx.JXImageView avataer;
     private javax.swing.JComboBox comboEquipas;
     private javax.swing.JComboBox comboEquipas1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JButton remover;
     // End of variables declaration//GEN-END:variables
 }
