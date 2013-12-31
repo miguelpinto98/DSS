@@ -89,9 +89,17 @@ public abstract class Fase {
         return res;
     }
    
-    public boolean ultimoJogo() {
+    public boolean ultimoJogoGrupo() {
         boolean res = false;
         if( (jogosEsperadosGrupo()-jogosRealizados()) == 0)
+            res=true;
+        
+        return res;
+    }
+    
+    public boolean ultimoJogoEliminatoria() {
+        boolean res = false;
+        if( (jogosEsperadosEliminatoria()-jogosRealizados()) == 0)
             res=true;
         
         return res;
@@ -111,6 +119,10 @@ public abstract class Fase {
     
     public int jogosEsperadosGrupo() {
         return (this.listaEscaloes.size()/2)-1;
+    }
+    
+    public int jogosEsperadosEliminatoria() {
+        return (this.listaEscaloes.size()/2);
     }
     
     public GregorianCalendar dataJornadaSeguinte(GregorianCalendar g, int jr){

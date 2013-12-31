@@ -15,6 +15,7 @@ import Business_Layer.Escola;
 import Business_Layer.ResponsavelEscola;
 import Business_Layer.Utilizador;
 import GUI.Equipa.JOpcoesAdmin;
+import GUI.Escola.jPalmares;
 import GUI.Header.JMenuAdmin;
 import GUI.Home2;
 import GUI.Plantel.JCriarPlantel;
@@ -72,8 +73,6 @@ public final class ConsultasEscola extends javax.swing.JFrame {
                 this.panelGeralEscolas.add(new JOpcoesAdmin(this, this.root, this.esc,this.user,this),BorderLayout.WEST);
                 this.panelGeralEscolas.updateUI();
                 this.panelGeralEscolas.validate();
-                reloadOpcaoJogadoresConvidado();
-                reloadOpcaoTreinadorConvidado();
             }
         } else {
             reloadOpcaoTreinadorConvidado();
@@ -88,12 +87,8 @@ public final class ConsultasEscola extends javax.swing.JFrame {
     }
     
     public void ativarComboEscolas() {
-        DefaultComboBoxModel<String> dcb = new DefaultComboBoxModel<>();
-        
         for(String s : this.esc.getEquipas().keySet())
-            dcb.addElement(s);
-        
-        this.comboEquipas.setModel(dcb);
+            this.comboEquipas.addItem((String) s);
     }
     
     public String devolveEscalaoTipo(int i) {
@@ -130,8 +125,7 @@ public final class ConsultasEscola extends javax.swing.JFrame {
         for(int i=0; i<4; i++)
             if(es[i] != null)
                 dcb.addElement(devolveEscalaoTipo(i));
-        }
-        
+        }        
         this.comboEscalao.setModel(dcb);  
     }
     
@@ -166,6 +160,7 @@ public final class ConsultasEscola extends javax.swing.JFrame {
         this.jPanelPlantel.updateUI();
         this.jPanelPlantel.validate();
     }
+    
     
     /* XXX */
     public void reloadPanelEquipaGeral(String equipa) {
@@ -215,7 +210,8 @@ public final class ConsultasEscola extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         comboEquipas = new javax.swing.JComboBox();
         jSeparator1 = new javax.swing.JSeparator();
-        jButton7 = new javax.swing.JButton();
+        palmares = new javax.swing.JButton();
+        avatar = new org.jdesktop.swingx.JXImageView();
         jPanelPlantel = new javax.swing.JPanel();
         jPanelOpcoes = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -226,6 +222,7 @@ public final class ConsultasEscola extends javax.swing.JFrame {
         jButtonAgenda = new javax.swing.JButton();
         jButtonDadosEst = new javax.swing.JButton();
         criarPlantel = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jPanelPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -270,20 +267,30 @@ public final class ConsultasEscola extends javax.swing.JFrame {
 
         jLabel4.setText("Seleccione uma Equipa");
 
-        comboEquipas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Equipa 1", "Equipa 2", "Item 3", "Item 4" }));
         comboEquipas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboEquipasActionPerformed(evt);
             }
         });
 
-        jButton7.setText("Palmarés");
-        jButton7.setToolTipText("");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        palmares.setText("Palmarés");
+        palmares.setToolTipText("");
+        palmares.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                palmaresActionPerformed(evt);
             }
         });
+
+        javax.swing.GroupLayout avatarLayout = new javax.swing.GroupLayout(avatar);
+        avatar.setLayout(avatarLayout);
+        avatarLayout.setHorizontalGroup(
+            avatarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        avatarLayout.setVerticalGroup(
+            avatarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout panelOpcoesConvidadoLayout = new javax.swing.GroupLayout(panelOpcoesConvidado);
         panelOpcoesConvidado.setLayout(panelOpcoesConvidadoLayout);
@@ -293,9 +300,13 @@ public final class ConsultasEscola extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panelOpcoesConvidadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(comboEquipas, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(palmares, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(panelOpcoesConvidadoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(avatar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         panelOpcoesConvidadoLayout.setVerticalGroup(
             panelOpcoesConvidadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -303,10 +314,12 @@ public final class ConsultasEscola extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(comboEquipas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(avatar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 286, Short.MAX_VALUE)
-                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
+                .addComponent(palmares, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -361,6 +374,8 @@ public final class ConsultasEscola extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Remover");
+
         javax.swing.GroupLayout jPanelOpcoesLayout = new javax.swing.GroupLayout(jPanelOpcoes);
         jPanelOpcoes.setLayout(jPanelOpcoesLayout);
         jPanelOpcoesLayout.setHorizontalGroup(
@@ -386,7 +401,9 @@ public final class ConsultasEscola extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(comboEscalao, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(criarPlantel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(criarPlantel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton1)))
                         .addContainerGap())))
         );
         jPanelOpcoesLayout.setVerticalGroup(
@@ -395,7 +412,8 @@ public final class ConsultasEscola extends javax.swing.JFrame {
                 .addGroup(jPanelOpcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(comboEscalao, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(criarPlantel))
+                    .addComponent(criarPlantel)
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -444,9 +462,15 @@ public final class ConsultasEscola extends javax.swing.JFrame {
         reloadPanelEquipaGeral(equipa);    
     }//GEN-LAST:event_comboEquipasActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void palmaresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_palmaresActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7ActionPerformed
+        String str = (String) this.comboEquipas.getSelectedItem();
+        
+        if(str != null) {
+            JDialog frame = new jPalmares(this.root, this.esc.getEquipas().get(str), str);
+            frame.setVisible(true);
+        }
+    }//GEN-LAST:event_palmaresActionPerformed
 
     private void jButtonTreinadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTreinadorActionPerformed
         // TODO add your handling code here:
@@ -485,11 +509,12 @@ public final class ConsultasEscola extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private org.jdesktop.swingx.JXImageView avatar;
     private javax.swing.JLabel campo;
     private javax.swing.JComboBox comboEquipas;
     private javax.swing.JComboBox comboEscalao;
     private javax.swing.JButton criarPlantel;
-    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonAgenda;
     private javax.swing.JButton jButtonDadosEst;
     private javax.swing.JButton jButtonJogadores;
@@ -506,6 +531,7 @@ public final class ConsultasEscola extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel local;
+    private javax.swing.JButton palmares;
     private javax.swing.JPanel panelGeralEscolas;
     private javax.swing.JPanel panelOpcoesConvidado;
     // End of variables declaration//GEN-END:variables

@@ -329,7 +329,7 @@ public class Torneio implements Competicao{
             equipas.add(this.buscaEscalao(grupoB.get(i)));
         }
         Eliminatoria meiaFinal = new Eliminatoria("Meia-Final",equipas);
-        meiaFinal.geraCalendario(this.getID(), this.getDataInicio(), arbs, grupoA, grupoB, this.getCampo());
+        meiaFinal.geraCalendarioTipo1(this.getID(), this.getDataInicio(), arbs, grupoA, grupoB, this.getCampo());
         Fase f = (Fase) meiaFinal;
         this.getFases().add(f);
         this.nFase = 2;
@@ -365,7 +365,7 @@ public class Torneio implements Competicao{
             if(!res) {
                 Grupo b = (Grupo) this.fases.get(1);
                 res = b.atualizaGrupoTipo1(j);
-                res2 = b.ultimoJogo();
+                res2 = b.ultimoJogoGrupo();
                 if(res2) 
                     equipas2 = b.doisMelhores();
                     equipas1 = a.doisMelhores();
@@ -373,7 +373,7 @@ public class Torneio implements Competicao{
          }
         else {
             res=e.atualizaEliminatoriaTipo1(j);
-            res3 = e.ultimoJogo();
+            res3 = e.ultimoJogoEliminatoria();
             }
             
         if(res) {
@@ -386,10 +386,29 @@ public class Torneio implements Competicao{
         if (res3)
             this.thirdFaseTorneioTipo1(e.vencedores());
         
-        
         return res;
     }
+
+    public boolean atualizaTorneioTipo2(Jogo j) {
+        boolean res = false, res2=false;
+        int i = this.nFase;
+        Eliminatoria e = (Eliminatoria) this.fases.get(i);
+        res=e.atualizaEliminatoriaTipo1(j);
+        res2=e.ultimoJogoEliminatoria();
+            
+        if(res) {
+            this.atualizaGoleadores(j);
+            this.estatisticaCompeticao.actualizaClassificacao(j);
+        }
         
+        if(res2){
+            //lista das equipas que ganharam
+            //this.secondEliminatoriaTipo2(ArrayList<Integer> listaEquipas)
+        }
+            
+        return res;
+        }    
+    
     public void inserirGrupo (Fase f){
         this.fases.add(f);
     }
