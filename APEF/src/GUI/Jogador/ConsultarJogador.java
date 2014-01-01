@@ -5,13 +5,13 @@ import Business_Layer.Escalao;
 import Business_Layer.Jogador;
 import Business_Layer.ResponsavelEscola;
 import Business_Layer.Utilizador;
-import GUI.Home2;
 import GUI.Plantel.JPlantelJogador;
 import java.awt.BorderLayout;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.GregorianCalendar;
+import GUI.Home2;
+
+
 
 
 public final class ConsultarJogador extends javax.swing.JDialog {
@@ -28,17 +28,14 @@ public final class ConsultarJogador extends javax.swing.JDialog {
         this.user = user;
         this.jogador = j;
         this.pj = pla;
-        initComponents();
-        
-        reload();
-          
-        
+        initComponents();        
+        reload();       
         verificaUser();
     }
     
-    public void reload() {
+        public void reload() {
         this.nome_t.setText(this.jogador.getNome());
-          this.clube_t.setText(this.jogador.getNomeEquipa());
+        this.clube_t.setText(this.jogador.getNomeEquipa());
           
           String s = null; 
           if(this.jogador.getSexo()==0) {s="Não Definido";}
@@ -48,9 +45,9 @@ public final class ConsultarJogador extends javax.swing.JDialog {
           
           GregorianCalendar aux = this.jogador.getDataNasc();
           int ano = aux.get(GregorianCalendar.YEAR);
-          int mes = aux.get(GregorianCalendar.MONTH);
+          int mes = ((aux.get(GregorianCalendar.MONTH))+1);
           int dia = aux.get(GregorianCalendar.DAY_OF_MONTH);
-          this.nascimento_t.setText(dia+"."+mes+"."+ano);
+          this.nascimento_t.setText(dia+"-"+mes+"-"+ano);
     }
     
     public void verificaUser() throws ParseException{
@@ -63,9 +60,7 @@ public final class ConsultarJogador extends javax.swing.JDialog {
             else 
                 this.remove(this.jPanel1);}
 
-    public JPlantelJogador getPlantelJogador() {
-        return this.pj;
-    }
+    public JPlantelJogador getPlantelJogador() {return this.pj;}
    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
