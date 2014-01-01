@@ -605,7 +605,7 @@ public class APEF {
                 if(eq==nomeEquipa) {
                     equipa = e.getEquipas().get(nomeEquipa);
                     flag = true;
-                    res = equipa.getEscaloes()[escalao].inserirJogador(j);
+                    res = equipa.getEscaloes()[escalao].inserirJogador(j.getNome(),j.getDataNasc(),j.getSexo(),j.getFoto());
                 }
             }
         }
