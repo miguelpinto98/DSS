@@ -21,11 +21,13 @@ public class Jogador extends Pessoa {
         this.nomeEquipaEmprestimo = "";
     }
    
-    public Jogador(String nome, GregorianCalendar g, int sexo, boolean emprestado) {
-        super(nome,null,g,sexo);
+    public Jogador(String nome, Imagem img, GregorianCalendar g, int sexo, String nEquipa) {
+        super(nome,img,g,sexo);
         this.nrGolos = 0;
         this.competicoes = new ArrayList<>();
-        this.emprestado = emprestado;
+        this.nomeEquipa = nEquipa;
+        this.nomeEquipaEmprestimo = new String();
+        this.emprestado = false;
     }
 
     public Jogador(String nome, GregorianCalendar g, int sexo, boolean emprestado, String nomeEquipa) {

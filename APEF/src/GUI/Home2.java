@@ -106,20 +106,14 @@ public final class Home2 extends JFrame {
         this.sistema.getEscolas().get("Universidade do Minho").inserirEquipa(eq3);
         
         /* ESCALOES */
-        Jogador jog1 = new Jogador("Mário", new GregorianCalendar(), 2, false , "Os Fraquinhos");
-        Jogador jog2 = new Jogador("Leite", new GregorianCalendar(), 0,false);
-        Jogador jog3 = new Jogador("Miguel", new GregorianCalendar(), 0,false);
-        Jogador jog4 = new Jogador("Luis", new GregorianCalendar(), 0,false);
-        Jogador jog5 = new Jogador("Pinto", new GregorianCalendar(), 0,false);
-        
         eq3.criarEscalao(0, "Universidade do Minho", "CeSIUM","Manuel Pato", new Date(), 0, new Imagem());
         Escalao escalao2 = new Escalao(3, "CeSIUM", "Universidade do Minho");
         
-        eq3.getEscaloes()[0].inserirJogador(jog1);
-        eq3.getEscaloes()[0].inserirJogador(jog2);
-        eq3.getEscaloes()[0].inserirJogador(jog3);
-        eq3.getEscaloes()[0].inserirJogador(jog4);
-        eq3.getEscaloes()[0].inserirJogador(jog5);
+        eq3.getEscaloes()[0].inserirJogador("Mário Leite", new GregorianCalendar(), 2, new Imagem());
+        eq3.getEscaloes()[0].inserirJogador("Miguel Pinto",new GregorianCalendar(), 2, new Imagem());
+        eq3.getEscaloes()[0].inserirJogador("Serafim Pinto", new GregorianCalendar(), 2, new Imagem());
+        eq3.getEscaloes()[0].inserirJogador("Diana Lemos", new GregorianCalendar(), 2, new Imagem());
+        eq3.getEscaloes()[0].inserirJogador("Mariana Medeiros", new GregorianCalendar(), 2, new Imagem());
         
         //this.sistema.getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").inserirEscalao(escalao1);
         this.sistema.getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").inserirEscalao(escalao2);

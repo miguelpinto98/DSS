@@ -13,6 +13,8 @@ import Business_Layer.ResponsavelEscola;
 import Business_Layer.Utilizador;
 import GUI.Jogador.ConsultarJogador;
 import GUI.Home2;
+import GUI.Jogador.JAdicionarJogador;
+import GUI.Jogador.JRemoverJogador;
 import java.awt.BorderLayout;
 import java.text.ParseException;
 import java.util.Collection;
@@ -43,6 +45,10 @@ public class JPlantelJogador extends javax.swing.JPanel {
         this.escalao = esc;
         initComponents();
         
+        this.adicionar.setVisible(false);
+        this.empresto.setVisible(false);
+        this.remover.setVisible(false);
+        
         if(escalao != null) {
             atualizaJogadores();
             verificaOpcoes();
@@ -57,8 +63,9 @@ public class JPlantelJogador extends javax.swing.JPanel {
     public void verificaOpcoes() {
         if(this.user != null) {
             if(this.user instanceof Admin || this.user instanceof ResponsavelEscola) {
-                this.remove(this.panelOpcoes);
-                this.add(new jPlantelJogadorOpcoes(this.root, this.escalao,this, this.user), BorderLayout.EAST);
+                this.adicionar.setVisible(true);
+                this.empresto.setVisible(true);
+                this.remover.setVisible(true);
             }
         }
     }
@@ -95,6 +102,9 @@ public class JPlantelJogador extends javax.swing.JPanel {
         listaJogadores = new org.jdesktop.swingx.JXTable();
         panelOpcoes = new javax.swing.JPanel();
         consultaJog = new javax.swing.JButton();
+        adicionar = new javax.swing.JButton();
+        empresto = new javax.swing.JButton();
+        remover = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Jogadores"));
         setLayout(new java.awt.BorderLayout());
@@ -149,21 +159,47 @@ public class JPlantelJogador extends javax.swing.JPanel {
             }
         });
 
+        adicionar.setText("Adicionar");
+        adicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adicionarActionPerformed(evt);
+            }
+        });
+
+        empresto.setText("Emprestar");
+
+        remover.setText("Remover");
+        remover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removerActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelOpcoesLayout = new javax.swing.GroupLayout(panelOpcoes);
         panelOpcoes.setLayout(panelOpcoesLayout);
         panelOpcoesLayout.setHorizontalGroup(
             panelOpcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelOpcoesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(consultaJog, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
+                .addGroup(panelOpcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(consultaJog, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
+                    .addComponent(adicionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(empresto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(remover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         panelOpcoesLayout.setVerticalGroup(
             panelOpcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelOpcoesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(consultaJog, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(224, Short.MAX_VALUE))
+                .addComponent(consultaJog, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(adicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(empresto, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(remover, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         add(panelOpcoes, java.awt.BorderLayout.CENTER);
@@ -190,12 +226,33 @@ public class JPlantelJogador extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_consultaJogActionPerformed
 
+    private void adicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adicionarActionPerformed
+        // TODO add your handling code here:
+        JDialog frame = new JAdicionarJogador(root, this.escalao, this);
+        frame.setVisible(true);
+    }//GEN-LAST:event_adicionarActionPerformed
+
+    private void removerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removerActionPerformed
+        // TODO add your handling code here:
+        this.listaJogadores.getColumnExt("ID").setVisible(true);
+        int row = this.listaJogadores.getSelectedRow();
+        
+        if(row != -1) {
+            int id = (int) this.listaJogadores.getValueAt(row, 0);
+            JDialog frame = new JRemoverJogador(this.root, escalao, this, this.escalao.getJogadores().get(id));
+            frame.setVisible(true);
+        }
+    }//GEN-LAST:event_removerActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton adicionar;
     private javax.swing.JButton consultaJog;
+    private javax.swing.JButton empresto;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private org.jdesktop.swingx.JXTable listaJogadores;
     private javax.swing.JPanel panelOpcoes;
+    private javax.swing.JButton remover;
     // End of variables declaration//GEN-END:variables
 }

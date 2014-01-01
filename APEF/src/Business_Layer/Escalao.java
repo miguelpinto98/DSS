@@ -1,6 +1,8 @@
 package Business_Layer;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -201,15 +203,19 @@ public class Escalao {
         return res;
     }
     
-    public boolean inserirJogador(Jogador j) {
+    public boolean inserirJogador(String nome, GregorianCalendar g, int sexo, Imagem img) {
         boolean flag = false;
+        
+        int anoNasc = g.get(g.YEAR);
+
         GregorianCalendar atual = new GregorianCalendar();
         int anoAtual = atual.get(atual.YEAR);
-        int anoNasc = j.getDataNasc().get(j.getDataNasc().YEAR);
         
-    	if( !(this.jogadores.containsKey(j.getID())) && (anoAtual-anoNasc) <= idadeEscalao()) {
-    			this.jogadores.put(j.getID(), j);
-                flag = true;
+        Jogador j = new Jogador(nome, img, (GregorianCalendar) g, sexo, this.nomeEquipa);
+        
+    	if(!(this.jogadores.containsKey(j.getID())) && (anoAtual-anoNasc) <= idadeEscalao()) {
+            this.jogadores.put(j.getID(),j);
+            flag = true;
         }
         
         return flag;
@@ -221,9 +227,9 @@ public class Escalao {
     
     public boolean removerJogador(Jogador j) {
         boolean res = false;
-        if(this.jogadores.size() > 12) {
-            this.jogadores.remove(j);
-            res = true;
+        if(this.jogadores.size() > 0) {
+            this.jogadores.remove(j.getID());
+            res= true;
         }
         
         return res;
