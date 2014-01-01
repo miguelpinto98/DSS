@@ -11,7 +11,7 @@ import Business_Layer.Escalao;
 import Business_Layer.Jogador;
 import Business_Layer.ResponsavelEscola;
 import Business_Layer.Utilizador;
-import GUI.ConsultarJogador;
+import GUI.Jogador.ConsultarJogador;
 import GUI.Home2;
 import java.awt.BorderLayout;
 import java.text.ParseException;
@@ -23,6 +23,8 @@ import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.table.DefaultTableModel;
+import org.jdesktop.swingx.JXTable;
 
 
 /**
@@ -56,21 +58,29 @@ public class JPlantelJogador extends javax.swing.JPanel {
         if(this.user != null) {
             if(this.user instanceof Admin || this.user instanceof ResponsavelEscola) {
                 this.remove(this.panelOpcoes);
-                this.add(new jPlantelJogadorOpcoes(this.root, this.escalao), BorderLayout.EAST);
+                this.add(new jPlantelJogadorOpcoes(this.root, this.escalao,this, this.user), BorderLayout.EAST);
             }
         }
     }
     
     public void atualizaJogadores() {
         Collection<Jogador> lesc = this.root.getSistema().getEscolas().get(this.escalao.getNomeEscola()).getEquipas().get(this.escalao.getNomeEquipa()).getEscaloes()[this.escalao.getTipoEscalao()].getJogadores().values();
-        DefaultListModel<String> str = new DefaultListModel<>();
+
+        Object[] columnNames = new String[] {"ID","Nome"};
+        Object[][] data = new Object[][] {};
+        DefaultTableModel x = new DefaultTableModel(data, columnNames);
         
         for(Jogador j : lesc) 
-            str.addElement(j.getNome());
+            x.addRow(new Object[]{j.getID(), j.getNome()});
         
-        listaJogadores.setModel(str);  
+        listaJogadores.setModel(x); 
+        listaJogadores.getColumnExt("ID").setVisible(false);
     }
 
+    public JXTable getTableJogadores() {
+        return this.listaJogadores;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -82,23 +92,35 @@ public class JPlantelJogador extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        listaJogadores = new javax.swing.JList();
+        listaJogadores = new org.jdesktop.swingx.JXTable();
         panelOpcoes = new javax.swing.JPanel();
         consultaJog = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Jogadores"));
         setLayout(new java.awt.BorderLayout());
 
-        listaJogadores.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        listaJogadores.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                listaJogadoresKeyPressed(evt);
+        listaJogadores.setBackground(new java.awt.Color(246, 246, 246));
+        listaJogadores.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                { new Integer(100), "arroz"}
+            },
+            new String [] {
+                "ID", "Jogadores"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
             }
         });
+        listaJogadores.setAlignmentX(1.0F);
+        listaJogadores.setAlignmentY(1.0F);
+        listaJogadores.setShowGrid(true);
+        listaJogadores.setShowVerticalLines(false);
+        listaJogadores.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(listaJogadores);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -113,8 +135,8 @@ public class JPlantelJogador extends javax.swing.JPanel {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -141,38 +163,31 @@ public class JPlantelJogador extends javax.swing.JPanel {
             .addGroup(panelOpcoesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(consultaJog, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(215, Short.MAX_VALUE))
+                .addContainerGap(224, Short.MAX_VALUE))
         );
 
         add(panelOpcoes, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void listaJogadoresKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_listaJogadoresKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_listaJogadoresKeyPressed
-
     private void consultaJogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaJogActionPerformed
         // TODO add your handling code here:
-        String jog = (String) this.listaJogadores.getSelectedValue();
-        Iterator t = this.escalao.getJogadores().values().iterator();
-        boolean encontrou = false;
-        Jogador j = null;
+        this.listaJogadores.getColumnExt("ID").setVisible(true);
         
-        while(t.hasNext() && !encontrou) {
-            j = (Jogador) t.next();
-            if(j.getNome().equals(jog))
-                encontrou = true;
-            System.out.println("ARRROZ");
-        }
+        int row = this.listaJogadores.getSelectedRow();
         
-        JDialog frame = null;
-        try {
-            frame = new ConsultarJogador(this.root, this.escalao, this.user, j,this);
-        } catch (ParseException ex) {
-            Logger.getLogger(JPlantelJogador.class.getName()).log(Level.SEVERE, null, ex);
+        if(row != -1) {
+            int id = (int) this.listaJogadores.getValueAt(row, 0);
+            JDialog frame = null;
+            
+            try {
+                frame = new ConsultarJogador(this.root, this.escalao, this.user, this.escalao.getJogadores().get(id),this);
+            } catch (ParseException ex) {
+                Logger.getLogger(JPlantelJogador.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+            frame.setVisible(true);
+            atualizaJogadores();
         }
-        frame.setVisible(true);
-        atualizaJogadores();
     }//GEN-LAST:event_consultaJogActionPerformed
 
 
@@ -180,7 +195,7 @@ public class JPlantelJogador extends javax.swing.JPanel {
     private javax.swing.JButton consultaJog;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JList listaJogadores;
+    private org.jdesktop.swingx.JXTable listaJogadores;
     private javax.swing.JPanel panelOpcoes;
     // End of variables declaration//GEN-END:variables
 }
