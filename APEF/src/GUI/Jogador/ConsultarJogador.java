@@ -1,10 +1,11 @@
-package GUI;
+package GUI.Jogador;
 
 import Business_Layer.Admin;
 import Business_Layer.Escalao;
 import Business_Layer.Jogador;
 import Business_Layer.ResponsavelEscola;
 import Business_Layer.Utilizador;
+import GUI.Home2;
 import GUI.Plantel.JPlantelJogador;
 import java.awt.BorderLayout;
 import java.text.ParseException;

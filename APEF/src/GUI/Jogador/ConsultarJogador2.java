@@ -1,8 +1,9 @@
-package GUI;
+package GUI.Jogador;
 
 import Business_Layer.APEF;
 import Business_Layer.Escalao;
 import Business_Layer.Jogador;
+import GUI.Home2;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
