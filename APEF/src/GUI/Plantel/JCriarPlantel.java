@@ -10,7 +10,6 @@ import Business_Layer.Equipa;
 import Business_Layer.Escalao;
 import Business_Layer.Escola;
 import Business_Layer.Imagem;
-import Business_Layer.Treinador;
 import GUI.ConsultasEscola;
 import GUI.Home2;
 import java.util.Date;
