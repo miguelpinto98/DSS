@@ -1,6 +1,7 @@
 package GUI.Jogador;
 
 import Business_Layer.Admin;
+import Business_Layer.Epoca;
 import Business_Layer.Escalao;
 import Business_Layer.Jogador;
 import Business_Layer.ResponsavelEscola;
@@ -10,6 +11,9 @@ import java.awt.BorderLayout;
 import java.text.ParseException;
 import java.util.GregorianCalendar;
 import GUI.Home2;
+import java.util.HashSet;
+import java.util.Set;
+import javax.swing.DefaultListModel;
 
 
 
@@ -21,6 +25,7 @@ public final class ConsultarJogador extends javax.swing.JDialog {
     private Jogador jogador;
     private Escalao esc;
     private JPlantelJogador pj;
+    private Epoca ep;
     
     public ConsultarJogador(Home2 root, Escalao e, Utilizador user, Jogador j, JPlantelJogador pla) throws ParseException{
         this.root = root;
@@ -29,7 +34,8 @@ public final class ConsultarJogador extends javax.swing.JDialog {
         this.jogador = j;
         this.pj = pla;
         initComponents();        
-        reload();       
+        reload();   
+        reloadListaCompeticoes();
         verificaUser();
     }
     
@@ -61,6 +67,21 @@ public final class ConsultarJogador extends javax.swing.JDialog {
                 this.remove(this.jPanel1);}
 
     public JPlantelJogador getPlantelJogador() {return this.pj;}
+    
+    public Set<String> listaComp(){
+        Set<String> lista = new HashSet<>();
+        for(int i=0; i<this.jogador.getCompeticoes().size(); i++){
+            lista.add(this.ep.procuraCampeonato(this.jogador.getCompeticoes().get(i)));
+            lista.add(this.ep.procuraTorneio(this.jogador.getCompeticoes().get(i)));           
+        }      
+    return lista;} 
+    
+    public void reloadListaCompeticoes() {
+        Set<String> lcomp = this.listaComp();
+        DefaultListModel<String> str = new DefaultListModel<>();        
+            for(String e : lcomp) str.addElement(e);       
+        comp_realizadas.setModel(str);
+    }
    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -186,11 +207,7 @@ public final class ConsultarJogador extends javax.swing.JDialog {
         competicoes.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Competições", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 14), new java.awt.Color(102, 102, 102))); // NOI18N
 
         comp_realizadas.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Realizadas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(102, 102, 102)));
-        comp_realizadas.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
+        comp_realizadas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(comp_realizadas);
 
         comp_ativas.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ativas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(102, 102, 102)));
