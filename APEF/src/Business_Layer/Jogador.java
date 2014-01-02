@@ -62,6 +62,11 @@ public class Jogador extends Pessoa {
     public String getNomeEquipaEmprestimo() {
         return this.getNomeEquipaEmprestimo();
     }
+    
+    public ArrayList<Integer> getCompeticoes() {
+        return this.competicoes;
+    }
+    
     //Setters
     public void setNrGolos(int n) {
     	this.nrGolos = n;
