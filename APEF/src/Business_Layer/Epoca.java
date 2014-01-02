@@ -86,12 +86,14 @@ public class Epoca {
     }	
 
     //Equals,hashCode,Clone,toString
+    @Override
     public int hashCode() {
         int hash = 5;
         hash = 23 * hash + Objects.hashCode(this.torneios);
         return hash;
     }
     
+    @Override
     public boolean equals(Object o) {
         if (this == null)
             return true;
@@ -99,22 +101,24 @@ public class Epoca {
             return false;
         else {
             Epoca t = (Epoca) o;
-            return ( this.ano == t.getAno() && this.campeonatos.equals(t.getCampeonatos()) &&
+            return ( this.ano == t.getAno() && this.campeonatos == t.getCampeonatos() &&
         			this.torneios.equals(t.getTorneios()));
         }
     } 
 
+    @Override
     public Epoca clone() {
         return new Epoca(this);
     }
 
+    @Override
     public String toString() {
         StringBuilder str = new StringBuilder(); 
         
         str.append("--Epoca--\n");
-        str.append(this.getAno() + "\n");
-		str.append(this.getCampeonatos() + "\n");
-		str.append(this.getTorneios() + "\n");
+        str.append(this.getAno()).append("\n");
+		str.append(this.getCampeonatos()).append("\n");
+		str.append(this.getTorneios()).append("\n");
         return str.toString(); 
     }
 
@@ -164,5 +168,24 @@ public class Epoca {
             }
         }
     }
+        
+           public String procuraCampeonato (Integer idCamp){
+        int i=0, flag=1;
+        String nome= null;
+            while (i<4 && flag==1){
+                if(this.campeonatos[i].getID()==idCamp) {nome=this.campeonatos[i].getNome(); flag=0;}
+                i++;
+            }
+    return nome;}
+
+    public String procuraTorneio (Integer id){
+        String nome=null;
+        boolean encontrado=false;        
+            for(int i=0; (i<this.torneios.size() && encontrado==false); i++){
+                for(Torneio t: this.torneios.get(i)){ 
+                    if (t.getID()==id) {nome=t.getNome(); encontrado=true;}
+                }
+           }
+      return nome;}
 }
 
