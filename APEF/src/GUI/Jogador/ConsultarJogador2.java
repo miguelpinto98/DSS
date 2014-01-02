@@ -32,9 +32,9 @@ public final class ConsultarJogador2 extends javax.swing.JPanel {
           
           
         GregorianCalendar aux = this.jogador.getDataNasc();
-        int anoa = aux.get(GregorianCalendar.YEAR);
-        int mesa = aux.get(GregorianCalendar.MONTH);
-        int diaa = aux.get(GregorianCalendar.DAY_OF_MONTH);
+        String anoa = Integer.toString(aux.get(GregorianCalendar.YEAR));
+        String mesa = Integer.toString((aux.get(GregorianCalendar.MONTH))+1);
+        String diaa = Integer.toString(aux.get(GregorianCalendar.DAY_OF_MONTH));
         this.dia.setSelectedItem(diaa);
         this.mes.setSelectedItem(mesa);
         this.ano.setSelectedItem(anoa);
@@ -171,7 +171,8 @@ private void mudaNome(){
         String n = nome_t.getText();
         if (n!=null) this.jogador.setNome(n);}
     
-    private int mudaSexo(int ok){
+    private int mudaSexo(){
+        int ok=0;
         String n = sexo_t.getSelectedItem().toString();
             if (n.equals("Masculino")) this.jogador.setSexo(1);
             if (n.equals("Feminino")) this.jogador.setSexo(2);
@@ -179,14 +180,21 @@ private void mudaNome(){
      return ok;
        }
               
+    private boolean dataSenil(int d, int m){
+        boolean senil=false;
+        if (m==3 ||m==5 || m==8 || m==10){
+            if(d==31) senil=true;}
+        if(m==1 && d>29) senil=true;
+    return senil;}
+    
     private int mudaNascimento(int ok){
          GregorianCalendar sistema = new GregorianCalendar();
          int diaS= Integer.parseInt(dia.getSelectedItem().toString());
          int mesS= Integer.parseInt(mes.getSelectedItem().toString())-1;
          int anoS= Integer.parseInt(ano.getSelectedItem().toString());
          GregorianCalendar selecionada = new GregorianCalendar(anoS, mesS, diaS);
-         if(sistema.after(selecionada))
-              this.jogador.setDataNasc(selecionada);
+         if((sistema.after(selecionada)) && (dataSenil(diaS, mesS)==false)){
+              this.jogador.setDataNasc(selecionada);}
           else {ok=1;}
     return ok;
     }   
@@ -198,19 +206,18 @@ private void mudaNome(){
     
     
     private void concluidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_concluidoActionPerformed
-        int ok=0;
+        int ok;
         mudaNome();
-        ok=mudaSexo(ok);
-        if(ok==1) {validadeDados.setText("Sexo Indefinido");}
-        else {
-           ok=mudaNascimento(ok);
-            if(ok==1) {validadeDados.setText("Data Inválida");}
-            else {//mudaFoto();        
-        validadeDados.setText("Dados Alterados com Sucesso");}}
+        ok=mudaSexo();
+            if(ok==1) {validadeDados.setText("Sexo Indefinido");}
+            else{
+                ok=mudaNascimento(ok);
+                    if(ok==1) {validadeDados.setText("Data Inválida");}
+                    else {//mudaFoto();        
+                    validadeDados.setText("Dados Alterados com Sucesso");}}
         
-              
         this.cj.reload();
-        this.cj.getPlantelJogador().atualizaJogadores();
+        this.cj.getPlantelJogador().atualizaJogadores();      
     }//GEN-LAST:event_concluidoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
