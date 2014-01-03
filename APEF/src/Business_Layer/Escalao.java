@@ -203,15 +203,15 @@ public class Escalao {
         return res;
     }
     
-    public boolean inserirJogador(String nome, GregorianCalendar g, int sexo, Imagem img) {
+    public boolean inserirJogador(Jogador a) {
         boolean flag = false;
         
-        int anoNasc = g.get(g.YEAR);
+        int anoNasc = (a.getDataNasc()).get((a.getDataNasc()).YEAR);
 
         GregorianCalendar atual = new GregorianCalendar();
         int anoAtual = atual.get(atual.YEAR);
         
-        Jogador j = new Jogador(nome, img, (GregorianCalendar) g, sexo, this.nomeEquipa);
+        Jogador j = new Jogador(a.getNome(), a.getFoto(), a.getDataNasc(), a.getSexo(), this.nomeEquipa);
         
     	if(!(this.jogadores.containsKey(j.getID())) && (anoAtual-anoNasc) <= idadeEscalao()) {
             this.jogadores.put(j.getID(),j);

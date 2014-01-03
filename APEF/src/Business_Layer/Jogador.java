@@ -29,6 +29,9 @@ public class Jogador extends Pessoa {
         this.nomeEquipaEmprestimo = new String();
         this.emprestado = false;
     }
+    
+    public Jogador(String nome, GregorianCalendar g, int sexo,  Imagem img) {
+        super(nome,img,g,sexo);}
 
     public Jogador(String nome, GregorianCalendar g, int sexo, boolean emprestado, String nomeEquipa) {
         super(nome,null,g,sexo);

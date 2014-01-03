@@ -11,6 +11,7 @@ import Business_Layer.Equipa;
 import Business_Layer.Escalao;
 import Business_Layer.Escola;
 import Business_Layer.Imagem;
+import Business_Layer.Jogador;
 import Business_Layer.Treinador;
 import GUI.ConsultasEscola;
 import GUI.Home2;
@@ -242,15 +243,14 @@ public final class JAdicionarJogador extends javax.swing.JDialog {
 
     private void criarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_criarActionPerformed
         // TODO add your handling code here:        
-        Imagem img = new Imagem();
-        
+        Imagem img = new Imagem();        
         String name = this.nome.getText();
         Date date = this.data.getDate();
         Calendar g = new GregorianCalendar();
         g.setTime(date);
         int sel = this.comboSexo.getSelectedIndex()+1;
-        
-        boolean res = this.escalao.inserirJogador(name, (GregorianCalendar) g, sel, img);
+        Jogador c = new Jogador(name, (GregorianCalendar) g, sel, img );
+        boolean res = this.escalao.inserirJogador(c);
         
         if(res) {
             this.jpc.atualizaJogadores();
