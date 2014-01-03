@@ -88,6 +88,7 @@ public final class Home2 extends JFrame {
         
         /**TORNEIOS*/
         Torneio t1 = new Torneio("Uminho Cup",new GregorianCalendar(),new GregorianCalendar(),2,2,new Campo("UM"));
+        Torneio t2 = new Torneio("Uminho Cup",new GregorianCalendar(),new GregorianCalendar(),1,2,new Campo("UM"));
         
         
         /* EQUIPAS */
@@ -115,6 +116,9 @@ public final class Home2 extends JFrame {
         eq3.getEscaloes()[0].inserirJogador(lindo3);
         eq3.getEscaloes()[0].inserirJogador(lindo4);
         eq3.getEscaloes()[0].inserirJogador(lindo5);
+        
+        //lindo1.addCompeticao(t1.getID());
+        //lindo1.addCompeticao(t2.getID());
         
         //this.sistema.getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").inserirEscalao(escalao1);
         this.sistema.getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").inserirEscalao(escalao2);

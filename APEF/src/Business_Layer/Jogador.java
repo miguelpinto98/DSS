@@ -2,6 +2,7 @@ package Business_Layer;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.Objects;
 
 public class Jogador extends Pessoa {    
     
@@ -88,6 +89,17 @@ public class Jogador extends Pessoa {
     }
 
     //Equals,Clone,toString
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 17 * hash + this.nrGolos;
+        hash = 17 * hash + Objects.hashCode(this.competicoes);
+        hash = 17 * hash + (this.emprestado ? 1 : 0);
+        hash = 17 * hash + Objects.hashCode(this.nomeEquipa);
+        hash = 17 * hash + Objects.hashCode(this.nomeEquipaEmprestimo);
+        return hash;
+    }
+    @Override
     public boolean equals(Object o) {
 
     	if(this == o)
@@ -100,20 +112,20 @@ public class Jogador extends Pessoa {
         }
     }
     
+    @Override
     public Jogador clone() {
         return new Jogador(this);
     }
 
+    @Override
     public String toString() {
     	StringBuilder str = new StringBuilder();
     	str.append("--Jogador--") ;
-        str.append("\nJogador ID: "+this.getID());
-        str.append("\nJogador Nome: "+this.getNome());
-        str.append("\nJogador Golos: "+this.getNrGolos());
-        str.append("\nJogador Data Nascimento: "+this.getDataNasc().get(GregorianCalendar.YEAR) +"/"+
-				this.getDataNasc().get(GregorianCalendar.MONTH) +"/"+
-				this.getDataNasc().get(GregorianCalendar.DAY_OF_MONTH));
-        str.append("\nJogador Sexo: "+this.getSexo()+"\n");
+            str.append("\nJogador ID: ").append(this.getID());
+            str.append("\nJogador Nome: ").append (this.getNome());
+            str.append("\nJogador Golos: ").append(this.getNrGolos());
+            str.append("\nJogador Data Nascimento: ").append(this.getDataNasc().get(GregorianCalendar.YEAR)).append("/").append(this.getDataNasc().get(GregorianCalendar.MONTH)).append("/").append(this.getDataNasc().get(GregorianCalendar.DAY_OF_MONTH));
+            str.append("\nJogador Sexo: ").append(this.getSexo()).append("\n");
  
     	return str.toString();
     }  	
