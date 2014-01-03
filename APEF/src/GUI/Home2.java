@@ -241,7 +241,7 @@ public final class Home2 extends JFrame {
         this.JPanelHeader.add(new JMenuAdmin(this, user), BorderLayout.CENTER);
         this.JPanelHeader.updateUI();
         this.JPanelHeader.validate();
-    }
+    } 
     
     public void reloadHeaderUserRespEscola() {
         this.JPanelHeader.remove(this.JPanelUserLogout);

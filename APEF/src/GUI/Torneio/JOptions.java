@@ -6,17 +6,19 @@
 
 package GUI.Torneio;
 
+import Business_Layer.Utilizador;
+
 /**
  *
  * @author Utilizador
  */
 public class JOptions extends javax.swing.JPanel {
 
-    /**
-     * Creates new form JOptionsAdmin
-     */
-    public JOptions() {
+    private JPrincipalTorneio p;
+    
+    public JOptions(JPrincipalTorneio p, Utilizador u) {
         initComponents();
+        this.p = p;
     }
 
     /**
