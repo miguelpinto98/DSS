@@ -135,7 +135,8 @@ public class Jogador extends Pessoa {
 		this.nrGolos = this.nrGolos + 1;
 	}
 
-    public void addCompeticao(int id) {
+    public void addCompeticao(int id){
+        this.competicoes = new ArrayList<>();
         this.competicoes.add(id);
     }   
 }
