@@ -8,6 +8,7 @@ package GUI.Torneio;
 
 import Business_Layer.Utilizador;
 import GUI.Home2;
+import javax.swing.JDialog;
 
 /**
  *
@@ -88,6 +89,9 @@ public class JOptions extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        JDialog frame = new JCriarToneio(this);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
 

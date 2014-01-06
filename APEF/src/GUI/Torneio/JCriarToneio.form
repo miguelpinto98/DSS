@@ -94,12 +94,10 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jTextField4" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jTextField5" max="32767" attributes="0"/>
-                                      <Component id="jComboBox1" pref="165" max="32767" attributes="0"/>
-                                      <Component id="jTextField6" alignment="0" max="32767" attributes="0"/>
-                                  </Group>
+                                  <Component id="jTextField4" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jTextField5" max="32767" attributes="0"/>
+                                  <Component id="jComboBox1" pref="165" max="32767" attributes="0"/>
+                                  <Component id="jTextField6" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jXDatePicker1" pref="183" max="32767" attributes="0"/>
                                   <Component id="jXDatePicker2" alignment="0" max="32767" attributes="0"/>
                               </Group>

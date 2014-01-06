@@ -6,18 +6,23 @@
 
 package GUI.Torneio;
 
+import javax.swing.JDialog;
+
 /**
  *
  * @author Utilizador
  */
-public class JCriarToneio extends javax.swing.JDialog {
+public class JCriarToneio extends JDialog {
 
-    /**
-     * Creates new form JCriarToneio
-     */
-    public JCriarToneio(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    private JOptions o;
+    
+    public JCriarToneio(JOptions j) {
         initComponents();
+         this.o = j;
+         
+        setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        setAlwaysOnTop(true);
+        o.setEnabled(false);
     }
 
     /**
