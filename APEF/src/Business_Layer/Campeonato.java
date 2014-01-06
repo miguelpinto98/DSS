@@ -391,10 +391,26 @@ public class Campeonato implements Competicao{
         }
     }
     
-	public boolean atualizaCampeonato(Jogo j) {
+    public boolean acabou() {
+        boolean flag = true;
+        for(Jornada jr : this.calendario.getJornadas())
+			if(jr.getJogosRealizados() < jr.getListaJogos().size() )
+				flag = false;		
+		
+        return flag;
+    }
+    
+	public boolean atualizaCampeonato(Jogo j, APEF a) {
         boolean res = false;
+        if(this.acabou()) {
+            int idEscalao = this.classificacao.getEstatistica().first().getIdEscalao();
+            Escalao es = this.buscaEscalao(idEscalao);
+            a.atualizaPalmaresEquipa(this.nome, es.getNomeEscola(), es.getNomeEquipa());
+        }
+            
+            
         if(j.getIdCompeticao() == this.id) {
-            if(this.calendario.atualizaCalendario(j)) { 
+            if(this.calendario.atualizaCalendario(j,a)) { 
                 this.atualizaGoleadores(j);
                 this.classificacao.actualizaClassificacao(j);
                 res = true;
@@ -402,7 +418,7 @@ public class Campeonato implements Competicao{
             return res;
         }
         else return res;
-	}
+    }
     
     public ArrayList<Integer> melhoresMarcadoresAux() {
         HashMap<Integer,Integer> aux = this.goleadores;

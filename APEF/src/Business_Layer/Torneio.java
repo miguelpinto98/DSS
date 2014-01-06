@@ -347,24 +347,22 @@ public class Torneio implements Competicao{
         this.nFase++;
         
         return this;
-    } 
-     
-    
-    public boolean atualizaTorneioTipo1(Jogo j) {
+    }
+
+    public boolean atualizaTorneioTipo1(Jogo j, APEF ap) {
         int i = this.getNFase();
         ArrayList<Integer> equipas1 = new ArrayList<>();
         ArrayList<Integer> equipas2 = new ArrayList<>();
         boolean res = false;
         boolean res2 = false;
         boolean res3 = false;
-   
         Grupo a = (Grupo) this.fases.get(i);
         Eliminatoria e = (Eliminatoria) this.fases.get(i);
         if(i == 0) {
-            res = a.atualizaGrupoTipo1(j);
+            res = a.atualizaGrupoTipo1(j,ap);
             if(!res) {
                 Grupo b = (Grupo) this.fases.get(1);
-                res = b.atualizaGrupoTipo1(j);
+                res = b.atualizaGrupoTipo1(j,ap);
                 res2 = b.ultimoJogoGrupo();
                 if(res2) 
                     equipas2 = b.doisMelhores();
@@ -372,7 +370,7 @@ public class Torneio implements Competicao{
             }
          }
         else {
-            res=e.atualizaEliminatoriaTipo1(j);
+            res=e.atualizaEliminatoriaTipo1(j,ap);
             res3 = e.ultimoJogoEliminatoria();
             }
             
@@ -384,18 +382,24 @@ public class Torneio implements Competicao{
         if (res2) 
             this.secondFaseTorneioTipo1(equipas1,equipas2);
         if (res3)
-            this.thirdFaseTorneioTipo1(e.vencedores());
-        
-        
-        
+            if(e.vencedores().size() == 2)
+                this.thirdFaseTorneioTipo1(e.vencedores());
+            else
+                this.atualizaPalmaresVencedor(ap,e.vencedores());
         return res;
     }
 
-    public boolean atualizaTorneioTipo2(Jogo j) {
+    public void atualizaPalmaresVencedor(APEF a, HashSet<Escalao> vencedor) {
+        for(Escalao e : vencedor) {
+            a.atualizaPalmaresEquipa(this.nome,e.getNomeEscola(),e.getNomeEquipa());
+        }  
+    } 
+    
+    public boolean atualizaTorneioTipo2(Jogo j, APEF ap) {
         boolean res = false, res2=false;
         int i = this.nFase;
         Eliminatoria e = (Eliminatoria) this.fases.get(i);
-        res=e.atualizaEliminatoriaTipo1(j);
+        res=e.atualizaEliminatoriaTipo1(j,ap);
         res2=e.ultimoJogoEliminatoria();
             
         if(res) {
