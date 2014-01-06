@@ -1,11 +1,10 @@
 package Business_Layer;
 
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Objects;
 
-public class Epoca {
+public class Epoca implements Comparable<Epoca>{
 
     private static final int indexInfantis = 0;
     private static final int indexBenjamins = 1;
@@ -187,5 +186,15 @@ public class Epoca {
                 }
            }
       return nome;}
+
+    @Override
+    public int compareTo(Epoca o) {
+        if(o.getAno() < this.ano)
+            return -1;
+        if(o.getAno() > this.ano)
+            return 1;
+        else
+            return 0;
+    }
 }
 

@@ -11,6 +11,7 @@ import Business_Layer.ResponsavelEscola;
 import Business_Layer.Utilizador;
 import GUI.Home2;
 import java.awt.BorderLayout;
+import java.text.ParseException;
 import javax.swing.JFrame;
 import javax.swing.event.ListSelectionEvent;
 
@@ -22,13 +23,12 @@ public class JPrincipalTorneio extends javax.swing.JPanel {
     private Home2 h;
     Utilizador user;
     
-    public JPrincipalTorneio(Home2 h, Utilizador user) {
+    public JPrincipalTorneio(Home2 h, Utilizador user){
         this.h=h;
         this.user=user;
         
-        initComponents();
-        
-        verificaUser(user);
+         initComponents();
+         verificaUser();
     }
     
     /** UTILIZADOR */
@@ -40,15 +40,11 @@ public class JPrincipalTorneio extends javax.swing.JPanel {
         this.jPanel2.validate();
     }
     
-    public void verificaUser(Utilizador user) {
-        if(user != null) {
-            if(user instanceof Admin) {
+    public void verificaUser(){
+        if(this.user != null) {
+            if(user instanceof Admin || user instanceof ResponsavelEscola) {
                 reloadUser();
             }
-            if(user instanceof ResponsavelEscola) {
-                reloadUser();
-            }
-                
         }
     }
     
@@ -108,6 +104,8 @@ public class JPrincipalTorneio extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jComboEpocaCampeonato = new javax.swing.JComboBox();
         jPanel2 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
@@ -153,16 +151,32 @@ public class JPrincipalTorneio extends javax.swing.JPanel {
 
         add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 940, Short.MAX_VALUE)
+        jPanel2.setMinimumSize(new java.awt.Dimension(940, 83));
+        jPanel2.setLayout(new java.awt.BorderLayout());
+
+        jPanel4.setMinimumSize(new java.awt.Dimension(940, 83));
+        jPanel4.setPreferredSize(new java.awt.Dimension(940, 83));
+
+        jLabel3.setText("jLabel3");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(475, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(431, 431, 431))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 83, Short.MAX_VALUE)
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(45, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(24, 24, 24))
         );
+
+        jPanel2.add(jPanel4, java.awt.BorderLayout.CENTER);
 
         add(jPanel2, java.awt.BorderLayout.PAGE_END);
 
@@ -253,9 +267,8 @@ public class JPrincipalTorneio extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1)))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -303,25 +316,17 @@ public class JPrincipalTorneio extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JComboBox jComboEpocaCampeonato;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JList jList1;
     private javax.swing.JList jList2;
     private javax.swing.JList jList3;
-    private javax.swing.JList jList4;
-    private javax.swing.JList jList5;
-    private javax.swing.JList jList6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -329,8 +334,5 @@ public class JPrincipalTorneio extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
     // End of variables declaration//GEN-END:variables
 }

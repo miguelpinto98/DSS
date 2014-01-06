@@ -33,6 +33,7 @@ public final class ConsultarJogador extends javax.swing.JDialog {
         this.user = user;
         this.jogador = j;
         this.pj = pla;
+        //this.ep=root.getSistema().getEpocas().
         initComponents();        
         reload();   
         reloadListaCompeticoes();
