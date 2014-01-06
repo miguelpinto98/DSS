@@ -106,7 +106,7 @@ public class Epoca implements Comparable<Epoca>{
             return false;
         else {
             Epoca t = (Epoca) o;
-            return ( this.ano == t.getAno() && this.campeonatos == t.getCampeonatos() &&
+            return ( this.ano == t.getAno() && this.campeonatos.equals(t.getCampeonatos()) &&
         			this.torneios.equals(t.getTorneios()));
         }
     } 
@@ -159,22 +159,23 @@ public class Epoca implements Comparable<Epoca>{
         }
     }
 
-	public void atualizaEpoca(Jogo j) {
+	public void atualizaEpoca(Jogo j, APEF a) {
 		int idEscalao = j.getEscalaoCasa().getTipoEscalao();
 		boolean encontrou = false, encontrouT = false;
 		
 		while(!encontrou && !encontrouT) {
-			encontrou = this.campeonatos[idEscalao].atualizaCampeonato(j);
+			encontrou = this.campeonatos[idEscalao].atualizaCampeonato(j,a);
 			for(Torneio t: this.torneios.get(idEscalao)) {
                 if(t.getID() == j.getIdCompeticao()) {
-                    encontrouT = t.atualizaTorneioTipo1(j);
+                    encontrouT = t.atualizaTorneioTipo1(j,a);
                 }
             }
         }
     }
         
-     public String procuraCampeonato (Integer idCamp){
-        int i=0, flag=1;
+
+    public String procuraCampeonato (Integer idCamp){
+       int i=0, flag=1;
         String nome= null;
             while (i<4 && flag==1){
                 if(this.campeonatos[i].getID()==idCamp) {nome=this.campeonatos[i].getNome(); flag=0;}

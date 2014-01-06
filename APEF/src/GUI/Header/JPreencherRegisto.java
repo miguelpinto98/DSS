@@ -90,7 +90,7 @@ public class JPreencherRegisto extends javax.swing.JDialog {
         jLabel3.setText("Nome:");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel4.setText("Data de nascimento:");
+        jLabel4.setText("Data de Nascimento:");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setText("Telemóvel:");
@@ -99,7 +99,7 @@ public class JPreencherRegisto extends javax.swing.JDialog {
         jLabel6.setText("Morada:");
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel7.setText("Código-postal:");
+        jLabel7.setText("Código-Postal:");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);

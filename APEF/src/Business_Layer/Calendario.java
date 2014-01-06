@@ -71,13 +71,11 @@ public class Calendario {
         this.jornadas.remove(j);
     }
 
-	public boolean atualizaCalendario(Jogo j) {
+	public boolean atualizaCalendario(Jogo j, APEF a) {
 		boolean flag = false;
-		
 		for(Jornada jr : this.jornadas)
 			if(jr.getJogosRealizados() < jr.getListaJogos().size() )
-				flag = jr.atualizaJornada(j);
-		
+				flag = jr.atualizaJornada(j);		
 		return flag;
 	}
 }

@@ -27,7 +27,8 @@ import GUI.Header.JMenuAdmin;
 import GUI.Header.JMenuArbitro;
 import GUI.Header.JMenuResponsavelEscola;
 import GUI.Header.JRegistar;
-import GUI.Torneio.JPrincipalTorneio;
+import GUI.Torneio.JOptions;
+import GUI.Torneio.JTorneioInfo;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Window;
@@ -199,7 +200,6 @@ public final class Home2 extends JFrame {
         
         reloadListaEscolas();
         reloadPagInicialCampeonato();
-        reloadTorneios();
     }
     
     public void verificaUser(Utilizador user) {
@@ -207,9 +207,13 @@ public final class Home2 extends JFrame {
             if(user instanceof Admin) {
                 reloadHeaderUserAdmin();
                 reloadTabEscolasAdmin();
+                reloadOptions();
+              /**  reloadTorneios();*/
             }
             if(user instanceof ResponsavelEscola) {
                 reloadHeaderUserRespEscola();
+                reloadOptions();
+              /**  reloadTorneios();*/
             }
             if(user instanceof Arbitro) {
                 reloadHeaderUserArbitro();
@@ -218,7 +222,15 @@ public final class Home2 extends JFrame {
         else {
             reloadHeaderConvidado();
             reloadTabEscolasConvidado();
+          /**  reloadTorneios();*/
         }
+    }
+    
+    public void reloadOptions(){
+        this.jPanel5.removeAll();
+        this.jPanel5.add(new JOptions(this, user), BorderLayout.CENTER);
+         this.jPanel5.updateUI();
+        this.jPanel5.validate();
     }
     
     public void reloadHeaderConvidado() {
@@ -264,6 +276,45 @@ public final class Home2 extends JFrame {
         this.JPanelHeader.add(new JMenuArbitro(this, user), BorderLayout.CENTER);
         this.JPanelHeader.updateUI();
         this.JPanelHeader.validate();
+    }
+    
+    public String seleccionadoTorneio1(){
+        String s;
+        
+        if (jList1.getSelectedIndex() != -1){
+            s = jList1.getSelectedValue().toString();
+        }
+        else{s= null;}
+        
+        jList1.clearSelection();
+        
+       return s;
+    }
+    
+    public String seleccionadoTorneio2(){
+        String s;
+        
+        if (jList2.getSelectedIndex() != -1){
+            s = jList2.getSelectedValue().toString();
+        }
+        else{s= null;}
+        
+        jList2.clearSelection();
+        
+       return s;
+    }
+    
+    public String seleccionadoTorneio3(){
+        String s;
+        
+        if (jList3.getSelectedIndex() != -1){
+            s = jList3.getSelectedValue().toString();
+        }
+        else{s= null;}
+        
+        jList3.clearSelection();
+        
+       return s;
     }
     
     public APEF getSistema() {
@@ -351,10 +402,10 @@ public final class Home2 extends JFrame {
     
     /*TAB TORNEIOS*/
     
-    public void reloadTorneios(){
-        this.JTabEscolas.remove(jPanel9);
-        this.JTabEscolas.add("Torneios",new JPrincipalTorneio(this,user));
-    }
+  /**  public void reloadTorneios(){
+        this.JTabEscolas.remove(Torneios);
+        this.JTabEscolas.add("Torneios",new JPrincipalTorneio(this,this.user));
+    }*/
     
     
     
@@ -407,10 +458,25 @@ public final class Home2 extends JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         panelAlteracaoesCamp = new javax.swing.JPanel();
-        jPanel9 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
+        Torneios = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jComboEpocaCampeonato1 = new javax.swing.JComboBox();
+        jComboBox2 = new javax.swing.JComboBox();
+        jPanel5 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList();
+        jLabel6 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jList2 = new javax.swing.JList();
+        jLabel7 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jList3 = new javax.swing.JList();
+        jLabel8 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -551,7 +617,7 @@ public final class Home2 extends JFrame {
         JTabEscolas.setFocusable(false);
         JTabEscolas.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
-        jPanel6.setBackground(new java.awt.Color(248, 247, 247));
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -708,7 +774,7 @@ public final class Home2 extends JFrame {
         JPanelEscolaConvidado.setBackground(new java.awt.Color(255, 255, 255));
         JPanelEscolaConvidado.setLayout(new java.awt.BorderLayout());
 
-        panelListaEscolas.setBackground(new java.awt.Color(248, 247, 247));
+        panelListaEscolas.setBackground(new java.awt.Color(255, 255, 255));
         panelListaEscolas.setPreferredSize(new java.awt.Dimension(500, 450));
 
         listaEscolas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -946,40 +1012,157 @@ public final class Home2 extends JFrame {
 
         JTabEscolas.addTab("Campeonatos", jPanel8);
 
-        jPanel9.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel9.setLayout(new java.awt.BorderLayout());
+        Torneios.setBackground(new java.awt.Color(255, 255, 255));
+        Torneios.setLayout(new java.awt.BorderLayout());
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel4.setText("Lista de Torneios");
 
-        jComboEpocaCampeonato1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Época" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Época 1", "Época 2" }));
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap(321, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addGap(194, 194, 194)
+                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(28, Short.MAX_VALUE))
+        );
+
+        Torneios.add(jPanel4, java.awt.BorderLayout.PAGE_START);
+
+        jPanel5.setLayout(new java.awt.BorderLayout());
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setMinimumSize(new java.awt.Dimension(940, 83));
+        jPanel3.setPreferredSize(new java.awt.Dimension(940, 83));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(329, Short.MAX_VALUE)
-                .addComponent(jLabel4)
-                .addGap(185, 185, 185)
-                .addComponent(jComboEpocaCampeonato1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGap(0, 940, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jComboEpocaCampeonato1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(31, Short.MAX_VALUE))
+            .addGap(0, 83, Short.MAX_VALUE)
         );
 
-        jPanel9.add(jPanel3, java.awt.BorderLayout.PAGE_START);
+        jPanel5.add(jPanel3, java.awt.BorderLayout.CENTER);
 
-        JTabEscolas.addTab("Torneios", jPanel9);
+        Torneios.add(jPanel5, java.awt.BorderLayout.PAGE_END);
+
+        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
+
+        jList1.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane4.setViewportView(jList1);
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Torneios acabados");
+
+        jButton1.setText("Consultar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jList2.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane6.setViewportView(jList2);
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("Torneios a decorrer");
+
+        jButton2.setText("Consultar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jList3.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane7.setViewportView(jList3);
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("Torneios futuros");
+
+        jButton4.setText("Consultar");
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(172, 172, 172)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane4)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(177, 177, 177))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(8, 8, 8)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2)
+                    .addComponent(jButton4))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        Torneios.add(jPanel7, java.awt.BorderLayout.CENTER);
+
+        JTabEscolas.addTab("Torneios", Torneios);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -1067,6 +1250,28 @@ public final class Home2 extends JFrame {
         reloadPagInicialCampeonato();
     }//GEN-LAST:event_buttonClassificacaoActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+         String s = seleccionadoTorneio1();
+        
+        if(s != null) {
+            JFrame frame = new JTorneioInfo(this,s);
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        String s = seleccionadoTorneio2();
+        
+        if(s != null) {
+            JFrame frame = new JTorneioInfo(this,s);
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1111,35 +1316,50 @@ public final class Home2 extends JFrame {
     private javax.swing.JTabbedPane JTabEscolas;
     private org.jdesktop.swingx.JXTable JTabResultados;
     private javax.swing.JPanel TitleHeader;
+    private javax.swing.JPanel Torneios;
     private javax.swing.JPanel botoesConvidadoEscola;
     private javax.swing.JButton buttonClassificacao;
     private javax.swing.JButton consultaEscola;
     private javax.swing.JLabel data;
     private javax.swing.JButton entrar;
     private javax.swing.JPanel headerCampeonato;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButtonCalendario;
     private javax.swing.JButton jButtonEstatistica;
     private javax.swing.JButton jButtonJornada;
     private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox jComboBox2;
     private javax.swing.JComboBox jComboEpocaCampeonato;
-    private javax.swing.JComboBox jComboEpocaCampeonato1;
     private javax.swing.JComboBox jComboEpocaCampeonato2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JList jList1;
+    private javax.swing.JList jList2;
+    private javax.swing.JList jList3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private org.jdesktop.swingx.JXTable jTabProximos;
     private javax.swing.JTable jTable1;
     private org.jdesktop.swingx.JXSearchField jXSearchField1;
