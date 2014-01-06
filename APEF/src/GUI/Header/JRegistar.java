@@ -64,7 +64,7 @@ public class JRegistar extends javax.swing.JDialog {
 
         jPanel1.setBackground(new java.awt.Color(102, 153, 255));
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Registo");
 
@@ -75,7 +75,7 @@ public class JRegistar extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(332, Short.MAX_VALUE))
+                .addContainerGap(300, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -85,7 +85,7 @@ public class JRegistar extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 430, 50));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 50));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Confirmar email");
@@ -129,7 +129,7 @@ public class JRegistar extends javax.swing.JDialog {
         error.setFont(new java.awt.Font("Lucida Grande", 3, 11)); // NOI18N
         error.setText("  ");
         error.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        getContentPane().add(error, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 230, 230, 20));
+        getContentPane().add(error, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 230, 220, 20));
 
         resp.setText("Responsável Escola");
         getContentPane().add(resp, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, -1, -1));
@@ -145,7 +145,7 @@ public class JRegistar extends javax.swing.JDialog {
         getContentPane().add(pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 210, -1));
         getContentPane().add(confpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, 210, -1));
 
-        setBounds(0, 0, 411, 335);
+        setBounds(0, 0, 411, 346);
     }// </editor-fold>//GEN-END:initComponents
 
     private void confirmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmaActionPerformed
