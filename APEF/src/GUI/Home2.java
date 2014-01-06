@@ -7,6 +7,7 @@ import Business_Layer.Agenda;
 import Business_Layer.Arbitro;
 import Business_Layer.Campo;
 import Business_Layer.DadosEstatisticos;
+import Business_Layer.Epoca;
 import Business_Layer.Equipa;
 import Business_Layer.Escalao;
 import Business_Layer.Escola;
@@ -73,6 +74,17 @@ public final class Home2 extends JFrame {
         this.sistema = new APEF();
         this.user = null;
         
+        /* EPOCA */ /**TORNEIOS*/
+        Epoca epo1 = new Epoca(2014);
+ 
+        Torneio t1 = new Torneio("Uminho Cup",new GregorianCalendar(),new GregorianCalendar(),2,2,new Campo("UM"));
+        Torneio t2 = new Torneio("Uminho Cup",new GregorianCalendar(),new GregorianCalendar(),1,2,new Campo("UM"));
+        
+        epo1.inserirTorneio(t1);
+        epo1.inserirTorneio(t2);
+
+        this.sistema.inserirEpoca(epo1);
+
         /* ESCOLAS */
         Escola e1 = new Escola("Escola Secundária da Lixa", "Lixa", new Campo("Lixa Futebol"));
         Escola e2 = new Escola("Escola Secundária de Felgueiras", "Felgueiras", new Campo("Dr. Machado Matos"));
@@ -86,10 +98,6 @@ public final class Home2 extends JFrame {
         a = this.sistema.inserirEscola(e4);
         a = this.sistema.inserirEscola(e5);
         
-        /**TORNEIOS*/
-        
-        Torneio t1 = new Torneio("Uminho Cup",new GregorianCalendar(),new GregorianCalendar(),2,2,new Campo("UM"));
-        Torneio t2 = new Torneio("Uminho Cup",new GregorianCalendar(),new GregorianCalendar(),1,2,new Campo("UM"));
         
         
         /* EQUIPAS */
@@ -109,7 +117,7 @@ public final class Home2 extends JFrame {
         Jogador lindo2 = new Jogador("Miguel Pinto", new GregorianCalendar(), 2, new Imagem());
         Jogador lindo3 = new Jogador("Serafim Pinto", new GregorianCalendar(), 2, new Imagem());
         Jogador lindo4 = new Jogador("Diana Lemos", new GregorianCalendar(), 2, new Imagem());
-        Jogador lindo5 = new Jogador("Mariana Medeiros", new GregorianCalendar(), 2, new Imagem());
+        Jogador lindo5 = new Jogador("63linda", new GregorianCalendar(), 2, new Imagem());
     
                
         eq3.getEscaloes()[0].inserirJogador(lindo1);
@@ -118,10 +126,11 @@ public final class Home2 extends JFrame {
         eq3.getEscaloes()[0].inserirJogador(lindo4);
         eq3.getEscaloes()[0].inserirJogador(lindo5);
         
-        lindo1.addCompeticao(t1.getID());
-        lindo1.addCompeticao(t2.getID());
+        this.getSistema().getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").getEscaloes()[0].getJogadores().get(17).addCompeticao(t1.getID());
+        this.getSistema().getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").getEscaloes()[0].getJogadores().get(17).addCompeticao(t2.getID());
         
-        //this.sistema.getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").inserirEscalao(escalao1);
+        
+        
         this.sistema.getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").inserirEscalao(escalao2);
         
 
