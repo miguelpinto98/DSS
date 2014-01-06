@@ -62,9 +62,9 @@ public class Grupo extends Fase {
     	return str.toString();
     }  	
     //Metodos     
-    public boolean atualizaGrupoTipo1(Jogo j) {
+    public boolean atualizaGrupoTipo1(Jogo j, APEF a) {
         boolean res=false;
-        if(this.getCalendario().atualizaCalendario(j))
+        if(this.getCalendario().atualizaCalendario(j,a))
             this.classificacao.actualizaClassificacao(j);
         return res;
     }

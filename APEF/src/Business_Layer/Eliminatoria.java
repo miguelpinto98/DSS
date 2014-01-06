@@ -45,8 +45,8 @@ public class Eliminatoria extends Fase {
     }   
     //Metodos
     
-    public boolean atualizaEliminatoriaTipo1(Jogo j) {
-        return this.getCalendario().atualizaCalendario(j);
+    public boolean atualizaEliminatoriaTipo1(Jogo j, APEF a) {
+        return this.getCalendario().atualizaCalendario(j,a);
     }
     
     public void geraCalendarioTipo1(int idComp, GregorianCalendar dataInicio, ArrayList<Utilizador> arbitros, ArrayList<Integer> equipas1, ArrayList<Integer> equipas2, Campo x) {
@@ -75,9 +75,9 @@ public class Eliminatoria extends Fase {
         jogo.getEscalaoFora().preencheAgendaEscalao(jogo);
         
         j.inserirJogo(jogo2); 
-        jogo.getArbitroJogo().preencheAgendaArbitro(jogo);
-        jogo.getEscalaoCasa().preencheAgendaEscalao(jogo);
-        jogo.getEscalaoFora().preencheAgendaEscalao(jogo);
+        jogo2.getArbitroJogo().preencheAgendaArbitro(jogo2);
+        jogo2.getEscalaoCasa().preencheAgendaEscalao(jogo2);
+        jogo2.getEscalaoFora().preencheAgendaEscalao(jogo2);
         
         getCalendario().inserirJornada(j);       
     }

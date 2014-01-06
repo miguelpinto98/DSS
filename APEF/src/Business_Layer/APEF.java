@@ -542,7 +542,7 @@ public class APEF {
 		if(!this.epocas.containsKey(ano));
 			ano--;
 		
-		this.epocas.get(ano).atualizaEpoca(j);	
+		this.epocas.get(ano).atualizaEpoca(j,this);	
 	}
         
     /* LIGAÇÃO BASE DE DADOS*/    
@@ -641,6 +641,10 @@ public class APEF {
 
     public boolean criarEquipa(String esc, Equipa e) {
         return this.escolas.get(esc).inserirEquipa(e);
+    }
+    
+    public void atualizaPalmaresEquipa(String nomeCompeticao,String escola, String equipa) {
+      this.escolas.get(escola).getEquipas().get(equipa).atualizaPalmares(nomeCompeticao);
     }
     
 }

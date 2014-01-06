@@ -134,7 +134,7 @@ public class Equipa {
 		}
 	}
 
-	public void atualizaPalmares(String nomeCompeticao, Equipa e) {
+	public void atualizaPalmares(String nomeCompeticao) {
 		if(this.palmares.containsKey(nomeCompeticao)) {
 			int contador = this.palmares.get(nomeCompeticao);
 			this.palmares.put(nomeCompeticao,contador+1);

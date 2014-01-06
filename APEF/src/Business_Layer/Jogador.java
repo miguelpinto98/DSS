@@ -32,7 +32,8 @@ public class Jogador extends Pessoa {
     }
     
     public Jogador(String nome, GregorianCalendar g, int sexo,  Imagem img) {
-        super(nome,img,g,sexo);}
+        super(nome,img,g,sexo);
+    }
 
     public Jogador(String nome, GregorianCalendar g, int sexo, boolean emprestado, String nomeEquipa) {
         super(nome,null,g,sexo);
