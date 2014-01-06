@@ -20,6 +20,7 @@ public class Jogador extends Pessoa {
         this.emprestado = false;
         this.nomeEquipa = "";
         this.nomeEquipaEmprestimo = "";
+        this.competicoes = new ArrayList<>();
     }
    
     public Jogador(String nome, Imagem img, GregorianCalendar g, int sexo, String nEquipa) {
@@ -32,7 +33,8 @@ public class Jogador extends Pessoa {
     }
     
     public Jogador(String nome, GregorianCalendar g, int sexo,  Imagem img) {
-        super(nome,img,g,sexo);}
+        super(nome,img,g,sexo);
+        this.competicoes = new ArrayList<>();}
 
     public Jogador(String nome, GregorianCalendar g, int sexo, boolean emprestado, String nomeEquipa) {
         super(nome,null,g,sexo);
@@ -45,6 +47,7 @@ public class Jogador extends Pessoa {
     public Jogador(Jogador t) {
     	super(t);
     	this.nrGolos = t.getNrGolos();
+        this.competicoes = new ArrayList<>();
         this.emprestado = t.getEmprestado();
         this.nomeEquipa = t.getNomeEquipa();
         this.nomeEquipaEmprestimo = t.getNomeEquipaEmprestimo();
@@ -136,7 +139,6 @@ public class Jogador extends Pessoa {
 	}
 
     public void addCompeticao(int id){
-        this.competicoes = new ArrayList<>();
         this.competicoes.add(id);
     }   
 }
