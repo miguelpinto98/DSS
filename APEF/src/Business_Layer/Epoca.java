@@ -170,7 +170,12 @@ public class Epoca implements Comparable<Epoca>{
 			encontrou = this.campeonatos[idEscalao].atualizaCampeonato(j,a);
 			for(Torneio t: this.torneios.get(idEscalao)) {
                 if(t.getID() == j.getIdCompeticao()) {
-                    encontrouT = t.atualizaTorneioTipo1(j,a);
+                    if(t.getTipoTorneio() == 1)
+                        encontrouT = t.atualizaTorneioTipo1(j,a);
+                    if(t.getTipoTorneio() == 2)
+                        t.atualizaTorneioTipo2(j, a);
+                    //if(t.getTipoTorneio() == 3)
+                        //t.atualizaTorneioTipo3(j, a);
                 }
             }
         }

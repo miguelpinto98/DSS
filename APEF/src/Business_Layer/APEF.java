@@ -416,7 +416,7 @@ public class APEF {
     public void avancaData(Torneio t) {
         GregorianCalendar data = t.getDataInicio();
         Epoca ep = this.epocas.get(this.epocas.firstKey());
-        ep.avancaDataCampeonto(t.getDataInicio(), t.getTipoEscalao());
+        ep.avancaDataCampeonto(data, t.getTipoEscalao());
     }
     
     public boolean iniciarTorneioTipo2(Torneio t){
