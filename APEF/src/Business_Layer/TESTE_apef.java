@@ -137,7 +137,7 @@ public class TESTE_apef {
     Equipa equipa4 = new Equipa("SC Negreiros");
     a.getEscolas().get(escola4.getNome()).inserirEquipa(equipa4);
     Escalao escalao4 = new Escalao(0,equipa4.getNome(),escola4.getNome());
-   Jogador j41 = new Jogador("Marioooooooooooooooooooooooooo", g2, 0,new Imagem());
+     Jogador j41 = new Jogador("Marioooooooooooooooooooooooooo", g2, 0,new Imagem());
      Jogador j42 = new Jogador("Leite", new GregorianCalendar(), 0,new Imagem());
      Jogador j43 = new Jogador("Miguel", new GregorianCalendar(), 0,new Imagem());
      Jogador j44 = new Jogador("Luis", new GregorianCalendar(), 0,new Imagem());
@@ -167,26 +167,39 @@ public class TESTE_apef {
     escalao4.inserirTreinador(treinador4);
     equipa4.inserirEscalao(escalao4);
   
-/*//EQUIPA - 5
+    //EQUIPA - 5
     Campo campo5 = new Campo("Campo de Airaes");
     Escola escola5 = new Escola("E.B. 2 e 3 de Airaes", "Arra", campo5);
     a.inserirEscola(escola5);
     Equipa equipa5 = new Equipa("FC AIRAES");
     a.getEscolas().get(escola5.getNome()).inserirEquipa(equipa5);
     Escalao escalao5 = new Escalao(0,equipa5.getNome(),escola5.getNome());
-    escalao5.inserirJogador("Marioooooooooooooooooooooooooo", g2, 0, new Imagem());
-    escalao5.inserirJogador("Leite", new GregorianCalendar(), 0, new Imagem());
-    escalao5.inserirJogador("Miguel", new GregorianCalendar(), 0, new Imagem());
-    escalao5.inserirJogador("Luis", new GregorianCalendar(), 0, new Imagem());
-    escalao5.inserirJogador("Pinto", new GregorianCalendar(), 0, new Imagem());
-    escalao5.inserirJogador("Serafim", new GregorianCalendar(), 0, new Imagem());
-    escalao5.inserirJogador("Pinto", new GregorianCalendar(), 0, new Imagem());
-    escalao5.inserirJogador("Ines", new GregorianCalendar(), 1, new Imagem());
-    escalao5.inserirJogador("Medeiros", new GregorianCalendar(), 1, new Imagem());
-    escalao5.inserirJogador("Mariana", new GregorianCalendar(), 1, new Imagem());
-    escalao5.inserirJogador("Diana", new GregorianCalendar(), 1, new Imagem());
-    escalao5.inserirJogador("Lemos", new GregorianCalendar(), 1, new Imagem());
-    escalao5.inserirJogador("Manuel", new GregorianCalendar(), 0, new Imagem());
+     Jogador j51 = new Jogador("Marioooooooooooooooooooooooooo", g2, 0,new Imagem());
+     Jogador j52 = new Jogador("Leite", new GregorianCalendar(), 0,new Imagem());
+     Jogador j53 = new Jogador("Miguel", new GregorianCalendar(), 0,new Imagem());
+     Jogador j54 = new Jogador("Luis", new GregorianCalendar(), 0,new Imagem());
+     Jogador j55 = new Jogador("Pinto", new GregorianCalendar(), 0,new Imagem());
+     Jogador j56 = new Jogador("Serafim", new GregorianCalendar(), 0,new Imagem());
+     Jogador j57 = new Jogador("Pinto", new GregorianCalendar(), 0,new Imagem());
+     Jogador j58 = new Jogador("Ines", new GregorianCalendar(), 1,new Imagem());
+     Jogador j59 = new Jogador("Medeiros", new GregorianCalendar(), 1,new Imagem());
+     Jogador j510 = new Jogador("Mariana", new GregorianCalendar(), 1,new Imagem());
+     Jogador j511 = new Jogador("Diana", new GregorianCalendar(), 1,new Imagem());
+     Jogador j512 = new Jogador("Lemos", new GregorianCalendar(), 1,new Imagem());
+     Jogador j513 = new Jogador("Manuel", new GregorianCalendar(), 0,new Imagem());
+     escalao5.inserirJogador(j51);
+     escalao.inserirJogador(j52);
+     escalao5.inserirJogador(j53);
+     escalao5.inserirJogador(j54);
+     escalao5.inserirJogador(j55);
+     escalao5.inserirJogador(j56);
+     escalao5.inserirJogador(j57);
+     escalao5.inserirJogador(j58);
+     escalao5.inserirJogador(j59);
+     escalao5.inserirJogador(j510);
+     escalao5.inserirJogador(j511);
+     escalao5.inserirJogador(j512);
+     escalao5.inserirJogador(j513);
     Treinador treinador5 = new Treinador("QUIM QUIM", new Imagem(), new GregorianCalendar(), 0);
     escalao5.inserirTreinador(treinador5);
     equipa5.inserirEscalao(escalao5);
@@ -197,42 +210,68 @@ public class TESTE_apef {
     Equipa equipa6 = new Equipa("lolololololol");
     a.getEscolas().get(escola6.getNome()).inserirEquipa(equipa6);
     Escalao escalao6 = new Escalao(0,equipa6.getNome(),escola6.getNome());
-    escalao6.inserirJogador("Marioooooooooooooooooooooooooo", g2, 0, new Imagem());
-    escalao6.inserirJogador("Leite", new GregorianCalendar(), 0, new Imagem());
-    escalao6.inserirJogador("Miguel", new GregorianCalendar(), 0, new Imagem());
-    escalao6.inserirJogador("Luis", new GregorianCalendar(), 0, new Imagem());
-    escalao6.inserirJogador("Pinto", new GregorianCalendar(), 0, new Imagem());
-    escalao6.inserirJogador("Serafim", new GregorianCalendar(), 0, new Imagem());
-    escalao6.inserirJogador("Pinto", new GregorianCalendar(), 0, new Imagem());
-    escalao6.inserirJogador("Ines", new GregorianCalendar(), 1, new Imagem());
-    escalao6.inserirJogador("Medeiros", new GregorianCalendar(), 1, new Imagem());
-    escalao6.inserirJogador("Mariana", new GregorianCalendar(), 1, new Imagem());
-    escalao6.inserirJogador("Diana", new GregorianCalendar(), 1, new Imagem());
-    escalao6.inserirJogador("Lemos", new GregorianCalendar(), 1, new Imagem());
-    escalao6.inserirJogador("Manuel", new GregorianCalendar(), 0, new Imagem());
+     Jogador j61 = new Jogador("Marioooooooooooooooooooooooooo", g2, 0,new Imagem());
+     Jogador j62 = new Jogador("Leite", new GregorianCalendar(), 0,new Imagem());
+     Jogador j63 = new Jogador("Miguel", new GregorianCalendar(), 0,new Imagem());
+     Jogador j64 = new Jogador("Luis", new GregorianCalendar(), 0,new Imagem());
+     Jogador j65 = new Jogador("Pinto", new GregorianCalendar(), 0,new Imagem());
+     Jogador j66 = new Jogador("Serafim", new GregorianCalendar(), 0,new Imagem());
+     Jogador j67 = new Jogador("Pinto", new GregorianCalendar(), 0,new Imagem());
+     Jogador j68 = new Jogador("Ines", new GregorianCalendar(), 1,new Imagem());
+     Jogador j69 = new Jogador("Medeiros", new GregorianCalendar(), 1,new Imagem());
+     Jogador j610 = new Jogador("Mariana", new GregorianCalendar(), 1,new Imagem());
+     Jogador j611 = new Jogador("Diana", new GregorianCalendar(), 1,new Imagem());
+     Jogador j612 = new Jogador("Lemos", new GregorianCalendar(), 1,new Imagem());
+     Jogador j613 = new Jogador("Manuel", new GregorianCalendar(), 0,new Imagem());
+     escalao6.inserirJogador(j61);
+     escalao6.inserirJogador(j62);
+     escalao6.inserirJogador(j63);
+     escalao6.inserirJogador(j64);
+     escalao6.inserirJogador(j65);
+     escalao6.inserirJogador(j66);
+     escalao6.inserirJogador(j67);
+     escalao6.inserirJogador(j68);
+     escalao6.inserirJogador(j69);
+     escalao6.inserirJogador(j610);
+     escalao6.inserirJogador(j611);
+     escalao6.inserirJogador(j612);
+     escalao6.inserirJogador(j613);
     Treinador treinador6 = new Treinador("Jorge JesusSSSSSSSSSSSS", new Imagem(), new GregorianCalendar(), 0);
     escalao6.inserirTreinador(treinador6);
     equipa6.inserirEscalao(escalao6);
-     //EQUIPA - 4
+     //EQUIPA - 7
     Campo campo7 = new Campo("Complexo VIZELA");
     Escola escola7 = new Escola("VIZELA ESCOLA", "AZUIS", campo7);
     a.inserirEscola(escola7);
     Equipa equipa7 = new Equipa("VIZELAAAAAAAAAAAAAAAAAA");
     a.getEscolas().get(escola7.getNome()).inserirEquipa(equipa7);
     Escalao escalao7 = new Escalao(0,equipa7.getNome(),escola7.getNome());
-    escalao7.inserirJogador("Marioooooooooooooooooooooooooo", g2, 0, new Imagem());
-    escalao7.inserirJogador("Leite", new GregorianCalendar(), 0, new Imagem());
-    escalao7.inserirJogador("Miguel", new GregorianCalendar(), 0, new Imagem());
-    escalao7.inserirJogador("Luis", new GregorianCalendar(), 0, new Imagem());
-    escalao7.inserirJogador("Pinto", new GregorianCalendar(), 0, new Imagem());
-    escalao7.inserirJogador("Serafim", new GregorianCalendar(), 0, new Imagem());
-    escalao7.inserirJogador("Pinto", new GregorianCalendar(), 0, new Imagem());
-    escalao7.inserirJogador("Ines", new GregorianCalendar(), 1, new Imagem());
-    escalao7.inserirJogador("Medeiros", new GregorianCalendar(), 1, new Imagem());
-    escalao7.inserirJogador("Mariana", new GregorianCalendar(), 1, new Imagem());
-    escalao7.inserirJogador("Diana", new GregorianCalendar(), 1, new Imagem());
-    escalao7.inserirJogador("Lemos", new GregorianCalendar(), 1, new Imagem());
-    escalao7.inserirJogador("Manuel", new GregorianCalendar(), 0, new Imagem());
+     Jogador j71 = new Jogador("Marioooooooooooooooooooooooooo", g2, 0,new Imagem());
+     Jogador j72 = new Jogador("Leite", new GregorianCalendar(), 0,new Imagem());
+     Jogador j73 = new Jogador("Miguel", new GregorianCalendar(), 0,new Imagem());
+     Jogador j74 = new Jogador("Luis", new GregorianCalendar(), 0,new Imagem());
+     Jogador j75 = new Jogador("Pinto", new GregorianCalendar(), 0,new Imagem());
+     Jogador j76 = new Jogador("Serafim", new GregorianCalendar(), 0,new Imagem());
+     Jogador j77 = new Jogador("Pinto", new GregorianCalendar(), 0,new Imagem());
+     Jogador j78 = new Jogador("Ines", new GregorianCalendar(), 1,new Imagem());
+     Jogador j79 = new Jogador("Medeiros", new GregorianCalendar(), 1,new Imagem());
+     Jogador j710 = new Jogador("Mariana", new GregorianCalendar(), 1,new Imagem());
+     Jogador j711 = new Jogador("Diana", new GregorianCalendar(), 1,new Imagem());
+     Jogador j712 = new Jogador("Lemos", new GregorianCalendar(), 1,new Imagem());
+     Jogador j713 = new Jogador("Manuel", new GregorianCalendar(), 0,new Imagem());
+     escalao7.inserirJogador(j71);
+     escalao7.inserirJogador(j72);
+     escalao7.inserirJogador(j73);
+     escalao7.inserirJogador(j74);
+     escalao7.inserirJogador(j75);
+     escalao7.inserirJogador(j76);
+     escalao7.inserirJogador(j77);
+     escalao7.inserirJogador(j78);
+     escalao7.inserirJogador(j79);
+     escalao7.inserirJogador(j710);
+     escalao7.inserirJogador(j711);
+     escalao7.inserirJogador(j712);
+     escalao7.inserirJogador(j713);
     Treinador treinador7 = new Treinador("Jorge", new Imagem(), new GregorianCalendar(), 0);
     escalao7.inserirTreinador(treinador7);
     equipa7.inserirEscalao(escalao7);
@@ -243,23 +282,35 @@ public class TESTE_apef {
     Equipa equipa8 = new Equipa("SC FELGUEIRAS");
     a.getEscolas().get(escola8.getNome()).inserirEquipa(equipa8);
     Escalao escalao8 = new Escalao(0,equipa8.getNome(),escola8.getNome());
-    escalao8.inserirJogador("Marioooooooooooooooooooooooooo", g2, 0, new Imagem());
-    escalao8.inserirJogador("Leite", new GregorianCalendar(), 0, new Imagem());
-    escalao8.inserirJogador("Miguel", new GregorianCalendar(), 0, new Imagem());
-    escalao8.inserirJogador("Luis", new GregorianCalendar(), 0, new Imagem());
-    escalao8.inserirJogador("Pinto", new GregorianCalendar(), 0, new Imagem());
-    escalao8.inserirJogador("Serafim", new GregorianCalendar(), 0, new Imagem());
-    escalao8.inserirJogador("Pinto", new GregorianCalendar(), 0, new Imagem());
-    escalao8.inserirJogador("Ines", new GregorianCalendar(), 1, new Imagem());
-    escalao8.inserirJogador("Medeiros", new GregorianCalendar(), 1, new Imagem());
-    escalao8.inserirJogador("Mariana", new GregorianCalendar(), 1, new Imagem());
-    escalao8.inserirJogador("Diana", new GregorianCalendar(), 1, new Imagem());
-    escalao8.inserirJogador("Lemos", new GregorianCalendar(), 1, new Imagem());
-    escalao8.inserirJogador("Manuel", new GregorianCalendar(), 0, new Imagem());
+     Jogador j81 = new Jogador("Marioooooooooooooooooooooooooo", g2, 0,new Imagem());
+     Jogador j82 = new Jogador("Leite", new GregorianCalendar(), 0,new Imagem());
+     Jogador j83 = new Jogador("Miguel", new GregorianCalendar(), 0,new Imagem());
+     Jogador j84 = new Jogador("Luis", new GregorianCalendar(), 0,new Imagem());
+     Jogador j85 = new Jogador("Pinto", new GregorianCalendar(), 0,new Imagem());
+     Jogador j86 = new Jogador("Serafim", new GregorianCalendar(), 0,new Imagem());
+     Jogador j87 = new Jogador("Pinto", new GregorianCalendar(), 0,new Imagem());
+     Jogador j88 = new Jogador("Ines", new GregorianCalendar(), 1,new Imagem());
+     Jogador j89 = new Jogador("Medeiros", new GregorianCalendar(), 1,new Imagem());
+     Jogador j810 = new Jogador("Mariana", new GregorianCalendar(), 1,new Imagem());
+     Jogador j811 = new Jogador("Diana", new GregorianCalendar(), 1,new Imagem());
+     Jogador j812 = new Jogador("Lemos", new GregorianCalendar(), 1,new Imagem());
+     Jogador j813 = new Jogador("Manuel", new GregorianCalendar(), 0,new Imagem());
+     escalao8.inserirJogador(j81);
+     escalao8.inserirJogador(j82);
+     escalao8.inserirJogador(j83);
+     escalao8.inserirJogador(j84);
+     escalao8.inserirJogador(j85);
+     escalao8.inserirJogador(j86);
+     escalao8.inserirJogador(j87);
+     escalao8.inserirJogador(j88);
+     escalao8.inserirJogador(j89);
+     escalao8.inserirJogador(j810);
+     escalao8.inserirJogador(j811);
+     escalao8.inserirJogador(j812);
+     escalao8.inserirJogador(j813);
     Treinador treinador8 = new Treinador("MAAAAAAATOS", new Imagem(), new GregorianCalendar(), 0);
     escalao8.inserirTreinador(treinador8);
-    equipa8.inserirEscalao(escalao8);*/
-    
+    equipa8.inserirEscalao(escalao8);
     
     //Users do sistema
     a.registarUser("maleite","pw1234","maleite@gmail.com",0);
@@ -272,8 +323,7 @@ public class TESTE_apef {
     a.registarUser("dianasa","pw1234","demossbsab@gmail.com",2);
     a.registarUser("serafimgsfe","pw1234","smcsap@gmail.com",2);
 
-    
-    //Testar "metodos"
+    //Campeonato
     campeonatoInfantis.inscreverEscalao(escalao);
     campeonatoInfantis.inscreverEscalao(escalao2);
     campeonatoInfantis.inscreverEscalao(escalao3);
@@ -286,48 +336,27 @@ public class TESTE_apef {
     inicio.set(2014, 0, 19);
     a.iniciarCampeonato(campeonatoInfantis);
             
-    /*Equipa equipa5 = new Equipa("teste5");
-    Equipa equipa6 = new Equipa("teste6");
-    Equipa equipa7 = new Equipa("teste7");
-    Equipa equipa8 = new Equipa("teste8");
-    a.getEscolas().get(escola3.getNome()).inserirEquipa(equipa5);
-    a.getEscolas().get(escola3.getNome()).inserirEquipa(equipa6);
-    a.getEscolas().get(escola3.getNome()).inserirEquipa(equipa7);
-    a.getEscolas().get(escola3.getNome()).inserirEquipa(equipa8);*/
-
+    //Torneio
     Torneio infantis = new Torneio("Taça Infantis", inicio, g, 0, 0, campo);
     ep.inserirTorneio(infantis);
     infantis.inscreverEscalao(escalao);
     infantis.inscreverEscalao(escalao2);
     infantis.inscreverEscalao(escalao3);
     infantis.inscreverEscalao(escalao4);
-    /*infantis.inscreverEscalao(escalao5);
+    infantis.inscreverEscalao(escalao5);
     infantis.inscreverEscalao(escalao6);
     infantis.inscreverEscalao(escalao7);
-    infantis.inscreverEscalao(escalao8);*/
+    infantis.inscreverEscalao(escalao8);
     
-    a.iniciarTorneioTipo1(infantis);
-    System.out.println(infantis.getFases().get(0));
-    System.out.println(infantis.getFases().get(1));
-
-    //System.out.println(infantis);
-    //System.out.println(infantis.getFases());
-    //System.out.println(infantis.getFases());
+    a.iniciarTorneioTipo1(infantis);  
+       
+    //Jogos
     
-    /**GregorianCalendar gg = new GregorianCalendar();
-    gg.set(2013, 1, 3);
-    campeonatoInfantis.setDataLimiteInscricoes(gg);
-    */
-    //a.iniciarCampeonato(campeonatoInfantis);
-    //System.out.println(a.emprestarJogador(j41, "Porto", 0));
-    //System.out.println(campeonatoInfantis.getCalendario());
-    //System.out.println(a.getEscolas().get(escola.getNome()));
-    /*GregorianCalendar teste = new GregorianCalendar();
-    int ano = teste.get(teste.YEAR);
-        System.out.println(ano); 
-      //System.out.println(a.countArbitros());  
-    //System.out.println(a.getUsers().get("diana"));  
-        
+    
+    
+    
+    
+    
    /*FORMA
     DadosEstatisticos d = new DadosEstatisticos(); 
     char[] teste = new char[] { 'a', 'l', 'p', 'h', 'a'};    
