@@ -1,7 +1,10 @@
 package Business_Layer;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Objects;
 
 public class Epoca implements Comparable<Epoca>{
@@ -39,7 +42,13 @@ public class Epoca implements Comparable<Epoca>{
     public Epoca(int ano) {
     	this.ano = ano;
     	this.campeonatos = new Campeonato[maxEscaloes];
-    	this.torneios = new ArrayList<>();
+        this.torneios = new ArrayList<>();
+        HashSet<Torneio> tor = new HashSet<>();
+        this.torneios.add(0,tor);
+        this.torneios.add(1,tor);
+        this.torneios.add(2,tor);
+        this.torneios.add(3,tor);
+        this.torneios.add(4,tor);
     }
 
     //Getters
@@ -138,9 +147,8 @@ public class Epoca implements Comparable<Epoca>{
     }
     
     public void inserirTorneio(Torneio t){
-        HashSet<Torneio> ts = new HashSet<>();
-        ts.add(t);
-        this.torneios.add(t.getTipoEscalao(), ts);
+        
+     this.torneios.get(t.getTipoEscalao()).add(t);
     }
     
     public void inscreveEmCampeonato(Escalao e) {
@@ -168,8 +176,9 @@ public class Epoca implements Comparable<Epoca>{
         }
     }
         
+
     public String procuraCampeonato (Integer idCamp){
-        int i=0, flag=1;
+       int i=0, flag=1;
         String nome= null;
             while (i<4 && flag==1){
                 if(this.campeonatos[i].getID()==idCamp) {nome=this.campeonatos[i].getNome(); flag=0;}
@@ -185,7 +194,34 @@ public class Epoca implements Comparable<Epoca>{
                     if (t.getID()==id) {nome=t.getNome(); encontrado=true;}
                 }
            }
-      return nome;}
+      return nome;
+    }
+    
+    public void avancaDataCampeonto(GregorianCalendar data, int tipoEscalao) {
+        boolean flag=false;
+        int jornada = 0;
+        Iterator<Jornada> it = this.campeonatos[tipoEscalao].getCalendario().getJornadas().iterator();
+        while(it.hasNext() && !flag) {
+            Jornada jr = it.next();
+            Iterator<Jogo> it2 = jr.getListaJogos().iterator();
+            while(it2.hasNext() && !flag) {
+                Jogo jg = it2.next();
+                if( data.get(GregorianCalendar.YEAR) == jg.getDiaJogo().get(GregorianCalendar.YEAR) && data.get(GregorianCalendar.MONTH) == jg.getDiaJogo().get(GregorianCalendar.MONTH) && data.get(GregorianCalendar.DAY_OF_MONTH) == jg.getDiaJogo().get(GregorianCalendar.DAY_OF_MONTH)) {
+                    flag = true;
+                    jornada = jr.getNrJornada();
+                }
+            }
+        } 
+        for(Jornada jor : this.campeonatos[tipoEscalao].getCalendario().getJornadas()) {
+            if(jor.getNrJornada() == jornada) {
+                for(Jogo jg : jor.getListaJogos()) {
+                    jg.setDia(this.campeonatos[tipoEscalao].dataJornadaSeguinte(jg.getDiaJogo()));
+
+                }
+                jornada++;
+            } 
+        } 
+    }
 
     @Override
     public int compareTo(Epoca o) {
