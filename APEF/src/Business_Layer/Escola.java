@@ -1,7 +1,9 @@
 package Business_Layer;
 
+import Data_Layer.EquipaDAO;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 public class Escola {
 	
@@ -9,7 +11,7 @@ public class Escola {
     private String nome;
     private String local;
     private Campo campo;
-    private HashMap<String,Equipa> equipas;
+    private Map<String,Equipa> equipas;
     private boolean ativa;
     
     //Construtor vazio
@@ -17,7 +19,7 @@ public class Escola {
         this.nome = "";
         this.local = "";
         this.campo = new Campo();
-        this.equipas = new HashMap<>();
+        this.equipas = new EquipaDAO();
         this.ativa = false;
     }
     
