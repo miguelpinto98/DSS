@@ -14,7 +14,7 @@ public class TESTE_apef {
     Epoca ep = new Epoca(2013);
     a.inserirEpoca(ep);
     GregorianCalendar g2 = new GregorianCalendar();
-    g2.set(2014, 0, 7);
+    g2.set(2014, 0, 12);
     Campeonato campeonatoInfantis = new Campeonato("Campeonato APEF - Infantis",g2, new GregorianCalendar(),0,4);
     ep.inserirCampeonato(campeonatoInfantis);
     //EQUIPA - 1
@@ -283,11 +283,9 @@ public class TESTE_apef {
     g.set(2013, 11, 20);
     campeonatoInfantis.setDataLimiteInscricoes(g);
     GregorianCalendar inicio = new GregorianCalendar();
-    inicio.set(2014, 1, 19);
+    inicio.set(2014, 0, 19);
     a.iniciarCampeonato(campeonatoInfantis);
-    //System.out.println(campeonatoInfantis.getCalendario());
-    System.out.println(campeonatoInfantis.acabou());
-        
+            
     /*Equipa equipa5 = new Equipa("teste5");
     Equipa equipa6 = new Equipa("teste6");
     Equipa equipa7 = new Equipa("teste7");
@@ -297,19 +295,22 @@ public class TESTE_apef {
     a.getEscolas().get(escola3.getNome()).inserirEquipa(equipa7);
     a.getEscolas().get(escola3.getNome()).inserirEquipa(equipa8);*/
 
-    //Torneio infantis = new Torneio("Taça Infantis", inicio, g, 0, 0, campo);
-    //ep.inserirTorneio(infantis);
-    //infantis.inscreverEscalao(escalao);
-    /*infantis.inscreverEscalao(escalao2);
+    Torneio infantis = new Torneio("Taça Infantis", inicio, g, 0, 0, campo);
+    ep.inserirTorneio(infantis);
+    infantis.inscreverEscalao(escalao);
+    infantis.inscreverEscalao(escalao2);
     infantis.inscreverEscalao(escalao3);
     infantis.inscreverEscalao(escalao4);
-    infantis.inscreverEscalao(escalao5);
+    /*infantis.inscreverEscalao(escalao5);
     infantis.inscreverEscalao(escalao6);
     infantis.inscreverEscalao(escalao7);
     infantis.inscreverEscalao(escalao8);*/
     
-    //a.iniciarTorneioTipo1(infantis);
-    //System.out.println(a.firstFaseTorneioTipo1(infantis));
+    a.iniciarTorneioTipo1(infantis);
+    System.out.println(infantis.getFases().get(0));
+    System.out.println(infantis.getFases().get(1));
+
+    //System.out.println(infantis);
     //System.out.println(infantis.getFases());
     //System.out.println(infantis.getFases());
     

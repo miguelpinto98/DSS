@@ -1,7 +1,10 @@
 package Business_Layer;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Objects;
 
 public class Epoca implements Comparable<Epoca>{
@@ -185,7 +188,34 @@ public class Epoca implements Comparable<Epoca>{
                     if (t.getID()==id) {nome=t.getNome(); encontrado=true;}
                 }
            }
-      return nome;}
+      return nome;
+    }
+    
+    public void avancaDataCampeonto(GregorianCalendar data, int tipoEscalao) {
+        boolean flag=false;
+        int jornada = 0;
+        Iterator<Jornada> it = this.campeonatos[tipoEscalao].getCalendario().getJornadas().iterator();
+        while(it.hasNext() && !flag) {
+            Jornada jr = it.next();
+            Iterator<Jogo> it2 = jr.getListaJogos().iterator();
+            while(it2.hasNext() && !flag) {
+                Jogo jg = it2.next();
+                if( data.get(GregorianCalendar.YEAR) == jg.getDiaJogo().get(GregorianCalendar.YEAR) && data.get(GregorianCalendar.MONTH) == jg.getDiaJogo().get(GregorianCalendar.MONTH) && data.get(GregorianCalendar.DAY_OF_MONTH) == jg.getDiaJogo().get(GregorianCalendar.DAY_OF_MONTH)) {
+                    flag = true;
+                    jornada = jr.getNrJornada();
+                }
+            }
+        } 
+        for(Jornada jor : this.campeonatos[tipoEscalao].getCalendario().getJornadas()) {
+            if(jor.getNrJornada() == jornada) {
+                for(Jogo jg : jor.getListaJogos()) {
+                    jg.setDia(this.campeonatos[tipoEscalao].dataJornadaSeguinte(jg.getDiaJogo()));
+
+                }
+                jornada++;
+            } 
+        } 
+    }
 
     @Override
     public int compareTo(Epoca o) {

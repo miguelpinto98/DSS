@@ -263,7 +263,5 @@ public class Escalao {
     public void preencheAgendaEscalao(Jogo j) {
         agenda.inserirJogo(j);
     }
-	
-	/*FALTA METODO PARA MEXER NO CALENDARIO DO Escalao*/
 }
 

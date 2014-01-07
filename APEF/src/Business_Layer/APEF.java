@@ -331,7 +331,7 @@ public class APEF {
     
     public boolean acabouInscricaoTorneioTipo1(Torneio t) {
         GregorianCalendar now = new GregorianCalendar();
-        if (t.getDataLimiteInscricoes().before(now) && (t.getNrEscaloes()==8 || t.getNrEscaloes()==10)) 
+        if (t.getDataLimiteInscricoes().before(now)) 
             return true;
         else return false;
     }
@@ -409,7 +409,14 @@ public class APEF {
                 res=true;
 
     	}
+        this.avancaData(t);
         return res;
+    }
+    
+    public void avancaData(Torneio t) {
+        GregorianCalendar data = t.getDataInicio();
+        Epoca ep = this.epocas.get(this.epocas.firstKey());
+        ep.avancaDataCampeonto(t.getDataInicio(), t.getTipoEscalao());
     }
     
     public boolean iniciarTorneioTipo2(Torneio t){
@@ -420,6 +427,7 @@ public class APEF {
                 res=true;
 
     	}
+        this.avancaData(t);
         return res;
     }
     

@@ -21,7 +21,7 @@ public class Calendario {
     public TreeSet<Jornada> getJornadas() {
     	TreeSet<Jornada> aux = new TreeSet<Jornada>();
         for(Jornada j: this.jornadas) 
-            aux.add(j.clone());
+            aux.add(j);
         return aux;
     }
 

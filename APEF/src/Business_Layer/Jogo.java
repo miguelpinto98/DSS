@@ -204,10 +204,36 @@ public class Jogo implements Comparable<Jogo>{
 		this.ecasa.adicionaDadosEscalao(this.numGolosCasa,this.numGolosFora,this.goleadores,this.dia);
 		this.efora.adicionaDadosEscalao(this.numGolosFora,this.numGolosCasa,this.goleadores,this.dia);
 	}
+    
+     public int criterio(Jogo j) {
+        if( this.dia.get(GregorianCalendar.YEAR) == j.getDiaJogo().get(GregorianCalendar.YEAR) && 
+                this.dia.get(GregorianCalendar.MONTH) == j.getDiaJogo().get(GregorianCalendar.MONTH) && 
+                this.dia.get(GregorianCalendar.DAY_OF_MONTH) == j.getDiaJogo().get(GregorianCalendar.DAY_OF_MONTH))
+            return 1;
+        else
+            return 0;
+    }
+    
+     public int ordenaNormal(Jogo j) {
+        if(j.getDiaJogo().before(this.dia)) return 1;
+        if(j.getDiaJogo().after(this.dia)) return -1;
+        else return 0;
+     }
+     
+     public int ordenaID(Jogo j) {
+        if(j.getIdCompeticao() > (this.idCompeticao)) return 1;
+        if(j.getIdCompeticao() < (this.idCompeticao)) return -1;
+        else return 0;
+     }
 
 	public int compareTo(Jogo j) {
-        if(j.getDiaJogo().compareTo(this.dia) <= 0 ) return 1;
-        if(j.getDiaJogo().compareTo(this.dia) >= 0) return -1;
-        else return 0;
+        int res = 0;
+        switch(criterio(j)) {
+            case 0: res = ordenaNormal(j);
+                break;
+            case 1: res = ordenaID(j);
+                break;
+        }
+        return res;  
     }
 }

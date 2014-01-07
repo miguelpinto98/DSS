@@ -71,7 +71,7 @@ public class Arbitro extends Utilizador {
 		f.addResultadoCompeticao(j);
 	}
         
-        public void preencheAgendaArbitro(Jogo j) {
+    public void preencheAgendaArbitro(Jogo j) {
         agenda.inserirJogo(j);
     }
         
