@@ -13,6 +13,7 @@ public class Torneio implements Competicao{
     //Variaveis de Instancia
     private int id;
     private int tipoEscalao;
+    private int tipoTorneio;
     private String nome;
     private int nrEscaloes;
     private HashMap<Integer,Integer> goleadores;
@@ -28,6 +29,7 @@ public class Torneio implements Competicao{
     public Torneio() {
         this.id = 0;
         this.tipoEscalao = -1;
+        this.tipoTorneio = -1;
         this.nome = "";
         this.nrEscaloes = 0;
         this.goleadores = new HashMap<>();
@@ -41,9 +43,10 @@ public class Torneio implements Competicao{
         this.arbs = new ArrayList<>();
     }
     
-    public Torneio(String nome, GregorianCalendar inicio, GregorianCalendar limite, int tipo, int nrEquipas, Campo campo){
+    public Torneio(String nome, GregorianCalendar inicio, GregorianCalendar limite, int tipoEscalao, int tipoTorneio, int nrEquipas, Campo campo){
         this.id = APEF.IDENTIFICADOR;
-        this.tipoEscalao = tipo;
+        this.tipoEscalao = tipoEscalao;
+        this.tipoTorneio = tipoTorneio;
         this.nome = nome;
         this.nrEscaloes = nrEquipas;
         this.goleadores = new HashMap<>();
@@ -55,11 +58,28 @@ public class Torneio implements Competicao{
         this.dataLimiteInscricoes = limite;
         this.campo = campo;
         this.arbs = new ArrayList<>();
-    }   
+    }
+    
+    public Torneio(String nome, GregorianCalendar inicio, GregorianCalendar limite, int tipoEscalao, int nrEquipas, Campo campo){
+        this.id = APEF.IDENTIFICADOR;
+        this.tipoEscalao = tipoEscalao;
+        this.nome = nome;
+        this.nrEscaloes = nrEquipas;
+        this.goleadores = new HashMap<>();
+        this.listaEscaloes = new HashSet<>();
+        this.estatisticaCompeticao = new EstatisticaCompeticao();
+        this.fases = new ArrayList<>();
+        this.nFase = 0;
+        this.dataInicio = inicio;
+        this.dataLimiteInscricoes = limite;
+        this.campo = campo;
+        this.arbs = new ArrayList<>();
+    }  
 
 	public Torneio(Torneio t) {
         this.id = t.getID();
         this.tipoEscalao = t.getTipoEscalao();
+        this.tipoTorneio = t.getTipoTorneio();
         this.nome = t.getNome();
         this.nrEscaloes = t.getNrEscaloes();
         this.goleadores = t.getGoleadores();
@@ -83,6 +103,14 @@ public class Torneio implements Competicao{
 
     public int getTipoEscalao() {
         return this.tipoEscalao;
+    }
+    
+    public int getTipoTorneio() {
+        return this.tipoTorneio;
+    }
+    
+    public void setTipoTorneio(int t) {
+        this.tipoTorneio = t;
     }
 
     public void setTipoEscalao(int t) {

@@ -337,7 +337,7 @@ public class TESTE_apef {
     a.iniciarCampeonato(campeonatoInfantis);
             
     //Torneio
-    Torneio infantis = new Torneio("Taça Infantis", inicio, g, 0, 0, campo);
+    Torneio infantis = new Torneio("Taça Infantis", inicio, g,0,1, 0, campo);
     ep.inserirTorneio(infantis);
     infantis.inscreverEscalao(escalao);
     infantis.inscreverEscalao(escalao2);
@@ -347,7 +347,6 @@ public class TESTE_apef {
     infantis.inscreverEscalao(escalao6);
     infantis.inscreverEscalao(escalao7);
     infantis.inscreverEscalao(escalao8);
-    
     a.iniciarTorneioTipo1(infantis);  
        
     //Jogos
