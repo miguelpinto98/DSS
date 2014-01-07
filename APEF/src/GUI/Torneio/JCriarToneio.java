@@ -54,6 +54,9 @@ public class JCriarToneio extends JDialog {
         jTextField6 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(358, 354));
+
+        jPanel1.setMinimumSize(new java.awt.Dimension(358, 44));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel7.setText("Criar Torneio");
@@ -78,6 +81,8 @@ public class JCriarToneio extends JDialog {
         );
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
+
+        jPanel3.setMinimumSize(new java.awt.Dimension(358, 310));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Nome do torneio");
@@ -124,11 +129,10 @@ public class JCriarToneio extends JDialog {
                                 .addComponent(jLabel2))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField4)
-                                    .addComponent(jTextField5)
-                                    .addComponent(jComboBox1, 0, 165, Short.MAX_VALUE)
-                                    .addComponent(jTextField6))
+                                .addComponent(jTextField4)
+                                .addComponent(jTextField5)
+                                .addComponent(jComboBox1, 0, 183, Short.MAX_VALUE)
+                                .addComponent(jTextField6)
                                 .addComponent(jXDatePicker1, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
                                 .addComponent(jXDatePicker2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addComponent(jLabel8))

@@ -220,7 +220,7 @@ public final class Home2 extends JFrame {
     public void reloadOptions(){
         this.jPanel5.removeAll();
         this.jPanel5.add(new JOptions(this, user), BorderLayout.CENTER);
-         this.jPanel5.updateUI();
+        this.jPanel5.updateUI();
         this.jPanel5.validate();
     }
     
@@ -1249,7 +1249,7 @@ public final class Home2 extends JFrame {
             JFrame frame = new JTorneioInfo(this,s);
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);
-        }
+        } 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
