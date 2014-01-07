@@ -7,6 +7,7 @@
 package GUI.Torneio;
 
 import Business_Layer.Utilizador;
+import GUI.Home2;
 import java.awt.BorderLayout;
 
 /**
@@ -14,10 +15,10 @@ import java.awt.BorderLayout;
  * @author Utilizador
  */
 public class JTorneioInfo extends javax.swing.JFrame {
-    private JPrincipalTorneio t;
+    private Home2 t;
     private Utilizador user;
     
-    public JTorneioInfo(JPrincipalTorneio t, String s) {
+    public JTorneioInfo(Home2 t, String s) {
         this.t=t;
         
         initComponents();

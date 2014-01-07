@@ -42,7 +42,13 @@ public class Epoca implements Comparable<Epoca>{
     public Epoca(int ano) {
     	this.ano = ano;
     	this.campeonatos = new Campeonato[maxEscaloes];
-    	this.torneios = new ArrayList<>();
+        this.torneios = new ArrayList<>();
+        HashSet<Torneio> tor = new HashSet<>();
+        this.torneios.add(0,tor);
+        this.torneios.add(1,tor);
+        this.torneios.add(2,tor);
+        this.torneios.add(3,tor);
+        this.torneios.add(4,tor);
     }
 
     //Getters
@@ -141,9 +147,8 @@ public class Epoca implements Comparable<Epoca>{
     }
     
     public void inserirTorneio(Torneio t){
-        HashSet<Torneio> ts = new HashSet<>();
-        ts.add(t);
-        this.torneios.add(t.getTipoEscalao(), ts);
+        
+     this.torneios.get(t.getTipoEscalao()).add(t);
     }
     
     public void inscreveEmCampeonato(Escalao e) {
@@ -171,8 +176,9 @@ public class Epoca implements Comparable<Epoca>{
         }
     }
         
+
     public String procuraCampeonato (Integer idCamp){
-        int i=0, flag=1;
+       int i=0, flag=1;
         String nome= null;
             while (i<4 && flag==1){
                 if(this.campeonatos[i].getID()==idCamp) {nome=this.campeonatos[i].getNome(); flag=0;}

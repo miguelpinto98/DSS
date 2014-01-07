@@ -11,11 +11,11 @@ import java.awt.BorderLayout;
 import java.text.ParseException;
 import java.util.GregorianCalendar;
 import GUI.Home2;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import javax.swing.DefaultListModel;
-
-
 
 
 public final class ConsultarJogador extends javax.swing.JDialog {
@@ -33,14 +33,16 @@ public final class ConsultarJogador extends javax.swing.JDialog {
         this.user = user;
         this.jogador = j;
         this.pj = pla;
-        //this.ep=root.getSistema().getEpocas().
+        Map.Entry<Integer, Epoca> firstEntry = this.root.getSistema().getEpocas().firstEntry();
+        this.ep = firstEntry.getValue();
         initComponents();        
         reload();   
         reloadListaCompeticoes();
         verificaUser();
+        System.out.println(j.getCompeticoes());
     }
     
-        public void reload() {
+    public void reload() {
         this.nome_t.setText(this.jogador.getNome());
         this.clube_t.setText(this.jogador.getNomeEquipa());
           
@@ -69,20 +71,12 @@ public final class ConsultarJogador extends javax.swing.JDialog {
 
     public JPlantelJogador getPlantelJogador() {return this.pj;}
     
-    public Set<String> listaComp(){
-        Set<String> lista = new HashSet<>();
-        for(int i=0; i<this.jogador.getCompeticoes().size(); i++){
-            lista.add(this.ep.procuraCampeonato(this.jogador.getCompeticoes().get(i)));
-            lista.add(this.ep.procuraTorneio(this.jogador.getCompeticoes().get(i)));           
-        }      
-    return lista;} 
-    
-    public void reloadListaCompeticoes() {
-        Set<String> lcomp = this.listaComp();
-        DefaultListModel<String> str = new DefaultListModel<>();        
-            for(String e : lcomp) str.addElement(e);       
-        comp_realizadas.setModel(str);
-    }
+          
+    public void reloadListaCompeticoes(){
+        //ArrayList<String> lcomp = listaComp();
+        DefaultListModel<Integer> str = new DefaultListModel<>();        
+            for(Integer n : this.jogador.getCompeticoes()) str.addElement(n);         
+        comp_realizadas.setModel(str);}
    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -102,10 +96,10 @@ public final class ConsultarJogador extends javax.swing.JDialog {
         clube_t = new javax.swing.JLabel();
         nome_t = new javax.swing.JLabel();
         competicoes = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        comp_realizadas = new javax.swing.JList();
         jScrollPane1 = new javax.swing.JScrollPane();
         comp_ativas = new javax.swing.JList();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        comp_realizadas = new javax.swing.JList<Integer>();
         jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -207,10 +201,6 @@ public final class ConsultarJogador extends javax.swing.JDialog {
 
         competicoes.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Competições", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 14), new java.awt.Color(102, 102, 102))); // NOI18N
 
-        comp_realizadas.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Realizadas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(102, 102, 102)));
-        comp_realizadas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane2.setViewportView(comp_realizadas);
-
         comp_ativas.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ativas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(102, 102, 102)));
         comp_ativas.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -219,14 +209,19 @@ public final class ConsultarJogador extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(comp_ativas);
 
+        comp_realizadas.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Realizadas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(102, 102, 102)));
+        comp_realizadas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane3.setViewportView(comp_realizadas);
+        comp_realizadas.getAccessibleContext().setAccessibleName("Realizadas");
+
         javax.swing.GroupLayout competicoesLayout = new javax.swing.GroupLayout(competicoes);
         competicoes.setLayout(competicoesLayout);
         competicoesLayout.setHorizontalGroup(
             competicoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(competicoesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addGap(12, 12, 12)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -234,10 +229,10 @@ public final class ConsultarJogador extends javax.swing.JDialog {
             competicoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(competicoesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(competicoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
-                .addGap(20, 20, 20))
+                .addGroup(competicoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
 
         jPanel2.add(competicoes, java.awt.BorderLayout.CENTER);
@@ -266,7 +261,7 @@ public final class ConsultarJogador extends javax.swing.JDialog {
     private javax.swing.JLabel clube_l;
     private javax.swing.JLabel clube_t;
     private javax.swing.JList comp_ativas;
-    private javax.swing.JList comp_realizadas;
+    private javax.swing.JList<Integer> comp_realizadas;
     private javax.swing.JPanel competicoes;
     private javax.swing.JPanel dados_pessoais;
     private javax.swing.JPanel header;
@@ -274,7 +269,7 @@ public final class ConsultarJogador extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel nascimento_l;
     private javax.swing.JLabel nascimento_t;
     private javax.swing.JLabel nome_l;
