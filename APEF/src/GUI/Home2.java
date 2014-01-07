@@ -27,10 +27,14 @@ import GUI.Header.JMenuAdmin;
 import GUI.Header.JMenuArbitro;
 import GUI.Header.JMenuResponsavelEscola;
 import GUI.Header.JRegistar;
+import GUI.Perfil.JAdminOption;
+import GUI.Perfil.JArbitroOption;
+import GUI.Perfil.JResponsavelOption;
 import GUI.Torneio.JOptions;
 import GUI.Torneio.JTorneioInfo;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.PopupMenu;
 import java.awt.Window;
 import java.awt.event.KeyEvent;
 import java.lang.reflect.Method;
@@ -47,6 +51,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 import javax.swing.ListModel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -208,15 +213,19 @@ public final class Home2 extends JFrame {
                 reloadHeaderUserAdmin();
                 reloadTabEscolasAdmin();
                 reloadOptions();
+                reloadAdmin();
+                 
               /**  reloadTorneios();*/
             }
             if(user instanceof ResponsavelEscola) {
                 reloadHeaderUserRespEscola();
                 reloadOptions();
+                reloadResponsavel();
               /**  reloadTorneios();*/
             }
             if(user instanceof Arbitro) {
                 reloadHeaderUserArbitro();
+                reloadArbitro();
             }     
         }
         else {
@@ -225,6 +234,29 @@ public final class Home2 extends JFrame {
           /**  reloadTorneios();*/
         }
     }
+    
+    
+    /** NOVA TAB */
+    
+    public void reloadArbitro(){
+        this.JTabEscolas.addTab("arbitro",new JArbitroOption(this,user));
+        this.JTabEscolas.updateUI();
+        this.JTabEscolas.validate();
+    }
+    
+    public void reloadAdmin(){
+        this.JTabEscolas.addTab("Gerir Aplicação",new JAdminOption(this,user));
+        this.JTabEscolas.updateUI();
+        this.JTabEscolas.validate();
+    }
+    
+    public void reloadResponsavel(){
+        this.JTabEscolas.addTab("Escolas",new JResponsavelOption(this,user));
+        this.JTabEscolas.updateUI();
+        this.JTabEscolas.validate();
+    }
+    
+    /** */
     
     public void reloadOptions(){
         this.jPanel5.removeAll();
@@ -1116,6 +1148,11 @@ public final class Home2 extends JFrame {
         jLabel8.setText("Torneios futuros");
 
         jButton4.setText("Consultar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -1272,6 +1309,17 @@ public final class Home2 extends JFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        String s = seleccionadoTorneio3();
+        
+        if(s != null) {
+            JFrame frame = new JTorneioInfo(this,s);
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1370,5 +1418,11 @@ public final class Home2 extends JFrame {
     private javax.swing.JButton registar;
     private javax.swing.JPanel searchPanel;
     // End of variables declaration//GEN-END:variables
+
+    private static class JArbitroOtion extends PopupMenu {
+
+        public JArbitroOtion() {
+        }
+    }
 
 }

@@ -40,9 +40,7 @@ public class JInscreverEquipa extends JDialog {
        return s;
     }
     
-    public void adiciona(String s, JList j){
-        
-    }
+   
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -238,7 +236,7 @@ public class JInscreverEquipa extends JDialog {
         String s = seleccionadoTorneio();
         
         if(s != null) {
-            adiciona(s,jList2);
+            
         } 
     }//GEN-LAST:event_jButton1ActionPerformed
 
