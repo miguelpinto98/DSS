@@ -1,17 +1,15 @@
 package Business_Layer;
 
 import Data_Layer.EquipaDAO;
-import java.util.Iterator;
 import java.util.Map;
 
-public class Escola {
-	
+public class Escola {	
     //variaveis de instancia
     private String nome;
     private String local;
     private Campo campo;
     private Map<String,Equipa> equipas;
-    private boolean ativa;
+    private int removida;
     
     //Construtor vazio
     public Escola(){
@@ -19,7 +17,7 @@ public class Escola {
         this.local = "";
         this.campo = new Campo();
         this.equipas = new EquipaDAO(nome);
-        this.ativa = false;
+        this.removida = 0;
     }
     
     //Construtor de copia
@@ -28,13 +26,23 @@ public class Escola {
         this.local = escola.getLocal();
         this.campo = escola.getCampo();
         this.equipas = escola.getEquipas();
+        this.removida = escola.getRemovida();
     }
     
     public Escola(String nome, String local, Campo campo) {
         this.nome = nome;
         this.local = local;
         this.campo = campo.clone();
+        this.removida = 0;
         this.equipas = new EquipaDAO(nome);
+    }
+    
+    public Escola(String nome, String local, Campo campo, int rem) {
+        this.nome = nome;
+        this.local = local;
+        this.campo = campo.clone();
+        this.equipas = new EquipaDAO(nome);
+        this.removida = rem;
     }
     //getters
      public String getNome() {
@@ -75,6 +83,10 @@ public class Escola {
          this.equipas = e;
      }
      
+     public void setRemovida(int rem) {
+         this.removida = rem;
+     }
+     
     //clone, equals e toString
     public Escola clone() {
     	return new Escola(this);
@@ -113,5 +125,9 @@ public class Escola {
     
     public void removerEquipa(Equipa a) {
         this.equipas.remove(a.getNome());
+    }
+
+    public int getRemovida() {
+        return this.removida;
     }
 }

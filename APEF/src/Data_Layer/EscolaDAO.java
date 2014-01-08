@@ -7,46 +7,52 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-/**
- *
- * @author serafim
- */
-public class EscolaDAO implements Map<String,Escola> {
-    private HashMap<String,Escola> escolas;
-    
+public class EscolaDAO implements Map<String,Escola> {    
     public static final int NOME = 1;
     public static final int LOCAL = 2;
     public static final int IDCAMPO = 3;
+    public static final int REMOVIDO = 4;
     
     public static final int ID_CAMPO = 1;
     public static final int NOME_CAMPO = 2;
 
     public EscolaDAO() {
-        this.escolas = new HashMap<>();
     }
     
     @Override
     public int size() {
-        return this.escolas.size();
+        int res = 0;
+        try {
+            Statement stm = ConexaoBD.getConexao().createStatement();          
+            String sql = "SELECT * FROM ESCOLA";
+            ResultSet rs = stm.executeQuery(sql);
+            
+            while(rs.next())
+                res++;
+            
+            ConexaoBD.fecharCursor(rs, stm);
+        } catch (SQLException e) {
+        }  
+        return res;
     }
 
     @Override
     public boolean isEmpty() {
-        return this.escolas.isEmpty();
+        throw new NullPointerException("Não Definido");
     }
 
     @Override
     public boolean containsKey(Object key) {
         try {
-            String c = (String) key;
-            String chave = c.toUpperCase();
+            String chave = (String) key;
+            //String chave = c.toUpperCase();
             
             Statement stm = ConexaoBD.getConexao().createStatement();          
-            String sql = "SELECT "+1+" FROM ESCOLA e WHERE e.NOME = '"+chave+"'";
+            String sql = "SELECT NOME FROM ESCOLA e WHERE e.NOME = '"+chave+"'";
             ResultSet rs = stm.executeQuery(sql);
             boolean res = rs.next();
             
@@ -60,7 +66,7 @@ public class EscolaDAO implements Map<String,Escola> {
 
     @Override
     public boolean containsValue(Object value) {
-        return this.escolas.containsValue(value);
+        throw new NullPointerException("Não Definido");
     }
 
     @Override
@@ -68,8 +74,8 @@ public class EscolaDAO implements Map<String,Escola> {
         Escola esc = null;
         
         try {
-            String c = (String) key;
-            String chave = c.toUpperCase();
+            String chave = (String) key;
+            //String chave = c.toUpperCase();
             Statement stm = ConexaoBD.getConexao().createStatement();
             String sql = "SELECT * FROM ESCOLA e WHERE e.NOME = '"+chave+"'";
             ResultSet rs = stm.executeQuery(sql);
@@ -78,6 +84,7 @@ public class EscolaDAO implements Map<String,Escola> {
                 String sNome = rs.getString(NOME);
                 String sLocal = rs.getString(LOCAL);
                 int nidCampo = rs.getInt(IDCAMPO);
+                int isRem = rs.getInt(REMOVIDO);
                 
                 stm = ConexaoBD.getConexao().createStatement();
                 sql = "SELECT * FROM CAMPO c where c.IDCAMPO = "+nidCampo;
@@ -87,12 +94,11 @@ public class EscolaDAO implements Map<String,Escola> {
                     String sCampo = rs.getString(NOME_CAMPO);
                     Campo campo = new Campo(nidCampo, sCampo);
   
-                esc = new Escola(sNome,sLocal,campo);
+                    esc = new Escola(sNome,sLocal,campo,isRem);
                 }
             }
                 
-        rs.close();
-        stm.close();
+        ConexaoBD.fecharCursor(rs, stm);
         } catch (Exception e) {
         }        
         return esc;
@@ -106,7 +112,7 @@ public class EscolaDAO implements Map<String,Escola> {
             boolean existe = this.containsKey(key);
             
             if(!existe) {
-                String chave = c.toUpperCase();
+                //String chave = c.toUpperCase();
                 String sql = "";
                 Campo campo = value.getCampo();
                 
@@ -118,11 +124,12 @@ public class EscolaDAO implements Map<String,Escola> {
                     stm1.execute();
                     stm1.close();
                 
-                    sql = "INSERT INTO Escola(nome, local, idCampo) VALUES (?, ?, ?)";
+                    sql = "INSERT INTO Escola(nome, local, idCampo, removido) VALUES (?, ?, ?, ?)";
                     PreparedStatement stm2 = ConexaoBD.getConexao().prepareStatement(sql);
                     stm2.setString(NOME, value.getNome());
                     stm2.setString(LOCAL, value.getLocal());
                     stm2.setInt(IDCAMPO, value.getCampo().getID());
+                    stm2.setInt(REMOVIDO, value.getRemovida());
                     stm2.execute();
                     stm2.close();
                 }
@@ -134,32 +141,44 @@ public class EscolaDAO implements Map<String,Escola> {
 
     @Override
     public Escola remove(Object key) {
-        return this.escolas.remove(key);
+        throw new NullPointerException("Não Definido");
     }
 
     @Override
     public void putAll(Map<? extends String, ? extends Escola> m) {
-        this.escolas.putAll(m);
+        throw new NullPointerException("Não Definido");
     }
 
     @Override
     public void clear() {
-        this.escolas.clear();
+        throw new NullPointerException("Não Definido");
     }
 
     @Override
     public Set<String> keySet() {
-        return this.escolas.keySet();
+        Set<String> res = new HashSet<>();
+        try {
+            Statement stm = ConexaoBD.getConexao().createStatement();
+            String sql = "SELECT NOME FROM ESCOLA";
+            ResultSet rs = stm.executeQuery(sql);
+            
+            while(rs.next())
+                res.add(rs.getString(NOME));
+           
+            ConexaoBD.fecharCursor(rs, stm);
+        } catch (SQLException e) {
+        }
+        return res;
     }
 
     @Override
     public Collection<Escola> values() {
-        return this.escolas.values();
+        throw new NullPointerException("Não Definido");
     }
 
     @Override
     public Set<Map.Entry<String, Escola>> entrySet() {
-        return this.escolas.entrySet();
+        throw new NullPointerException("Não Definido");
     }
     
     @Override
