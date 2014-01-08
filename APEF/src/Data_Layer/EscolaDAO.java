@@ -113,24 +113,18 @@ public class EscolaDAO implements Map<String,Escola> {
                 if(campo != null) {
                     sql = "INSERT INTO Campo(idCampo, nome) VALUES (?, ?)";
                     PreparedStatement stm1 = ConexaoBD.getConexao().prepareStatement(sql);
-                    
                     stm1.setInt(ID_CAMPO, campo.getID());
                     stm1.setString(NOME_CAMPO, campo.getNome());
                     stm1.execute();
                     stm1.close();
                 
-
-                sql = "INSERT INTO Escola(nome, local, idCampo) VALUES (?, ?, ?)";
-                PreparedStatement stm2 = ConexaoBD.getConexao().prepareStatement(sql);
-
-                stm2.setString(NOME, value.getNome());
-                stm2.setString(LOCAL, value.getLocal());
-                stm2.setInt(IDCAMPO, value.getCampo().getID());
-                stm2.execute();
-                
-                
-                
-                stm2.close();
+                    sql = "INSERT INTO Escola(nome, local, idCampo) VALUES (?, ?, ?)";
+                    PreparedStatement stm2 = ConexaoBD.getConexao().prepareStatement(sql);
+                    stm2.setString(NOME, value.getNome());
+                    stm2.setString(LOCAL, value.getLocal());
+                    stm2.setInt(IDCAMPO, value.getCampo().getID());
+                    stm2.execute();
+                    stm2.close();
                 }
             }
         } catch (SQLException e) {
