@@ -1,6 +1,7 @@
 package GUI.Arbitro;
 
 import GUI.Home2;
+import java.awt.BorderLayout;
 
 public class JAdicionaResultado extends javax.swing.JDialog {
 
@@ -30,6 +31,7 @@ public class JAdicionaResultado extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
@@ -42,16 +44,23 @@ public class JAdicionaResultado extends javax.swing.JDialog {
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanel2.setLayout(new java.awt.BorderLayout());
+
+        jPanel4.setMinimumSize(new java.awt.Dimension(148, 338));
+        jPanel4.setPreferredSize(new java.awt.Dimension(148, 338));
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 148, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 338, Short.MAX_VALUE)
         );
+
+        jPanel2.add(jPanel4, java.awt.BorderLayout.CENTER);
 
         jPanel1.add(jPanel2, java.awt.BorderLayout.LINE_END);
 
@@ -136,7 +145,10 @@ public class JAdicionaResultado extends javax.swing.JDialog {
         String s = seleccionadoJogo();
         
         if(s != null) {
-            
+            this.jPanel2.removeAll();
+            this.jPanel2.add(new JAdicionar(this), BorderLayout.CENTER);
+            this.jPanel2.updateUI();
+            this.jPanel2.validate();
         } 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -156,6 +168,7 @@ public class JAdicionaResultado extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }

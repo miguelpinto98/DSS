@@ -9,6 +9,10 @@ import java.util.Set;
 public class UtilizadorDAO implements Map<String,Utilizador>{
     private HashMap<String,Utilizador> users;
 
+    public UtilizadorDAO() {
+        this.users = new HashMap<>();
+    }
+    
     @Override
     public int size() {
         return this.users.size();
