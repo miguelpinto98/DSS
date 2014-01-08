@@ -1,6 +1,8 @@
 package Business_Layer;
 
-import DAO.ConexaoBD;
+import Data_Layer.ConexaoBD;
+import Data_Layer.EpocaDAO;
+import Data_Layer.EscolaDAO;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -8,20 +10,22 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeMap;
+import Data_Layer.UtilizadorDAO;
+import java.util.Map;
 
 public class APEF {
-    private HashMap<String, Escola> escolas;
-    private TreeMap<Integer, Epoca> epocas; //Não será melhor um TreeSet a ordenar por epocas?
-    private HashMap<String, Utilizador> users;
-    private HashSet<Campo> campos; /*Sao os campos que estao associados a escolas*/
+    private Map<String, Escola> escolas;
+    private Map<Integer, Epoca> epocas; //Não será melhor um TreeSet a ordenar por epocas?
+    private Map<String, Utilizador> users;
+    private HashSet<Campo> campos; /*Sao os campos que nao estao associados a escolas*/
     private Utilizador emSessao;
 
     public static int IDENTIFICADOR=1;
     
     public APEF() {
-    	this.escolas = new HashMap<>();
-    	this.epocas = new TreeMap<>();
-    	this.users = new HashMap<>();
+    	this.escolas = new EscolaDAO();
+    	this.epocas = new EpocaDAO();
+    	this.users = new UtilizadorDAO();
     	this.campos = new HashSet<>();
         //this.iniciarConexao();
         //this.registaUtilizador();
@@ -275,6 +279,7 @@ public class APEF {
     
     public void inserirEpoca(Epoca e) {
         if(!this.epocas.containsKey(e.getAno())) {
+            System.out.println("ccc");
             this.epocas.put(e.getAno(), e);
         }
     }
@@ -415,8 +420,11 @@ public class APEF {
     
     public void avancaData(Torneio t) {
         GregorianCalendar data = t.getDataInicio();
-        Epoca ep = this.epocas.get(this.epocas.firstKey());
-        ep.avancaDataCampeonto(t.getDataInicio(), t.getTipoEscalao());
+        GregorianCalendar g = new GregorianCalendar();
+        int ano = g.get(GregorianCalendar.YEAR);
+
+        Epoca ep = this.epocas.get(ano);
+        ep.avancaDataCampeonto(data, t.getTipoEscalao());
     }
     
     public boolean iniciarTorneioTipo2(Torneio t){

@@ -129,7 +129,7 @@ public class JRegistar extends javax.swing.JDialog {
         error.setFont(new java.awt.Font("Lucida Grande", 3, 11)); // NOI18N
         error.setText("  ");
         error.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        getContentPane().add(error, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 230, 220, 20));
+        getContentPane().add(error, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 210, 20));
 
         resp.setText("Responsável Escola");
         getContentPane().add(resp, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, -1, -1));
