@@ -346,8 +346,7 @@ public class TESTE_apef {
     infantis.inscreverEscalao(escalao5);
     infantis.inscreverEscalao(escalao6);
     infantis.inscreverEscalao(escalao7);
-    infantis.inscreverEscalao(escalao8);
-    
+    infantis.inscreverEscalao(escalao8);    
     a.iniciarTorneioTipo2(infantis);
     //System.out.println(a.iniciarTorneioTipo2(infantis));
     System.out.println(infantis.getFases());
