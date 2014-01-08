@@ -3,6 +3,7 @@ package GUI.Jogador;
 import Business_Layer.Admin;
 import Business_Layer.Epoca;
 import Business_Layer.Escalao;
+import Business_Layer.Escola;
 import Business_Layer.Jogador;
 import Business_Layer.ResponsavelEscola;
 import Business_Layer.Utilizador;
@@ -13,6 +14,7 @@ import java.util.GregorianCalendar;
 import GUI.Home2;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import javax.swing.DefaultListModel;
@@ -33,8 +35,12 @@ public final class ConsultarJogador extends javax.swing.JDialog {
         this.user = user;
         this.jogador = j;
         this.pj = pla;
-        Map.Entry<Integer, Epoca> firstEntry = this.root.getSistema().getEpocas().firstEntry();
-        this.ep = firstEntry.getValue();
+        GregorianCalendar g = new GregorianCalendar();
+        int ano = g.get(GregorianCalendar.YEAR);
+        if(!this.root.getSistema().getEpocas().containsKey(ano));
+			ano--;
+        this.ep = this.root.getSistema().getEpocas().get(ano);
+        
         initComponents();        
         reload();   
         reloadListaCompeticoes();
@@ -74,8 +80,12 @@ public final class ConsultarJogador extends javax.swing.JDialog {
           
     public void reloadListaCompeticoes(){
         //ArrayList<String> lcomp = listaComp();
-        DefaultListModel<Integer> str = new DefaultListModel<>();        
-            for(Integer n : this.jogador.getCompeticoes()) str.addElement(n);         
+        DefaultListModel<Integer> str = new DefaultListModel<>(); 
+        Iterator<Integer> it = this.jogador.getCompeticoes().keySet().iterator(); 
+		while (it.hasNext()) {
+            Integer idComp = it.next();
+                str.addElement(idComp); 
+        }
         comp_realizadas.setModel(str);}
    
     @SuppressWarnings("unchecked")

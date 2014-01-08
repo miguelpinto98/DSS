@@ -1,20 +1,23 @@
 package Business_Layer;
 
+import Data_Layer.AgendaDAO;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.TreeSet;
 
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 
 public class Agenda {
-    private TreeSet<Jogo> jogos;
+    private Map<Integer,Jogo> jogos;
         
         public Agenda(){
-            this.jogos = new TreeSet<>();
+            this.jogos = new AgendaDAO();
         }
         
-        public Agenda(TreeSet<Jogo> j){
+        public Agenda(Map<Integer,Jogo> j){
             this.jogos = j;
         }
         
@@ -22,15 +25,16 @@ public class Agenda {
             this.jogos = a.getJogos();
         }
 
-        public TreeSet<Jogo> getJogos() {
-            TreeSet<Jogo> aux = new TreeSet<Jogo>();
-            for(Jogo j: this.jogos) aux.add(j);
-            return aux;
+        public Map<Integer,Jogo> getJogos() {
+            Map<Integer,Jogo> aux = new AgendaDAO();
+         for(Integer s : this.jogos.keySet()){
+             aux.put(s,this.jogos.get(s));
+         }
+         return aux;
         }
     
-        public void setJogos(TreeSet<Jogo> jogo){
-            this.jogos = new TreeSet<Jogo>();
-            for(Jogo j : jogo) this.jogos.add(j);
+        public void setJogos(Map<Integer,Jogo> jogos){
+            this.jogos = jogos;
         }
     
         public boolean equals(Object o) {
@@ -52,17 +56,19 @@ public class Agenda {
 		StringBuilder s = new StringBuilder();
 		
 		s.append("***** Agenda *****");
-		for(Jogo j : this.jogos)
+		Iterator<Jogo> it = this.jogos.values().iterator(); 
+		while (it.hasNext()) {
+            Jogo j = it.next();
 			s.append(j.toString());
-		
+        }
 		s.append("\n******************\n");
 
 		return s.toString();
 	}
 
 	public void inserirJogo(Jogo j) {
-		if(!this.jogos.contains(j))
-			this.jogos.add(j);
+		if(!this.jogos.containsValue(j))
+			this.jogos.put(j.getID(), j);
 	}
 
 	public void removerJogo(Jogo j) {
@@ -73,7 +79,9 @@ public class Agenda {
 		boolean mudou = false;
 		Jogo jg = null;
 		
-		for(Jogo j : this.jogos) {
+		Iterator<Jogo> it = this.jogos.values().iterator(); 
+		while (it.hasNext()) {
+            Jogo j = it.next();
 			if(!j.isJogoRealizado() && !mudou) {
 				j.resultadoJogo(casa, fora);
 				j.goleadoresJogo(goleadores);
@@ -96,7 +104,9 @@ public class Agenda {
 		Jogo j = null;
 		GregorianCalendar g = null;
 		
-		for(Jogo jg : this.jogos){
+		Iterator<Jogo> it = this.jogos.values().iterator(); 
+		while (it.hasNext()) {
+            Jogo jg = it.next();
 			g = jg.getDiaJogo();
 			DateTime dj = new DateTime(g.get(g.YEAR),g.get(g.MONTH),g.get(g.DAY_OF_MONTH),g.get(g.HOUR_OF_DAY),g.get(g.MINUTE));
 			if(jg.isJogoRealizado() && Days.daysBetween(dj, new DateTime()).getDays()<7);
@@ -105,11 +115,13 @@ public class Agenda {
 		return j;
 	}
 
-    Jogo getProximoJogo() {
+    public Jogo getProximoJogo() {
         Jogo j = null;
-	GregorianCalendar g = null;
+        GregorianCalendar g = null;
 		
-	for(Jogo jg : this.jogos){
+        Iterator<Jogo> it = this.jogos.values().iterator(); 
+		while (it.hasNext()) {
+            Jogo jg = it.next();
             g = jg.getDiaJogo();
             DateTime dj = new DateTime(g.get(g.YEAR),g.get(g.MONTH),g.get(g.DAY_OF_MONTH),g.get(g.HOUR_OF_DAY),g.get(g.MINUTE));
             

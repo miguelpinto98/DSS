@@ -70,7 +70,6 @@ public class Epoca implements Comparable<Epoca>{
         ArrayList<HashSet<Torneio>> array = new ArrayList<>();
         HashSet<Torneio> hash = null;
         int i;
-        
         for(i=0;i<this.torneios.size();i++){
             hash = new HashSet<>();
             for(Torneio t: this.torneios.get(i)){ 
@@ -137,8 +136,7 @@ public class Epoca implements Comparable<Epoca>{
                 res=true;
             else
                 res=false;    
-        }
-        
+        } 
         return res;
     }
     
@@ -174,14 +172,13 @@ public class Epoca implements Comparable<Epoca>{
                         encontrouT = t.atualizaTorneioTipo1(j,a);
                     if(t.getTipoTorneio() == 2)
                         t.atualizaTorneioTipo2(j, a);
-                    //if(t.getTipoTorneio() == 3)
+                  //if(t.getTipoTorneio() == 3)
                         //t.atualizaTorneioTipo3(j, a);
                 }
             }
         }
     }
         
-
     public String procuraCampeonato (Integer idCamp){
        int i=0, flag=1;
         String nome= null;
@@ -189,7 +186,8 @@ public class Epoca implements Comparable<Epoca>{
                 if(this.campeonatos[i].getID()==idCamp) {nome=this.campeonatos[i].getNome(); flag=0;}
                 i++;
             }
-    return nome;}
+        return nome;
+    }
 
     public String procuraTorneio (Integer id){
         String nome=null;

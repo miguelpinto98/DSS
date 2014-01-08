@@ -73,6 +73,5 @@ public class Arbitro extends Utilizador {
         
     public void preencheAgendaArbitro(Jogo j) {
         agenda.inserirJogo(j);
-    }
-        
+    }     
 } 

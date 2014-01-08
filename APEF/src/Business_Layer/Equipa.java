@@ -1,10 +1,14 @@
 package Business_Layer;
 
+import Data_Layer.EquipaDAO;
+import Data_Layer.EscalaoDAO;
+import Data_Layer.PalmaresDAO;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Equipa {
 
@@ -17,23 +21,23 @@ public class Equipa {
     private int id;
     private String nome;
     private Imagem emblema;
-    private HashMap<String,Integer> palmares; //<nome da competicao, nr vezes que ganhou>
-    private Escalao[] escaloes;  
+    private Map<String,Integer> palmares; //<nome da competicao, nr vezes que ganhou>
+    private Map<Integer,Escalao> escaloes; //<tipo de escalao(0,1,2 ou 3), Escalao>  
     
     public Equipa() {
     	this.id = 0; 	//nao definido
     	this.nome = new String();
     	this.emblema = new Imagem();
-    	this.palmares = new HashMap<>();
-    	this.escaloes = new Escalao[maxEscaloes];
+    	this.palmares = new PalmaresDAO();
+    	this.escaloes = new EscalaoDAO();
     }
     
     public Equipa(String n, Imagem e) {
     	this.id = APEF.IDENTIFICADOR;
     	this.nome = n;
     	this.emblema = e;
-    	this.palmares = new HashMap<>();
-    	this.escaloes = new Escalao[maxEscaloes];
+    	this.palmares = new PalmaresDAO();
+    	this.escaloes = new EscalaoDAO();
     	APEF.IDENTIFICADOR++;	
     }
 
@@ -41,8 +45,8 @@ public class Equipa {
     	this.id = APEF.IDENTIFICADOR;
     	this.nome = n;
     	this.emblema = new Imagem();
-    	this.palmares = new HashMap<>();
-    	this.escaloes = new Escalao[maxEscaloes];
+    	this.palmares = new PalmaresDAO();
+    	this.escaloes = new EscalaoDAO();
     	APEF.IDENTIFICADOR++;	
     }
 
@@ -66,23 +70,20 @@ public class Equipa {
 		return this.emblema;
 	}
 
-	public HashMap<String, Integer> getPalmares() {
-		HashMap<String, Integer> hmp = new HashMap<>();
-		
+	public Map<String, Integer> getPalmares() {
+		Map<String, Integer> hmp = new PalmaresDAO();
 		for(String s : this.palmares.keySet())
 			hmp.put(s, this.palmares.get(s));
-		
 		return hmp;
 	}
 
-	public Escalao[] getEscaloes() {
-		Escalao[] aux = new Escalao[maxEscaloes];
-        int i;
-        for(i=0;i<maxEscaloes;i++){
-            aux[i] = this.escaloes[i];
-        }
-        return aux;
-	}
+	public Map<Integer,Escalao> getEscaloes() {
+         Map<Integer,Escalao> aux = new EscalaoDAO();
+         for(Integer s : this.escaloes.keySet()){
+             aux.put(s,this.escaloes.get(s));
+         }
+         return aux;
+     }
 
 	public void setId(int id) {
 		this.id = id;
@@ -96,11 +97,11 @@ public class Equipa {
 		this.emblema = emblema;
 	}
 
-	public void setPalmares(HashMap<String, Integer> palmares) {
+	public void setPalmares(Map<String, Integer> palmares) {
 		this.palmares = palmares;
 	}
 
-	public void setEscaloes(Escalao[] escaloes) {
+	public void setEscaloes(Map<Integer,Escalao> escaloes) {
 		this.escaloes = escaloes;
 	}
 
@@ -117,7 +118,6 @@ public class Equipa {
 	
 	public String toString() {
 		StringBuilder str = new StringBuilder("Equipas \n");
-		
 		str.append("Nome: "+this.nome.toString());
 		
 		return str.toString();
@@ -144,11 +144,11 @@ public class Equipa {
 	}
 
 	public void inserirEscalao(Escalao a) {
-		this.escaloes[a.getTipoEscalao()] = a;
+        this.escaloes.put(a.getTipoEscalao(), a);
 	}
 
 	public void removerEscalao(Escalao a) {
-		this.escaloes[a.getTipoEscalao()] = null;
+		this.escaloes.remove(a);
 	}
     
     public boolean criarEscalao(int tipo, String nEscola, String nEquipa, String nTreinador, Date d, int sexo, Imagem img) {
@@ -161,7 +161,7 @@ public class Equipa {
         
         if(this.nome.equals(nEquipa)) {
             e = new Escalao(tipo, nEscola, nEquipa, t);
-            this.escaloes[tipo] = e;
+            this.escaloes.put(tipo, e);
             res = true;
         }     
         return res;

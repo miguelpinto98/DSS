@@ -35,10 +35,8 @@ public class Admin extends Utilizador {
 	
 	public HashSet<HistoricoAcao> getAcoes() {
 		HashSet<HistoricoAcao> hse = new HashSet<HistoricoAcao>();
-		
 		for(HistoricoAcao s : this.acoes)
 			hse.add(s);
-		
 		return hse;
 	}
 
@@ -60,13 +58,6 @@ public class Admin extends Utilizador {
 			return (this.getID() == re.getID());	
 		}
 	}
-	
-	/**public gdagvdd inserirEu(Utilizador x, Escola)
-	{   nomeEquipa = 
-		String s = "Inserir equipa "+ nomeEquipa + " da escola "+getNomeEscola();
-		this.acoes.add(s)
-	}*/
-
 	public String toString() {
 		StringBuilder str = new StringBuilder("Admin\n");
 		str.append("ID:" + this.getID() + "\n");

@@ -1,7 +1,6 @@
 package Business_Layer;
 
 import Data_Layer.EquipaDAO;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -30,14 +29,13 @@ public class Escola {
         this.campo = escola.getCampo();
         this.equipas = escola.getEquipas();
     }
-
+    
     public Escola(String nome, String local, Campo campo) {
         this.nome = nome;
         this.local = local;
         this.campo = campo.clone();
-        this.equipas = new HashMap<>();
+        this.equipas = new EquipaDAO();
     }
-
     //getters
      public String getNome() {
          return this.nome;
@@ -50,14 +48,12 @@ public class Escola {
      public Campo getCampo() {
          return this.campo;
      }
-     
-     public HashMap<String,Equipa> getEquipas() {
-         HashMap<String,Equipa> aux = new HashMap<>();
-         
+ 
+     public Map<String,Equipa> getEquipas() {
+         Map<String,Equipa> aux = new EquipaDAO();
          for(String s : this.equipas.keySet()){
              aux.put(s,this.equipas.get(s));
          }
-         
          return aux;
      }
      
@@ -75,10 +71,9 @@ public class Escola {
          this.campo = c;
      }
      
-     public void setEquipas(HashMap<String,Equipa> e){
+     public void setEquipas(Map<String,Equipa> e){
          this.equipas = e;
      }
-
      
     //clone, equals e toString
     public Escola clone() {
@@ -87,11 +82,10 @@ public class Escola {
     
      public String toString() {
         StringBuilder str = new StringBuilder(); 
-        
         str.append("Escola\n");
         str.append(this.getNome() + "\n");
-	str.append(this.getLocal() + "\n");
-	str.append(this.getCampo() + "\n");
+        str.append(this.getLocal() + "\n");
+        str.append(this.getCampo() + "\n");
         str.append(this.getEquipas() + "\n");
         
         return str.toString(); 
@@ -107,21 +101,7 @@ public class Escola {
             return this.nome.equals(t.getNome());
         }
     }
-    /**
-    *Metodos Equipa
-    */
-    /**public boolean existeEquipa(String n) {
-        boolean res=false;
-        Iterator<Equipa> it = this.equipas.iterator(); 
-        while (it.hasNext() && !res) {
-            Equipa eq = it.next();
-            if (eq.getNome().equals(n)) {
-                res = true;
-            }
-        }
-        return res;
-    }*/
-
+    
     public boolean inserirEquipa(Equipa a) {
         boolean res = false;
         if(!this.equipas.containsKey(a.getNome())) {
@@ -134,6 +114,4 @@ public class Escola {
     public void removerEquipa(Equipa a) {
         this.equipas.remove(a.getNome());
     }
-    
-    
 }

@@ -1,14 +1,17 @@
 package Business_Layer;
 
+import Data_Layer.CompeticoesJogadorDAO;
+import Data_Layer.JogadorDAO;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.Map;
 import java.util.Objects;
 
 public class Jogador extends Pessoa {    
     
     //Variaveis de Instancia
     private int nrGolos;
-    private ArrayList<Integer> competicoes;
+    private Map<Integer,Integer> competicoes; //<Id da competicao,id jogador>
     private boolean emprestado;
     private String nomeEquipa;
     private String nomeEquipaEmprestimo;
@@ -20,13 +23,13 @@ public class Jogador extends Pessoa {
         this.emprestado = false;
         this.nomeEquipa = "";
         this.nomeEquipaEmprestimo = "";
-        this.competicoes = new ArrayList<>();
+        this.competicoes = new CompeticoesJogadorDAO();
     }
    
     public Jogador(String nome, Imagem img, GregorianCalendar g, int sexo, String nEquipa) {
         super(nome,img,g,sexo);
         this.nrGolos = 0;
-        this.competicoes = new ArrayList<>();
+        this.competicoes = new CompeticoesJogadorDAO();
         this.nomeEquipa = nEquipa;
         this.nomeEquipaEmprestimo = new String();
         this.emprestado = false;
@@ -38,12 +41,13 @@ public class Jogador extends Pessoa {
         this.nomeEquipa = "CeSIUM";
         this.nrGolos = 0;
         this.nomeEquipaEmprestimo = new String();
-        this.competicoes = new ArrayList<>();}
+        this.competicoes = new CompeticoesJogadorDAO();
+    }
 
     public Jogador(String nome, GregorianCalendar g, int sexo, boolean emprestado, String nomeEquipa) {
         super(nome,null,g,sexo);
         this.nrGolos = 0;
-        this.competicoes = new ArrayList<>();
+        this.competicoes = new CompeticoesJogadorDAO();
         this.emprestado = emprestado;
         this.nomeEquipa=nomeEquipa;
     }
@@ -74,13 +78,12 @@ public class Jogador extends Pessoa {
         return this.getNomeEquipaEmprestimo();
     }
     
-    public ArrayList<Integer> getCompeticoes() {
-        ArrayList<Integer> al = new ArrayList<>();
+    public Map<Integer,Integer> getCompeticoes() {
+       Map<Integer,Integer> aux = new CompeticoesJogadorDAO();
+        for(Integer n : this.competicoes.keySet()) 
+            aux.put(n, this.getID());
         
-        for(Integer n : this.competicoes)
-            al.add(n);
-        
-        return al;
+        return aux;
     }
     
     //Setters
@@ -135,8 +138,7 @@ public class Jogador extends Pessoa {
     	str.append("--Jogador--") ;
             str.append("\nJogador ID: ").append(this.getID());
             str.append("\nJogador Nome: ").append (this.getNome());
-                        str.append("\nNum COmp: ").append (this.competicoes.size());
-
+            str.append("\nNum COmp: ").append (this.competicoes.size());
             str.append("\nJogador Golos: ").append(this.getNrGolos());
             str.append("\nJogador Data Nascimento: ").append(this.getDataNasc().get(GregorianCalendar.YEAR)).append("/").append(this.getDataNasc().get(GregorianCalendar.MONTH)).append("/").append(this.getDataNasc().get(GregorianCalendar.DAY_OF_MONTH));
             str.append("\nJogador Sexo: ").append(this.getSexo()).append("\n");
@@ -150,7 +152,7 @@ public class Jogador extends Pessoa {
 	}
 
     public void addCompeticao(int id){
-            this.competicoes.add(id);
+            this.competicoes.put(id,this.getID());
         
     }   
 }

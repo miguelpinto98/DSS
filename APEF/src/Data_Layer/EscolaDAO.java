@@ -72,4 +72,8 @@ public class EscolaDAO implements Map<String,Escola> {
     public Set<Map.Entry<String, Escola>> entrySet() {
         return this.escolas.entrySet();
     }
+    
+    public int hashCode() {
+        return ConexaoBD.getConexao().hashCode();
+    }
 }

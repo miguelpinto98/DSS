@@ -71,7 +71,7 @@ public class JPlantelJogador extends javax.swing.JPanel {
     }
     
     public void atualizaJogadores() {
-        Collection<Jogador> lesc = this.root.getSistema().getEscolas().get(this.escalao.getNomeEscola()).getEquipas().get(this.escalao.getNomeEquipa()).getEscaloes()[this.escalao.getTipoEscalao()].getJogadores().values();
+        Collection<Jogador> lesc = this.root.getSistema().getEscolas().get(this.escalao.getNomeEscola()).getEquipas().get(this.escalao.getNomeEquipa()).getEscaloes().get(this.escalao.getTipoEscalao()).getJogadores().values();
 
         Object[] columnNames = new String[] {"ID","Nome"};
         Object[][] data = new Object[][] {};

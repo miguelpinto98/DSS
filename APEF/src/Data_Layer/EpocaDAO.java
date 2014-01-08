@@ -73,4 +73,8 @@ public class EpocaDAO implements Map<Integer,Epoca> {
     public Set<Map.Entry<Integer, Epoca>> entrySet() {
         return this.epocas.entrySet();
     }
+    
+    public int hashCode() {
+        return ConexaoBD.getConexao().hashCode();
+    }
 }

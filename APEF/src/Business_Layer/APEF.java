@@ -5,7 +5,6 @@ import Data_Layer.EpocaDAO;
 import Data_Layer.EscolaDAO;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -31,38 +30,33 @@ public class APEF {
         //this.registaUtilizador();
         this.emSessao = null;
     }
-
+    
     public APEF(APEF a) {
-	this.escolas = a.getEscolas();
+        this.escolas = a.getEscolas();
         this.epocas = a.getEpocas();
-	this.users = a.getUsers();
-	this.campos = a.getCampos();
+        this.users = a.getUsers();
+        this.campos = a.getCampos();
         this.emSessao = a.getEmSessao();
     }
 
-	public HashMap<String, Escola> getEscolas() {
-		HashMap<String,Escola> aux = new HashMap<>();
-		
+	public Map<String, Escola> getEscolas() {
+		Map<String,Escola> aux = new EscolaDAO();
 		for(String s : this.escolas.keySet())
 			aux.put(s, this.escolas.get(s));
-		
 		return aux;
 	}
 	
-	public TreeMap<Integer, Epoca> getEpocas() {
-		TreeMap<Integer,Epoca> aux = new TreeMap<>();
-		
+	public Map<Integer, Epoca> getEpocas() {
+		Map<Integer,Epoca> aux = new EpocaDAO();
 		for(Integer s : this.epocas.keySet())
 			aux.put(s, this.epocas.get(s).clone());
 		return aux;
 	}
 
-	public HashMap<String, Utilizador> getUsers() {
-		HashMap<String,Utilizador> aux = new HashMap<>();
-		
+	public Map<String, Utilizador> getUsers() {
+		Map<String,Utilizador> aux = new UtilizadorDAO();
 		for(String s : this.users.keySet())
 			aux.put(s, this.users.get(s).clone());
-		
 		return aux;
 	}
 
@@ -77,11 +71,11 @@ public class APEF {
 		return this.emSessao;
 	}
 
-	public void setEscolas(HashMap<String, Escola> escolas) {
+	public void setEscolas(Map<String, Escola> escolas) {
 		this.escolas = escolas;
 	}
 	
-	public void setEpoca(TreeMap<Integer, Epoca> epocas) {
+	public void setEpoca(Map<Integer, Epoca> epocas) {
 		this.epocas = epocas;
 	}
 	
@@ -89,7 +83,7 @@ public class APEF {
 		this.campos = campos;
     }
 
-    public void setUsers(HashMap<String, Utilizador> users) {
+    public void setUsers(Map<String, Utilizador> users) {
 		this.users = users;
     }
 
@@ -123,11 +117,9 @@ public class APEF {
 
 	public String toString() {
 		StringBuilder str = new StringBuilder(); 
-		
 		str.append("APEF\n");
 		str.append("Utilizador:" + this.getUsers());
         str.append("Escola:" + this.getEscolas());
-		
 		return str.toString(); 
 	}
 
@@ -143,7 +135,7 @@ public class APEF {
 				res = true;
 			}
 		}
-                return res;
+        return res;
 	}
 
 	public boolean existeNickname(String nickname){
@@ -154,12 +146,9 @@ public class APEF {
 		return (existeNickname(nickname) || existeEmail(email));
 	}
 
-	
-
 	public boolean validaPassword(String pw) {
         boolean res = true;
         int i = 0;
-        
         if(pw.length() < 6)
                     return false ;
         for (; i < pw.length() && res; i++) {
@@ -171,50 +160,47 @@ public class APEF {
     }
 
     public boolean registarUser(String nickname, String password, String email, int tipoUser) {
-	GregorianCalendar g = new GregorianCalendar();
+        GregorianCalendar g = new GregorianCalendar();
         boolean inserido = false;
 	
         if(validaPassword(password)) {
             if (tipoUser==0) { 
                 Admin user = new Admin(nickname, password, email, g,this);
-		String pw = user.encriptarPassword(password);
+                String pw = user.encriptarPassword(password);
                 user.setPass(pw);
        	    	inserido = inserirUtilizador(user);
             }
             if (tipoUser==1) { 
-		ResponsavelEscola user = new ResponsavelEscola(nickname, password, email,g,this);
+                ResponsavelEscola user = new ResponsavelEscola(nickname, password, email,g,this);
                 String pw = user.encriptarPassword(password);
                 user.setPass(pw);
                 inserido = inserirUtilizador(user);
             }
             if (tipoUser==2) { 
-		Arbitro user = new Arbitro(nickname, password, email, g,this);
+                Arbitro user = new Arbitro(nickname, password, email, g,this);
                 String pw = user.encriptarPassword(password);
                 user.setPass(pw);
-	        inserido = inserirUtilizador(user);
+                inserido = inserirUtilizador(user);
             }	
 	}
-        
         return inserido;
     }
     
     public boolean inserirUtilizador(Utilizador user) {
         boolean ins = false;
-        
         if ( !(existeUtilizador(user.getNomeUser(),user.getEmail())) ) {
             this.users.put(user.getNomeUser(),user);
             ins = true;
         }
-        
         return ins;
     }
 
     public void removerUtilizador(Utilizador user) {
-	this.users.remove(user.getNomeUser());
+        this.users.remove(user.getNomeUser());
     }
 
     public boolean validaLogin(String nickname, String password){
-	return (existeNickname(nickname) && this.users.get(nickname).passwordCorresponde(password));
+        return (existeNickname(nickname) && this.users.get(nickname).passwordCorresponde(password));
     }
     
     /* Ainda Falta Fazer Uma Verificação */
@@ -268,7 +254,6 @@ public class APEF {
 	*/
 	public void criaEpoca(int anoEpoca) {
 		GregorianCalendar g = new GregorianCalendar();
-		
 		if(this.epocas.containsKey(anoEpoca) || (anoEpoca-g.get(GregorianCalendar.YEAR))==0)
 			; /*Epoca ja existe || Nao esta no ano corrente*/
 		else {
@@ -286,7 +271,8 @@ public class APEF {
 	public void mudarPermissoes(String name) {
 		if(this.users.get(name).isAtivo()) 
 			this.users.get(name).setAtivo(false);
-		else this.users.get(name).setAtivo(true);		
+		else 
+            this.users.get(name).setAtivo(true);		
 	}
 
 	/**
@@ -307,6 +293,7 @@ public class APEF {
 		if(verificaJogadores(inscritos)) {
 			inscreveJogadores(idCompeticao,inscritos);
             Epoca e = this.epocas.get(anoEpoca);
+            
             e.inscreveEmCampeonato(x);
 			return true;
 		}
@@ -323,9 +310,6 @@ public class APEF {
 		else return false;
 	}
     
-    /*Isto serve para confirmar se a inscricao acabou, e o admin pode agora "IniciarCampeonato"(metodo a ser 
-    definido, que ja ira verificar 1�� se tem o nr de equipas pre-definido e de seguida, gerar o calendario, etc.)
-    */
     public boolean acabouInscricaoCampeonato(Campeonato c) {
         GregorianCalendar now = new GregorianCalendar();
         if ( c.getDataLimiteInscricoes().before(now) && c.getDataInicio().after(now) && c.getNrEscaloes()==0) 
@@ -357,7 +341,6 @@ public class APEF {
     
     public ArrayList<Utilizador> daListaArbitros(){
         ArrayList<Utilizador> res = new ArrayList<>();
-        
         for(String s : this.users.keySet())
 		if (this.users.get(s) instanceof Arbitro) 
 				res.add(this.users.get(s));
@@ -365,8 +348,8 @@ public class APEF {
     }
     
     public Campo daCampoEscalao(Escalao e){
-    Campo c = this.escolas.get(e.getNomeEscola()).getCampo();
-    return c;
+        Campo c = this.escolas.get(e.getNomeEscola()).getCampo();
+        return c;
     }
 
     public boolean iniciarCampeonato(Campeonato c){
@@ -411,7 +394,6 @@ public class APEF {
         if (acabouInscricaoTorneioTipo1(t) && countArbitros()>=((nrEscaloes)/2)){
         	firstFaseTorneioTipo1(t);
                 res=true;
-
     	}
         this.avancaData(t);
         return res;
@@ -421,7 +403,8 @@ public class APEF {
         GregorianCalendar data = t.getDataInicio();
         GregorianCalendar g = new GregorianCalendar();
         int ano = g.get(GregorianCalendar.YEAR);
-
+        if(!this.epocas.containsKey(ano));
+			ano--;
         Epoca ep = this.epocas.get(ano);
         ep.avancaDataCampeonto(data, t.getTipoEscalao());
     }
@@ -432,7 +415,6 @@ public class APEF {
         if (acabouInscricaoTorneioTipo2(t) && countArbitros()>=((nrEscaloes)/2)){
         	   eliminatoriaTorneioTipo2(t);
                 res=true;
-
     	}
         this.avancaData(t);
         return res;
@@ -554,10 +536,8 @@ public class APEF {
 	public void addResultadoCompeticao(Jogo j) {
 		GregorianCalendar g = new GregorianCalendar();
 		int ano = g.get(GregorianCalendar.YEAR);
-		
 		if(!this.epocas.containsKey(ano));
 			ano--;
-		
 		this.epocas.get(ano).atualizaEpoca(j,this);	
 	}
         
@@ -621,7 +601,7 @@ public class APEF {
                 if(eq==nomeEquipa) {
                     equipa = e.getEquipas().get(nomeEquipa);
                     flag = true;
-                    res = equipa.getEscaloes()[escalao].inserirJogador(j);
+                    res = equipa.getEscaloes().get(escalao).inserirJogador(j);
                 }
             }
         }
@@ -644,7 +624,7 @@ public class APEF {
                 if(eq==j.getNomeEquipaEmprestimo()) {
                     equipa = e.getEquipas().get(j.getNomeEquipaEmprestimo());
                     flag = true;
-                    res = equipa.getEscaloes()[tipoEscalao].removerJogador(j);
+                    res = equipa.getEscaloes().get(tipoEscalao).removerJogador(j);
                 }
             }
         }
@@ -662,5 +642,4 @@ public class APEF {
     public void atualizaPalmaresEquipa(String nomeCompeticao,String escola, String equipa) {
       this.escolas.get(escola).getEquipas().get(equipa).atualizaPalmares(nomeCompeticao);
     }
-    
 }

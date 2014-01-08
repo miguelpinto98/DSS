@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 public class Jogo implements Comparable<Jogo>{
+    private int id;
     private int idCompeticao;
     private boolean realizado; /* Comeca a falso */
     private GregorianCalendar dia; /* Dia e hora de jogo */
@@ -16,6 +17,7 @@ public class Jogo implements Comparable<Jogo>{
     private ArrayList<Integer> goleadores;
 	
     public Jogo() {
+        this.id = 0;
     	this.idCompeticao = 0;
     	this.realizado = false;
     	this.dia = new GregorianCalendar();
@@ -29,7 +31,8 @@ public class Jogo implements Comparable<Jogo>{
     }
     
     public Jogo(int i, GregorianCalendar g, Campo c, Arbitro a, Escalao ec, Escalao ef) {
-    	this.idCompeticao = i;
+    	this.id = APEF.IDENTIFICADOR;
+        this.idCompeticao = i;
     	this.realizado = false;
     	this.dia = (GregorianCalendar) g.clone();
     	this.campo = c;
@@ -39,17 +42,21 @@ public class Jogo implements Comparable<Jogo>{
     	this.numGolosCasa = 0;
     	this.numGolosFora = 0;
     	this.goleadores = new ArrayList<>();
+        APEF.IDENTIFICADOR++;
     }
     
     public Jogo(int idCompeticao, GregorianCalendar g, Campo campo, Escalao c, Escalao f){
+        this.id = APEF.IDENTIFICADOR;
         this.idCompeticao = idCompeticao;
         this.campo = campo;
         this.dia = g;
         this.ecasa = c;
         this.efora = f;
+        APEF.IDENTIFICADOR++;
     }
 
     public Jogo(Jogo j) {
+        this.id = j.getID();
     	this.idCompeticao = j.getIdCompeticao();
     	this.realizado = j.isJogoRealizado();
     	this.dia = j.getDiaJogo();
@@ -61,6 +68,14 @@ public class Jogo implements Comparable<Jogo>{
     	this.numGolosFora = j.getNumGolosJogoFora();
     	this.goleadores = j.getGoleadoresJogo();
 	}
+    
+    public int getID() {
+        return this.id;
+    }
+    
+    public void setID(int id) {
+        this.id = id;
+    }
     
 	public int getIdCompeticao(){
 		return this.idCompeticao;

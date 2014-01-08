@@ -167,7 +167,7 @@ public abstract class Utilizador {
     public void setCamposPreenchidos(boolean m){
         this.camposPreenchidos = m;
     }
-
+    
     //Equals,Clone,toString
     public abstract Utilizador clone(); 
    
@@ -194,7 +194,5 @@ public abstract class Utilizador {
         //System.out.println("pw user :" + this.password) ;
         return this.password.equals(encriptarPassword(pw));
        }
-
-
 }
 

@@ -13,6 +13,7 @@ import Business_Layer.Imagem;
 import GUI.ConsultasEscola;
 import GUI.Home2;
 import java.util.Date;
+import java.util.Map;
 
 /**
  *
@@ -36,11 +37,11 @@ public final class JCriarPlantel extends javax.swing.JDialog {
     }
         
     public void verificaEscalaoesDisponiveis() {
-        Escalao[] esc = this.equipa.getEscaloes();
+        Map<Integer,Escalao> esc = this.equipa.getEscaloes();
         
         
-        for(int i=0; i<esc.length; i++)
-            if(esc[i] == null)
+        for(int i=0; i<esc.size(); i++)
+            if(!esc.containsKey(esc))
                 this.comboEscaloesDisponiveis.addItem(ce.devolveEscalaoTipo(i));
     }
 

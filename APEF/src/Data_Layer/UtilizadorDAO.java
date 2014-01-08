@@ -68,4 +68,8 @@ public class UtilizadorDAO implements Map<String,Utilizador>{
     public Set<Entry<String, Utilizador>> entrySet() {
         return this.users.entrySet();
     }
+    
+    public int hashCode() {
+        return ConexaoBD.getConexao().hashCode();
+    }
 }

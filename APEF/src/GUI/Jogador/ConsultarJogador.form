@@ -313,9 +313,6 @@
                     </Property>
                     <Property name="selectionMode" type="int" value="0"/>
                   </Properties>
-                  <AccessibilityProperties>
-                    <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Realizadas"/>
-                  </AccessibilityProperties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Integer&gt;"/>
                   </AuxValues>

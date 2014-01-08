@@ -25,6 +25,7 @@ import GUI.Plantel.JPlantelJogador;
 import GUI.Plantel.JPlantelTreinador;
 import GUI.Plantel.JRemoverPlantel;
 import java.awt.BorderLayout;
+import java.util.Map;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -62,7 +63,7 @@ public final class ConsultasEscola extends javax.swing.JFrame {
         String equ = (String) this.comboEquipas.getSelectedItem();
         String esc = (String) this.comboEscalao.getSelectedItem();
         if(equ != null && esc != null)
-            this.escalao = this.esc.getEquipas().get(equ).getEscaloes()[devolveTipoEscalao(esc)];
+            this.escalao = this.esc.getEquipas().get(equ).getEscaloes().get(devolveTipoEscalao(esc));
         reloadOpcaoTreinadorConvidado();
         
         verificaUser(this.user);
@@ -125,10 +126,10 @@ public final class ConsultasEscola extends javax.swing.JFrame {
         
         if(eq != null) {
         Equipa e = this.esc.getEquipas().get(eq);
-        Escalao[] es = e.getEscaloes();
+        Map<Integer,Escalao> es = e.getEscaloes();
         
         for(int i=0; i<4; i++)
-            if(es[i] != null) {
+            if( !es.containsKey(i) ) {
                 dcb.addElement(devolveEscalaoTipo(i));
                 res++;
             }                
@@ -181,7 +182,7 @@ public final class ConsultasEscola extends javax.swing.JFrame {
         System.out.println(esc);
         
         if(esc != null)
-            this.escalao = this.esc.getEquipas().get(equipa).getEscaloes()[devolveTipoEscalao(esc)];
+            this.escalao = this.esc.getEquipas().get(equipa).getEscaloes().get(devolveTipoEscalao(esc));
         else
             this.escalao = null;
         
@@ -194,7 +195,7 @@ public final class ConsultasEscola extends javax.swing.JFrame {
     
     public void verificaEscalaoSeleccionado(String eq, String esc) {
         if(esc != null)
-            this.escalao = this.esc.getEquipas().get(eq).getEscaloes()[devolveTipoEscalao(esc)];
+            this.escalao = this.esc.getEquipas().get(eq).getEscaloes().get(devolveTipoEscalao(esc));
         else
             this.escalao = null;
         
@@ -211,9 +212,9 @@ public final class ConsultasEscola extends javax.swing.JFrame {
         int res=0;
         
         if(equipa != null) {
-            Escalao[] escalao = this.esc.getEquipas().get(equipa).getEscaloes();
-            for(int i=0; i<escalao.length; i++)
-                 if(escalao[i] != null)
+            Map<Integer,Escalao> escalao = this.esc.getEquipas().get(equipa).getEscaloes();
+            for(int i=0; i<escalao.size(); i++)
+                 if(!escalao.containsKey(i))
                      res++;
             
             if(res==4)

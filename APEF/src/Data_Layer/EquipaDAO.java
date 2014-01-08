@@ -72,4 +72,8 @@ public class EquipaDAO implements Map<String,Equipa> {
     public Set<Map.Entry<String, Equipa>> entrySet() {
         return this.equipas.entrySet();
     }
+    
+    public int hashCode() {
+        return ConexaoBD.getConexao().hashCode();
+    }
 }

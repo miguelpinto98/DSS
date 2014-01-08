@@ -1,11 +1,13 @@
 package Business_Layer;
 
+import Data_Layer.JogadorDAO;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 
 public class Escalao {
     
@@ -15,7 +17,7 @@ public class Escalao {
     private String nomeEscola;
     private String nomeEquipa; 
     private Treinador treinador;
-    private HashMap<Integer,Jogador> jogadores;
+    private Map<Integer,Jogador> jogadores;
     private Agenda agenda;          //Jogos 
     private DadosEstatisticos dados;
 
@@ -26,7 +28,7 @@ public class Escalao {
         this.nomeEscola = "";
         this.nomeEquipa = "";
     	this.treinador = new Treinador();
-    	this.jogadores = new HashMap<>();
+    	this.jogadores = new JogadorDAO();
         this.agenda = new Agenda();
         this.dados = new DadosEstatisticos();
     }
@@ -37,9 +39,9 @@ public class Escalao {
         this.nomeEscola = nomeEscola;
         this.nomeEquipa = nomeEquipa;
         this.treinador = new Treinador();
-    	this.jogadores = new HashMap<>();
+    	this.jogadores = new JogadorDAO();
         this.agenda = new Agenda();
-        this.dados = new DadosEstatisticos(APEF.IDENTIFICADOR); 
+        this.dados = new DadosEstatisticos(APEF.IDENTIFICADOR);
         APEF.IDENTIFICADOR++;
     }
 
@@ -60,7 +62,7 @@ public class Escalao {
         this.nomeEscola = nEscola;
         this.nomeEquipa = nEquipa;
         this.treinador = t;
-        this.jogadores = new HashMap<>();
+        this.jogadores = new JogadorDAO();
         this.agenda = new Agenda();
         this.dados = new DadosEstatisticos(); 
     }
@@ -86,9 +88,8 @@ public class Escalao {
         return this.treinador;
     }
     
-    public HashMap<Integer,Jogador> getJogadores() {
-        HashMap<Integer,Jogador> aux = new HashMap<Integer,Jogador>();
-        
+    public Map<Integer,Jogador> getJogadores() {
+        Map<Integer,Jogador> aux = new JogadorDAO();
         for(Integer n : this.jogadores.keySet()) 
             aux.put(n, this.jogadores.get(n));
         
@@ -124,7 +125,7 @@ public class Escalao {
         this.treinador = t;
     }
 
-    public void setJogadores(HashMap<Integer, Jogador> j) {
+    public void setJogadores(Map<Integer, Jogador> j) {
         this.jogadores = j;
     }
 
