@@ -50,6 +50,14 @@ public class Equipa {
     	this.escaloes = new EscalaoDAO();
     	APEF.IDENTIFICADOR++;	
     }
+    
+    public Equipa(int id, String n) {
+    	this.id = id;
+    	this.nome = n;
+    	this.emblema = new Imagem();
+    	this.palmares = new PalmaresDAO();
+    	this.escaloes = new EscalaoDAO();
+    }
 
     public Equipa(Equipa e) {
     	this.id = e.getID();
