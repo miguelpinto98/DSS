@@ -25,11 +25,12 @@ public class Equipa {
     private Map<Integer,Escalao> escaloes; //<tipo de escalao(0,1,2 ou 3), Escalao>  
     
     public Equipa() {
-    	this.id = 0; 	//nao definido
+    	this.id = APEF.IDENTIFICADOR;
     	this.nome = new String();
     	this.emblema = new Imagem();
     	this.palmares = new PalmaresDAO();
     	this.escaloes = new EscalaoDAO();
+        APEF.IDENTIFICADOR++;
     }
     
     public Equipa(String n, Imagem e) {

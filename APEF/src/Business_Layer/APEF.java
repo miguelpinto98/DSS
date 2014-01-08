@@ -1,5 +1,6 @@
 package Business_Layer;
 
+import Data_Layer.ArbsDAO;
 import Data_Layer.ConexaoBD;
 import Data_Layer.EpocaDAO;
 import Data_Layer.EscolaDAO;
@@ -363,7 +364,7 @@ public class APEF {
         int nrEscaloes = c.getListaEscaloes().size();
 
         if (acabouInscricaoCampeonato(c) && countArbitros()>=((nrEscaloes)/2)){
-        	for(Escalao e : c.getListaEscaloes()){
+        	for(Escalao e : c.getListaEscaloes().values()){
         		arrayEquipas.add(e.getID());
                 arrayCampos.add(daCampoEscalao(e));
         	}
@@ -371,7 +372,7 @@ public class APEF {
         	c.geraCalendario(arrayEquipas, arrayCampos, arrayArbitros);
             c.setNrEscaloes(nrEscaloes);
            
-            for(Escalao e : c.getListaEscaloes()) {
+            for(Escalao e : c.getListaEscaloes().values()) {
                 DadosEstatisticos x = new DadosEstatisticos(e.getID());
                 c.getClassificacao().inserirDados(x);
             }
@@ -434,7 +435,7 @@ public class APEF {
         ArrayList<Utilizador> arrayArbitros = new ArrayList<>();
         arrayArbitros = daListaArbitros();
 
-        for(Escalao e : t.getListaEscaloes()){
+        for(Escalao e : t.getListaEscaloes().values()){
         		arrayEquipas.add(e.getID());
         	}
 
@@ -469,15 +470,19 @@ public class APEF {
         HashSet<Utilizador> arbitrosEscolhidos = g1.geraCalendario(t.getID(),t.getDataInicio(),arrayEquipasGrupo1,t.getCampo(),arrayArbitros);
         ArrayList<Utilizador> arrayArbitrosDisponiveis = new ArrayList<>();
         arrayArbitrosDisponiveis = daArbitrosDisponiveis(arbitrosEscolhidos, arrayArbitros);
+        Map<Integer,Utilizador> aux = new ArbsDAO();
+        for(Utilizador j : arrayArbitrosDisponiveis) {
+            aux.put(j.getID(), j);
+        }
         g2.geraCalendario(t.getID(),t.getDataInicio(),arrayEquipasGrupo2,t.getCampo(),arrayArbitrosDisponiveis);
         
         Fase f1 = (Grupo) g1;
         Fase f2 = (Grupo) g2;
 
-        t.inserirGrupo(f1);
-        t.inserirGrupo(f2);
+        t.inserirGrupo(t.getNFase(),f1);
+        t.inserirGrupo(t.getNFase(),f2);
         
-        t.setArbs(arrayArbitrosDisponiveis);
+        t.setArbs(aux);
         
         return t;
     }

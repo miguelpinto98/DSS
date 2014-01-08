@@ -2,6 +2,7 @@ package Business_Layer;
 
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.Map;
 
 public interface Competicao {
     
@@ -18,7 +19,7 @@ public interface Competicao {
 
     public void setNrEscaloes(int nrPlanteis);
 
-    public HashMap<Integer, Integer> getGoleadores();
+    public Map<Integer, Integer> getGoleadores();
 
     public void setGoleadores(HashMap<Integer, Integer> goleadores);
 

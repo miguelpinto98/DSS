@@ -1,27 +1,34 @@
 package Business_Layer;
 
+import Data_Layer.EscalaoDAO;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Map;
 
 public abstract class Fase {
     
     //Variaveis de Instancia
+    private int idFase;
     private String nome;
-    private HashSet<Escalao> listaEscaloes;
+    private Map<Integer,Escalao> listaEscaloes;
     private Calendario calendario;
 
     public Fase() {
+        this.idFase = APEF.IDENTIFICADOR;
         this.nome = "";
-        this.listaEscaloes = new HashSet<>();
+        this.listaEscaloes = new EscalaoDAO();
         this.calendario = new Calendario();
+        APEF.IDENTIFICADOR++;
     }
 
     public Fase(String nome, HashSet<Escalao> le) {
+        this.idFase = APEF.IDENTIFICADOR;
         this.nome = nome;
-        this.listaEscaloes = le;
+        this.listaEscaloes = new EscalaoDAO();
         this.calendario = new Calendario();
+        APEF.IDENTIFICADOR++;
     }
 
     public Fase(Fase f) {
@@ -34,18 +41,23 @@ public abstract class Fase {
         return this.nome;
     }
     
+    public int getID() {
+        return this.idFase;
+    }
+    
     public void setNome(String n){
         this.nome = n;
     }
     
-    public HashSet<Escalao> getListaEscaloes() {
-        HashSet<Escalao> aux = new HashSet<Escalao>();
-        for(Escalao e: this.listaEscaloes) 
-            aux.add(e);
-        return aux;
+    public Map<Integer,Escalao> getListaEscaloes() {
+         Map<Integer,Escalao> aux = new EscalaoDAO();
+         for(Integer s : this.listaEscaloes.keySet()){
+             aux.put(s,this.listaEscaloes.get(s));
+         }
+         return aux;
     }
 
-    public void setListaEquipas (HashSet<Escalao> le){
+    public void setListaEquipas (Map<Integer,Escalao> le){
         this.listaEscaloes = le;
     }
 
@@ -66,8 +78,8 @@ public abstract class Fase {
     public abstract String toString();
 
     public void inserirEscalao(Escalao e) {
-        if (!this.listaEscaloes.contains(e))
-            this.listaEscaloes.add(e);
+        if (!this.listaEscaloes.containsKey(e.getID()))
+            this.listaEscaloes.put(e.getID(),e);
     }
     
     public void removerEscalao(Escalao e) {
@@ -78,7 +90,7 @@ public abstract class Fase {
    public Escalao buscaEscalao(int id) {
         Escalao res = new Escalao();
         boolean flag = false;
-        Iterator<Escalao> it = getListaEscaloes().iterator(); 
+        Iterator<Escalao> it = getListaEscaloes().values().iterator(); 
         while (it.hasNext() && !flag) {
             Escalao e = it.next();
             if (e.getID()==id) {
@@ -108,7 +120,7 @@ public abstract class Fase {
     public int jogosRealizados() {
         int res=0;
         for(Jornada j : this.calendario.getJornadas().values()) {
-           for(Jogo jg : j.getListaJogos()) {
+           for(Jogo jg : j.getListaJogos().values()) {
                if(jg.isJogoRealizado()) {
                    res++;
                }

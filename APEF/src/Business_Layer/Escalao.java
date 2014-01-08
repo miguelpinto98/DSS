@@ -23,7 +23,7 @@ public class Escalao {
 
     //Construtores
     public Escalao() {
-        this.id = 0;
+        this.id = APEF.IDENTIFICADOR;
         this.tipoEscalao = -1;
         this.nomeEscola = "";
         this.nomeEquipa = "";
@@ -31,6 +31,7 @@ public class Escalao {
     	this.jogadores = new JogadorDAO();
         this.agenda = new Agenda();
         this.dados = new DadosEstatisticos();
+        APEF.IDENTIFICADOR++;
     }
     
     public Escalao(int tipo, String nomeEquipa, String nomeEscola) {
@@ -252,11 +253,11 @@ public class Escalao {
         return res;
     }
 
-	public void adicionaDadosEscalao(int numGolosMarcados, int numGolosSofridos, ArrayList<Integer> goleadores, GregorianCalendar dia) {
+	public void adicionaDadosEscalao(int numGolosMarcados, int numGolosSofridos, Map<Integer,Integer> goleadores, GregorianCalendar dia) {
 		this.dados.addDadosEstatisticos(numGolosMarcados, numGolosSofridos);
 		this.agenda.atualizaAgenda(dia);
 		
-		for(Integer n : goleadores) 
+		for(Integer n : goleadores.keySet()) 
 			if(this.jogadores.containsKey(n))
 				this.jogadores.get(n).addGolosJogador();
 	}

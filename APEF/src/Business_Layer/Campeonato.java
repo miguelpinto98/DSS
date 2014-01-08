@@ -1,11 +1,14 @@
 package Business_Layer;
 
+import Data_Layer.EscalaoDAO;
+import Data_Layer.GoleadoresDAO;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Objects;
 
 public class Campeonato implements Competicao{
@@ -16,24 +19,25 @@ public class Campeonato implements Competicao{
     private String nome;
     private int nrEscaloes;
     private Calendario calendario;
-    private HashSet<Escalao> listaEscaloes;
-    private HashMap<Integer,Integer> goleadores; //<id do jogador,nr golos>     
+    private Map<Integer,Escalao> listaEscaloes;
+    private Map<Integer,Integer> goleadores; //<id do jogador,nr golos>     
     private EstatisticaCompeticao classificacao;
     private GregorianCalendar dataInicio;
     private GregorianCalendar dataLimiteInscricoes;
 
     //Construtores
     public Campeonato() {
-    	this.id = 0;
+    	this.id = APEF.IDENTIFICADOR;
         this.tipoEscalao = -1;
     	this.nome = "";
     	this.nrEscaloes = 0;
     	this.calendario = new Calendario();
-        this.listaEscaloes = new HashSet<>();
-    	this.goleadores = new HashMap<>();
+        this.listaEscaloes = new EscalaoDAO();
+    	this.goleadores = new GoleadoresDAO();
         this.classificacao = null;
         this.dataInicio = new GregorianCalendar();
         this.dataLimiteInscricoes = new GregorianCalendar();
+        APEF.IDENTIFICADOR++;
     }
     
     public Campeonato(Campeonato ca) {
@@ -55,8 +59,8 @@ public class Campeonato implements Competicao{
         this.nome = nome;
         this.nrEscaloes = nrEquipasMax;
         this.calendario = new Calendario();
-        this.listaEscaloes = new HashSet<>();
-        this.goleadores = new HashMap<>();
+        this.listaEscaloes = new EscalaoDAO();
+        this.goleadores = new GoleadoresDAO();
         this.classificacao = new EstatisticaCompeticao();
         this.dataInicio = inicio;
         this.dataLimiteInscricoes = limiteInscricao;
@@ -105,14 +109,14 @@ public class Campeonato implements Competicao{
         this.calendario = calendario;
     }
 
-    public HashSet<Escalao> getListaEscaloes() {
-        HashSet<Escalao> aux = new HashSet<Escalao>();
-        for(Escalao e: this.listaEscaloes) 
-            aux.add(e);
+    public Map<Integer,Escalao> getListaEscaloes() {
+        Map<Integer,Escalao> aux = new EscalaoDAO();
+        for(Escalao e: this.listaEscaloes.values()) 
+            aux.put(e.getID(),e);
         return aux;
     }
 
-    public void setListaEscaloes (HashSet<Escalao> le){
+    public void setListaEscaloes (Map<Integer,Escalao> le){
         this.listaEscaloes = le;
     }
     
@@ -124,8 +128,8 @@ public class Campeonato implements Competicao{
         this.classificacao = classificacao;
     }
 
-    public HashMap<Integer, Integer> getGoleadores() {
-		HashMap<Integer,Integer> hsg = new HashMap<>();
+    public Map<Integer, Integer> getGoleadores() {
+		Map<Integer,Integer> hsg = new GoleadoresDAO();
 		for(Integer n : this.goleadores.keySet())
 			hsg.put(n, this.goleadores.get(n));
 		
@@ -191,8 +195,8 @@ public class Campeonato implements Competicao{
 
     /**Metodos*/
     public void inserirEscalao(Escalao e) {
-        if(!this.listaEscaloes.contains(e))
-            this.listaEscaloes.add(e);
+        if(!this.listaEscaloes.containsKey(e.getID()))
+            this.listaEscaloes.put(e.getID(),e);
     }
 
     public void removerEscalao(Escalao e) {
@@ -231,7 +235,7 @@ public class Campeonato implements Competicao{
     public Escalao buscaEscalao(int id) {
         Escalao res = new Escalao();
         boolean flag = false;
-        Iterator<Escalao> it = this.listaEscaloes.iterator(); 
+        Iterator<Escalao> it = this.listaEscaloes.values().iterator(); 
         while (it.hasNext() && !flag) {
             Escalao e = it.next();
             if (e.getID()==id) {
@@ -381,7 +385,7 @@ public class Campeonato implements Competicao{
     
     public void atualizaGoleadores(Jogo j) {
         int contador;
-        for(Integer id: j.getGoleadoresJogo()) {
+        for(Integer id: j.getGoleadoresJogo().keySet()) {
             if(this.goleadores.containsKey(id)) {
                 contador = this.goleadores.get(id);
                 this.goleadores.put(id, contador+1);
@@ -421,7 +425,7 @@ public class Campeonato implements Competicao{
     }
     
     public ArrayList<Integer> melhoresMarcadoresAux() {
-        HashMap<Integer,Integer> aux = this.goleadores;
+        Map<Integer,Integer> aux = this.goleadores;
         ArrayList<Integer> res = new ArrayList<>();
         int maxGolos = Collections.max(aux.values());
 
@@ -440,7 +444,7 @@ public class Campeonato implements Competicao{
         Jogador res = new Jogador();
         boolean flag = false;
         
-        Iterator<Escalao> it = this.listaEscaloes.iterator(); 
+        Iterator<Escalao> it = this.listaEscaloes.values().iterator(); 
         while (it.hasNext() && !flag) {
             Escalao e = it.next();
             Iterator<Integer> it2 = e.getJogadores().keySet().iterator(); 

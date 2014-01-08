@@ -5,10 +5,13 @@ import java.util.Objects;
 import java.util.TreeSet;
 
 public class EstatisticaCompeticao {
+    private int idEstatistica;
     private TreeSet<DadosEstatisticos> estatistica; //<id equipas, dados estatisticos>
 
     public EstatisticaCompeticao() {
+        this.idEstatistica = APEF.IDENTIFICADOR;
     	this.estatistica = new TreeSet<DadosEstatisticos>();
+        APEF.IDENTIFICADOR++;
     }
 
     public EstatisticaCompeticao(EstatisticaCompeticao ec){
@@ -26,6 +29,10 @@ public class EstatisticaCompeticao {
 
     public void setEstatistica(TreeSet<DadosEstatisticos> h){
     	this.estatistica = h;
+    }
+    
+    public int getID() {
+        return this.idEstatistica;
     }
 
     @Override

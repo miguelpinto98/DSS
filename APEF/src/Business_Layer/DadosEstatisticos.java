@@ -4,6 +4,7 @@ public class DadosEstatisticos implements Comparable<DadosEstatisticos> {
     
     private static final int maxForma = 5;
 
+    private int idDados;
     private int idEscalao;
     private int vitorias;
     private int derrotas;
@@ -13,6 +14,7 @@ public class DadosEstatisticos implements Comparable<DadosEstatisticos> {
     private char[] forma;
 
     public DadosEstatisticos(){
+        this.idDados = APEF.IDENTIFICADOR;
         this.idEscalao = 0;
     	this.vitorias = 0;
     	this.derrotas = 0;
@@ -25,10 +27,12 @@ public class DadosEstatisticos implements Comparable<DadosEstatisticos> {
         this.forma[2] = '-';
         this.forma[3] = '-';
         this.forma[4] = '-';
+        APEF.IDENTIFICADOR++;
 
     } 
     
     public DadosEstatisticos(int id){
+        this.idDados = APEF.IDENTIFICADOR;
         this.idEscalao = id;
     	this.vitorias = 0;
     	this.derrotas = 0;
@@ -41,6 +45,7 @@ public class DadosEstatisticos implements Comparable<DadosEstatisticos> {
         this.forma[2] = '-';
         this.forma[3] = '-';
         this.forma[4] = '-';
+        APEF.IDENTIFICADOR++;
     }
 
     public DadosEstatisticos(DadosEstatisticos d){

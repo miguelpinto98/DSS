@@ -15,7 +15,9 @@ public class Agenda {
     private Map<Integer,Jogo> jogos;
         
         public Agenda(){
+            this.idAgenda = APEF.IDENTIFICADOR;;
             this.jogos = new AgendaDAO();
+            APEF.IDENTIFICADOR++;
         }
         
         public Agenda(Map<Integer,Jogo> j){
@@ -25,9 +27,8 @@ public class Agenda {
         }
         
         public Agenda(Agenda a){
-            this.idAgenda = APEF.IDENTIFICADOR;
+            this.idAgenda = a.getIDAgenda();
             this.jogos = a.getJogos();
-            APEF.IDENTIFICADOR++;
         }
 
         public Map<Integer,Jogo> getJogos() {
@@ -36,6 +37,10 @@ public class Agenda {
              aux.put(s,this.jogos.get(s));
          }
          return aux;
+        }
+        
+        public int getIDAgenda() {
+            return this.idAgenda;
         }
     
         public void setJogos(Map<Integer,Jogo> jogos){
@@ -80,7 +85,7 @@ public class Agenda {
 		this.jogos.remove(j);
 	}
 
-	public Jogo addResultadoJogo(int casa, int fora, ArrayList<Integer> goleadores) {
+	public Jogo addResultadoJogo(int casa, int fora, Map<Integer,Integer> goleadores) {
 		boolean mudou = false;
 		Jogo jg = null;
 		
