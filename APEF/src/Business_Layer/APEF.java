@@ -422,10 +422,12 @@ public class APEF {
     public boolean iniciarTorneioTipo2(Torneio t){
     	boolean res=false;
         int nrEscaloes = t.getListaEscaloes().size();
+        ArrayList<Utilizador> arrayArbitros = new ArrayList<>();
+        arrayArbitros = daListaArbitros();
+        String x= daNomeEliminatoria(nrEscaloes);
         if (acabouInscricaoTorneioTipo2(t) && countArbitros()>=((nrEscaloes)/2)){
-        	   eliminatoriaTorneioTipo2(t);
+        	   t.firstEliminatoriaTorneioTipo2(t,arrayArbitros,x);
                 res=true;
-
     	}
         this.avancaData(t);
         return res;
@@ -501,47 +503,6 @@ public class APEF {
                 break;
         }
         return res;
-    }
-    
-    public Torneio eliminatoriaTorneioTipo2 (Torneio t) {
-        HashSet<Escalao> equipas = new HashSet<>();
-        ArrayList<Integer> arrayEquipas = new ArrayList<>();
-        equipas = t.getListaEscaloes();
-        int nrEquipas = equipas.size();
-        for(Escalao e: equipas){
-            arrayEquipas.add(e.getID());
-            DadosEstatisticos x = new DadosEstatisticos(e.getID());
-            t.getEstatisticaCompeticao().inserirDados(x);
-        }
-        
-        ArrayList<Utilizador> arbs = new ArrayList<>();
-        arbs = daListaArbitros();
-        String nomeEliminatoria = daNomeEliminatoria(nrEquipas);
-        Eliminatoria elimi = new Eliminatoria(nomeEliminatoria,equipas);
-        elimi.geraCalendarioTipo2(t.getID(), t.getDataInicio(), arbs, arrayEquipas, t.getCampo());
-        Fase f = (Fase) elimi;
-        
-        t.getFases().add(f);
-        
-    return t;
-    }
-    
-    public Torneio secondEliminatoriaTorneioTipo2 (Torneio t, ArrayList<Integer> listaEquipas) {
-        HashSet<Escalao> equipas = new HashSet<>();
-        ArrayList<Utilizador> arbs = new ArrayList<>();
-        arbs = daListaArbitros();
-        int i=0;
-        for(i=0;i<listaEquipas.size();i++){
-            equipas.add(t.buscaEscalao(listaEquipas.get(i)));
-        }
-        String nomeEliminatoria = daNomeEliminatoria(listaEquipas.size());
-        Eliminatoria elimi = new Eliminatoria(nomeEliminatoria,equipas);
-        elimi.geraCalendarioTipo2(t.getID(), t.getDataInicio(), arbs, listaEquipas, t.getCampo());
-        Fase f = (Fase) elimi;
-        
-        t.getFases().add(f);
-        
-    return t;
     }
     
 	public void addResultadoCompeticao(Jogo j) {
