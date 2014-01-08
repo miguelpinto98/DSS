@@ -2,6 +2,7 @@ package Data_Layer;
 
 import Business_Layer.Campo;
 import Business_Layer.Escola;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -99,7 +100,42 @@ public class EscolaDAO implements Map<String,Escola> {
 
     @Override
     public Escola put(String key, Escola value) {
-        return this.escolas.put(key, value);
+        Escola res = null;
+        try {
+            String c = (String) key;
+            boolean existe = this.containsKey(key);
+            
+            if(!existe) {
+                String chave = c.toUpperCase();
+                String sql = "";
+                Campo campo = value.getCampo();
+                
+                if(campo != null) {
+                    sql = "INSERT INTO Campo(idCampo, nome) VALUES (?, ?)";
+                    PreparedStatement stm1 = ConexaoBD.getConexao().prepareStatement(sql);
+                    
+                    stm1.setInt(ID_CAMPO, campo.getID());
+                    stm1.setString(NOME_CAMPO, campo.getNome());
+                    stm1.execute();
+                    stm1.close();
+                
+
+                sql = "INSERT INTO Escola(nome, local, idCampo) VALUES (?, ?, ?)";
+                PreparedStatement stm2 = ConexaoBD.getConexao().prepareStatement(sql);
+
+                stm2.setString(NOME, value.getNome());
+                stm2.setString(LOCAL, value.getLocal());
+                stm2.setInt(IDCAMPO, value.getCampo().getID());
+                stm2.execute();
+                
+                
+                
+                stm2.close();
+                }
+            }
+        } catch (SQLException e) {
+        }
+        return res;
     }
 
     @Override
