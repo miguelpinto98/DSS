@@ -151,6 +151,7 @@ public final class Home2 extends JFrame {
         this.sistema.registarUser("atum","pw1234","atum@gmail.com",0);
         System.out.println(this.sistema.getUsers().size());
         System.out.println(this.sistema.getUsers().isEmpty());
+        System.out.println(this.sistema.getUsers().containsKey("ATUM"));
         
         /* TESTE JOGO COM ESCALOES */
         ArrayList<Jogo> tj = new ArrayList<>();

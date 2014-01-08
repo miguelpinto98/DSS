@@ -63,15 +63,15 @@ public class UtilizadorDAO implements Map<String,Utilizador>{
     try {
         String chave = (String) key;
         Statement stm = ConexaoBD.getConexao().createStatement();
-        String sql = "SELECT NICKNAME FROM " 
-                    + " WHERE u.nickname = '" + chave;
+        String sql = "SELECT NICKNAME FROM "+USER+" WHERE u.NICKNAME = '" + chave+"'";
             ResultSet rs = stm.executeQuery(sql);
             boolean res = rs.next();
             ConexaoBD.fecharCursor(rs, stm);
             return res;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new NullPointerException(e.getMessage());
-        }    }
+        }    
+    }
 
     @Override
     public boolean containsValue(Object value) {
