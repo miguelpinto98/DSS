@@ -1,10 +1,12 @@
 package Business_Layer;
 
+import Data_Layer.CampeonatoDAO;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Objects;
 
 public class Epoca implements Comparable<Epoca>{
@@ -17,17 +19,17 @@ public class Epoca implements Comparable<Epoca>{
 
     //Variaveis de Instancia
     private int ano;
-    private Campeonato[] campeonatos;
+    private Map<Integer,Campeonato> campeonatos; //<tipo escalao,campeonato>
     private ArrayList<HashSet<Torneio>> torneios;
 
     //Construtores
     public Epoca() {
     	this.ano = 0;
-    	this.campeonatos = new Campeonato[maxEscaloes];
+    	this.campeonatos = new CampeonatoDAO();
     	this.torneios = new ArrayList<HashSet<Torneio>>();
     }
 
-    public Epoca(int ano, Campeonato[] c, ArrayList<HashSet<Torneio>> t){
+    public Epoca(int ano, Map<Integer,Campeonato> c, ArrayList<HashSet<Torneio>> t){
         this.ano = ano;
         this.campeonatos = c;
         this.torneios = t;
@@ -41,7 +43,7 @@ public class Epoca implements Comparable<Epoca>{
     
     public Epoca(int ano) {
     	this.ano = ano;
-    	this.campeonatos = new Campeonato[maxEscaloes];
+    	this.campeonatos = new CampeonatoDAO();
         this.torneios = new ArrayList<>();
         HashSet<Torneio> tor = new HashSet<>();
         this.torneios.add(0,tor);
@@ -56,14 +58,12 @@ public class Epoca implements Comparable<Epoca>{
         return this.ano;
     }
     
-    public Campeonato[] getCampeonatos() {
-        Campeonato[] aux = new Campeonato[maxEscaloes];
-        int i;
-        for(i=0;i<maxEscaloes;i++){
-            if(this.campeonatos[i]!=null)
-                aux[i] = this.campeonatos[i].clone();
-        }
-        return aux;
+    public Map<Integer,Campeonato> getCampeonatos() {
+        Map<Integer,Campeonato> aux = new CampeonatoDAO();
+         for(Integer s : this.campeonatos.keySet()){
+             aux.put(s,this.campeonatos.get(s));
+         }
+         return aux;
     }
     
     public ArrayList<HashSet<Torneio>> getTorneios() {
@@ -85,7 +85,7 @@ public class Epoca implements Comparable<Epoca>{
         this.ano = ano;
     }
 
-    public void setCampeonatos(Campeonato[] c) {
+    public void setCampeonatos(Map<Integer,Campeonato> c) {
         this.campeonatos = c;
     }
     public void setTorneios(ArrayList<HashSet<Torneio>> t) {
@@ -131,7 +131,7 @@ public class Epoca implements Comparable<Epoca>{
 
     public boolean existeNomeCampeonato(String n) {
         boolean res=false;
-        for(Campeonato c : this.campeonatos) {
+        for(Campeonato c : this.campeonatos.values()) {
             if(c.getNome().equals(n)) 
                 res=true;
             else
@@ -141,7 +141,7 @@ public class Epoca implements Comparable<Epoca>{
     }
     
     public void inserirCampeonato(Campeonato c) {
-        this.campeonatos[c.getTipoEscalao()] = c;
+        this.campeonatos.put(c.getTipoEscalao(),c);
     }
     
     public void inserirTorneio(Torneio t){
@@ -150,7 +150,7 @@ public class Epoca implements Comparable<Epoca>{
     }
     
     public void inscreveEmCampeonato(Escalao e) {
-        this.campeonatos[e.getTipoEscalao()].inscreverEscalao(e);
+        this.campeonatos.get(e.getTipoEscalao()).inscreverEscalao(e);
     }
     
     public void inscreveEmTorneio(Escalao e, int id) {
@@ -165,7 +165,7 @@ public class Epoca implements Comparable<Epoca>{
 		boolean encontrou = false, encontrouT = false;
 		
 		while(!encontrou && !encontrouT) {
-			encontrou = this.campeonatos[idEscalao].atualizaCampeonato(j,a);
+			encontrou = this.campeonatos.get(idEscalao).atualizaCampeonato(j,a);
 			for(Torneio t: this.torneios.get(idEscalao)) {
                 if(t.getID() == j.getIdCompeticao()) {
                     if(t.getTipoTorneio() == 1)
@@ -183,7 +183,7 @@ public class Epoca implements Comparable<Epoca>{
        int i=0, flag=1;
         String nome= null;
             while (i<4 && flag==1){
-                if(this.campeonatos[i].getID()==idCamp) {nome=this.campeonatos[i].getNome(); flag=0;}
+                if(this.campeonatos.get(i).getID()==idCamp) {nome=this.campeonatos.get(i).getNome(); flag=0;}
                 i++;
             }
         return nome;
@@ -203,7 +203,7 @@ public class Epoca implements Comparable<Epoca>{
     public void avancaDataCampeonto(GregorianCalendar data, int tipoEscalao) {
         boolean flag=false;
         int jornada = 0;
-        Iterator<Jornada> it = this.campeonatos[tipoEscalao].getCalendario().getJornadas().iterator();
+        Iterator<Jornada> it = this.campeonatos.get(tipoEscalao).getCalendario().getJornadas().values().iterator();
         while(it.hasNext() && !flag) {
             Jornada jr = it.next();
             Iterator<Jogo> it2 = jr.getListaJogos().iterator();
@@ -215,10 +215,10 @@ public class Epoca implements Comparable<Epoca>{
                 }
             }
         } 
-        for(Jornada jor : this.campeonatos[tipoEscalao].getCalendario().getJornadas()) {
+        for(Jornada jor : this.campeonatos.get(tipoEscalao).getCalendario().getJornadas().values()) {
             if(jor.getNrJornada() == jornada) {
                 for(Jogo jg : jor.getListaJogos()) {
-                    jg.setDia(this.campeonatos[tipoEscalao].dataJornadaSeguinte(jg.getDiaJogo()));
+                    jg.setDia(this.campeonatos.get(tipoEscalao).dataJornadaSeguinte(jg.getDiaJogo()));
 
                 }
                 jornada++;

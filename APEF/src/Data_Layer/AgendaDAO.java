@@ -14,6 +14,10 @@ import java.util.Set;
 public class AgendaDAO implements Map<Integer,Jogo> {
     private HashMap<Integer,Jogo> jogos;
     
+    public AgendaDAO() {
+        this.jogos = new HashMap<>();
+    }
+    
     @Override
     public int size() {
         return this.jogos.size();

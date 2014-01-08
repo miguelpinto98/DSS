@@ -107,7 +107,7 @@ public abstract class Fase {
 
     public int jogosRealizados() {
         int res=0;
-        for(Jornada j : this.calendario.getJornadas()) {
+        for(Jornada j : this.calendario.getJornadas().values()) {
            for(Jogo jg : j.getListaJogos()) {
                if(jg.isJogoRealizado()) {
                    res++;

@@ -1,16 +1,19 @@
 package Business_Layer;
 
+import Data_Layer.JornadaDAO;
+import java.util.Map;
 import java.util.TreeSet;
 import java.util.Objects;
 
 public class Calendario {
 	
-	//Variaveis de Instancia    
-    private TreeSet<Jornada> jornadas;
+	//Variaveis de Instancia  
+    private int idCalendario;
+    private Map<Integer,Jornada> jornadas;
 
     //Construtores
 	public Calendario() {
-		this.jornadas = new TreeSet<>();
+		this.jornadas = new JornadaDAO();
     }
 
     public Calendario(Calendario c) {
@@ -18,15 +21,15 @@ public class Calendario {
     }
 
     //Getters
-    public TreeSet<Jornada> getJornadas() {
-    	TreeSet<Jornada> aux = new TreeSet<Jornada>();
-        for(Jornada j: this.jornadas) 
-            aux.add(j);
+    public Map<Integer,Jornada> getJornadas() {
+    	Map<Integer,Jornada> aux = new JornadaDAO();
+        for(Jornada j: this.jornadas.values()) 
+            aux.put(j.getNrJornada(), j);
         return aux;
     }
 
     //Setters
-    public void setJornadas(TreeSet<Jornada> j) {
+    public void setJornadas(Map<Integer,Jornada> j) {
     	this.jornadas = j;
     }
     
@@ -55,7 +58,7 @@ public class Calendario {
     public String toString() {
     	StringBuilder str = new StringBuilder();
     	str.append("--Calendario--\n") ;
-        for (Jornada j : this.jornadas){
+        for (Jornada j : this.jornadas.values()){
             str.append(j);
         }
 
@@ -63,8 +66,8 @@ public class Calendario {
     } 
 
     public void inserirJornada(Jornada j) {
-        if (!this.jornadas.contains(j))
-            this.jornadas.add(j);
+        if (!this.jornadas.containsKey(j.getNrJornada()))
+            this.jornadas.put(j.getNrJornada(), j);
     }
 
     public void removerJornada(Jornada j) {
@@ -73,7 +76,7 @@ public class Calendario {
 
 	public boolean atualizaCalendario(Jogo j, APEF a) {
 		boolean flag = false;
-		for(Jornada jr : this.jornadas)
+		for(Jornada jr : this.jornadas.values())
 			if(jr.getJogosRealizados() < jr.getListaJogos().size() )
 				flag = jr.atualizaJornada(j);		
 		return flag;

@@ -393,7 +393,7 @@ public class Campeonato implements Competicao{
     
     public boolean acabou() {
         boolean flag = true;
-        for(Jornada jr : this.calendario.getJornadas())
+        for(Jornada jr : this.calendario.getJornadas().values())
 			if(jr.getJogosRealizados() < jr.getListaJogos().size() )
 				flag = false;		
 		

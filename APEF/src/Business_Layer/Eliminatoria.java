@@ -100,7 +100,7 @@ public class Eliminatoria extends Fase {
     
     public HashSet<Escalao> vencedores() {
         HashSet<Escalao> aux = new HashSet<>();
-        for(Jogo j : this.getCalendario().getJornadas().first().getListaJogos()) {
+        for(Jogo j : this.getCalendario().getJornadas().get(0).getListaJogos()) {
             if(j.getNumGolosJogoCasa()>j.getNumGolosJogoFora())
                 aux.add(j.getEscalaoCasa());
             else

@@ -12,7 +12,11 @@ import java.util.Set;
  */
 public class EscalaoDAO implements Map<Integer,Escalao> {
     private HashMap<Integer,Escalao> escaloes;
-
+    
+    public EscalaoDAO() {
+        this.escaloes = new HashMap<>();
+    }
+    
     @Override
     public int size() {
         return this.escaloes.size();

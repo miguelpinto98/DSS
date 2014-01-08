@@ -13,6 +13,10 @@ import java.util.Set;
 public class JogadorDAO implements Map<Integer,Jogador> {
     private HashMap<Integer,Jogador> jogadores;
 
+    public JogadorDAO() {
+        this.jogadores = new HashMap<>();
+    }
+    
     @Override
     public int size() {
         return this.jogadores.size();
@@ -73,8 +77,11 @@ public class JogadorDAO implements Map<Integer,Jogador> {
         return this.jogadores.entrySet();
     }
     
-    public int hashCode() {
-        return ConexaoBD.getConexao().hashCode();
+     public int hashCode() {     
+        final int prime = 7;
+        int result = 1;
+        result = prime * result + ((this.jogadores == null) ? 0 : this.jogadores.hashCode());
+        return result;
     }
 }
 

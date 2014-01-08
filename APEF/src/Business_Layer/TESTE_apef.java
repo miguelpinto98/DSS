@@ -347,19 +347,19 @@ public class TESTE_apef {
     infantis.inscreverEscalao(escalao6);
     infantis.inscreverEscalao(escalao7);
     infantis.inscreverEscalao(escalao8);    
+    j11.addCompeticao(infantis.getID());
+j12.addCompeticao(infantis.getID());    
+j13.addCompeticao(infantis.getID());    
+j14.addCompeticao(infantis.getID());    
+j15.addCompeticao(infantis.getID());    
+j16.addCompeticao(infantis.getID());   
     a.iniciarTorneioTipo2(infantis);
     //System.out.println(a.iniciarTorneioTipo2(infantis));
     System.out.println(infantis.getFases());
     //System.out.println(infantis.getFases());
-
     a.iniciarTorneioTipo1(infantis);  
        
-
-    
-    
-    
-    
-    
+ 
    /*FORMA
     DadosEstatisticos d = new DadosEstatisticos(); 
     char[] teste = new char[] { 'a', 'l', 'p', 'h', 'a'};    

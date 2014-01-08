@@ -11,6 +11,7 @@ import org.joda.time.DateTime;
 import org.joda.time.Days;
 
 public class Agenda {
+    private int idAgenda;
     private Map<Integer,Jogo> jogos;
         
         public Agenda(){
@@ -18,11 +19,15 @@ public class Agenda {
         }
         
         public Agenda(Map<Integer,Jogo> j){
+            this.idAgenda = APEF.IDENTIFICADOR;
             this.jogos = j;
+            APEF.IDENTIFICADOR++;
         }
         
         public Agenda(Agenda a){
+            this.idAgenda = APEF.IDENTIFICADOR;
             this.jogos = a.getJogos();
+            APEF.IDENTIFICADOR++;
         }
 
         public Map<Integer,Jogo> getJogos() {

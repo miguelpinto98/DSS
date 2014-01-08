@@ -138,7 +138,7 @@ public class Jogador extends Pessoa {
     	str.append("--Jogador--") ;
             str.append("\nJogador ID: ").append(this.getID());
             str.append("\nJogador Nome: ").append (this.getNome());
-            str.append("\nNum COmp: ").append (this.competicoes.size());
+            str.append("\nNum Comp: ").append (this.competicoes.toString());
             str.append("\nJogador Golos: ").append(this.getNrGolos());
             str.append("\nJogador Data Nascimento: ").append(this.getDataNasc().get(GregorianCalendar.YEAR)).append("/").append(this.getDataNasc().get(GregorianCalendar.MONTH)).append("/").append(this.getDataNasc().get(GregorianCalendar.DAY_OF_MONTH));
             str.append("\nJogador Sexo: ").append(this.getSexo()).append("\n");
@@ -153,6 +153,5 @@ public class Jogador extends Pessoa {
 
     public void addCompeticao(int id){
             this.competicoes.put(id,this.getID());
-        
     }   
 }
