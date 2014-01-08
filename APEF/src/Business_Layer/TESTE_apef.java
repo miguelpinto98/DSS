@@ -334,7 +334,7 @@ public class TESTE_apef {
     campeonatoInfantis.setDataLimiteInscricoes(g);
     GregorianCalendar inicio = new GregorianCalendar();
     inicio.set(2014, 0, 19);
-    a.iniciarCampeonato(campeonatoInfantis);
+    //a.iniciarCampeonato(campeonatoInfantis);
             
     //Torneio
     Torneio infantis = new Torneio("Taça Infantis", inicio, g,0,1, 0, campo);
@@ -346,11 +346,15 @@ public class TESTE_apef {
     infantis.inscreverEscalao(escalao5);
     infantis.inscreverEscalao(escalao6);
     infantis.inscreverEscalao(escalao7);
-    infantis.inscreverEscalao(escalao8);
+    infantis.inscreverEscalao(escalao8);    
+    a.iniciarTorneioTipo2(infantis);
+    //System.out.println(a.iniciarTorneioTipo2(infantis));
+    System.out.println(infantis.getFases());
+    //System.out.println(infantis.getFases());
+
     a.iniciarTorneioTipo1(infantis);  
        
-    //Jogos
-    
+
     
     
     

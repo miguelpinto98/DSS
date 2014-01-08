@@ -421,7 +421,61 @@ public class Torneio implements Competicao{
         for(Escalao e : vencedor) {
             a.atualizaPalmaresEquipa(this.nome,e.getNomeEscola(),e.getNomeEquipa());
         }  
-    } 
+    }
+    
+    public Torneio firstEliminatoriaTorneioTipo2 (Torneio t, ArrayList<Utilizador> arrayArbitros,String nomeElim) {
+        HashSet<Escalao> equipas = new HashSet<>();
+        ArrayList<Integer> arrayEquipas = new ArrayList<>();
+        equipas = t.getListaEscaloes();
+        int nrEquipas = equipas.size();
+        for(Escalao e: equipas){
+            arrayEquipas.add(e.getID());
+            DadosEstatisticos x = new DadosEstatisticos(e.getID());
+            t.getEstatisticaCompeticao().inserirDados(x);
+        }
+        
+        ArrayList<Utilizador> arbs = new ArrayList<>();
+        arbs = arrayArbitros;
+        String nomeEliminatoria = nomeElim;
+        Eliminatoria elimi = new Eliminatoria(nomeEliminatoria,equipas);
+        elimi.geraCalendarioTipo2(t.getID(), t.getDataInicio(), arbs, arrayEquipas, t.getCampo());
+        //System.out.println(elimi);
+        Fase f = (Fase) elimi;
+        t.inserirEliminatoria(f);  
+    return t;
+    }
+    
+    public String daNomeEliminatoria(int x){
+        String res = "";
+        switch (x){
+            case 32: res="1/16 DE FINAL";
+                break;
+            case 16: res="OITAVOS-DE-FINAL";
+                break;
+            case 8: res="QUARTOS-DE-FINAL";
+                break;
+            case 4: res="MEIA-FINAL";
+                break;
+        }
+        return res;
+    }
+    
+    public Torneio secondEliminatoriaTorneioTipo2 (HashSet<Escalao> escaloes) {
+        ArrayList<Utilizador> arbs = new ArrayList<>();
+        arbs = this.getArbs();
+        int nrEquipas = escaloes.size();
+        ArrayList<Integer> equipas = new ArrayList<>();
+        for(Escalao e : escaloes){
+            equipas.add(e.getID());
+        }
+        String nm = daNomeEliminatoria(nrEquipas);
+        Eliminatoria elim = new Eliminatoria(nm,escaloes);
+        elim.geraCalendarioTipo2(this.getID(), this.getDataInicio(), arbs, equipas, this.getCampo());
+        Fase f = (Fase) elim;
+        this.inserirEliminatoria(f);
+        
+    return this;
+    }
     
     public boolean atualizaTorneioTipo2(Jogo j, APEF ap) {
         boolean res = false, res2=false;
@@ -429,21 +483,25 @@ public class Torneio implements Competicao{
         Eliminatoria e = (Eliminatoria) this.fases.get(i);
         res=e.atualizaEliminatoriaTipo1(j,ap);
         res2=e.ultimoJogoEliminatoria();
-            
+        ArrayList<Integer> arrayVencedoras = new ArrayList<>();
         if(res) {
             this.atualizaGoleadores(j);
             this.estatisticaCompeticao.actualizaClassificacao(j);
         }
         
         if(res2){
-            //lista das equipas que ganharam
-            //this.secondEliminatoriaTipo2(ArrayList<Integer> listaEquipas)
+            this.secondEliminatoriaTorneioTipo2(e.vencedores());
+            this.nFase++;
         }
             
         return res;
         }    
     
     public void inserirGrupo (Fase f){
+        this.fases.add(f);
+    }
+    
+    public void inserirEliminatoria (Fase f){
         this.fases.add(f);
     }
     

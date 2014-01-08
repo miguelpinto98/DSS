@@ -6,20 +6,19 @@
 
 package GUI.Perfil;
 
-import Business_Layer.Utilizador;
 import GUI.Home2;
 
 /**
  *
  * @author Diana
  */
-public class JResponsavelOption extends javax.swing.JPanel {
+public class JAdminGestao extends javax.swing.JDialog {
+
+    private Home2 p;
     
-    private Home2 h;
-    
-    public JResponsavelOption(Home2 g, Utilizador us) {
+    public JAdminGestao(Home2 p) {
+        this.p=p;
         initComponents();
-        this.h = g;
     }
 
     /**
@@ -31,21 +30,23 @@ public class JResponsavelOption extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setBackground(new java.awt.Color(255, 255, 255));
-        setMinimumSize(new java.awt.Dimension(940, 455));
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 940, Short.MAX_VALUE)
+            .addGap(0, 660, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 455, Short.MAX_VALUE)
+            .addGap(0, 410, Short.MAX_VALUE)
         );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

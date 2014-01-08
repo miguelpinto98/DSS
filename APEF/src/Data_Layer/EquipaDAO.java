@@ -12,6 +12,10 @@ import java.util.Set;
  */
 public class EquipaDAO implements Map<String,Equipa> {
     private HashMap<String,Equipa> equipas;
+    
+    public EquipaDAO() {
+        this.equipas = new HashMap<>();
+    }
 
     @Override
     public int size() {

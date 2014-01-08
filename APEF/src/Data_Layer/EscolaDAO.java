@@ -13,6 +13,10 @@ import java.util.Set;
 public class EscolaDAO implements Map<String,Escola> {
     private HashMap<String,Escola> escolas;
 
+    public EscolaDAO() {
+        this.escolas = new HashMap<>();
+    }
+    
     @Override
     public int size() {
         return this.escolas.size();

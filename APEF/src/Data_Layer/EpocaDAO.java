@@ -14,6 +14,10 @@ import java.util.Set;
 public class EpocaDAO implements Map<Integer,Epoca> {
     private HashMap<Integer,Epoca> epocas;
     
+    public EpocaDAO() {
+        this.epocas = new HashMap<>();
+    }
+    
     @Override
     public int size() {
         return this.epocas.size();

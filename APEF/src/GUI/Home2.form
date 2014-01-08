@@ -103,9 +103,9 @@
                       <Component id="data" min="-2" pref="241" max="-2" attributes="0"/>
                       <EmptySpace pref="164" max="32767" attributes="0"/>
                       <Component id="jXSearchField1" min="-2" pref="150" max="-2" attributes="0"/>
-                      <EmptySpace pref="84" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
                       <Component id="jComboBox1" min="-2" pref="150" max="-2" attributes="0"/>
-                      <EmptySpace pref="84" max="32767" attributes="0"/>
+                      <EmptySpace pref="95" max="32767" attributes="0"/>
                       <Component id="jButton3" min="-2" pref="150" max="-2" attributes="0"/>
                       <EmptySpace pref="28" max="32767" attributes="0"/>
                   </Group>

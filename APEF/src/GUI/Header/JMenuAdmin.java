@@ -9,6 +9,7 @@ package GUI.Header;
 import Business_Layer.Utilizador;
 import GUI.Home2;
 import GUI.JPerfil;
+import GUI.Perfil.JAdminGestao;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 
@@ -53,16 +54,21 @@ public class JMenuAdmin extends JPanel {
         });
 
         jButton2.setText("Perfil");
-        jButton2.setSize(new java.awt.Dimension(97, 35));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Gestão");
+        jButton3.setText("Gestão da aplicação");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
-        bemvindo.setText("Bem-Vindo User");
+        bemvindo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        bemvindo.setText("Bem-Vindo User!");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -88,7 +94,7 @@ public class JMenuAdmin extends JPanel {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(bemvindo, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)))
+                        .addComponent(bemvindo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -105,9 +111,16 @@ public class JMenuAdmin extends JPanel {
         Home2.REGISTADO = false;
         Home2.UTILIZADOR = null;
         root.setUser(null);
-        root.verificaUser(null);
         root.getSistema().logout();
+        root.verificaUser(null);        
     }//GEN-LAST:event_sairActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        JDialog frame = new JAdminGestao(this.root);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
