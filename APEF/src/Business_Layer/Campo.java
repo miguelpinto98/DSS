@@ -23,6 +23,11 @@ public class Campo {
         this.nome = n;
         APEF.IDENTIFICADOR++;
     }
+    
+    public Campo(int id, String nome) {
+        this.id = id;
+        this.nome = nome;
+    }
 
     //Getters
     public int getID() {

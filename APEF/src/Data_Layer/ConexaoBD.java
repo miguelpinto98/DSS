@@ -3,6 +3,7 @@ package Data_Layer;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class ConexaoBD {
     public static final String ip = "localhost";
@@ -18,7 +19,7 @@ public class ConexaoBD {
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             conexao = DriverManager.getConnection(url, user, pw);
-            conexao.setAutoCommit(true);                    
+            conexao.setAutoCommit(true);
 	} catch (Exception e) {
             throw new NullPointerException(e.getMessage());
 	}
