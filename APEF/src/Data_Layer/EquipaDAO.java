@@ -1,6 +1,9 @@
 package Data_Layer;
 
 import Business_Layer.Equipa;
+import java.io.File;
+import java.io.FileInputStream;
+import java.sql.PreparedStatement;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,11 +13,22 @@ import java.util.Set;
  *
  * @author serafim
  */
+
+
 public class EquipaDAO implements Map<String,Equipa> {
     private HashMap<String,Equipa> equipas;
     
-    public EquipaDAO() {
-        this.equipas = new HashMap<>();
+    public static final String ESCOLA_E = "Escola e";
+    public static final int IDEQUIPA = 1;
+    public static final int NOME = 2;
+    public static final int EMBLEMA = 3;
+    public static final int NOMEESCOLA = 4;
+
+    private String nomeEscola;
+
+    
+    public EquipaDAO(String nomeEscola) {
+        this.nomeEscola = nomeEscola;
     }
 
     @Override
@@ -44,9 +58,32 @@ public class EquipaDAO implements Map<String,Equipa> {
 
     @Override
     public Equipa put(String key, Equipa value) {
-        return this.equipas.put(key, value);
-    }
 
+        try {
+            Equipa res = null;
+            String sql = "INSERT INTO " + ESCOLA_E + " VALUES (?, ?, null, ?)";
+            PreparedStatement stm = ConexaoBD.getConexao()
+                    .prepareStatement(sql);
+            File f = new File(value.getEmblema().getPath());
+            stm.setInt(IDEQUIPA, value.getID());
+            stm.setString(NOME, key);
+            /**if (f.exists()) {
+                FileInputStream fis = new FileInputStream(f);
+                stm.setBlob(EMBLEMA, fis);
+                stm.setString(NOMEIMAGEM, value.getEmblema().getNome());
+            } else {
+                stm.setBlob(EMBLEMA, (Blob) null);
+                stm.setString(NOME_IMAGEM, "");
+            }*/
+            stm.setString(NOMEESCOLA, nomeEscola);
+            stm.execute();
+                        ConexaoBD.fecharCursor(null, stm);
+            return res;
+        } catch (Exception e) {
+            throw new NullPointerException(e.getMessage());
+        }
+    }
+    
     @Override
     public Equipa remove(Object key) {
         return this.equipas.remove(key);

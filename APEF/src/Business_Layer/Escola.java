@@ -18,7 +18,7 @@ public class Escola {
         this.nome = "";
         this.local = "";
         this.campo = new Campo();
-        this.equipas = new EquipaDAO();
+        this.equipas = new EquipaDAO(nome);
         this.ativa = false;
     }
     
@@ -34,7 +34,7 @@ public class Escola {
         this.nome = nome;
         this.local = local;
         this.campo = campo.clone();
-        this.equipas = new EquipaDAO();
+        this.equipas = new EquipaDAO(nome);
     }
     //getters
      public String getNome() {
@@ -50,7 +50,7 @@ public class Escola {
      }
  
      public Map<String,Equipa> getEquipas() {
-         Map<String,Equipa> aux = new EquipaDAO();
+         Map<String,Equipa> aux = new EquipaDAO(this.nome);
          for(String s : this.equipas.keySet()){
              aux.put(s,this.equipas.get(s));
          }

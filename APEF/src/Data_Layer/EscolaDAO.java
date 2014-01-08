@@ -1,6 +1,8 @@
 package Data_Layer;
 
+import Business_Layer.Campo;
 import Business_Layer.Escola;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -19,6 +21,9 @@ public class EscolaDAO implements Map<String,Escola> {
     public static final int NOME = 1;
     public static final int LOCAL = 2;
     public static final int IDCAMPO = 3;
+    
+    public static final int ID_CAMPO = 1;
+    public static final int NOME_CAMPO = 2;
 
     public EscolaDAO() {
         this.escolas = new HashMap<>();
@@ -39,8 +44,8 @@ public class EscolaDAO implements Map<String,Escola> {
         try {
             String c = (String) key;
             String chave = c.toUpperCase();
-            Statement stm = ConexaoBD.getConexao().createStatement();
             
+            Statement stm = ConexaoBD.getConexao().createStatement();          
             String sql = "SELECT "+1+" FROM ESCOLA e WHERE e.NOME = '"+chave+"'";
             ResultSet rs = stm.executeQuery(sql);
             boolean res = rs.next();
@@ -60,12 +65,71 @@ public class EscolaDAO implements Map<String,Escola> {
 
     @Override
     public Escola get(Object key) {
-        return this.escolas.get(key);
+        Escola esc = null;
+        
+        try {
+            String c = (String) key;
+            String chave = c.toUpperCase();
+            Statement stm = ConexaoBD.getConexao().createStatement();
+            String sql = "SELECT * FROM ESCOLA e WHERE e.NOME = '"+chave+"'";
+            ResultSet rs = stm.executeQuery(sql);
+            
+            if(rs.next()) {
+                String sNome = rs.getString(NOME);
+                String sLocal = rs.getString(LOCAL);
+                int nidCampo = rs.getInt(IDCAMPO);
+                
+                stm = ConexaoBD.getConexao().createStatement();
+                sql = "SELECT * FROM CAMPO c where c.IDCAMPO = "+nidCampo;
+                rs = stm.executeQuery(sql);
+
+                if(rs.next()) {
+                    String sCampo = rs.getString(NOME_CAMPO);
+                    Campo campo = new Campo(nidCampo, sCampo);
+  
+                esc = new Escola(sNome,sLocal,campo);
+                }
+            }
+                
+        rs.close();
+        stm.close();
+        } catch (Exception e) {
+        }        
+        return esc;
     }
 
     @Override
     public Escola put(String key, Escola value) {
-        return this.escolas.put(key, value);
+        Escola res = null;
+        try {
+            String c = (String) key;
+            boolean existe = this.containsKey(key);
+            
+            if(!existe) {
+                String chave = c.toUpperCase();
+                String sql = "";
+                Campo campo = value.getCampo();
+                
+                if(campo != null) {
+                    sql = "INSERT INTO Campo(idCampo, nome) VALUES (?, ?)";
+                    PreparedStatement stm1 = ConexaoBD.getConexao().prepareStatement(sql);
+                    stm1.setInt(ID_CAMPO, campo.getID());
+                    stm1.setString(NOME_CAMPO, campo.getNome());
+                    stm1.execute();
+                    stm1.close();
+                
+                    sql = "INSERT INTO Escola(nome, local, idCampo) VALUES (?, ?, ?)";
+                    PreparedStatement stm2 = ConexaoBD.getConexao().prepareStatement(sql);
+                    stm2.setString(NOME, value.getNome());
+                    stm2.setString(LOCAL, value.getLocal());
+                    stm2.setInt(IDCAMPO, value.getCampo().getID());
+                    stm2.execute();
+                    stm2.close();
+                }
+            }
+        } catch (SQLException e) {
+        }
+        return res;
     }
 
     @Override
@@ -98,6 +162,7 @@ public class EscolaDAO implements Map<String,Escola> {
         return this.escolas.entrySet();
     }
     
+    @Override
     public int hashCode() {
         return ConexaoBD.getConexao().hashCode();
     }

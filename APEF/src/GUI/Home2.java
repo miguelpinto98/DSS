@@ -110,9 +110,9 @@ public final class Home2 extends JFrame {
         Equipa eq2 = new Equipa("LEI");
         Equipa eq3 = new Equipa("CeSIUM");
         
-        this.sistema.getEscolas().get("Universidade do Minho").inserirEquipa(eq1);
-        this.sistema.getEscolas().get("Universidade do Minho").inserirEquipa(eq2);
-        this.sistema.getEscolas().get("Universidade do Minho").inserirEquipa(eq3);
+        //this.sistema.getEscolas().get("Universidade do Minho").inserirEquipa(eq1);
+        //this.sistema.getEscolas().get("Universidade do Minho").inserirEquipa(eq2);
+        //this.sistema.getEscolas().get("Universidade do Minho").inserirEquipa(eq3);
         
         /* ESCALOES */
         eq3.criarEscalao(0, "Universidade do Minho", "CeSIUM","Manuel Pato", new Date(), 0, new Imagem());
@@ -133,10 +133,12 @@ public final class Home2 extends JFrame {
         
 //        this.getSistema().getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").getEscaloes().get(0).getJogadores().get(17).addCompeticao(t1.getID());
      //   this.getSistema().getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").getEscaloes().get(0).getJogadores().get(17).addCompeticao(t2.getID());
+        //this.getSistema().getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").getEscaloes().get(0).getJogadores().get(17).addCompeticao(t1.getID());
+        //this.getSistema().getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").getEscaloes().get(0).getJogadores().get(17).addCompeticao(t2.getID());
         
         
         
-        this.sistema.getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").inserirEscalao(escalao2);
+        //this.sistema.getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").inserirEscalao(escalao2);
         
         
 

@@ -20,7 +20,7 @@ public class ConexaoBD {
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             conexao = DriverManager.getConnection(url, user, pw);
-            conexao.setAutoCommit(true);                    
+            conexao.setAutoCommit(true);
 	} catch (Exception e) {
             throw new NullPointerException(e.getMessage());
 	}
