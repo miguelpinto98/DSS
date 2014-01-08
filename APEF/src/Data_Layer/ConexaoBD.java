@@ -2,10 +2,12 @@ package Data_Layer;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class ConexaoBD {
-    public static final String ip = "localhost";
+    public static final String ip = "192.168.1.84";
     public static final String porta = "1521";
     public static final String sid = "orcl";
     public static final String user = "APEF";
@@ -34,4 +36,13 @@ public class ConexaoBD {
 	} catch (SQLException e) {
 	}
     }
+
+     public static void fecharCursor(ResultSet rs, Statement stm) {
+        try {
+            if(rs != null)
+                rs.close() ;
+            if(stm != null)
+                stm.close() ;
+            } catch(Exception e) {throw new NullPointerException(e.getMessage());}
+     }
 }

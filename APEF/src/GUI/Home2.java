@@ -95,12 +95,13 @@ public final class Home2 extends JFrame {
         Escola e3 = new Escola("Universidade do Minho", "Braga", new Campo("Rodovia"));
         Escola e4 = new Escola();
         Escola e5 = new Escola();
-        
         boolean a = this.sistema.inserirEscola(e1);
         a = this.sistema.inserirEscola(e2);
         a = this.sistema.inserirEscola(e3);
         a = this.sistema.inserirEscola(e4);
         a = this.sistema.inserirEscola(e5);
+        
+        /* USERS */
         
         
         
@@ -130,12 +131,13 @@ public final class Home2 extends JFrame {
         eq3.getEscaloes().get(0).inserirJogador(lindo4);
         eq3.getEscaloes().get(0).inserirJogador(lindo5);
         
-        this.getSistema().getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").getEscaloes().get(0).getJogadores().get(17).addCompeticao(t1.getID());
-        this.getSistema().getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").getEscaloes().get(0).getJogadores().get(17).addCompeticao(t2.getID());
+//        this.getSistema().getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").getEscaloes().get(0).getJogadores().get(17).addCompeticao(t1.getID());
+     //   this.getSistema().getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").getEscaloes().get(0).getJogadores().get(17).addCompeticao(t2.getID());
         
         
         
         this.sistema.getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").inserirEscalao(escalao2);
+        
         
 
         /* TESTE USERS */
@@ -145,6 +147,8 @@ public final class Home2 extends JFrame {
         this.sistema.registarUser("diana","pw1234","demossbb@gmail.com",2);
         this.sistema.registarUser("serafim","pw1234","smcp@gmail.com",2);
         this.sistema.registarUser("atum","pw1234","atum@gmail.com",0);
+        System.out.println(this.sistema.getUsers().size());
+        System.out.println(this.sistema.getUsers().isEmpty());
         
         /* TESTE JOGO COM ESCALOES */
         ArrayList<Jogo> tj = new ArrayList<>();
