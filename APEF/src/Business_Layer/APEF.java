@@ -26,7 +26,7 @@ public class APEF {
     	this.epocas = new EpocaDAO();
     	this.users = new UtilizadorDAO();
     	this.campos = new HashSet<>();
-        //this.iniciarConexao();
+        this.iniciarConexao();
         //this.registaUtilizador();
         this.emSessao = null;
     }
@@ -235,8 +235,9 @@ public class APEF {
 	*Metodos Escola
 	*/
     public boolean inserirEscola(Escola a) {
-    	if( !(this.escolas.containsKey(a.getNome())) ){
+    	if(!(this.escolas.containsKey(a.getNome()))){
             this.escolas.put(a.getNome(),a);
+            System.out.println("Escola inserida "+a.getNome());
             return true;
     	}
         else{

@@ -1,6 +1,9 @@
 package Data_Layer;
 
 import Business_Layer.Escola;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,6 +15,10 @@ import java.util.Set;
  */
 public class EscolaDAO implements Map<String,Escola> {
     private HashMap<String,Escola> escolas;
+    
+    public static final int NOME = 1;
+    public static final int LOCAL = 2;
+    public static final int IDCAMPO = 3;
 
     public EscolaDAO() {
         this.escolas = new HashMap<>();
@@ -29,7 +36,21 @@ public class EscolaDAO implements Map<String,Escola> {
 
     @Override
     public boolean containsKey(Object key) {
-        return this.escolas.containsKey(key);
+        try {
+            String c = (String) key;
+            String chave = c.toUpperCase();
+            Statement stm = ConexaoBD.getConexao().createStatement();
+            
+            String sql = "SELECT "+1+" FROM ESCOLA e WHERE e.NOME = '"+chave+"'";
+            ResultSet rs = stm.executeQuery(sql);
+            boolean res = rs.next();
+            
+            rs.close();
+            stm.close(); 
+            return res; 
+        } catch (SQLException e) {
+            throw new NullPointerException(e.getMessage());
+        }
     }
 
     @Override
