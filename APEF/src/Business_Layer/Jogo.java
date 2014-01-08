@@ -1,7 +1,9 @@
 package Business_Layer;
 
+import Data_Layer.GoleadoresDAO;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.Map;
 
 public class Jogo implements Comparable<Jogo>{
     private int id;
@@ -14,7 +16,7 @@ public class Jogo implements Comparable<Jogo>{
     private Escalao efora;
     private int numGolosCasa;
     private int numGolosFora;
-    private ArrayList<Integer> goleadores;
+    private Map<Integer,Integer> goleadores; //<idJogador,nrgolos>
 	
     public Jogo() {
         this.id = 0;
@@ -27,7 +29,7 @@ public class Jogo implements Comparable<Jogo>{
     	this.efora = new Escalao();
     	this.numGolosCasa = 0;
     	this.numGolosFora = 0;
-    	this.goleadores = new ArrayList<> ();
+    	this.goleadores = new GoleadoresDAO();
     }
     
     public Jogo(int i, GregorianCalendar g, Campo c, Arbitro a, Escalao ec, Escalao ef) {
@@ -41,7 +43,7 @@ public class Jogo implements Comparable<Jogo>{
     	this.efora = ef;
     	this.numGolosCasa = 0;
     	this.numGolosFora = 0;
-    	this.goleadores = new ArrayList<>();
+    	this.goleadores = new GoleadoresDAO();
         APEF.IDENTIFICADOR++;
     }
     
@@ -149,16 +151,16 @@ public class Jogo implements Comparable<Jogo>{
 		this.numGolosFora = numGolosFora;
 	}
 
-	public ArrayList<Integer> getGoleadoresJogo() {
-		ArrayList<Integer> hsg = new ArrayList<>();
+	public Map<Integer,Integer> getGoleadoresJogo() {
+		Map<Integer,Integer> hsg = new GoleadoresDAO();
 		
-		for(Integer n : this.goleadores)
-			hsg.add(n);
+		for(Integer n : this.goleadores.values())
+			hsg.put(this.getID(),n);
 		
 		return hsg;
 	}
 
-	public void setGoleadoresJogo(ArrayList<Integer> goleadores) {
+	public void setGoleadoresJogo(Map<Integer,Integer> goleadores) {
 		this.goleadores = goleadores;
 	}
 	
@@ -211,7 +213,7 @@ public class Jogo implements Comparable<Jogo>{
 		setNumGolosJogoFora(ngf);
 	}
 
-	public void goleadoresJogo(ArrayList<Integer> golos) {
+	public void goleadoresJogo(Map<Integer,Integer> golos) {
 		this.setGoleadoresJogo(golos);
 	}
 	

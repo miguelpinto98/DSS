@@ -96,7 +96,7 @@ public class Grupo extends Fase {
     public Escalao buscaEscalao(int id) {
         Escalao res = new Escalao();
         boolean flag = false;
-        Iterator<Escalao> it = getListaEscaloes().iterator(); 
+        Iterator<Escalao> it = getListaEscaloes().values().iterator(); 
         while (it.hasNext() && !flag) {
             Escalao e = it.next();
             if (e.getID()==id) {

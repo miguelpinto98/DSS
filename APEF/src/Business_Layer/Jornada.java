@@ -1,27 +1,34 @@
 package Business_Layer;
 
+import Data_Layer.AgendaDAO;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Objects;
 import java.util.TreeSet;
 
 public class Jornada implements Comparable<Jornada>{
     
     //Variaveis de Instancia
+    private int id;
     private int nrJornada;
     private int jogosRealizados;
-    private HashSet<Jogo> listaJogos; 
+    private Map<Integer,Jogo> listaJogos; 
 
     //Construtores
     public Jornada() {
+        this.id = APEF.IDENTIFICADOR;
         this.nrJornada = 0;
         this.jogosRealizados = 0;
-        this.listaJogos = new HashSet<Jogo>();
+        this.listaJogos = new AgendaDAO();
+        APEF.IDENTIFICADOR++;
     }
     
     public Jornada(int nrJornada) {
+        this.id = APEF.IDENTIFICADOR;
         this.nrJornada = nrJornada;
         this.jogosRealizados = 0;
-        this.listaJogos = new HashSet<Jogo>();
+        this.listaJogos = new AgendaDAO();
+        APEF.IDENTIFICADOR++;
     }
     
     public Jornada(Jornada j) {
@@ -36,10 +43,10 @@ public class Jornada implements Comparable<Jornada>{
         return this.nrJornada;
     }
     
-    public HashSet<Jogo> getListaJogos() {
-        HashSet<Jogo> aux = new HashSet<Jogo>();
-        for(Jogo e: this.listaJogos) 
-            aux.add(e);
+    public Map<Integer,Jogo> getListaJogos() {
+        Map<Integer,Jogo> aux = new AgendaDAO();
+        for(Jogo e: this.listaJogos.values()) 
+            aux.put(e.getID(),e);
         return aux;
     }
     
@@ -98,8 +105,8 @@ public class Jornada implements Comparable<Jornada>{
 
 
     public void inserirJogo(Jogo j) {
-        if (!this.listaJogos.contains(j))
-            this.listaJogos.add(j);
+        if (!this.listaJogos.containsKey(j.getID()))
+            this.listaJogos.put(j.getID(),j);
     }
     
     
@@ -107,10 +114,10 @@ public class Jornada implements Comparable<Jornada>{
 	public boolean atualizaJornada(Jogo j) {
 		boolean encontrou = false;
 		
-		for(Jogo jg : this.listaJogos)
+		for(Jogo jg : this.listaJogos.values())
 			if(jg.getArbitroJogo().getNome().equals(j.getArbitroJogo().getNome()) && !encontrou) {
 				this.listaJogos.remove(jg);
-				this.listaJogos.add(j);
+				this.listaJogos.put(j.getID(),j);
 				
 				this.jogosRealizados++;
 				encontrou=true;

@@ -1,11 +1,17 @@
 package Business_Layer;
 
+import Data_Layer.ArbsDAO;
+import Data_Layer.EscalaoDAO;
+import Data_Layer.FaseDAO;
+import Data_Layer.GoleadoresDAO;
+import Data_Layer.UtilizadorDAO;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Objects;
 
 public class Torneio implements Competicao{
@@ -16,15 +22,15 @@ public class Torneio implements Competicao{
     private int tipoTorneio;
     private String nome;
     private int nrEscaloes;
-    private HashMap<Integer,Integer> goleadores;
-    private HashSet<Escalao> listaEscaloes;
+    private Map<Integer,Integer> goleadores;
+    private Map<Integer,Escalao> listaEscaloes;
     private EstatisticaCompeticao estatisticaCompeticao;
     private GregorianCalendar dataInicio;
     private GregorianCalendar dataLimiteInscricoes;
     private int nFase;
-    private ArrayList<Fase> fases;
+    private Map<Integer,Fase> fases;
     private Campo campo;
-    private ArrayList<Utilizador> arbs;
+    private Map<Integer,Utilizador> arbs;
 
     public Torneio() {
         this.id = 0;
@@ -32,15 +38,15 @@ public class Torneio implements Competicao{
         this.tipoTorneio = -1;
         this.nome = "";
         this.nrEscaloes = 0;
-        this.goleadores = new HashMap<>();
-        this.listaEscaloes = new HashSet<>();
+        this.goleadores = new GoleadoresDAO();
+        this.listaEscaloes = new EscalaoDAO();
         this.estatisticaCompeticao = new EstatisticaCompeticao();
-        this.fases = new ArrayList<>();
+        this.fases = new FaseDAO();
         this.nFase = 0;
         this.dataInicio = new GregorianCalendar();
         this.dataLimiteInscricoes = new GregorianCalendar();
         this.campo = new Campo();
-        this.arbs = new ArrayList<>();
+        this.arbs = new ArbsDAO();
     }
     
     public Torneio(String nome, GregorianCalendar inicio, GregorianCalendar limite, int tipoEscalao, int tipoTorneio, int nrEquipas, Campo campo){
@@ -49,15 +55,15 @@ public class Torneio implements Competicao{
         this.tipoTorneio = tipoTorneio;
         this.nome = nome;
         this.nrEscaloes = nrEquipas;
-        this.goleadores = new HashMap<>();
-        this.listaEscaloes = new HashSet<>();
+        this.goleadores = new GoleadoresDAO();
+        this.listaEscaloes = new EscalaoDAO();
         this.estatisticaCompeticao = new EstatisticaCompeticao();
-        this.fases = new ArrayList<>();
+        this.fases = new FaseDAO();
         this.nFase = 0;
         this.dataInicio = inicio;
         this.dataLimiteInscricoes = limite;
         this.campo = campo;
-        this.arbs = new ArrayList<>();
+        this.arbs = new ArbsDAO() ;
     }
     
     public Torneio(String nome, GregorianCalendar inicio, GregorianCalendar limite, int tipoEscalao, int nrEquipas, Campo campo){
@@ -65,15 +71,15 @@ public class Torneio implements Competicao{
         this.tipoEscalao = tipoEscalao;
         this.nome = nome;
         this.nrEscaloes = nrEquipas;
-        this.goleadores = new HashMap<>();
-        this.listaEscaloes = new HashSet<>();
+        this.goleadores = new GoleadoresDAO();
+        this.listaEscaloes = new EscalaoDAO();
         this.estatisticaCompeticao = new EstatisticaCompeticao();
-        this.fases = new ArrayList<>();
+        this.fases = new FaseDAO();
         this.nFase = 0;
         this.dataInicio = inicio;
         this.dataLimiteInscricoes = limite;
         this.campo = campo;
-        this.arbs = new ArrayList<>();
+        this.arbs = new ArbsDAO();
     }  
 
 	public Torneio(Torneio t) {
@@ -133,8 +139,8 @@ public class Torneio implements Competicao{
         this.nrEscaloes = nrEscaloes;
     }
 
-    public HashMap<Integer, Integer> getGoleadores() {
-        HashMap<Integer,Integer> hsg = new HashMap<>();
+    public Map<Integer, Integer> getGoleadores() {
+        Map<Integer,Integer> hsg = new GoleadoresDAO();
         for(Integer n : this.goleadores.keySet())
             hsg.put(n, this.goleadores.get(n));
         
@@ -145,14 +151,14 @@ public class Torneio implements Competicao{
         this.goleadores = goleadores;
     }
     
-    public HashSet<Escalao> getListaEscaloes() {
-        HashSet<Escalao> aux = new HashSet<Escalao>();
-        for(Escalao e: this.listaEscaloes) 
-            aux.add(e);
+    public Map<Integer,Escalao> getListaEscaloes() {
+        Map<Integer,Escalao> aux = new EscalaoDAO();
+        for(Escalao e: this.listaEscaloes.values()) 
+            aux.put(e.getID(),e);
         return aux;
     }
 
-    public void setListaEscaloes (HashSet<Escalao> le){
+    public void setListaEscaloes (Map<Integer,Escalao> le){
         this.listaEscaloes = le;
     }
 
@@ -163,25 +169,25 @@ public class Torneio implements Competicao{
     public void setEstatisticaCompeticao(EstatisticaCompeticao ec){
         this.estatisticaCompeticao = ec;
     }
-    public ArrayList<Fase> getFases(){
-        ArrayList<Fase> aux = new ArrayList<>();
+    public Map<Integer,Fase> getFases(){
+        Map<Integer,Fase> aux = new FaseDAO();
 
-        for(Fase f : this.fases){
-            aux.add(f.clone());
+        for(Fase f : this.fases.values()){
+            aux.put(f.getID(),f);
         }
         return aux;
     }
     
-    public ArrayList<Utilizador> getArbs(){
-        ArrayList<Utilizador> aux = new ArrayList<>();
+    public Map<Integer,Utilizador> getArbs(){
+        Map<Integer,Utilizador> aux = new ArbsDAO();
 
-        for(Utilizador f : this.arbs){
-            aux.add(f);
+        for(Utilizador f : this.arbs.values()){
+            aux.put(f.getID(),f);
         }
         return aux;
     }
     
-    public void setArbs(ArrayList<Utilizador> a) {
+    public void setArbs(Map<Integer,Utilizador> a) {
         this.arbs = a;
     }
     
@@ -192,7 +198,7 @@ public class Torneio implements Competicao{
     public void setNFase(int n) {
         this.nFase = n;
     }
-    public void setFases (ArrayList<Fase> al){
+    public void setFases (Map<Integer,Fase> al){
         this.fases = al;
     }
     
@@ -251,15 +257,15 @@ public class Torneio implements Competicao{
         str.append("\nNrEquipas: "+this.getNrEscaloes());
         str.append("\nParticipantes: "+this.getListaEscaloes());
         str.append("\nClassificacao:"+this.estatisticaCompeticao);
-        for(Fase x : this.fases)
+        for(Fase x : this.fases.values())
             str.append(x.toString());
         return str.toString(); 
     }
     
     /** Metodos */
     public void inserirEscalao(Escalao e) {
-        if(!this.listaEscaloes.contains(e))
-            this.listaEscaloes.add(e);
+        if(!this.listaEscaloes.containsKey(e.getID()))
+            this.listaEscaloes.put(e.getID(),e);
     }
 
     public void removerEscalao(Escalao e) {
@@ -276,7 +282,7 @@ public class Torneio implements Competicao{
     public Escalao buscaEscalao(int id) {
         Escalao res = new Escalao();
         boolean flag = false;
-        Iterator<Escalao> it = this.listaEscaloes.iterator(); 
+        Iterator<Escalao> it = this.listaEscaloes.values().iterator(); 
         while (it.hasNext() && !flag) {
             Escalao e = it.next();
             if (e.getID()==id) {
@@ -289,7 +295,7 @@ public class Torneio implements Competicao{
     
     public void atualizaGoleadores(Jogo j) {
         int contador;
-        for(Integer id: j.getGoleadoresJogo()) {
+        for(Integer id: j.getGoleadoresJogo().keySet()) {
             if(this.goleadores.containsKey(id)) {
                 contador = this.goleadores.get(id);
                 this.goleadores.put(id, contador+1);
@@ -300,7 +306,7 @@ public class Torneio implements Competicao{
     }
     
     public ArrayList<Integer> melhoresMarcadoresAux() {
-        HashMap<Integer,Integer> aux = this.goleadores;
+        Map<Integer,Integer> aux = this.goleadores;
         ArrayList<Integer> res = new ArrayList<>();
         int maxGolos = Collections.max(aux.values());
 
@@ -319,7 +325,7 @@ public class Torneio implements Competicao{
         Jogador res = new Jogador();
         boolean flag = false;
         
-        Iterator<Escalao> it = this.listaEscaloes.iterator(); 
+        Iterator<Escalao> it = this.listaEscaloes.values().iterator(); 
         while (it.hasNext() && !flag) {
             Escalao e = it.next();
             Iterator<Integer> it2 = e.getJogadores().keySet().iterator(); 
@@ -348,8 +354,9 @@ public class Torneio implements Competicao{
      public Torneio secondFaseTorneioTipo1 (ArrayList<Integer> grupoA, ArrayList<Integer> grupoB) {
         HashSet<Escalao> equipas = new HashSet<>();
         ArrayList<Utilizador> arbs = new ArrayList<>();
-        arbs = this.getArbs();
-                
+        for(Utilizador j : this.getArbs().values()) {
+            arbs.add(j);
+        }                
         for (int i = 0; i < grupoA.size(); i++) {
             equipas.add(this.buscaEscalao(grupoA.get(i)));
         }
@@ -359,7 +366,7 @@ public class Torneio implements Competicao{
         Eliminatoria meiaFinal = new Eliminatoria("Meia-Final",equipas);
         meiaFinal.geraCalendarioTipo1(this.getID(), this.getDataInicio(), arbs, grupoA, grupoB, this.getCampo());
         Fase f = (Fase) meiaFinal;
-        this.getFases().add(f);
+        this.getFases().put(this.nFase,f);
         this.nFase = 2;
         
     return this;
@@ -367,11 +374,13 @@ public class Torneio implements Competicao{
     
     public Torneio thirdFaseTorneioTipo1(HashSet<Escalao> finalistas) {
         ArrayList<Utilizador> arbs = new ArrayList<>();
-        arbs = this.getArbs();
+        for(Utilizador j : this.getArbs().values()) {
+            arbs.add(j);
+        }          
         Eliminatoria finale = new Eliminatoria("Final",finalistas);
         finale.geraFinal(this.getID(),this.getDataInicio(),arbs,finalistas,this.getCampo());
         Fase f = (Fase) finale;
-        this.getFases().add(f);
+        this.getFases().put(this.nFase,f);
         this.nFase++;
         
         return this;
@@ -426,7 +435,9 @@ public class Torneio implements Competicao{
     public Torneio firstEliminatoriaTorneioTipo2 (Torneio t, ArrayList<Utilizador> arrayArbitros,String nomeElim) {
         HashSet<Escalao> equipas = new HashSet<>();
         ArrayList<Integer> arrayEquipas = new ArrayList<>();
-        equipas = t.getListaEscaloes();
+        for(Escalao eq : t.getListaEscaloes().values()) {
+            equipas.add(eq);
+        }
         int nrEquipas = equipas.size();
         for(Escalao e: equipas){
             arrayEquipas.add(e.getID());
@@ -441,7 +452,7 @@ public class Torneio implements Competicao{
         elimi.geraCalendarioTipo2(t.getID(), t.getDataInicio(), arbs, arrayEquipas, t.getCampo());
         //System.out.println(elimi);
         Fase f = (Fase) elimi;
-        t.inserirEliminatoria(f);  
+        t.inserirEliminatoria(t.getNFase(),f);  
     return t;
     }
     
@@ -462,7 +473,9 @@ public class Torneio implements Competicao{
     
     public Torneio secondEliminatoriaTorneioTipo2 (HashSet<Escalao> escaloes) {
         ArrayList<Utilizador> arbs = new ArrayList<>();
-        arbs = this.getArbs();
+        for(Utilizador j : this.getArbs().values()) {
+            arbs.add(j);
+        }          
         int nrEquipas = escaloes.size();
         ArrayList<Integer> equipas = new ArrayList<>();
         for(Escalao e : escaloes){
@@ -472,7 +485,7 @@ public class Torneio implements Competicao{
         Eliminatoria elim = new Eliminatoria(nm,escaloes);
         elim.geraCalendarioTipo2(this.getID(), this.getDataInicio(), arbs, equipas, this.getCampo());
         Fase f = (Fase) elim;
-        this.inserirEliminatoria(f);
+        this.inserirEliminatoria(this.nFase,f);
         
     return this;
     }
@@ -497,12 +510,12 @@ public class Torneio implements Competicao{
         return res;
         }    
     
-    public void inserirGrupo (Fase f){
-        this.fases.add(f);
+    public void inserirGrupo (int i,Fase f){
+        this.fases.put(i,f);
     }
     
-    public void inserirEliminatoria (Fase f){
-        this.fases.add(f);
+    public void inserirEliminatoria (int i,Fase f){
+        this.fases.put(i,f);
     }
     
 }

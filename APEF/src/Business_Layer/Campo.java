@@ -8,8 +8,9 @@ public class Campo {
 
     //Construtores
     public Campo() {
-    	this.id = 0;
+    	this.id = APEF.IDENTIFICADOR;
     	this.nome = "";
+        APEF.IDENTIFICADOR++;
     }
 
     public Campo(Campo c) {

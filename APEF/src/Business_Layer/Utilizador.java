@@ -22,7 +22,7 @@ public abstract class Utilizador {
     
     //Construtores
     public Utilizador() {
-    	this.id = 0;
+    	this.id = APEF.IDENTIFICADOR++;
         this.avatar = null;
         this.nomeUtilizador = "";
         this.nome = "";
@@ -34,6 +34,7 @@ public abstract class Utilizador {
         this.dataNascimento = new GregorianCalendar();
         this.ativo = false;
         this.camposPreenchidos = false;
+        APEF.IDENTIFICADOR++;
     }
 
     public Utilizador(Imagem img, String nickname, String nome, String email, 

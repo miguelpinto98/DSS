@@ -206,7 +206,7 @@ public class Epoca implements Comparable<Epoca>{
         Iterator<Jornada> it = this.campeonatos.get(tipoEscalao).getCalendario().getJornadas().values().iterator();
         while(it.hasNext() && !flag) {
             Jornada jr = it.next();
-            Iterator<Jogo> it2 = jr.getListaJogos().iterator();
+            Iterator<Jogo> it2 = jr.getListaJogos().values().iterator();
             while(it2.hasNext() && !flag) {
                 Jogo jg = it2.next();
                 if( data.get(GregorianCalendar.YEAR) == jg.getDiaJogo().get(GregorianCalendar.YEAR) && data.get(GregorianCalendar.MONTH) == jg.getDiaJogo().get(GregorianCalendar.MONTH) && data.get(GregorianCalendar.DAY_OF_MONTH) == jg.getDiaJogo().get(GregorianCalendar.DAY_OF_MONTH)) {
@@ -217,7 +217,7 @@ public class Epoca implements Comparable<Epoca>{
         } 
         for(Jornada jor : this.campeonatos.get(tipoEscalao).getCalendario().getJornadas().values()) {
             if(jor.getNrJornada() == jornada) {
-                for(Jogo jg : jor.getListaJogos()) {
+                for(Jogo jg : jor.getListaJogos().values()) {
                     jg.setDia(this.campeonatos.get(tipoEscalao).dataJornadaSeguinte(jg.getDiaJogo()));
 
                 }
