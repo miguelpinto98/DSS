@@ -1,11 +1,26 @@
 package GUI.Header;
 
+import Business_Layer.APEF;
+import Business_Layer.Imagem;
+import Business_Layer.Utilizador;
+import GUI.Home2;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import javax.swing.JDialog;
+
 
 public class JPreencherRegisto extends javax.swing.JDialog {
-
-    public JPreencherRegisto(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    
+    private Utilizador user;
+    private Home2 p;
+    
+    public JPreencherRegisto(Home2 h,Utilizador u) {
+        this.user=u;
+        this.p=h;
         initComponents();
+        setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        setAlwaysOnTop(true);
     }
 
     @SuppressWarnings("unchecked")
@@ -25,10 +40,11 @@ public class JPreencherRegisto extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
         jTextField5 = new javax.swing.JTextField();
+        jXDatePicker1 = new org.jdesktop.swingx.JXDatePicker();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(524, 329));
@@ -61,6 +77,11 @@ public class JPreencherRegisto extends javax.swing.JDialog {
         getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
         jButton2.setText("Confirmar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -101,6 +122,11 @@ public class JPreencherRegisto extends javax.swing.JDialog {
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setText("Código-Postal:");
 
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel8.setMaximumSize(new java.awt.Dimension(6, 15));
+        jLabel8.setMinimumSize(new java.awt.Dimension(6, 15));
+        jLabel8.setPreferredSize(new java.awt.Dimension(6, 15));
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -120,10 +146,11 @@ public class JPreencherRegisto extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField1)
-                    .addComponent(jTextField2)
                     .addComponent(jTextField3)
                     .addComponent(jTextField4)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE))
+                    .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
+                    .addComponent(jXDatePicker1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -135,10 +162,10 @@ public class JPreencherRegisto extends javax.swing.JDialog {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(21, 21, 21)
+                        .addGap(20, 20, 20)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jXDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
@@ -155,13 +182,40 @@ public class JPreencherRegisto extends javax.swing.JDialog {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1)))
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel3, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        Imagem img = new Imagem(); 
+        String nome = this.jTextField1.getText();
+        
+        Date dn = this.jXDatePicker1.getDate();
+        Calendar g = new GregorianCalendar();
+        g.setTime(dn);
+        
+        String telemovel = this.jTextField3.getText();
+        String morada = this.jTextField4.getText();
+        String codigoPostal = this.jTextField5.getText();
+        
+        if(nome.equals("") || telemovel.equals("") || morada.equals("") || codigoPostal.equals(""))
+            jLabel8.setText("Preencha todos os campos");
+        
+        this.user.setAvatar(img);
+        this.user.setNome(nome);
+        this.user.setDataNasc((GregorianCalendar) g);
+        this.user.setTelemovel(telemovel);
+        this.user.setMorada(morada);
+        this.user.setCodPostal(codigoPostal);
+       
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     
 
@@ -175,13 +229,14 @@ public class JPreencherRegisto extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
+    private org.jdesktop.swingx.JXDatePicker jXDatePicker1;
     // End of variables declaration//GEN-END:variables
 }

@@ -26,10 +26,8 @@ import GUI.Header.JEntrar;
 import GUI.Header.JMenuAdmin;
 import GUI.Header.JMenuArbitro;
 import GUI.Header.JMenuResponsavelEscola;
+import GUI.Header.JPreencherRegisto;
 import GUI.Header.JRegistar;
-import GUI.Perfil.JAdminOption;
-import GUI.Perfil.JArbitroOption;
-import GUI.Perfil.JResponsavelOption;
 import GUI.Torneio.JOptions;
 import GUI.Torneio.JTorneioInfo;
 import java.awt.BorderLayout;
@@ -209,37 +207,34 @@ public final class Home2 extends JFrame {
     
     public void verificaUser(Utilizador user) {
         if(user != null) {
+            
             if(user instanceof Admin) {
                 reloadHeaderUserAdmin();
                 reloadTabEscolasAdmin();
                 reloadOptions();
-                reloadAdmin();
-                 
-              /**  reloadTorneios();*/
             }
+            
             if(user instanceof ResponsavelEscola) {
                 reloadHeaderUserRespEscola();
                 reloadOptions();
-                reloadResponsavel();
-              /**  reloadTorneios();*/
             }
+            
             if(user instanceof Arbitro) {
                 reloadHeaderUserArbitro();
-                reloadArbitro();
             }     
         }
+        
         else {
             reloadHeaderConvidado();
             reloadTabEscolasConvidado();
-          /**  reloadTorneios();*/
         }
     }
     
     
-    /** NOVA TAB */
+    /** NOVA TAB 
     
     public void reloadArbitro(){
-        this.JTabEscolas.addTab("arbitro",new JArbitroOption(this,user));
+        this.JTabEscolas.addTab("Jogos",new JArbitroOption(this,user));
         this.JTabEscolas.updateUI();
         this.JTabEscolas.validate();
     }
@@ -251,12 +246,18 @@ public final class Home2 extends JFrame {
     }
     
     public void reloadResponsavel(){
-        this.JTabEscolas.addTab("Escolas",new JResponsavelOption(this,user));
+        this.JTabEscolas.addTab("Equipas",new JResponsavelOption(this,user));
         this.JTabEscolas.updateUI();
         this.JTabEscolas.validate();
     }
     
-    /** */
+     */
+    
+    public void reloadP(){
+        JDialog h = new JPreencherRegisto(this, user);
+        h.setLocationRelativeTo(null);
+        h.setVisible(true);
+    }
     
     public void reloadOptions(){
         this.jPanel5.removeAll();
@@ -1109,7 +1110,7 @@ public final class Home2 extends JFrame {
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Torneios acabados");
+        jLabel6.setText("Torneios realizados");
 
         jButton1.setText("Consultar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -1231,7 +1232,7 @@ public final class Home2 extends JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jXSearchField1ActionPerformed
 
-    /* Janela Para Fazer Login */
+    /* Janela Para Fazer Login */ 
     private void entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarActionPerformed
         JDialog frame = new JEntrar(this);
         frame.setLocationRelativeTo(null);

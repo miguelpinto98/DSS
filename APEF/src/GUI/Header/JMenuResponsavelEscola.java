@@ -8,6 +8,9 @@ package GUI.Header;
 
 import Business_Layer.Utilizador;
 import GUI.Home2;
+import GUI.JPerfil;
+import GUI.Perfil.JResponsavelGestao;
+import javax.swing.JDialog;
 
 /**
  *
@@ -48,10 +51,21 @@ public class JMenuResponsavelEscola extends javax.swing.JPanel {
         });
 
         jButton2.setText("Perfil");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Gerir Escola");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
-        bemvindo.setText("Bem-Vindo User");
+        bemvindo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        bemvindo.setText("Bem-Vindo User!");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -92,6 +106,20 @@ public class JMenuResponsavelEscola extends javax.swing.JPanel {
         root.verificaUser(null);
         root.getSistema().logout();
     }//GEN-LAST:event_sairActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        JDialog frame = new JPerfil(this.root);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        JDialog frame = new JResponsavelGestao(this.root);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
