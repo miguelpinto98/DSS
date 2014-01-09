@@ -1,6 +1,6 @@
 package Business_Layer;
 
-import Data_Layer.CalendarioDAO;
+import Data_Layer.JornadaDAO;
 import java.util.Map;
 import java.util.TreeSet;
 import java.util.Objects;
@@ -14,7 +14,7 @@ public class Calendario {
     //Construtores
 	public Calendario() {
         this.idCalendario = APEF.IDENTIFICADOR;
-		this.jornadas = new CalendarioDAO();
+		this.jornadas = new JornadaDAO(idCalendario);
         APEF.IDENTIFICADOR++;
     }
 
@@ -24,7 +24,7 @@ public class Calendario {
 
     //Getters
     public Map<Integer,Jornada> getJornadas() {
-    	Map<Integer,Jornada> aux = new CalendarioDAO();
+    	Map<Integer,Jornada> aux = new JornadaDAO();
         for(Jornada j: this.jornadas.values()) 
             aux.put(j.getNrJornada(), j);
         return aux;
@@ -69,7 +69,7 @@ public class Calendario {
 
     public void inserirJornada(Jornada j) {
         if (!this.jornadas.containsKey(j.getNrJornada()))
-            this.jornadas.put(j.getNrJornada(), j);
+            this.jornadas.put(j.getID(), j);
     }
 
     public void removerJornada(Jornada j) {

@@ -15,8 +15,8 @@ public class Agenda {
     private Map<Integer,Jogo> jogos;
         
         public Agenda(){
-            this.idAgenda = APEF.IDENTIFICADOR;;
-            this.jogos = new AgendaDAO();
+            this.idAgenda = APEF.IDENTIFICADOR;
+            this.jogos = new AgendaDAO(idAgenda);
             APEF.IDENTIFICADOR++;
         }
         

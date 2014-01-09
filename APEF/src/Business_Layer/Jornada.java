@@ -31,6 +31,13 @@ public class Jornada implements Comparable<Jornada>{
         APEF.IDENTIFICADOR++;
     }
     
+    public Jornada(int id, int nr, int realizados, Map<Integer,Jogo> jogos) {
+        this.id = id;
+        this.nrJornada = nr;
+        this.jogosRealizados = realizados;
+        this.listaJogos = jogos;
+    }
+    
     public Jornada(Jornada j) {
     	this.jogosRealizados = j.getJogosRealizados();
         this.nrJornada = j.getNrJornada();
@@ -52,6 +59,9 @@ public class Jornada implements Comparable<Jornada>{
     
     public int getJogosRealizados() {
     	return this.jogosRealizados;
+    }
+    public int getID() {
+        return this.id;
     }
     
     //Setter

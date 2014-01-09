@@ -27,7 +27,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
         
 public class UtilizadorDAO implements Map<String,Utilizador>{
-    private HashMap<String,Utilizador> users;
 
     public static final String USER = "Utilizador u";
     public static final String ADMIN = "Admin u";
@@ -58,7 +57,6 @@ public class UtilizadorDAO implements Map<String,Utilizador>{
     public static int ESCOLANOME = 2;    
             
     public UtilizadorDAO() {
-        this.users = new HashMap<>();
     }
     
     @Override
@@ -107,8 +105,8 @@ public class UtilizadorDAO implements Map<String,Utilizador>{
 
     @Override
     public boolean containsValue(Object value) {
-        return this.users.containsValue(value);
-    }
+        throw new NullPointerException("não está implementado!");
+        }    
     
     public boolean converte(int a) {
         if(a==0)
@@ -242,9 +240,9 @@ public class UtilizadorDAO implements Map<String,Utilizador>{
                 stm3.close();
              }
              if(value.getTipo() == 2) {
-                 Arbitro a = (Arbitro) value;
+                Arbitro a = (Arbitro) value;
                 int idAgenda = a.getAgenda().getIDAgenda();
-                String sql4 = "INSERT INTO Arbitro(idUtilizador,idTorneio,idAgenda) VALUES ("+value.getID()+",null,"+idAgenda+")";
+                String sql4 = "INSERT INTO Arbitro(idUtilizador,idTorneio,idAgenda) VALUES ("+value.getID()+",null,null)";
                 PreparedStatement stm4 = ConexaoBD.getConexao().prepareStatement(sql4);
                 stm4.execute();
                 stm4.close();
@@ -260,17 +258,17 @@ public class UtilizadorDAO implements Map<String,Utilizador>{
         
     @Override
     public Utilizador remove(Object key) {
-        return this.users.remove(key);
+        throw new NullPointerException("não está implementado!");    
     }
 
     @Override
     public void putAll(Map<? extends String, ? extends Utilizador> m) {
-        this.users.putAll(m);
+        throw new NullPointerException("não está implementado!");
     }
 
     @Override
     public void clear() {
-        this.users.clear();
+        throw new NullPointerException("não está implementado!");
     }
 
     @Override
@@ -367,7 +365,7 @@ public class UtilizadorDAO implements Map<String,Utilizador>{
 
     @Override
     public Set<Entry<String, Utilizador>> entrySet() {
-        return this.users.entrySet();
+        throw new NullPointerException("não está implementado!");
     }
     
     public int hashCode() {
