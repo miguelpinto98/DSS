@@ -40,12 +40,9 @@ public class APEF {
         this.emSessao = a.getEmSessao();
     }
 
-	public Map<String, Escola> getEscolas() {
-		Map<String,Escola> aux = new EscolaDAO();
-		for(String s : this.escolas.keySet())
-			aux.put(s, this.escolas.get(s));
-		return aux;
-	}
+    public Map<String, Escola> getEscolas() {
+        return this.escolas;
+    }
 	
 	public Map<Integer, Epoca> getEpocas() {
 		Map<Integer,Epoca> aux = new EpocaDAO();

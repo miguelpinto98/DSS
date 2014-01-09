@@ -29,7 +29,7 @@ public class Equipa {
     	this.nome = new String();
     	this.emblema = new Imagem();
     	this.palmares = new PalmaresDAO();
-    	this.escaloes = new EscalaoDAO();
+    	this.escaloes = new EscalaoDAO(this.id);
         APEF.IDENTIFICADOR++;
     }
     
@@ -38,7 +38,7 @@ public class Equipa {
     	this.nome = n;
     	this.emblema = e;
     	this.palmares = new PalmaresDAO();
-    	this.escaloes = new EscalaoDAO();
+    	this.escaloes = new EscalaoDAO(this.id);
     	APEF.IDENTIFICADOR++;	
     }
 
@@ -47,7 +47,7 @@ public class Equipa {
     	this.nome = n;
     	this.emblema = new Imagem();
     	this.palmares = new PalmaresDAO();
-    	this.escaloes = new EscalaoDAO();
+    	this.escaloes = new EscalaoDAO(this.id);
     	APEF.IDENTIFICADOR++;	
     }
     
@@ -56,7 +56,8 @@ public class Equipa {
     	this.nome = n;
     	this.emblema = new Imagem();
     	this.palmares = new PalmaresDAO();
-    	this.escaloes = new EscalaoDAO();
+        System.out.println("Por causa do erro");
+    	this.escaloes = new EscalaoDAO(this.id);
     }
 
     public Equipa(Equipa e) {
@@ -86,13 +87,9 @@ public class Equipa {
 		return hmp;
 	}
 
-	public Map<Integer,Escalao> getEscaloes() {
-         Map<Integer,Escalao> aux = new EscalaoDAO();
-         for(Integer s : this.escaloes.keySet()){
-             aux.put(s,this.escaloes.get(s));
-         }
-         return aux;
-     }
+    public Map<Integer,Escalao> getEscaloes() {
+        return new HashMap<Integer, Escalao>();
+    }
 
 	public void setId(int id) {
 		this.id = id;
