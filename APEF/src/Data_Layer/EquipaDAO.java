@@ -4,8 +4,12 @@ import Business_Layer.Equipa;
 import java.io.File;
 import java.io.FileInputStream;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -18,11 +22,10 @@ import java.util.Set;
 public class EquipaDAO implements Map<String,Equipa> {
     private HashMap<String,Equipa> equipas;
     
-    public static final String ESCOLA_E = "Escola e";
+    public static final String EQUIPA_E = "Equipa e";
     public static final int IDEQUIPA = 1;
     public static final int NOME = 2;
     public static final int EMBLEMA = 3;
-    public static final int NOMEESCOLA = 4;
 
     private String nomeEscola;
 
@@ -33,7 +36,17 @@ public class EquipaDAO implements Map<String,Equipa> {
 
     @Override
     public int size() {
-        return this.equipas.size();
+        int i=0;
+        try {
+        Statement stm = ConexaoBD.getConexao().createStatement();
+        ResultSet rs = stm.executeQuery("SELECT NOME FROM " + EQUIPA_E);
+            for (; rs.next(); i++)
+                              ;
+            ConexaoBD.fecharCursor(rs, stm);            
+             return i;
+        } catch (SQLException e) {
+            throw new NullPointerException(e.getMessage());
+        }
     }
 
     @Override
@@ -43,7 +56,21 @@ public class EquipaDAO implements Map<String,Equipa> {
 
     @Override
     public boolean containsKey(Object key) {
-        return this.equipas.containsKey(key);
+        try {
+            String c = (String) key;
+            String chave = c.toUpperCase();
+            
+            Statement stm = ConexaoBD.getConexao().createStatement();          
+            String sql = "SELECT "+2+" FROM "+EQUIPA_E+" WHERE e.NOME = '"+chave+"'";
+            ResultSet rs = stm.executeQuery(sql);
+            boolean res = rs.next();
+            
+            rs.close();
+            stm.close(); 
+            return res; 
+        } catch (SQLException e) {
+            throw new NullPointerException(e.getMessage());
+        }
     }
 
     @Override
@@ -53,7 +80,27 @@ public class EquipaDAO implements Map<String,Equipa> {
 
     @Override
     public Equipa get(Object key) {
-        return this.equipas.get(key);
+        Equipa eq = null;
+        
+        try {
+            String c = (String) key;
+            String chave = c.toUpperCase();
+            Statement stm = ConexaoBD.getConexao().createStatement();
+            String sql = "SELECT * FROM"+EQUIPA_E+"WHERE e.NOME = '"+chave+"'";
+            ResultSet rs = stm.executeQuery(sql);
+            
+            if(rs.next()) {
+                int id = rs.getInt(IDEQUIPA);
+                String nome = rs.getString(NOME);
+  
+                eq = new Equipa(id,nome);
+                }
+            
+        rs.close();
+        stm.close();
+        } catch (Exception e) {
+        }        
+        return eq;
     }
 
     @Override
@@ -61,7 +108,7 @@ public class EquipaDAO implements Map<String,Equipa> {
 
         try {
             Equipa res = null;
-            String sql = "INSERT INTO " + ESCOLA_E + " VALUES (?, ?, null, ?)";
+            String sql = "INSERT INTO " + EQUIPA_E + " VALUES (?, ?, null, ?)";
             PreparedStatement stm = ConexaoBD.getConexao()
                     .prepareStatement(sql);
             File f = new File(value.getEmblema().getPath());
@@ -75,7 +122,6 @@ public class EquipaDAO implements Map<String,Equipa> {
                 stm.setBlob(EMBLEMA, (Blob) null);
                 stm.setString(NOME_IMAGEM, "");
             }*/
-            stm.setString(NOMEESCOLA, nomeEscola);
             stm.execute();
                         ConexaoBD.fecharCursor(null, stm);
             return res;
@@ -86,7 +132,21 @@ public class EquipaDAO implements Map<String,Equipa> {
     
     @Override
     public Equipa remove(Object key) {
-        return this.equipas.remove(key);
+        try {
+			Equipa res = null;
+			String chave = (String) key;
+			String sql = "DELETE FROM " + EQUIPA_E
+					+ " WHERE e.nome = ?";
+			PreparedStatement stm = ConexaoBD.getConexao()
+					.prepareStatement(sql);
+			stm.setInt(1, IDEQUIPA);
+			stm.setString(2, chave);
+			stm.execute();
+                        ConexaoBD.fecharCursor(null, stm);
+			return res;
+		} catch (Exception e) {
+			throw new NullPointerException(e.getMessage());
+		}
     }
 
     @Override
@@ -101,7 +161,20 @@ public class EquipaDAO implements Map<String,Equipa> {
 
     @Override
     public Set<String> keySet() {
-        return this.equipas.keySet();
+        Set<String> res = new HashSet<String>();
+        try {
+            Statement stm = ConexaoBD.getConexao().createStatement();
+            String sql = "SELECT NOME FROM EQUIPA";
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                res.add(rs.getString(NOME));
+            }
+            rs.close() ;
+            stm.close() ;
+        } catch (Exception e) {
+            throw new NullPointerException(e.getMessage());
+        }
+        return res;
     }
 
     @Override
