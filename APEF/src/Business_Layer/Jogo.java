@@ -47,6 +47,20 @@ public class Jogo implements Comparable<Jogo>{
         APEF.IDENTIFICADOR++;
     }
     
+    public Jogo(int idJogo, int i, GregorianCalendar g, Campo c, Arbitro a, Escalao ec, Escalao ef) {
+    	this.id = idJogo;
+        this.idCompeticao = i;
+    	this.realizado = false;
+    	this.dia = g;
+    	this.campo = c;
+    	this.arbitro = a;
+    	this.ecasa = ec;
+    	this.efora = ef;
+    	this.numGolosCasa = 0;
+    	this.numGolosFora = 0;
+    	this.goleadores = new GoleadoresDAO();
+    }
+    
     public Jogo(int idCompeticao, GregorianCalendar g, Campo campo, Escalao c, Escalao f){
         this.id = APEF.IDENTIFICADOR;
         this.idCompeticao = idCompeticao;
@@ -70,6 +84,18 @@ public class Jogo implements Comparable<Jogo>{
     	this.numGolosFora = j.getNumGolosJogoFora();
     	this.goleadores = j.getGoleadoresJogo();
 	}
+
+    public Jogo(int idJogo, int idComp, GregorianCalendar data2, Campo campo, Arbitro arb) {
+        this.id = idJogo;
+        this.idCompeticao = idComp;
+    	this.realizado = false;
+    	this.dia = data2;
+    	this.campo = campo;
+    	this.arbitro = arb;
+    	this.numGolosCasa = 0;
+    	this.numGolosFora = 0;
+    	this.goleadores = new GoleadoresDAO();
+    }
     
     public int getID() {
         return this.id;
