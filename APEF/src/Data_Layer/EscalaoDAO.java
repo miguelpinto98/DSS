@@ -11,6 +11,7 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.GregorianCalendar;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -99,7 +100,7 @@ public class EscalaoDAO implements Map<Integer,Escalao> {
             Integer chave = (Integer) key;
             if(chave < 4) {
                 Statement stm = ConexaoBD.getConexao().createStatement();
-                String sql = "SELECT * FROM ESCALAO e WHERE e.IDESCALAO = "+chave;
+                String sql = "SELECT * FROM ESCALAO e WHERE e.TIPOESCALAO = "+chave+" and e.IDEQUIPA = "+this.idEquipa;
                 ResultSet rs = stm.executeQuery(sql);         
                 if(rs.next()) {
                     int nIdEsc = rs.getInt(ID_ESCALAO);
@@ -133,7 +134,7 @@ public class EscalaoDAO implements Map<Integer,Escalao> {
                         rs = stm.executeQuery(sql);
                         String nomeEquipa = null;
                         if(rs.next())
-                            nomeEquipa = rs.getString(2);
+                            nomeEquipa = rs.getString(1);
                         
                         escalao = new Escalao(nIdEsc, nTipoEsc, nNomeEsco, nomeEquipa, t, nIdAg,nIdDadEst);
                     }
@@ -175,15 +176,21 @@ public class EscalaoDAO implements Map<Integer,Escalao> {
                     stm.execute();
                     stm.close();
                     
-                    sql = "INSERT INTO Escalao(idEscalao, tipoEscalao, Escolanome, idEquipa, idTreinador, idAgenda, idDadosEstatisticos, idCampeonato, idTorneio, idFase, removido) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    System.out.println(value.getNomeEquipa());
+                    System.out.println(value.getTipoEscalao());
+                    
+                    
+                    sql = "INSERT INTO Escalao VALUES ("+value.getID()+", "+value.getTipoEscalao()+", '"+value.getNomeEscola()+"', "+this.idEquipa+", "+tre.getID()+", null, null, null, null, null, 0)";
                     stm = ConexaoBD.getConexao().prepareStatement(sql);
-                    stm.setInt(ID_ESCALAO, value.getID());
-                    stm.setInt(TIPOESCALAO, c);
-                    stm.setString(ESCOLANOME, value.getNomeEscola());
-                    stm.setInt(ID_EQUIPA, this.idEquipa);
-                    stm.setInt(ID_TREINADOR, tre.getID());
-                    stm.setInt(REMOVIDO, 0);
-                    stm.execute();
+                    //stm.setInt(ID_ESCALAO, value.getID());
+                    //stm.setInt(TIPOESCALAO, c);
+                    //stm.setString(ESCOLANOME, value.getNomeEscola());
+                    //stm.setInt(ID_EQUIPA, this.idEquipa);
+                    //stm.setInt(ID_TREINADOR, tre.getID());
+                    //stm.setInt(REMOVIDO, 0);
+                    ResultSet rs = stm.executeQuery();
+                    if(rs.rowInserted())
+                        System.out.println("INSERIDA");
                     stm.close();
                 }
             }
@@ -210,7 +217,19 @@ public class EscalaoDAO implements Map<Integer,Escalao> {
 
     @Override
     public Set<Integer> keySet() {
-        throw new NullPointerException("Não Definido");
+        Set<Integer> res = new HashSet<>();
+        try {
+            Statement stm = ConexaoBD.getConexao().createStatement();
+            String sql = "SELECT IDESCALAO FROM ESCALAO e WHERE e.IDEQUIPA = "+this.idEquipa;
+            ResultSet rs = stm.executeQuery(sql);
+            
+            while(rs.next())
+                res.add(rs.getInt(1));
+           
+            ConexaoBD.fecharCursor(rs, stm);
+        } catch (SQLException e) {
+        }
+        return res;
     }
 
     @Override

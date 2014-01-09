@@ -24,7 +24,7 @@ public class Escalao {
         this.nomeEscola = "";
         this.nomeEquipa = "";
     	this.treinador = new Treinador();
-    	this.jogadores = new JogadorDAO();
+    	this.jogadores = new JogadorDAO(this.id,this.nomeEquipa);
         this.agenda = new Agenda();
         this.dados = new DadosEstatisticos();
         APEF.IDENTIFICADOR++;
@@ -36,7 +36,7 @@ public class Escalao {
         this.nomeEscola = nomeEscola;
         this.nomeEquipa = nomeEquipa;
         this.treinador = new Treinador();
-    	this.jogadores = new JogadorDAO();
+    	this.jogadores = new JogadorDAO(this.id,this.nomeEquipa);
         this.agenda = new Agenda();
         this.dados = new DadosEstatisticos(APEF.IDENTIFICADOR);
         APEF.IDENTIFICADOR++;
@@ -59,7 +59,7 @@ public class Escalao {
         this.nomeEscola = nEscola;
         this.nomeEquipa = nEquipa;
         this.treinador = t;
-        this.jogadores = new JogadorDAO();
+        this.jogadores = new JogadorDAO(this.id, this.nomeEquipa);
         this.agenda = new Agenda();
         this.dados = new DadosEstatisticos(); 
     }
@@ -70,7 +70,7 @@ public class Escalao {
         this.nomeEscola = nEscola;
         this.nomeEquipa = nEquipa;
         this.treinador = t;
-        this.jogadores = new JogadorDAO();
+        this.jogadores = new JogadorDAO(this.id, this.nomeEquipa);
         this.agenda = new Agenda(idAgenda);
         this.dados = new DadosEstatisticosDAO(idDadosEst);
     }
@@ -97,11 +97,7 @@ public class Escalao {
     }
     
     public Map<Integer,Jogador> getJogadores() {
-        Map<Integer,Jogador> aux = new JogadorDAO();
-        for(Integer n : this.jogadores.keySet()) 
-            aux.put(n, this.jogadores.get(n));
-        
-        return aux;
+        return this.jogadores;
     }
 
     public Agenda getAgenda() {
@@ -240,7 +236,7 @@ public class Escalao {
     
     public boolean removerJogador(Jogador j) {
         boolean res = false;
-        if(this.jogadores.size() > 0) {
+        if(this.jogadores.size() > 0) { // ALTEREI O VALOR MINIMO DE REMOÇ
             this.jogadores.remove(j.getID());
             res= true;
         }

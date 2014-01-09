@@ -12,17 +12,17 @@ public class Jogador extends Pessoa {
     //Variaveis de Instancia
     private int nrGolos;
     private Map<Integer,Integer> competicoes; //<Id da competicao,id jogador>
-    private boolean emprestado;
     private String nomeEquipa;
-    private String nomeEquipaEmprestimo;
+    private int emprestado;
+    private int nomeEquipaEmprestimo;
 
     //Construtores
     public Jogador() {
     	super();
     	this.nrGolos = 0;
-        this.emprestado = false;
+        this.emprestado = 0;
         this.nomeEquipa = "";
-        this.nomeEquipaEmprestimo = "";
+        this.nomeEquipaEmprestimo = 0;
         this.competicoes = new CompeticoesJogadorDAO();
     }
    
@@ -31,16 +31,16 @@ public class Jogador extends Pessoa {
         this.nrGolos = 0;
         this.competicoes = new CompeticoesJogadorDAO();
         this.nomeEquipa = nEquipa;
-        this.nomeEquipaEmprestimo = new String();
-        this.emprestado = false;
+        this.nomeEquipaEmprestimo = 0;
+        this.emprestado = 0;
     }
     
     public Jogador(String nome, GregorianCalendar g, int sexo,  Imagem img) {
         super(nome,img,g,sexo);
-        this.emprestado = false;
+        this.emprestado = 0;
         this.nomeEquipa = "CeSIUM";
         this.nrGolos = 0;
-        this.nomeEquipaEmprestimo = new String();
+        this.nomeEquipaEmprestimo = 0;
         this.competicoes = new CompeticoesJogadorDAO();
     }
 
@@ -48,7 +48,7 @@ public class Jogador extends Pessoa {
         super(nome,null,g,sexo);
         this.nrGolos = 0;
         this.competicoes = new CompeticoesJogadorDAO();
-        this.emprestado = emprestado;
+        this.emprestado = 0;
         this.nomeEquipa=nomeEquipa;
     }
 
@@ -60,13 +60,22 @@ public class Jogador extends Pessoa {
         this.nomeEquipa = t.getNomeEquipa();
         this.nomeEquipaEmprestimo = t.getNomeEquipaEmprestimo();
     }
-
+    
+    public Jogador(int id, String nome, Imagem img, GregorianCalendar g, int sexo, int ngolos, String nomeEquipa, int emprestado, int idEquipaEmprestado) {
+        super(id,nome,img,g,sexo);
+        this.nrGolos = ngolos;
+        this.nomeEquipa = nomeEquipa;
+        this.emprestado = emprestado;
+        this.nomeEquipaEmprestimo = idEquipaEmprestado;
+        this.competicoes = new CompeticoesJogadorDAO();
+    }
+    
     //Getters
     public int getNrGolos() {
     	return this.nrGolos;
     }
 
-    public boolean getEmprestado() {
+    public int getEmprestado() {
         return this.emprestado;
     }
     
@@ -74,7 +83,7 @@ public class Jogador extends Pessoa {
         return this.nomeEquipa;
     }
     
-    public String getNomeEquipaEmprestimo() {
+    public int getNomeEquipaEmprestimo() {
         return this.getNomeEquipaEmprestimo();
     }
     
@@ -91,15 +100,15 @@ public class Jogador extends Pessoa {
     	this.nrGolos = n;
     }
 
-    public void setEmprestado(boolean e) {
+    public void setEmprestado(int e) {
         this.emprestado = e;
     }
     
     public void setNomeEquipa(String s) {
-        this.nomeEquipaEmprestimo = s;
+        this.nomeEquipa = s;
     }
     
-    public void setNomeEquipaEmprestimo(String s) {
+    public void setNomeEquipaEmprestimo(int s) {
         this.nomeEquipaEmprestimo = s;
     }
 
@@ -109,7 +118,6 @@ public class Jogador extends Pessoa {
         int hash = 7;
         hash = 17 * hash + this.nrGolos;
         hash = 17 * hash + Objects.hashCode(this.competicoes);
-        hash = 17 * hash + (this.emprestado ? 1 : 0);
         hash = 17 * hash + Objects.hashCode(this.nomeEquipa);
         hash = 17 * hash + Objects.hashCode(this.nomeEquipaEmprestimo);
         return hash;
