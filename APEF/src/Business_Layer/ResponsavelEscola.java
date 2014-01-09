@@ -11,11 +11,18 @@ public class ResponsavelEscola extends Utilizador {
 		this.escola = new Escola();
 	}
 
-	public ResponsavelEscola(String nickname, String password, String email, GregorianCalendar g, APEF a) {
-		super(null,nickname,"",email,password,"","","",g,false,false);
+	public ResponsavelEscola(int tipo,String nickname, String password, String email, GregorianCalendar g, APEF a) {
+		super(null,tipo,nickname,"",email,password,"","","",g,false,false,false);
 		this.escola = new Escola(); 
 		APEF.IDENTIFICADOR++;
 	}
+    
+    public ResponsavelEscola(int id, Imagem avatar, int tipo, String nick, String nome, 
+            String email, String pw, String morada, String tlmvl, String codPostal, 
+            GregorianCalendar dataNasc, boolean ativo, boolean camposP,boolean removido,Escola escola) {
+        super(id,avatar,tipo,nick,nome,email,pw,morada,tlmvl,codPostal,dataNasc,ativo,camposP,removido);
+        this.escola = escola;
+    }
 
 	public ResponsavelEscola(ResponsavelEscola re) {
 		super(re);
@@ -51,6 +58,7 @@ public class ResponsavelEscola extends Utilizador {
                 str.append("Nickname:" + this.getNomeUser()+"\n");
                 str.append("Password:" + this.getPass()+"\n");
                 str.append("Email:" + this.getEmail()+"\n");
+                //str.append("Escola" + this.escola.getNome()+"\n");
 		
 		return str.toString();
 	}

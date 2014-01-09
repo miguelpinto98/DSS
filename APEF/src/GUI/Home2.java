@@ -143,15 +143,18 @@ public final class Home2 extends JFrame {
         
 
         /* TESTE USERS */
-        this.sistema.registarUser("maleite","pw1234","maleite@gmail.com",0);
+        /*this.sistema.registarUser("maleite","pw1234","maleite@gmail.com",0);
         this.sistema.registarUser("174Miguel","pw1234","miguel@gmail.com",1);
         this.sistema.registarUser("63linda","pw1234","63@gmail.com",2);
         this.sistema.registarUser("diana","pw1234","demossbb@gmail.com",2);
         this.sistema.registarUser("serafim","pw1234","smcp@gmail.com",2);
-        this.sistema.registarUser("atum","pw1234","atum@gmail.com",0);
+        this.sistema.registarUser("atum","pw1234","atum@gmail.com",0);*/
         System.out.println(this.sistema.getUsers().size());
         System.out.println(this.sistema.getUsers().isEmpty());
-        System.out.println(this.sistema.getUsers().containsKey("ATUM"));
+        System.out.println(this.sistema.getUsers().get("serafim"));
+        System.out.println(this.sistema.getUsers().get("miguel"));
+        System.out.println(this.sistema.getUsers().get("diana"));
+
         
         /* TESTE JOGO COM ESCALOES */
         ArrayList<Jogo> tj = new ArrayList<>();

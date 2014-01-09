@@ -2,20 +2,31 @@ package Data_Layer;
 
 import Business_Layer.Agenda;
 import Business_Layer.Jogo;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author serafim
  */
 public class AgendaDAO implements Map<Integer,Jogo> {
+    private int id;
     private HashMap<Integer,Jogo> jogos;
     
     public AgendaDAO() {
-        this.jogos = new HashMap<>();
+        this.jogos = new HashMap<Integer,Jogo>(); 
+    }
+    
+    public AgendaDAO(int id) {
+      this.id = id;
     }
     
     @Override
@@ -40,6 +51,7 @@ public class AgendaDAO implements Map<Integer,Jogo> {
 
     @Override
     public Jogo get(Object key) {
+        
         return this.jogos.get(key);
     }
 
@@ -70,8 +82,23 @@ public class AgendaDAO implements Map<Integer,Jogo> {
 
     @Override
     public Collection<Jogo> values() {
-        return this.jogos.values();
-    }
+        Statement stm;
+        try {
+            Collection<Jogo> jgs = new ArrayList<Jogo>();
+            stm = ConexaoBD.getConexao().createStatement();
+            String sql = "SELECT * FROM JOGO j where j.IDAGENDA = '"+this.id+"'";
+            ResultSet rs = stm.executeQuery(sql);
+            while(rs.next()) {
+                
+                Jogo jg = new Jogo();
+                jgs.add(jg);
+            }
+            ConexaoBD.fecharCursor(rs, stm);
+            return jgs;
+        } catch (SQLException e) {  
+            throw new NullPointerException(e.getMessage());
+        }
+}
 
     @Override
     public Set<Map.Entry<Integer, Jogo>> entrySet() {

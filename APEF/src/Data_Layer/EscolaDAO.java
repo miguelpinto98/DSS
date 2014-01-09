@@ -63,7 +63,6 @@ public class EscolaDAO implements Map<String,Escola> {
         return this.escolas.containsValue(value);
     }
 
-    @Override
     public Escola get(Object key) {
         Escola esc = null;
         

@@ -5,24 +5,26 @@ import java.util.HashSet;
 
 public class Admin extends Utilizador {
 	private APEF gestao;
-	private HashSet<HistoricoAcao> acoes;
 
 	public Admin(){
 		super();
 		this.gestao = new APEF();
-		this.acoes = new HashSet<HistoricoAcao>();
 	}
 
-	public Admin(String nickname, String password, String email, GregorianCalendar g, APEF a){
-		super(null,nickname,"",email,password,"","","",g,false,false);
+	public Admin(int tipo,String nickname, String password, String email, GregorianCalendar g, APEF a){
+		super(null,tipo,nickname,"",email,password,"","","",g,false,false,false);
 		this.gestao = a;
-		this.acoes = new HashSet<HistoricoAcao>(); 
 		APEF.IDENTIFICADOR++;
 	}
+    
+    public Admin(int id, Imagem avatar, int tipo, String nick, String nome, 
+            String email, String pw, String morada, String tlmvl, String codPostal, 
+            GregorianCalendar dataNasc, boolean ativo, boolean camposP,boolean removido) {
+        super(id,avatar,tipo,nick,nome,email,pw,morada,tlmvl,codPostal,dataNasc,ativo,camposP,removido);
+    }
 
 	public Admin(Admin a) {
 		super(a);
-		this.acoes = a.getAcoes();
 	}
 	
 	public APEF getGestao() {
@@ -32,18 +34,7 @@ public class Admin extends Utilizador {
 	public void setGestao(APEF a){
 		this.gestao = a;
 	}
-	
-	public HashSet<HistoricoAcao> getAcoes() {
-		HashSet<HistoricoAcao> hse = new HashSet<HistoricoAcao>();
-		for(HistoricoAcao s : this.acoes)
-			hse.add(s);
-		return hse;
-	}
-
-	public void setAcoes (HashSet<HistoricoAcao> es) {
-		this.acoes = es;
-	}
-
+    
 	public Admin clone() {
 		return new Admin(this);
 	}
@@ -64,19 +55,22 @@ public class Admin extends Utilizador {
 		str.append("Nickname:" + this.getNomeUser()+"\n");
         str.append("Password:" + this.getPass()+"\n");
         str.append("Email:" + this.getEmail()+"\n");
-        str.append(this.getAcoes());
-		return str.toString();
+        str.append("Nome:" + this.getNome()+"\n");
+		str.append("Morada:" + this.getMorada()+"\n");
+        str.append("Contacto:" + this.getTelemovel()+"\n");
+        str.append("DN:" + this.getDataNasc()+"\n");
+        str.append("Ativo:" + this.isAtivo()+"\n");
+        str.append("CP:" + this.isCamposPreenchidos()+"\n");
+        str.append("Removido:" + this.isRemovido()+"\n");
+
+        return str.toString();
 	}
-	
+    
 	public void criaNovaEpoca(int ano) {
 		this.gestao.criaEpoca(ano);
 	}
 	
 	public void atribuiPermissoes(String name) {
 		this.gestao.mudarPermissoes(name);
-	}
-
-	public void inserirHistorico(HistoricoAcao h) {
-		this.acoes.add(h);
 	}
 }

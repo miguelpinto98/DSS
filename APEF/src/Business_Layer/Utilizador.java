@@ -8,6 +8,7 @@ public abstract class Utilizador {
     
     //Variaveis de Instancia
     private int id;
+    private int tipo;
     private Imagem avatar;
     private String nomeUtilizador;
     private String nome;
@@ -19,10 +20,11 @@ public abstract class Utilizador {
     private GregorianCalendar dataNascimento;
     private boolean ativo;
     private boolean camposPreenchidos;
-    
+    private boolean removido;
     //Construtores
     public Utilizador() {
     	this.id = APEF.IDENTIFICADOR++;
+        this.tipo = -1;
         this.avatar = null;
         this.nomeUtilizador = "";
         this.nome = "";
@@ -34,14 +36,16 @@ public abstract class Utilizador {
         this.dataNascimento = new GregorianCalendar();
         this.ativo = false;
         this.camposPreenchidos = false;
+        this.removido = false;
         APEF.IDENTIFICADOR++;
     }
 
-    public Utilizador(Imagem img, String nickname, String nome, String email, 
+    public Utilizador(Imagem img, int tipo, String nickname, String nome, String email, 
                         String pw, String morada, String tlmvl, 
                         String codPostal, GregorianCalendar data, 
-                        boolean ativo, boolean camposPreenchidos) {
+                        boolean ativo, boolean camposPreenchidos, boolean removido) {
         this.id = APEF.IDENTIFICADOR;
+        this.tipo = tipo;
         this.avatar = img;
         this.nomeUtilizador = nickname;
         this.nome = nome;
@@ -53,7 +57,27 @@ public abstract class Utilizador {
         this.dataNascimento = data;
         this.ativo = ativo;
         this.camposPreenchidos = camposPreenchidos;
+        this.removido = removido;
         APEF.IDENTIFICADOR++;
+    }
+    
+    public Utilizador(int id, Imagem avatar, int tipo, String nick, String nome, String email, String pw, 
+            String morada, String tlmvl, String codPostal, GregorianCalendar dataNasc, 
+            boolean ativo, boolean camposP, boolean removido) {
+        this.id = id;
+        this.avatar = avatar;
+        this.tipo = tipo;
+        this.nomeUtilizador = nick;
+        this.nome = nome;
+        this.email = email;
+        this.password = pw;
+        this.morada = morada;
+        this.telemovel = tlmvl;
+        this.codigoPostal = codPostal;
+        this.dataNascimento = dataNasc;
+        this.ativo = ativo;
+        this.camposPreenchidos = camposP;
+        this.removido = removido;
     }
     
     public Utilizador(Utilizador u) {
@@ -69,6 +93,7 @@ public abstract class Utilizador {
         this.dataNascimento = u.getDataNasc();
         this.ativo = u.isAtivo();
         this.camposPreenchidos = u.isCamposPreenchidos();
+        this.removido = u.isRemovido();
     }
 
     //Getters
@@ -115,7 +140,11 @@ public abstract class Utilizador {
     public boolean isAtivo() {
         return this.ativo;
     }
-
+    
+    public boolean isRemovido() {
+        return this.removido;
+    }
+    
     public boolean isCamposPreenchidos() {
         return this.camposPreenchidos;
     }

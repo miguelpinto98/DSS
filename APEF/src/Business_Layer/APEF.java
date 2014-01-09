@@ -166,19 +166,19 @@ public class APEF {
 	
         if(validaPassword(password)) {
             if (tipoUser==0) { 
-                Admin user = new Admin(nickname, password, email, g,this);
+                Admin user = new Admin(tipoUser,nickname, password, email, g,this);
                 String pw = user.encriptarPassword(password);
                 user.setPass(pw);
        	    	inserido = inserirUtilizador(user);
             }
             if (tipoUser==1) { 
-                ResponsavelEscola user = new ResponsavelEscola(nickname, password, email,g,this);
+                ResponsavelEscola user = new ResponsavelEscola(tipoUser,nickname, password, email,g,this);
                 String pw = user.encriptarPassword(password);
                 user.setPass(pw);
                 inserido = inserirUtilizador(user);
             }
             if (tipoUser==2) { 
-                Arbitro user = new Arbitro(nickname, password, email, g,this);
+                Arbitro user = new Arbitro(tipoUser,nickname, password, email, g,this);
                 String pw = user.encriptarPassword(password);
                 user.setPass(pw);
                 inserido = inserirUtilizador(user);

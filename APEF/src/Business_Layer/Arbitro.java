@@ -12,12 +12,18 @@ public class Arbitro extends Utilizador {
     	this.agenda = new Agenda();
     }
 
-    public Arbitro(String nickname, String password, String email, GregorianCalendar g, APEF a) {
-		super(null,nickname,"",email,password,"","","",g,false,false);
+    public Arbitro(int tipo,String nickname, String password, String email, GregorianCalendar g, APEF a) {
+		super(null,tipo,nickname,"",email,password,"","","",g,false,false,false);
 		this.agenda = new Agenda();
         APEF.IDENTIFICADOR++; 
 	}
     
+    public Arbitro(int id, Imagem avatar, int tipo, String nick, String nome, 
+            String email, String pw, String morada, String tlmvl, String codPostal, 
+            GregorianCalendar dataNasc, boolean ativo, boolean camposP, Agenda a,boolean removido) {
+        super(id,avatar,tipo,nick,nome,email,pw,morada,tlmvl,codPostal,dataNasc,ativo,camposP,removido);
+        this.agenda = a;
+    }
     public Arbitro(Arbitro arb) {
     	super(arb);
     	this.agenda = arb.getAgenda();
@@ -50,7 +56,7 @@ public class Arbitro extends Utilizador {
         str.append("\nEmail: " + this.getEmail());
         str.append("\nAtivo: " + this.isAtivo());
         str.append("\nCampos Preenchidos: "+  this.isCamposPreenchidos());     
-        str.append("\n"+this.getAgenda().toString());   
+//        str.append("\n"+this.getAgenda().toString());   
         str.append("\n-----------------\n");
 		return str.toString();
 	}

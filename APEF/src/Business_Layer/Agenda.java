@@ -20,10 +20,9 @@ public class Agenda {
             APEF.IDENTIFICADOR++;
         }
         
-        public Agenda(Map<Integer,Jogo> j){
-            this.idAgenda = APEF.IDENTIFICADOR;
+        public Agenda(int id,Map<Integer,Jogo> j){
+            this.idAgenda = id;
             this.jogos = j;
-            APEF.IDENTIFICADOR++;
         }
         
         public Agenda(Agenda a){
