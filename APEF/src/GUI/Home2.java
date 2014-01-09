@@ -5,6 +5,7 @@ import Business_Layer.Utilizador;
 import Business_Layer.Admin;
 import Business_Layer.Agenda;
 import Business_Layer.Arbitro;
+import Business_Layer.Campeonato;
 import Business_Layer.Campo;
 import Business_Layer.DadosEstatisticos;
 import Business_Layer.Epoca;
@@ -80,14 +81,25 @@ public final class Home2 extends JFrame {
         
         /* EPOCA */ /**TORNEIOS*/
         Epoca epo1 = new Epoca(2014);
+        Epoca epo2 = new Epoca(2003);
+        Epoca epo3 = new Epoca(2010);
+        Epoca epo4 = new Epoca(2014);
+        Epoca epo5 = new Epoca(1995);
  
         Torneio t1 = new Torneio("Uminho Cup",new GregorianCalendar(),new GregorianCalendar(),2,2,new Campo("UM"));
         Torneio t2 = new Torneio("Uminho Cup",new GregorianCalendar(),new GregorianCalendar(),1,2,new Campo("UM"));
-        
+        Campeonato c1 = new Campeonato("Campeonato dos lindos", new GregorianCalendar(),new GregorianCalendar(), 1, 2);
+        Campeonato c2 = new Campeonato("Campeonato dos ainda mais lindos", new GregorianCalendar(),new GregorianCalendar(), 1, 2);
+        epo1.inserirCampeonato(c1);
+        epo1.inserirCampeonato(c2);
         epo1.inserirTorneio(t1);
         epo1.inserirTorneio(t2);
 
         this.sistema.inserirEpoca(epo1);
+        this.sistema.inserirEpoca(epo2);
+        this.sistema.inserirEpoca(epo3);
+        this.sistema.inserirEpoca(epo4);
+        this.sistema.inserirEpoca(epo5);
 
         /* ESCOLAS */
         Escola e1 = new Escola("Escola Secundária da Lixa", "Lixa", new Campo("Lixa Futebol"));

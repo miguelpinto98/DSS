@@ -70,7 +70,7 @@ public class EpocaDAO implements Map<Integer,Epoca> {
     public Set<Map.Entry<Integer, Epoca>> entrySet() {throw new NullPointerException("Não Definido");}
 
     @Override
-    public Epoca get(Object key) {
+    public Epoca get(Object key){
         Epoca ep = null;
         
         try {

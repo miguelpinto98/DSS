@@ -1,12 +1,7 @@
 package Business_Layer;
 
-import Data_Layer.AgendaDAO;
 import Data_Layer.JogadorDAO;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
@@ -153,6 +148,7 @@ public class Escalao {
 
 
     //Equals,hashCode,Clone,toString
+    @Override
     public int hashCode() {     
         final int prime = 7;
         int result = 1;
@@ -160,6 +156,7 @@ public class Escalao {
         return result;
     }
 
+    @Override
     public boolean equals(Object o) {
         if (this == o)
             return true;
@@ -171,6 +168,7 @@ public class Escalao {
         }
     }
 
+    @Override
     public Escalao clone() {
     	return new Escalao(this);
     }
@@ -184,17 +182,18 @@ public class Escalao {
        return s;
     }
 
+    @Override
     public String toString() {
 		StringBuilder str = new StringBuilder(); 
 		
 		str.append("--Escalao--\n");
-        str.append("\nID: "+this.getID());
-        str.append("\nTipo: "+this.getTipoEscalao());
-        str.append("\nNome Equipa: "+this.getNomeEquipa());
+                str.append("\nID: ").append(this.getID());
+                str.append("\nTipo: ").append(this.getTipoEscalao());
+                str.append("\nNome Equipa: ").append(this.getNomeEquipa());
 		for(Jogador j : this.jogadores.values())
 		str.append(j.toString());
-        str.append("\n"+this.getAgenda());
-        str.append("\n"+this.getDados());
+                str.append("\n").append(this.getAgenda());
+                str.append("\n").append(this.getDados());
 		
 		return str.toString(); 
 	}
