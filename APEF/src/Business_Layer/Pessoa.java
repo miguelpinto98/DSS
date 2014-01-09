@@ -49,13 +49,6 @@ public abstract class Pessoa {
 		this.dataNascimento = p.getDataNasc();
 		this.sexo = p.getSexo();
 	}
-        public Pessoa(int id, String nome, Imagem img, GregorianCalendar g, int sexo) {
-            this.id = id;
-            this.nome = nome;
-            this.foto = img;
-            this.dataNascimento = g;
-            this.sexo = sexo;
-        }
 
 	//Getters
  	public int getID() {

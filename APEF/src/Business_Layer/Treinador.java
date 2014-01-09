@@ -20,9 +20,6 @@ public class Treinador extends Pessoa {
     public Treinador(Treinador t) {
     	super(t);
     }
-    public Treinador(int id, String nome, Imagem img, GregorianCalendar g, int sexo) {
-        super(id,nome,img,g,sexo);
-    }
 
     //Equals,Clone,toString
     public boolean equals(Object o) {
