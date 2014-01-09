@@ -262,7 +262,7 @@ public class APEF {
 	}
     
     public void inserirEpoca(Epoca e) {
-        if(!this.epocas.containsKey(e.getAno())) {
+        if(!(this.epocas.containsKey(e.getAno()))) {
             System.out.println("ccc");
             this.epocas.put(e.getAno(), e);
         }

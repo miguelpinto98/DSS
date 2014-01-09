@@ -5,79 +5,80 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
 
 public class EpocaDAO implements Map<Integer,Epoca> {
-    private HashMap<Integer,Epoca> epocas;
-    public static final Integer ANO = 1;
+    private static final int ANO = 1;
     
-    public EpocaDAO() {
-        this.epocas = new HashMap<>();
-    }
+    public EpocaDAO() { }
     
     @Override
-    @SuppressWarnings("empty-statement")
     public int size() {
+        int i=0;
          try {
-            int i = 0;
-            Statement stm = ConexaoBD.getConexao().createStatement(); ResultSet rs = stm.executeQuery("SELECT ano FROM " + ANO);
-                 for (; rs.next(); i++)
-                     ;
-             
-           return i;
-        } catch (Exception e) {
-            throw new NullPointerException(e.getMessage());
-        }
-    }
+            Statement stm = ConexaoBD.getConexao().createStatement();
+            ResultSet rs = stm.executeQuery("SELECT * FROM EPOCA");
+                 while (rs.next()) i++;
+                 ConexaoBD.fecharCursor(rs, stm);}
+         catch(Exception e) {throw new NullPointerException(e.getMessage());}
+         return i;} 
+    
+    @Override
+    public boolean isEmpty() {throw new NullPointerException("Não Definido");}
 
     @Override
-    public boolean isEmpty() {
-        return this.epocas.isEmpty();
-    }
+    public boolean containsKey(Object key) {throw new NullPointerException("Não Definido");}
+    
+    @Override
+    public boolean containsValue(Object value) {throw new NullPointerException("Não Definido");}
 
     @Override
-    public boolean containsKey(Object key) {
-        try {
+    public void putAll(Map<? extends Integer, ? extends Epoca> m) {throw new NullPointerException("Não Definido");}
+    
+    @Override
+    public Epoca remove(Object key) {
+        Epoca res = null;
+        try {            
             Integer chave = (Integer) key;
-            boolean res;
-            try (Statement stm = ConexaoBD.getConexao().createStatement()) {
-                String sql = "SELECT ano FROM " + ANO + " WHERE 1.ano = "
-                        + chave;
-                try (ResultSet rs = stm.executeQuery(sql)) {
-                    res = rs.next();
-                }
-            }
-            return res ;
-        } catch (Exception e) {
-            throw new NullPointerException(e.getMessage());
-        }
+            String sql = "DELETE FROM EPOCA WHERE EPOCA.ANO = ?";
+            PreparedStatement stm = ConexaoBD.getConexao().prepareStatement(sql);
+            stm.setInt(ANO, chave);
+            stm.execute();
+            ConexaoBD.fecharCursor(null, stm);
+            return res;}
+        catch (Exception e){throw new NullPointerException(e.getMessage());}
     }
 
     @Override
-    public boolean containsValue(Object value) {
-        return this.epocas.containsValue(value);
-    }
-
-
+    public void clear() {throw new NullPointerException("Não Definido");}
+    
     @Override
-    public void putAll(Map<? extends Integer, ? extends Epoca> m) {
-        this.epocas.putAll(m);
-    }
-
+    public Set<Map.Entry<Integer, Epoca>> entrySet() {throw new NullPointerException("Não Definido");}
 
     @Override
     public Epoca get(Object key) {
-        throw new UnsupportedOperationException("Not supported yet."); }
-    
+        Epoca ep = null;
+        
+        try {
+            String chave = (String) key;
+            Statement stm = ConexaoBD.getConexao().createStatement();
+            String sql = "SELECT * FROM EPOCA WHERE EPOCA.ANO = "+chave+"";
+            ResultSet rs = stm.executeQuery(sql);
+            
+            if(rs.next()) { int ano = rs.getInt(ANO); ep= new Epoca(ano);}
+            
+            rs.close();
+            stm.close();}
+        catch (Exception e) {}        
+     return ep;}
 
     @Override
     public Epoca put(Integer key, Epoca value){        
         Epoca res = null;
         try {
-            String sql = "INSERT INTO " + ANO + " VALUES (?)";            
+            String sql = "INSERT INTO Epoca(key) VALUES (?)";            
             PreparedStatement stm = ConexaoBD.getConexao().prepareStatement(sql);
             stm.setInt(ANO, key);
             stm.execute();
@@ -86,35 +87,12 @@ public class EpocaDAO implements Map<Integer,Epoca> {
         catch (Exception e){throw new NullPointerException(e.getMessage());}
         return res;}
     
-  
-    
-    @Override
-    public Epoca remove(Object key) {
-        return this.epocas.remove(key);
-    }
-
- 
-    @Override
-    public void clear() {
-        this.epocas.clear();
-    }
+   @Override
+    public Set<Integer> keySet() {throw new NullPointerException("Não Definido");}
 
     @Override
-    public Set<Integer> keySet() {
-        return this.epocas.keySet();
-    }
+    public Collection<Epoca> values() {throw new NullPointerException("Não Definido");}
 
     @Override
-    public Collection<Epoca> values() {
-        return this.epocas.values();
-    }
-
-    @Override
-    public Set<Map.Entry<Integer, Epoca>> entrySet() {
-        return this.epocas.entrySet();
-    }
-    
-    public int hashCode() {
-        return ConexaoBD.getConexao().hashCode();
-    }
+    public int hashCode() {throw new NullPointerException("Não Definido");}
 }
