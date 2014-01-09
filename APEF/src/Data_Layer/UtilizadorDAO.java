@@ -8,16 +8,21 @@ import Business_Layer.Utilizador;
 import Business_Layer.Imagem;
 import Business_Layer.Jogo;
 import Business_Layer.ResponsavelEscola;
+import java.io.File;
+import java.sql.Blob;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
         
@@ -25,6 +30,10 @@ public class UtilizadorDAO implements Map<String,Utilizador>{
     private HashMap<String,Utilizador> users;
 
     public static final String USER = "Utilizador u";
+    public static final String ADMIN = "Admin u";
+    public static final String RESCOLA = "ResponsavelEscola u";
+    public static final String ARBITRO = "Arbitro u";
+
     public static final int ID = 1;
     public static final int AVATAR = 2;
     public static final int NICKNAME = 3;
@@ -40,10 +49,15 @@ public class UtilizadorDAO implements Map<String,Utilizador>{
     public static final int REMOVIDO = 13;
     public static final int NOME = 14;
     //arbitro
+    public static int IDUTILIZADOR = 1;
+    
+    public static int IDTORNEIO = 2;
     public static int IDAGENDA = 3;
+
     //r.escola
-    public static int NOMESCOLA = 2;    
-            public UtilizadorDAO() {
+    public static int ESCOLANOME = 2;    
+            
+    public UtilizadorDAO() {
         this.users = new HashMap<>();
     }
     
@@ -101,6 +115,12 @@ public class UtilizadorDAO implements Map<String,Utilizador>{
             return false;
         else return true;
     }
+    public int converte2(boolean a) {
+        if(a==true)
+            return 1;
+        else return 0;
+    }
+    
 
     @Override
     public Utilizador get(Object key) {
@@ -147,7 +167,7 @@ public class UtilizadorDAO implements Map<String,Utilizador>{
                     sql = "SELECT * FROM RESPONSAVELESCOLA a where a.IDUTILIZADOR = '"+id+"'";
                     rs = stm.executeQuery(sql);
                     if(rs.next()) {
-                    String nomeEscola = rs.getString(NOMESCOLA);
+                    String nomeEscola = rs.getString(ESCOLANOME);
                     EscolaDAO x = new EscolaDAO();
                     Escola y = x.get(nomeEscola);
                     res = new ResponsavelEscola(id,avatar,tipo,nick,nome,email,pw,morada,tlmvl,
@@ -173,9 +193,71 @@ public class UtilizadorDAO implements Map<String,Utilizador>{
 
     @Override
     public Utilizador put(String key, Utilizador value) {
-        return this.users.put(key, value);
-    }
+        Utilizador res = null;
+        try {
+            boolean existe = this.containsKey(key);
+            String sql;
+            if (existe) {
+                sql = "UPDATE "
+                        + USER
+                        + " SET u.idUtilizador = ?, u.avatar = ?, u.nickname = ?, u.email = ?, u.password = ?, u.morada = ?, u.telemovel = ?, u.codPostal = ?, u.dataNasc = ?, u.ativo = ?, u.camposPreenchidos = ?, u.tipoUser = ?, u.removido = ?, u.nome = ? WHERE u.nickname = "
+                        + key;
+            }
+            else {
+                sql = "INSERT INTO Utilizador(idUtilizador,avatar,nickname,email,password,morada,telemovel,codPostal,dataNasc,ativo,camposPreenchidos,tipoUser,removido,nome) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            }
+            PreparedStatement stm = ConexaoBD.getConexao().prepareStatement(sql);
+            stm.setInt(ID, value.getID());
+            stm.setString(NICKNAME,value.getNomeUser());
+            stm.setString(EMAIL,value.getEmail());
+            if(existe)
+                stm.setString(PASSWORD, value.getPass());
+            else
+                stm.setString(PASSWORD, Utilizador.encriptarPassword(value.getPass()));
+            stm.setString(AVATAR,null);
+            stm.setString(MORADA,value.getMorada());
+            stm.setString(TELEMOVEL, value.getTelemovel());
+            stm.setString(CODPOSTAL, value.getCodPostal());
+            Timestamp dataNasc = new Timestamp(value.getDataNasc().getTimeInMillis());
+            stm.setTimestamp(DATANASC, dataNasc);
+            stm.setInt(ATIVO, converte2(value.isAtivo()));
+            stm.setInt(CAMPOSPREENCHIDOS, converte2(value.isCamposPreenchidos()));
+            stm.setInt(REMOVIDO, converte2(value.isRemovido()));
+            stm.setInt(TIPO, value.getTipo());
+            stm.setString(NOME, value.getNome());
+            stm.executeQuery();
+            stm.close();
+             if (value.getTipo() == 0) {
+                  String sql2 = "INSERT INTO Admin(idUtilizador) VALUES ("+value.getID()+")";
+                  PreparedStatement stm2 = ConexaoBD.getConexao().prepareStatement(sql2);
+                  stm2.execute();
+                  stm2.close();
+             }
+             if(value.getTipo() == 1)  {
+                ResponsavelEscola r = (ResponsavelEscola) value; 
+                String s = r.getEscola().getNome();
+                String sql3 = "INSERT INTO ResponsavelEscola(idUtilizador,escolaNome) VALUES ("+value.getID()+",'"+s+"')";
+                PreparedStatement stm3 = ConexaoBD.getConexao().prepareStatement(sql3);
+                stm3.execute();
+                stm3.close();
+             }
+             if(value.getTipo() == 2) {
+                 Arbitro a = (Arbitro) value;
+                int idAgenda = a.getAgenda().getIDAgenda();
+                String sql4 = "INSERT INTO Arbitro(idUtilizador,idTorneio,idAgenda) VALUES ("+value.getID()+",null,"+idAgenda+")";
+                PreparedStatement stm4 = ConexaoBD.getConexao().prepareStatement(sql4);
+                stm4.execute();
+                stm4.close();
+            }
 
+         }
+       
+        catch (SQLException e) {
+            throw new NullPointerException(e.getMessage());
+        }
+        return res;
+    }
+        
     @Override
     public Utilizador remove(Object key) {
         return this.users.remove(key);
@@ -193,12 +275,94 @@ public class UtilizadorDAO implements Map<String,Utilizador>{
 
     @Override
     public Set<String> keySet() {
-        return this.users.keySet();
+        Set<String> res = new TreeSet<>();
+        try {
+            Statement stm = ConexaoBD.getConexao().createStatement();
+            String sql = "SELECT NOME FROM ESCOLA";
+            ResultSet rs = stm.executeQuery(sql);
+            
+            while(rs.next())
+                res.add(rs.getString(NICKNAME));
+           
+            ConexaoBD.fecharCursor(rs, stm);
+        } catch (SQLException e) {
+        }
+        return res;
     }
 
     @Override
     public Collection<Utilizador> values() {
-        return this.users.values();
+        try {
+            Collection<Utilizador> res = new ArrayList<Utilizador>();;
+            Statement stm = ConexaoBD.getConexao().createStatement();
+            String sql = "SELECT * FROM UTILIZADOR u";
+            ResultSet rsCiclo = stm.executeQuery(sql);
+            while(rsCiclo.next()) {
+                int id = rsCiclo.getInt(ID);
+                Imagem avatar = null;
+                if(rsCiclo.getBlob(AVATAR) == null)
+                    avatar = new Imagem();
+                int tipo = rsCiclo.getInt(TIPO);
+                String nick = rsCiclo.getString(NICKNAME);
+                String nome = rsCiclo.getString(NOME);
+                String email = rsCiclo.getString(EMAIL);
+                String pw = rsCiclo.getString(PASSWORD);
+                String morada = rsCiclo.getString(MORADA);
+                String tlmvl = rsCiclo.getString(TELEMOVEL);
+                String codPostal = rsCiclo.getString(CODPOSTAL);
+                GregorianCalendar dataNasc = new GregorianCalendar();
+                rsCiclo.getTimestamp(DATANASC, dataNasc);
+                int ativo = rsCiclo.getInt(ATIVO); 
+                int camposPreenchidos = rsCiclo.getInt(CAMPOSPREENCHIDOS);  
+                int removido = rsCiclo.getInt(REMOVIDO);                
+                if(tipo == 2) {
+                    Arbitro a = null;
+                    stm = ConexaoBD.getConexao().createStatement();
+                    sql = "SELECT * FROM ARBITRO u where u.IDUTILIZADOR = '"+id+"'";
+                    ResultSet rs = stm.executeQuery(sql);
+                    if(rs.next()) {
+                    int idAgenda = rs.getInt(IDAGENDA);
+                                        
+                    AgendaDAO ag = new AgendaDAO(idAgenda);
+                    Agenda agenda = new Agenda(idAgenda,ag);
+                    a = new Arbitro(id,avatar,tipo,nick,nome,email,pw,morada,tlmvl,
+                            codPostal,dataNasc,converte(ativo),converte(camposPreenchidos),
+                            agenda,converte(removido));
+                    res.add(a);
+                    }
+                }
+                if(tipo == 1) {
+                    ResponsavelEscola r = null;
+                    stm = ConexaoBD.getConexao().createStatement();
+                    sql = "SELECT * FROM RESPONSAVELESCOLA a where a.IDUTILIZADOR = '"+id+"'";
+                    ResultSet rs = stm.executeQuery(sql);
+                    if(rs.next()) {
+                    String nomeEscola = rs.getString(ESCOLANOME);
+                    EscolaDAO x = new EscolaDAO();
+                    Escola y = x.get(nomeEscola);
+                    r = new ResponsavelEscola(id,avatar,tipo,nick,nome,email,pw,morada,tlmvl,
+                            codPostal,dataNasc,converte(ativo),converte(camposPreenchidos),converte(removido),y);
+                    res.add(r);
+                    }
+                }
+                if(tipo == 0) {
+                    Admin a = null;
+                    stm = ConexaoBD.getConexao().createStatement();
+                    sql = "SELECT * FROM ADMIN a where a.IDUTILIZADOR = '"+id+"'";
+                    ResultSet rs = stm.executeQuery(sql);
+                    if(rs.next()) {
+                    a = new Admin(id,avatar,tipo,nick,nome,email,pw,morada,tlmvl,
+                            codPostal,dataNasc,converte(ativo),converte(camposPreenchidos),converte(removido));
+                    res.add(a);
+                    }
+                } 
+            }
+            ConexaoBD.fecharCursor(rsCiclo, stm);
+            return res;
+        }
+        catch (SQLException e) {
+            throw new NullPointerException(e.getMessage());
+        }
     }
 
     @Override

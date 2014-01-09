@@ -94,6 +94,7 @@ public abstract class Utilizador {
         this.ativo = u.isAtivo();
         this.camposPreenchidos = u.isCamposPreenchidos();
         this.removido = u.isRemovido();
+        this.tipo = u.getTipo();
     }
 
     //Getters
@@ -123,6 +124,10 @@ public abstract class Utilizador {
 
     public String getMorada() {
         return this.morada;
+    }
+    
+    public int getTipo() {
+        return this.tipo;
     }
 
     public String getTelemovel() {
@@ -206,7 +211,7 @@ public abstract class Utilizador {
     public abstract boolean equals(Object o);
 
     /**Metodos*/
-    public String encriptarPassword (String pw) {
+    public static String encriptarPassword (String pw) {
         byte[] pwB = pw.getBytes() ;
         byte[] pwEnc = null ;
         String res = null ;        

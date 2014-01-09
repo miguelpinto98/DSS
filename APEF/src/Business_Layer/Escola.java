@@ -32,7 +32,7 @@ public class Escola {
     public Escola(String nome, String local, Campo campo) {
         this.nome = nome;
         this.local = local;
-        this.campo = campo.clone();
+        this.campo = campo;
         this.removida = 0;
         this.equipas = new EquipaDAO(nome);
     }

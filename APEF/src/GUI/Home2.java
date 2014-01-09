@@ -150,10 +150,15 @@ public final class Home2 extends JFrame {
         this.sistema.registarUser("serafim","pw1234","smcp@gmail.com",2);
         this.sistema.registarUser("atum","pw1234","atum@gmail.com",0);*/
         System.out.println(this.sistema.getUsers().size());
-        System.out.println(this.sistema.getUsers().isEmpty());
-        System.out.println(this.sistema.getUsers().get("serafim"));
-        System.out.println(this.sistema.getUsers().get("miguel"));
-        System.out.println(this.sistema.getUsers().get("diana"));
+        //System.out.println(this.sistema.getUsers().isEmpty());
+        //System.out.println(this.sistema.getUsers().get("serafim"));
+        //System.out.println(this.sistema.getUsers().get("miguel"));
+        Agenda aaa = new Agenda(999,null);
+        Utilizador u = new Admin(123,null,0,"ADMIN","serafimpinto","lol@joao","1245213s22","Felgueiras","91568544","784-545",new GregorianCalendar(),false,false,false);
+        Utilizador u2 = new ResponsavelEscola(101,null,1,"Rescla","sersfismpinto","ll@josao","1245213s22","Felgueiras","91568544","784-545",new GregorianCalendar(),false,false,false,e1);
+        Utilizador u3 = new Arbitro(1001,null,2,"josejose","sersfismpinto","ll@josao","1245213s22","Felgueiras","91568544","784-545",new GregorianCalendar(),false,false,aaa,false);
+
+        //System.out.println(this.sistema.getUsers().values());
 
         
         /* TESTE JOGO COM ESCALOES */
