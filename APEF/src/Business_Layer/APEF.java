@@ -45,10 +45,7 @@ public class APEF {
     }
 	
 	public Map<Integer, Epoca> getEpocas() {
-		Map<Integer,Epoca> aux = new EpocaDAO();
-		for(Integer s : this.epocas.keySet())
-			aux.put(s, this.epocas.get(s).clone());
-		return aux;
+		return this.epocas;
 	}
 
 	public Map<String, Utilizador> getUsers() {
