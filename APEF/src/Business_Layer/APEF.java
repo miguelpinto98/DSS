@@ -569,8 +569,8 @@ public class APEF {
             }
         }
         if(res) {
-            j.setEmprestado(true);
-            j.setNomeEquipaEmprestimo(nomeEquipa);
+            j.setEmprestado(1);
+            j.setNomeEquipaEmprestimo(equipa.getID());
         }
         return res;
     }
@@ -584,7 +584,8 @@ public class APEF {
             Iterator<String> it2 = e.getEquipas().keySet().iterator(); 
             while (it2.hasNext() && !flag) {
                 String eq = it2.next();
-                if(eq==j.getNomeEquipaEmprestimo()) {
+                
+                if(e.getEquipas().get(eq).getID()==j.getNomeEquipaEmprestimo()) {
                     equipa = e.getEquipas().get(j.getNomeEquipaEmprestimo());
                     flag = true;
                     res = equipa.getEscaloes().get(tipoEscalao).removerJogador(j);
@@ -592,8 +593,8 @@ public class APEF {
             }
         }
         if(res) {
-            j.setEmprestado(false);
-            j.setNomeEquipaEmprestimo("");
+            j.setEmprestado(0);
+            j.setNomeEquipaEmprestimo(0);
         }
         return res;
     }
