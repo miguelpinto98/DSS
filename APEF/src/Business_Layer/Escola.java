@@ -1,6 +1,7 @@
 package Business_Layer;
 
 import Data_Layer.EquipaDAO;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Escola {	
@@ -16,7 +17,7 @@ public class Escola {
         this.nome = "";
         this.local = "";
         this.campo = new Campo();
-        this.equipas = new EquipaDAO(nome);
+        this.equipas = new EquipaDAO(this.nome);
         this.removida = 0;
     }
     
@@ -58,10 +59,11 @@ public class Escola {
      }
  
      public Map<String,Equipa> getEquipas() {
-         Map<String,Equipa> aux = new EquipaDAO(this.nome);
-         for(String s : this.equipas.keySet()){
+         Map<String,Equipa> aux = new HashMap<>();
+         
+         for(String s : this.equipas.keySet())
              aux.put(s,this.equipas.get(s));
-         }
+         
          return aux;
      }
      

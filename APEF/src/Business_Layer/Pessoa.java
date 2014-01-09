@@ -26,6 +26,14 @@ public abstract class Pessoa {
         APEF.IDENTIFICADOR++;
     }
 
+    public Pessoa(int id, String name, Imagem img, GregorianCalendar data, int genero) {
+	this.id = id;
+	this.nome = name;
+	this.foto = img;
+	this.dataNascimento = data;
+	this.sexo = genero;
+    }
+    
     public Pessoa(String name, int genero) {
 	this.id = APEF.IDENTIFICADOR;
 	this.nome = name;

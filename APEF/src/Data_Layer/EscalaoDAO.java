@@ -1,8 +1,16 @@
 package Data_Layer;
 
 import Business_Layer.Escalao;
+import Business_Layer.Imagem;
+import Business_Layer.Treinador;
+import java.sql.Blob;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.GregorianCalendar;
 import java.util.Map;
 import java.util.Set;
 
@@ -11,70 +19,208 @@ import java.util.Set;
  * @author serafim
  */
 public class EscalaoDAO implements Map<Integer,Escalao> {
-    private HashMap<Integer,Escalao> escaloes;
+    private int idEquipa;
+    
+    private static final int ID_PESSOA = 1;
+    private static final int TREINADOR_NOME = 2;
+    private static final int FOTO = 3;
+    private static final int TREINADOR_DATANASC = 4;
+    private static final int TREINADOR_SEXO = 5;
+    
+    private static final int ID_ESCALAO = 1;
+    private static final int TIPOESCALAO = 2;
+    private static final int ESCOLANOME = 3;
+    private static final int ID_EQUIPA = 4;
+    private static final int ID_TREINADOR = 5;
+    private static final int ID_AGENDA = 6;
+    private static final int ID_DADOSEST = 7;
+    private static final int ID_CAMPEONATO = 8;
+    private static final int ID_TORNEIO = 9;
+    private static final int ID_FASE = 10;
+    private static final int REMOVIDO = 11;
     
     public EscalaoDAO() {
-        this.escaloes = new HashMap<>();
+    }
+    
+    public EscalaoDAO(int idEquipa) {
+        this.idEquipa = idEquipa;
     }
     
     @Override
     public int size() {
-        return this.escaloes.size();
+        int res = 0;
+        try {
+            Statement stm = ConexaoBD.getConexao().createStatement();          
+            String sql = "SELECT * FROM ESCALAO";
+            ResultSet rs = stm.executeQuery(sql);
+            
+            while(rs.next())
+                res++;
+            
+            ConexaoBD.fecharCursor(rs, stm);    
+        } catch (SQLException e) {
+        }
+        
+        return res;
     }
 
     @Override
     public boolean isEmpty() {
-        return this.escaloes.isEmpty();
+        throw new NullPointerException("Não Definido");
     }
 
     @Override
     public boolean containsKey(Object key) {
-        return this.escaloes.containsKey(key);
+        boolean res = false;
+        try {
+            int chave = (Integer) key;
+            //String chave = c.toUpperCase();
+            
+            Statement stm = ConexaoBD.getConexao().createStatement();          
+            String sql = "SELECT * FROM ESCALAO e WHERE e.IDESCALAO = "+chave;
+            ResultSet rs = stm.executeQuery(sql);
+            res = rs.next();
+            
+            ConexaoBD.fecharCursor(rs, stm);   
+        } catch (SQLException e) {
+        }
+        return res;
     }
 
     @Override
     public boolean containsValue(Object value) {
-        return this.escaloes.containsValue(value);
+        throw new NullPointerException("Não Definido");
     }
 
     @Override
     public Escalao get(Object key) {
-        return this.escaloes.get(key);
+        Escalao escalao = null;
+        try {
+            Integer chave = (Integer) key;
+            if(chave < 4) {
+                Statement stm = ConexaoBD.getConexao().createStatement();
+                String sql = "SELECT * FROM ESCALAO e WHERE e.IDESCALAO = "+chave;
+                ResultSet rs = stm.executeQuery(sql);         
+                if(rs.next()) {
+                    int nIdEsc = rs.getInt(ID_ESCALAO);
+                    int nTipoEsc = rs.getInt(TIPOESCALAO);
+                    String nNomeEsco = rs.getString(ESCOLANOME);
+                    int nIdEqui = rs.getInt(ID_EQUIPA);
+                    int nIdTrei = rs.getInt(ID_TREINADOR);
+                    int nIdAg = rs.getInt(ID_AGENDA);
+                    int nIdDadEst = rs.getInt(ID_DADOSEST);
+                    int nIdCamp = rs.getInt(ID_CAMPEONATO);
+                    int nIdTor = rs.getInt(ID_TORNEIO);
+                    int nIdFase = rs.getInt(ID_FASE);
+                    int nrem = rs.getInt(REMOVIDO);
+                    
+                    stm = ConexaoBD.getConexao().createStatement();
+                    sql = "SELECT * FROM PESSOA p, TREINADOR t WHERE t.IDPESSOA = "+nIdTrei+" and p.IDPESSOA = "+nIdTrei;
+                    rs = stm.executeQuery(sql);
+                    Treinador t = null;
+                    if(rs.next()) {
+                        int nIdPess = rs.getInt(ID_PESSOA);
+                        String nomePess = rs.getString(TREINADOR_NOME);
+                        Blob avatar = rs.getBlob(FOTO);
+                        GregorianCalendar dataNascT = new GregorianCalendar();
+                        rs.getTimestamp(TREINADOR_DATANASC, dataNascT);
+                        int sexoTrei = rs.getInt(TREINADOR_SEXO);
+                        
+                        t = new Treinador(nIdPess,nomePess,new Imagem(),dataNascT,sexoTrei);
+                        
+                        stm = ConexaoBD.getConexao().createStatement();
+                        sql = "SELECT NOME FROM Equipa e WHERE e.IDEQUIPA = "+nIdEqui;
+                        rs = stm.executeQuery(sql);
+                        String nomeEquipa = null;
+                        if(rs.next())
+                            nomeEquipa = rs.getString(2);
+                        
+                        escalao = new Escalao(nIdEsc, nTipoEsc, nNomeEsco, nomeEquipa, t, nIdAg,nIdDadEst);
+                    }
+                }
+            
+            }
+        } catch (SQLException e) {
+        }
+        return escalao;
     }
 
     @Override
     public Escalao put(Integer key, Escalao value) {
-        return this.escaloes.put(key, value);
+        Escalao res = null;
+        try {
+            Integer c = (Integer) key;
+            boolean existe = this.containsKey(key);
+            PreparedStatement stm = null;
+            
+            if(!existe && c < 4) {
+                String sql = "";
+                
+                Treinador tre = value.getTreinador();
+                if(tre != null) {
+                    sql = "INSERT INTO Pessoa(idPessoa, nome, foto, dataNasc, sexo) VALUES (?, ?, ?, ?, ?)";
+                    stm = ConexaoBD.getConexao().prepareStatement(sql);
+                    stm.setInt(ID_PESSOA, tre.getID());
+                    stm.setString(TREINADOR_NOME, tre.getNome());
+                    stm.setString(FOTO, null);
+                    Timestamp dataNasc = new Timestamp(tre.getDataNasc().getTimeInMillis());
+                    stm.setTimestamp(TREINADOR_DATANASC, dataNasc);
+                    stm.setInt(TREINADOR_SEXO, tre.getSexo());
+                    stm.execute();
+                    stm.close();
+                    
+                    sql = "INSERT INTO Treinador(idPessoa) VALUES (?)";
+                    stm = ConexaoBD.getConexao().prepareStatement(sql);
+                    stm.setInt(ID_PESSOA, tre.getID());
+                    stm.execute();
+                    stm.close();
+                    
+                    sql = "INSERT INTO Escalao(idEscalao, tipoEscalao, Escolanome, idEquipa, idTreinador, idAgenda, idDadosEstatisticos, idCampeonato, idTorneio, idFase, removido) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    stm = ConexaoBD.getConexao().prepareStatement(sql);
+                    stm.setInt(ID_ESCALAO, value.getID());
+                    stm.setInt(TIPOESCALAO, c);
+                    stm.setString(ESCOLANOME, value.getNomeEscola());
+                    stm.setInt(ID_EQUIPA, this.idEquipa);
+                    stm.setInt(ID_TREINADOR, tre.getID());
+                    stm.setInt(REMOVIDO, 0);
+                    stm.execute();
+                    stm.close();
+                }
+            }
+            res = value;
+        } catch (SQLException e) {
+        }
+        return res;
     }
 
     @Override
     public Escalao remove(Object key) {
-        return this.escaloes.remove(key);
+        throw new NullPointerException("Não Definido");
     }
 
     @Override
     public void putAll(Map<? extends Integer, ? extends Escalao> m) {
-        this.escaloes.putAll(m);
+        throw new NullPointerException("Não Definido");
     }
 
     @Override
     public void clear() {
-        this.escaloes.clear();
+        throw new NullPointerException("Não Definido");
     }
 
     @Override
     public Set<Integer> keySet() {
-        return this.escaloes.keySet();
+        throw new NullPointerException("Não Definido");
     }
 
     @Override
     public Collection<Escalao> values() {
-        return this.escaloes.values();
+        throw new NullPointerException("Não Definido");
     }
 
     @Override
     public Set<Map.Entry<Integer, Escalao>> entrySet() {
-        return this.escaloes.entrySet();
+        throw new NullPointerException("Não Definido");
     }
     
     public int hashCode() {

@@ -13,6 +13,10 @@ public class Treinador extends Pessoa {
         super(nome,img,n,genero);
     }
     
+    public Treinador(int id,String nome, Imagem img ,GregorianCalendar n,int genero) {
+        super(id,nome,img,n,genero);
+    }
+    
     public Treinador(Treinador t) {
     	super(t);
     }

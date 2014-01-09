@@ -40,18 +40,12 @@ public class APEF {
         this.emSessao = a.getEmSessao();
     }
 
-	public Map<String, Escola> getEscolas() {
-		Map<String,Escola> aux = new EscolaDAO();
-		for(String s : this.escolas.keySet())
-			aux.put(s, this.escolas.get(s));
-		return aux;
-	}
+    public Map<String, Escola> getEscolas() {
+        return this.escolas;
+    }
 	
 	public Map<Integer, Epoca> getEpocas() {
-		Map<Integer,Epoca> aux = new EpocaDAO();
-		for(Integer s : this.epocas.keySet())
-			aux.put(s, this.epocas.get(s).clone());
-		return aux;
+		return this.epocas;
 	}
 
 	public Map<String, Utilizador> getUsers() {
@@ -265,7 +259,7 @@ public class APEF {
 	}
     
     public void inserirEpoca(Epoca e) {
-        if(!this.epocas.containsKey(e.getAno())) {
+        if(!(this.epocas.containsKey(e.getAno()))) {
             System.out.println("ccc");
             this.epocas.put(e.getAno(), e);
         }

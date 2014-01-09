@@ -25,10 +25,15 @@ public class Agenda {
             this.jogos = j;
         }
         
-        public Agenda(Agenda a){
-            this.idAgenda = a.getIDAgenda();
-            this.jogos = a.getJogos();
-        }
+    public Agenda(Agenda a){
+        this.idAgenda = a.getIDAgenda();
+        this.jogos = a.getJogos();
+    }
+
+    public Agenda(int idAgenda) {
+        this.idAgenda = idAgenda;
+        this.jogos = new AgendaDAO(); //JOGODAO()
+    }
 
         public Map<Integer,Jogo> getJogos() {
             Map<Integer,Jogo> aux = new AgendaDAO();

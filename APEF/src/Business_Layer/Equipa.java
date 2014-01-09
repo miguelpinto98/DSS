@@ -11,8 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Equipa {
-
-	private static final int indexInfantis = 0;
+    private static final int indexInfantis = 0;
     private static final int indexBenjamins = 1;
     private static final int indexTraquinas = 2;
     private static final int indexPetizes = 3;
@@ -29,7 +28,7 @@ public class Equipa {
     	this.nome = new String();
     	this.emblema = new Imagem();
     	this.palmares = new PalmaresDAO();
-    	this.escaloes = new EscalaoDAO();
+    	this.escaloes = new EscalaoDAO(this.id);
         APEF.IDENTIFICADOR++;
     }
     
@@ -38,7 +37,7 @@ public class Equipa {
     	this.nome = n;
     	this.emblema = e;
     	this.palmares = new PalmaresDAO();
-    	this.escaloes = new EscalaoDAO();
+    	this.escaloes = new EscalaoDAO(this.id);
     	APEF.IDENTIFICADOR++;	
     }
 
@@ -47,7 +46,7 @@ public class Equipa {
     	this.nome = n;
     	this.emblema = new Imagem();
     	this.palmares = new PalmaresDAO();
-    	this.escaloes = new EscalaoDAO();
+    	this.escaloes = new EscalaoDAO(this.id);
     	APEF.IDENTIFICADOR++;	
     }
     
@@ -56,7 +55,7 @@ public class Equipa {
     	this.nome = n;
     	this.emblema = new Imagem();
     	this.palmares = new PalmaresDAO();
-    	this.escaloes = new EscalaoDAO();
+    	this.escaloes = new EscalaoDAO(this.id);
     }
 
     public Equipa(Equipa e) {
@@ -79,20 +78,13 @@ public class Equipa {
 		return this.emblema;
 	}
 
-	public Map<String, Integer> getPalmares() {
-		Map<String, Integer> hmp = new PalmaresDAO();
-		for(String s : this.palmares.keySet())
-			hmp.put(s, this.palmares.get(s));
-		return hmp;
-	}
+    public Map<String, Integer> getPalmares() {
+	return this.palmares;
+    }
 
-	public Map<Integer,Escalao> getEscaloes() {
-         Map<Integer,Escalao> aux = new EscalaoDAO();
-         for(Integer s : this.escaloes.keySet()){
-             aux.put(s,this.escaloes.get(s));
-         }
-         return aux;
-     }
+    public Map<Integer,Escalao> getEscaloes() {
+        return this.escaloes;
+    }
 
 	public void setId(int id) {
 		this.id = id;
@@ -102,7 +94,7 @@ public class Equipa {
 		this.nome = nome;
 	}
 
-	public void setEmblema(Imagem emblema) {
+    public void setEmblema(Imagem emblema) {
 		this.emblema = emblema;
 	}
 

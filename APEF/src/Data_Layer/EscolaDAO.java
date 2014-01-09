@@ -131,6 +131,8 @@ public class EscolaDAO implements Map<String,Escola> {
                     stm2.setInt(REMOVIDO, value.getRemovida());
                     stm2.execute();
                     stm2.close();
+                    
+                    res = value;
                 }
             }
         } catch (SQLException e) {
