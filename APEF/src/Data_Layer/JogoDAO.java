@@ -7,6 +7,8 @@ import Business_Layer.Escalao;
 import Business_Layer.Imagem;
 import Business_Layer.Jogo;
 import Business_Layer.Treinador;
+import Business_Layer.Utilizador;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -15,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
@@ -24,11 +27,13 @@ import java.util.logging.Logger;
  *
  * @author serafim
  */
-public class AgendaDAO implements Map<Integer,Jogo> {
+public class JogoDAO implements Map<Integer,Jogo> {
     private int id;
+    private int idJornada;
+    
     private HashMap<Integer,Jogo> jogos;
     
-    public static final String AGENDA_A = "Agenda a";
+    public static final String JOGO_O = "Jogo o";
     public static final int IDJOGO = 1;
     public static final int IDCOMPETICAO = 2;
     public static final int REALIZADO = 3;
@@ -77,18 +82,29 @@ public class AgendaDAO implements Map<Integer,Jogo> {
     private static final int DATANASC2 = 4;
     private static final int SEXO = 5;
     
-    public AgendaDAO() {
+    public JogoDAO() {
         this.jogos = new HashMap<Integer,Jogo>(); 
     }
 
-    public AgendaDAO(int idAgenda) {
+    public JogoDAO(int idAgenda) {
         this.id = idAgenda;
+    }
+    
+    public JogoDAO(int idAgenda, int idJornada) {
+        this.id = idAgenda;
+        this.idJornada = idJornada;
     }
     
     public boolean converte(int a) {
         if(a==0)
             return false;
         else return true;
+    }
+    
+    public int converte2(boolean a) {
+        if(a==true)
+            return 1;
+        else return 0;
     }
     
     @Override
@@ -118,7 +134,7 @@ public class AgendaDAO implements Map<Integer,Jogo> {
         try {
         int id = (Integer) key;
         Statement stm = ConexaoBD.getConexao().createStatement();
-        String sql = "SELECT IDJOGO FROM JOGO j WHERE j.IDJOGO = '"+id+"'";
+        String sql = "SELECT IDJOGO FROM JOGO j WHERE j.IDJOGO = "+id;
             ResultSet rs = stm.executeQuery(sql);
             boolean res = rs.next();
             ConexaoBD.fecharCursor(rs, stm);
@@ -141,7 +157,7 @@ public class AgendaDAO implements Map<Integer,Jogo> {
             int idJogo = (Integer) key;
             //String chave = c.toUpperCase();
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * FROM JOGO j WHERE j.IDJOGO = '"+idJogo+"'";
+            String sql = "SELECT * FROM JOGO j WHERE j.IDJOGO = "+idJogo;
             ResultSet rs = stm.executeQuery(sql);
             
             Arbitro arb = null;
@@ -170,7 +186,7 @@ public class AgendaDAO implements Map<Integer,Jogo> {
                 int idJornada = rs.getInt(IDJORNADA);
                 
                 stm = ConexaoBD.getConexao().createStatement();
-                sql = "SELECT * FROM CAMPO c where c.IDCAMPO = '"+idCampo+"'";
+                sql = "SELECT * FROM CAMPO c where c.IDCAMPO = "+idCampo;
                 rs = stm.executeQuery(sql);
                 if(rs.next()) {
                     String sCampo = rs.getString(NOME_CAMPO);
@@ -178,7 +194,7 @@ public class AgendaDAO implements Map<Integer,Jogo> {
                 }
                 
                 stm = ConexaoBD.getConexao().createStatement();
-                sql = "SELECT * FROM ARBITRO a where a.IDUTILIZADOR = '"+idArbitro+"'";
+                sql = "SELECT * FROM ARBITRO a where a.IDUTILIZADOR = "+idArbitro;
                 rs = stm.executeQuery(sql);
                 if(rs.next()) {
                 int idAgenda = rs.getInt(IDAGENDA);
@@ -200,7 +216,7 @@ public class AgendaDAO implements Map<Integer,Jogo> {
                 int camposPreenchidos = rs.getInt(CAMPOSPREENCHIDOS);  
                 int removido = rs.getInt(REMOVIDO);
                                         
-                AgendaDAO ag = new AgendaDAO(idAgenda);
+                JogoDAO ag = new JogoDAO(idAgenda,idJornada);
                 Agenda agenda = new Agenda(idAgenda,ag);
                 arb = new Arbitro(id,avatar,tipo,nick,nome,email,pw,morada,tlmvl,
                                         codPostal,dataNasc,converte(ativo),converte(camposPreenchidos),
@@ -208,7 +224,7 @@ public class AgendaDAO implements Map<Integer,Jogo> {
                 }    
                 
                 stm = ConexaoBD.getConexao().createStatement();
-                sql = "SELECT * FROM ESCALAO e where e.IDESCALAO = '"+idEscalaoCasa+"'";
+                sql = "SELECT * FROM ESCALAO e where e.IDESCALAO = "+idEscalaoCasa;
                 rs = stm.executeQuery(sql);
                 if(rs.next()) {
                 int idEscalao1 = rs.getInt(ID_ESCALAO);
@@ -224,7 +240,7 @@ public class AgendaDAO implements Map<Integer,Jogo> {
                 int removido = rs.getInt(REMOVIDO2);
                 
                 stm = ConexaoBD.getConexao().createStatement();
-                sql = "SELECT * FROM EQUIPA e where e.IDEQUIPA = '"+idEquipa+"'";
+                sql = "SELECT * FROM EQUIPA e where e.IDEQUIPA = "+idEquipa;
                 rs = stm.executeQuery(sql);
                 String nomeEquipa1 = new String();
                 if(rs.next()) {
@@ -232,7 +248,7 @@ public class AgendaDAO implements Map<Integer,Jogo> {
                 }
                 
                 stm = ConexaoBD.getConexao().createStatement();
-                sql = "SELECT * FROM PESSOA t where t.IDPESSOA = '"+idTreinador1+"'";
+                sql = "SELECT * FROM PESSOA t where t.IDPESSOA = "+idTreinador1;
                 rs = stm.executeQuery(sql);
                 if(rs.next()) {
                 int idTrei1 = rs.getInt(IDPESSOA);
@@ -247,11 +263,11 @@ public class AgendaDAO implements Map<Integer,Jogo> {
                 t1 = new Treinador(idTrei1,nomeTreinador1,foto1,dN1,sexo1);
                 }
                 
-                escCasa = new Escalao(idEscalao1, nomeEquipa1, nomeEsc, null);
+                escCasa = new Escalao(idEscalao1, nomeEquipa1, nomeEsc, t1);
                 }
                 
                 stm = ConexaoBD.getConexao().createStatement();
-                sql = "SELECT * FROM ESCALAO e where e.IDESCALAO = '"+idEscalaoFora+"'";
+                sql = "SELECT * FROM ESCALAO e where e.IDESCALAO = "+idEscalaoFora;
                 rs = stm.executeQuery(sql);
                 if(rs.next()) {
                 int idEscalao2 = rs.getInt(ID_ESCALAO);
@@ -267,7 +283,7 @@ public class AgendaDAO implements Map<Integer,Jogo> {
                 int removido2 = rs.getInt(REMOVIDO2);
                 
                 stm = ConexaoBD.getConexao().createStatement();
-                sql = "SELECT * FROM EQUIPA e where e.IDEQUIPA = '"+idEquipa2+"'";
+                sql = "SELECT * FROM EQUIPA e where e.IDEQUIPA = "+idEquipa2;
                 rs = stm.executeQuery(sql);
                 String nomeEquipa2 = new String();
                 if(rs.next()) {
@@ -275,7 +291,7 @@ public class AgendaDAO implements Map<Integer,Jogo> {
                 }
                 
                 stm = ConexaoBD.getConexao().createStatement();
-                sql = "SELECT * FROM PESSOA t where t.IDPESSOA = '"+idTreinador2+"'";
+                sql = "SELECT * FROM PESSOA t where t.IDPESSOA = "+idTreinador2;
                 rs = stm.executeQuery(sql);
                 if(rs.next()) {
                 int idTrei2 = rs.getInt(IDPESSOA);
@@ -304,12 +320,55 @@ public class AgendaDAO implements Map<Integer,Jogo> {
 
     @Override
     public Jogo put(Integer key, Jogo value) {
-        return this.jogos.put(key, value);
+        Jogo res = null;
+        try {
+            Integer c = (Integer) key;
+            boolean existe = this.containsKey(key);
+            PreparedStatement stm = null;
+            
+            if(!existe) {
+                String sql = "";
+                
+                sql = "INSERT INTO Jogo(idJogo,idComp,realizado,dia,idCampo,idAgenda,idEscalaoCasa,idEscalaoFora,nrGolosCasa,nrGolosFora,idJornada) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                
+                stm.setInt(IDJOGO, value.getID());
+                stm.setInt(IDCOMPETICAO,value.getIdCompeticao());
+                stm.setInt(REALIZADO,converte2(value.isJogoRealizado()));
+                Timestamp dataNasc = new Timestamp(value.getDiaJogo().getTimeInMillis());
+                stm.setTimestamp(DIA, dataNasc);
+                stm.setInt(IDCAMPO,value.getCampoJogo().getID());
+                stm.setInt(IDAGENDA, this.id);
+                stm.setInt(IDESCALAOCASA, value.getEscalaoCasa().getID());
+                stm.setInt(IDESCALAOFORA, value.getEscalaoFora().getID());
+                stm.setInt(NRGOLOSCASA, value.getNumGolosJogoCasa());
+                stm.setInt(NRGOLOSFORA, value.getNumGolosJogoFora());
+                stm.setInt(IDJORNADA, this.idJornada);
+                
+                stm.execute();
+                stm.close();
+                
+            }
+            res = value;
+        } catch (SQLException e) {
+        }
+        return res;
     }
 
     @Override
     public Jogo remove(Object key) {
-        return this.jogos.remove(key);
+        try {
+			Jogo res = null;
+			int chave = (Integer) key;
+			String sql = "DELETE FROM JOGO j WHERE j.IDJOGO = ?";
+			PreparedStatement stm = ConexaoBD.getConexao()
+					.prepareStatement(sql);
+			stm.setInt(1, chave);
+			stm.execute();
+                        ConexaoBD.fecharCursor(null, stm);
+			return res;
+		} catch (Exception e) {
+			throw new NullPointerException(e.getMessage());
+		}
     }
 
     @Override
@@ -324,7 +383,19 @@ public class AgendaDAO implements Map<Integer,Jogo> {
 
     @Override
     public Set<Integer> keySet() {
-        return this.jogos.keySet();
+        Set<Integer> res = new HashSet<>();
+        try {
+            Statement stm = ConexaoBD.getConexao().createStatement();
+            String sql = "SELECT IDJOGO FROM JOGO j WHERE j.IDAGENDA = "+this.id;
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next())
+                res.add(rs.getInt(IDJOGO));
+          
+            ConexaoBD.fecharCursor(rs, stm);
+        } catch (SQLException e) {
+            throw new NullPointerException(e.getMessage());
+        }
+        return res;
     }
 
     @Override
@@ -333,7 +404,7 @@ public class AgendaDAO implements Map<Integer,Jogo> {
         try {
             Collection<Jogo> jgs = new ArrayList<Jogo>();
             stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * FROM JOGO j where j.IDAGENDA = '"+this.id+"'";
+            String sql = "SELECT * FROM JOGO j where j.IDAGENDA = "+this.id;
             ResultSet rs = stm.executeQuery(sql);
             while(rs.next()) {
                 

@@ -84,7 +84,7 @@ public class JornadaDAO implements Map<Integer,Jornada> {
                 int idJornada = rs.getInt(1);
                 int nrJornada = rs.getInt(2);
                 int nrJogosRealizados = rs.getInt(3);
-                AgendaDAO ag = new AgendaDAO(idJornada);
+                JogoDAO ag = new JogoDAO(idJornada);
                 res = new Jornada(idJornada,nrJornada,nrJogosRealizados,ag);
             }
             return res;

@@ -153,7 +153,7 @@ public class UtilizadorDAO implements Map<String,Utilizador>{
                     if(rs.next()) {
                     int idAgenda = rs.getInt(IDAGENDA);
                                         
-                    AgendaDAO ag = new AgendaDAO(idAgenda);
+                    JogoDAO ag = new JogoDAO(idAgenda);
                     Agenda agenda = new Agenda(idAgenda,ag);
                     res = new Arbitro(id,avatar,tipo,nick,nome,email,pw,morada,tlmvl,
                             codPostal,dataNasc,converte(ativo),converte(camposPreenchidos),
@@ -321,7 +321,7 @@ public class UtilizadorDAO implements Map<String,Utilizador>{
                     if(rs.next()) {
                     int idAgenda = rs.getInt(IDAGENDA);
                                         
-                    AgendaDAO ag = new AgendaDAO(idAgenda);
+                    JogoDAO ag = new JogoDAO(idAgenda);
                     Agenda agenda = new Agenda(idAgenda,ag);
                     a = new Arbitro(id,avatar,tipo,nick,nome,email,pw,morada,tlmvl,
                             codPostal,dataNasc,converte(ativo),converte(camposPreenchidos),
