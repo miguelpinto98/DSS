@@ -24,9 +24,9 @@ public class AgendaDAO implements Map<Integer,Jogo> {
     public AgendaDAO() {
         this.jogos = new HashMap<Integer,Jogo>(); 
     }
-    
-    public AgendaDAO(int id) {
-      this.id = id;
+
+    public AgendaDAO(int idAgenda) {
+        this.id = idAgenda;
     }
     
     @Override

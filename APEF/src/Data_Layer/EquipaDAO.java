@@ -87,10 +87,10 @@ public class EquipaDAO implements Map<String,Equipa> {
         Equipa eq = null;
         
         try {
-            String c = (String) key;
-            String chave = c.toUpperCase();
+            String chave = (String) key;
+            //String chave = c.toUpperCase();
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * FROM"+EQUIPA_E+"WHERE e.NOME = '"+chave+"'";
+            String sql = "SELECT * FROM "+EQUIPA_E+" WHERE e.NOME = '"+chave+"'";
             ResultSet rs = stm.executeQuery(sql);
             
             if(rs.next()) {

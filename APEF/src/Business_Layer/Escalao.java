@@ -1,5 +1,6 @@
 package Business_Layer;
 
+import Data_Layer.AgendaDAO;
 import Data_Layer.JogadorDAO;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -66,6 +67,17 @@ public class Escalao {
         this.jogadores = new JogadorDAO();
         this.agenda = new Agenda();
         this.dados = new DadosEstatisticos(); 
+    }
+    
+    public Escalao(int id, int tipo, String nEscola, String nEquipa, Treinador t, int idAgenda, int idDadosEst) {
+        this.id = id;
+        this.tipoEscalao = tipo;
+        this.nomeEscola = nEscola;
+        this.nomeEquipa = nEquipa;
+        this.treinador = t;
+        this.jogadores = new JogadorDAO();
+        this.agenda = new Agenda(idAgenda);
+        this.dados = new DadosEstatisticosDAO(idDadosEst);
     }
 
     //Getters
