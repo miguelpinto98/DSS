@@ -23,11 +23,11 @@ public class EpocaDAO implements Map<Integer,Epoca> {
     public int size() {
          try {
             int i = 0;
-             try (Statement stm = ConexaoBD.getConexao().createStatement(); ResultSet rs = stm.executeQuery("SELECT ano FROM " + ANO)) {
+            Statement stm = ConexaoBD.getConexao().createStatement(); ResultSet rs = stm.executeQuery("SELECT ano FROM " + ANO);
                  for (; rs.next(); i++)
                      ;
-             }
-            return i;
+             
+           return i;
         } catch (Exception e) {
             throw new NullPointerException(e.getMessage());
         }
