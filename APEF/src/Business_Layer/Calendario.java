@@ -26,7 +26,7 @@ public class Calendario {
     public Map<Integer,Jornada> getJornadas() {
     	Map<Integer,Jornada> aux = new JornadaDAO();
         for(Jornada j: this.jornadas.values()) 
-            aux.put(j.getNrJornada(), j);
+            aux.put(j.getID(), j);
         return aux;
     }
 

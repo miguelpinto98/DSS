@@ -57,6 +57,10 @@ public class DadosEstatisticos implements Comparable<DadosEstatisticos> {
     	this.gsofridos = d.getGsofridos();
         this.forma = d.getForma();
     }
+    
+    public int getID() {
+        return this.idDados;
+    }
 
     public int getIdEscalao() {
         return this.idEscalao;

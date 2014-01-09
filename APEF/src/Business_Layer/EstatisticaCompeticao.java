@@ -1,16 +1,18 @@
 package Business_Layer;
 
+import Data_Layer.DadosEstatisticosDAO;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.TreeSet;
 
 public class EstatisticaCompeticao {
     private int idEstatistica;
-    private TreeSet<DadosEstatisticos> estatistica; //<id equipas, dados estatisticos>
+    private Map<Integer,DadosEstatisticos> estatistica; //<id equipas, dados estatisticos>
 
     public EstatisticaCompeticao() {
         this.idEstatistica = APEF.IDENTIFICADOR;
-    	this.estatistica = new TreeSet<DadosEstatisticos>();
+    	this.estatistica = new DadosEstatisticosDAO();
         APEF.IDENTIFICADOR++;
     }
 
@@ -18,16 +20,16 @@ public class EstatisticaCompeticao {
     	this.estatistica = ec.getEstatistica();
     }
 
-    public TreeSet<DadosEstatisticos> getEstatistica(){
-    	TreeSet<DadosEstatisticos> aux = new TreeSet<DadosEstatisticos>();
+    public Map<Integer,DadosEstatisticos> getEstatistica(){
+    	Map<Integer,DadosEstatisticos> aux = new DadosEstatisticosDAO();
     	
-    	for (DadosEstatisticos i : this.estatistica)
-    	{ aux.add(i); }
+    	for (DadosEstatisticos i : this.estatistica.values())
+    	{ aux.put(i.getID(),i); }
 
     	return aux;
     }
 
-    public void setEstatistica(TreeSet<DadosEstatisticos> h){
+    public void setEstatistica(Map<Integer,DadosEstatisticos> h){
     	this.estatistica = h;
     }
     
@@ -61,15 +63,15 @@ public class EstatisticaCompeticao {
     public String toString(){
         StringBuilder s = new StringBuilder();
         s.append("Estatistica da Competicao:");
-        for(DadosEstatisticos d : this.estatistica) {
+        for(DadosEstatisticos d : this.estatistica.values()) {
 			s.append(d);
         }
         return s.toString();
     }
     
     public void inserirDados(DadosEstatisticos d) {
-        if (!this.estatistica.contains(d))
-            this.estatistica.add(d);
+        if (!this.estatistica.containsKey(d.getID()))
+            this.estatistica.put(d.getID(),d);
     }
     
     public void actualizaClassificacao(Jogo j) {
@@ -80,21 +82,21 @@ public class EstatisticaCompeticao {
         DadosEstatisticos novoCasa;  
         DadosEstatisticos novoFora;
         
-        for(DadosEstatisticos dadosCasa : this.estatistica) {
+        for(DadosEstatisticos dadosCasa : this.estatistica.values()) {
             if(casa.getID() == dadosCasa.getIdEscalao()) {
                 dadosCasa.addDadosEstatisticos(golosCasa,golosFora);
                 novoCasa = dadosCasa;
                 this.estatistica.remove(dadosCasa);
-                this.estatistica.add(novoCasa);
+                this.estatistica.put(novoCasa.getID(),novoCasa);
             }
         }
         
-        for(DadosEstatisticos dadosFora : this.estatistica) {
+        for(DadosEstatisticos dadosFora : this.estatistica.values()) {
             if(fora.getID() == dadosFora.getIdEscalao()) {
                 dadosFora.addDadosEstatisticos(golosCasa,golosFora);
                 novoFora = dadosFora;
                 this.estatistica.remove(dadosFora);
-                this.estatistica.add(novoFora);
+                this.estatistica.put(novoFora.getID(),novoFora);
             }
         }
     }
