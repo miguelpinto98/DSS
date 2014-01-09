@@ -1,6 +1,6 @@
 package Business_Layer;
 
-import Data_Layer.AgendaDAO;
+import Data_Layer.JogoDAO;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
@@ -16,7 +16,7 @@ public class Agenda {
         
         public Agenda(){
             this.idAgenda = APEF.IDENTIFICADOR;;
-            this.jogos = new AgendaDAO();
+            this.jogos = new JogoDAO();
             APEF.IDENTIFICADOR++;
         }
         
@@ -32,11 +32,11 @@ public class Agenda {
 
     public Agenda(int idAgenda) {
         this.idAgenda = idAgenda;
-        this.jogos = new AgendaDAO(); //JOGODAO()
+        this.jogos = new JogoDAO(); //JOGODAO()
     }
 
         public Map<Integer,Jogo> getJogos() {
-            Map<Integer,Jogo> aux = new AgendaDAO();
+            Map<Integer,Jogo> aux = new JogoDAO();
          for(Integer s : this.jogos.keySet()){
              aux.put(s,this.jogos.get(s));
          }
@@ -81,7 +81,7 @@ public class Agenda {
 	}
 
 	public void inserirJogo(Jogo j) {
-		if(!this.jogos.containsValue(j))
+		if(this.jogos.containsKey(j.getID()))
 			this.jogos.put(j.getID(), j);
 	}
 
