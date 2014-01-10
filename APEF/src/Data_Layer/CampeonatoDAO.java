@@ -11,10 +11,9 @@ import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeSet;
 
 
-public class CampeonatoDAO implements Map<Integer,Campeonato>/*IDCAMPEONATO->CAMPEONATO*/ {
+public class CampeonatoDAO implements Map<Integer,Campeonato>/*IDCAMPEONATO->CAMPEONATO*/{
     private int idEpoca;
     private int idEstatisticaCompeticao;
     private int idCalendario;
