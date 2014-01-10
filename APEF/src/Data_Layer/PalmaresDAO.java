@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -74,6 +73,7 @@ public class PalmaresDAO implements Map<String,Integer> {
             
             if(rs.next())
                 res = rs.getInt(1);
+            ConexaoBD.fecharCursor(rs, stm);
         } catch (SQLException e) {
         }
         return res;
@@ -90,10 +90,12 @@ public class PalmaresDAO implements Map<String,Integer> {
                 sql = "UPDATE Palmares SET nrVezes = "+value+", idEquipa = "+this.idEquipa+" WHERE nomeCompeticao = '"+key+"'";
                 Statement st = ConexaoBD.getConexao().createStatement();
                 ResultSet rse = st.executeQuery(sql);
+                ConexaoBD.fecharCursor(rse, st);
             } else {
                 sql = "INSERT INTO PALMARES(NOMECOMPETICAO, NRVEZES, IDEQUIPA) VALUES ('"+key+"', "+value+", "+this.idEquipa+")";
                 Statement stm = ConexaoBD.getConexao().createStatement();
                 ResultSet rs = stm.executeQuery(sql);
+                ConexaoBD.fecharCursor(rs, stm);
             }
         } catch (SQLException e) {
         }
@@ -125,6 +127,8 @@ public class PalmaresDAO implements Map<String,Integer> {
             
             while(rs.next())
                 res.add(rs.getString(1));
+            
+            ConexaoBD.fecharCursor(rs, stm);
         } catch (SQLException e) {
         }
         return res;
