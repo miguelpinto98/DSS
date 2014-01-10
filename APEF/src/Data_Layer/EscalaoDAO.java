@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
@@ -69,7 +70,18 @@ public class EscalaoDAO implements Map<Integer,Escalao> {
 
     @Override
     public boolean isEmpty() {
-        throw new NullPointerException("Não Definido");
+        boolean res = false;
+        try {
+            Statement stm = ConexaoBD.getConexao().createStatement();
+            ResultSet rs = stm.executeQuery("SELECT * FROM ESCALAO e WHERE e.IDEQUIPA = "+this.idEquipa);
+            
+            if(rs.next())
+                res = true;
+            
+            ConexaoBD.fecharCursor(rs, stm);
+        } catch (Exception e) {
+        }
+        return false;
     }
 
     @Override
@@ -80,7 +92,7 @@ public class EscalaoDAO implements Map<Integer,Escalao> {
             //String chave = c.toUpperCase();
             
             Statement stm = ConexaoBD.getConexao().createStatement();          
-            String sql = "SELECT * FROM ESCALAO e WHERE e.IDESCALAO = "+chave;
+            String sql = "SELECT * FROM ESCALAO e WHERE e.TIPOESCALAO = "+chave;
             ResultSet rs = stm.executeQuery(sql);
             res = rs.next();
             
@@ -125,11 +137,12 @@ public class EscalaoDAO implements Map<Integer,Escalao> {
                         int nIdPess = rs.getInt(ID_PESSOA);
                         String nomePess = rs.getString(TREINADOR_NOME);
                         Blob avatar = rs.getBlob(FOTO);
-                        GregorianCalendar dataNascT = new GregorianCalendar();
-                        rs.getTimestamp(TREINADOR_DATANASC, dataNascT);
+                        
+                        Calendar dataNascT = GregorianCalendar.getInstance();
+                        dataNascT.setTime(rs.getTimestamp(TREINADOR_DATANASC));
                         int sexoTrei = rs.getInt(TREINADOR_SEXO);
                         
-                        t = new Treinador(nIdPess,nomePess,new Imagem(),dataNascT,sexoTrei);
+                        t = new Treinador(nIdPess,nomePess,new Imagem(),(GregorianCalendar) dataNascT,sexoTrei);
                         
                         stm = ConexaoBD.getConexao().createStatement();
                         sql = "SELECT NOME FROM Equipa e WHERE e.IDEQUIPA = "+nIdEqui;

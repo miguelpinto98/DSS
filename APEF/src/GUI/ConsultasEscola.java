@@ -50,7 +50,7 @@ public final class ConsultasEscola extends javax.swing.JFrame {
         
         initComponents();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        this.root.setEnabled(true);
+        //this.root.setEnabled(true);
                 
 
         

@@ -175,54 +175,16 @@ public final class Home2 extends JFrame {
         Utilizador u2 = new ResponsavelEscola(101,null,1,"Rescla","sersfismpinto","ll@josao","1245213s22","Felgueiras","91568544","784-545",new GregorianCalendar(),false,false,false,e1);
         Utilizador u3 = new Arbitro(1001,null,2,"josejose","sersfismpinto","ll@josao","1245213s22","Felgueiras","91568544","784-545",new GregorianCalendar(),false,false,aaa,false);
                 
-
-        //TESTE JOGO COM ESCALOES
-        ArrayList<Jogo> tj = new ArrayList<>();
-        Escalao esc1 = new Escalao(0, "LEI", "UMINHO");
-        Escalao esc2 = new Escalao(0, "ESF", "ESF");
-        
-        Jogo j1 = new Jogo(1000, new GregorianCalendar(2013, 12, 21), null, null, esc1, esc2);
-        Jogo j2 = new Jogo(1000, new GregorianCalendar(2013, 12, 21), null, null, esc2, esc1);
-        
-        j2.setNumGolosJogoCasa(10);
-        j2.setRealizado(true);
-        
-        tj.add(j1);
-        tj.add(j2); 
-        
-        //Últimos Resultados
-        ArrayList<Jogo> ures = this.sistema.jogosRealizados(15);
-        
-        Object[] columnNames = new String[] {"Casa","Golos","Golos","Fora"};
-        Object[][] data = new Object[][] {};
-        DefaultTableModel x = new DefaultTableModel(data, columnNames);
-
-        for(Jogo j : tj) {
-            x.addRow(new Object[]{j.getEscalaoCasa().getNomeEquipa(),j.getNumGolosJogoCasa(),j.getNumGolosJogoFora(),j.getEscalaoFora().getNomeEquipa()});
-        }
-        JTabResultados.setModel(x); 
-        
-        
-        //Próximos Jogos
-        ArrayList<Jogo> pjogos = this.sistema.proximosJogos(15);
-        columnNames = new String[] {"Casa","Dia","Fora"};
-        data = new Object[][] {};
-        x = new DefaultTableModel(data, columnNames);
-        
-        
-        for(Jogo j : tj) {
-            x.addRow(new Object[]{j.getEscalaoCasa().getNomeEquipa(),"XX",j.getEscalaoFora().getNomeEquipa()});
-        }
-        jTabProximos.setModel(x);
-         */
-        
-        /* Inicia Aplicação */
+         /* Inicia Aplicação */
         initComponents();  
         verificaUser(user);
         this.JPanelEscolaConvidado.setBackground(new java.awt.Color(248, 247, 247));
-        
+
         GregorianCalendar g = new GregorianCalendar();
         this.data.setText(g.get(g.DAY_OF_MONTH)+"/"+(g.get(g.MONTH)+1)+"/"+g.get(g.YEAR));
+        
+        reloadPagIncialHome();
+        
         
         /* CENTRAR UMA COLUNA
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
@@ -462,6 +424,32 @@ public final class Home2 extends JFrame {
         this.jPanel8.validate();
     }
     
+    public void reloadPagIncialHome() { 
+        //Últimos Resultados
+        ArrayList<Jogo> ures = this.sistema.jogosRealizados(15);
+        
+        Object[] columnNames = new String[] {"Casa","Golos","Golos","Fora"};
+        Object[][] data = new Object[][] {};
+        DefaultTableModel x = new DefaultTableModel(data, columnNames);
+
+        for(Jogo j : ures) {
+            x.addRow(new Object[]{j.getEscalaoCasa().getNomeEquipa(),j.getNumGolosJogoCasa(),j.getNumGolosJogoFora(),j.getEscalaoFora().getNomeEquipa()});
+        }
+        JTabResultados.setModel(x);        
+        
+        //Próximos Jogos
+        ArrayList<Jogo> pjogos = this.sistema.proximosJogos(15);
+        columnNames = new String[] {"Casa","Dia","Fora"};
+        data = new Object[][] {};
+        x = new DefaultTableModel(data, columnNames);
+        
+        
+        for(Jogo j :pjogos) {
+            x.addRow(new Object[]{j.getEscalaoCasa().getNomeEquipa(),"vs",j.getEscalaoFora().getNomeEquipa()});
+        }
+        jTabProximos.setModel(x);
+    }
+    
     /*TAB TORNEIOS*/
     
   /**  public void reloadTorneios(){
@@ -650,7 +638,7 @@ public final class Home2 extends JFrame {
 
         JPanelHeader.add(searchPanel, java.awt.BorderLayout.PAGE_END);
 
-        JPanelUserLogout.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
+        JPanelUserLogout.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
 
         registar.setText("Registar");
         registar.addActionListener(new java.awt.event.ActionListener() {

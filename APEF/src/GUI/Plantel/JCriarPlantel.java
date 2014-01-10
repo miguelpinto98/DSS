@@ -12,6 +12,7 @@ import Business_Layer.Escola;
 import Business_Layer.Imagem;
 import GUI.ConsultasEscola;
 import GUI.Home2;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -35,10 +36,17 @@ public final class JCriarPlantel extends javax.swing.JDialog {
         verificaEscalaoesDisponiveis();
     }
         
-    public void verificaEscalaoesDisponiveis() {
-        for(Integer i: this.equipa.getEscaloes().keySet()) 
-            if(!this.equipa.getEscaloes().containsKey(i))
-                this.comboEscaloesDisponiveis.addItem(ce.devolveEscalaoTipo(i));
+    public void verificaEscalaoesDisponiveis() {        
+        if(!this.equipa.getEscaloes().isEmpty()) {
+            for(int i = 0; i<4; i++)
+               this.comboEscaloesDisponiveis.addItem(ce.devolveEscalaoTipo(i));
+        } else {
+            for(int i = 0; i<4; i++) {
+                if(!this.equipa.getEscaloes().containsKey(i)) 
+                    this.comboEscaloesDisponiveis.addItem(ce.devolveEscalaoTipo(i));
+                    
+            }
+        }
     }
 
     /**
