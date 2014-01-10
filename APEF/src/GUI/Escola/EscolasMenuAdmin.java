@@ -43,6 +43,7 @@ public class EscolasMenuAdmin extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(248, 247, 247));
 
+        consultas.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         consultas.setText("Consultar");
         consultas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -50,6 +51,7 @@ public class EscolasMenuAdmin extends javax.swing.JPanel {
             }
         });
 
+        addEscola.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         addEscola.setText("Adicionar");
         addEscola.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -57,6 +59,7 @@ public class EscolasMenuAdmin extends javax.swing.JPanel {
             }
         });
 
+        editarEscola.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         editarEscola.setText("Editar");
         editarEscola.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -64,6 +67,7 @@ public class EscolasMenuAdmin extends javax.swing.JPanel {
             }
         });
 
+        removerEscola.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         removerEscola.setText("Remover");
         removerEscola.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

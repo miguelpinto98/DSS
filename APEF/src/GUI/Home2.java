@@ -175,54 +175,16 @@ public final class Home2 extends JFrame {
         Utilizador u2 = new ResponsavelEscola(101,null,1,"Rescla","sersfismpinto","ll@josao","1245213s22","Felgueiras","91568544","784-545",new GregorianCalendar(),false,false,false,e1);
         Utilizador u3 = new Arbitro(1001,null,2,"josejose","sersfismpinto","ll@josao","1245213s22","Felgueiras","91568544","784-545",new GregorianCalendar(),false,false,aaa,false);
                 
-
-        //TESTE JOGO COM ESCALOES
-        ArrayList<Jogo> tj = new ArrayList<>();
-        Escalao esc1 = new Escalao(0, "LEI", "UMINHO");
-        Escalao esc2 = new Escalao(0, "ESF", "ESF");
-        
-        Jogo j1 = new Jogo(1000, new GregorianCalendar(2013, 12, 21), null, null, esc1, esc2);
-        Jogo j2 = new Jogo(1000, new GregorianCalendar(2013, 12, 21), null, null, esc2, esc1);
-        
-        j2.setNumGolosJogoCasa(10);
-        j2.setRealizado(true);
-        
-        tj.add(j1);
-        tj.add(j2); 
-        
-        //Últimos Resultados
-        ArrayList<Jogo> ures = this.sistema.jogosRealizados(15);
-        
-        Object[] columnNames = new String[] {"Casa","Golos","Golos","Fora"};
-        Object[][] data = new Object[][] {};
-        DefaultTableModel x = new DefaultTableModel(data, columnNames);
-
-        for(Jogo j : tj) {
-            x.addRow(new Object[]{j.getEscalaoCasa().getNomeEquipa(),j.getNumGolosJogoCasa(),j.getNumGolosJogoFora(),j.getEscalaoFora().getNomeEquipa()});
-        }
-        JTabResultados.setModel(x); 
-        
-        
-        //Próximos Jogos
-        ArrayList<Jogo> pjogos = this.sistema.proximosJogos(15);
-        columnNames = new String[] {"Casa","Dia","Fora"};
-        data = new Object[][] {};
-        x = new DefaultTableModel(data, columnNames);
-        
-        
-        for(Jogo j : tj) {
-            x.addRow(new Object[]{j.getEscalaoCasa().getNomeEquipa(),"XX",j.getEscalaoFora().getNomeEquipa()});
-        }
-        jTabProximos.setModel(x);
-         */
-        
-        /* Inicia Aplicação */
+         /* Inicia Aplicação */
         initComponents();  
         verificaUser(user);
         this.JPanelEscolaConvidado.setBackground(new java.awt.Color(248, 247, 247));
-        
+
         GregorianCalendar g = new GregorianCalendar();
         this.data.setText(g.get(g.DAY_OF_MONTH)+"/"+(g.get(g.MONTH)+1)+"/"+g.get(g.YEAR));
+        
+        reloadPagIncialHome();
+        
         
         /* CENTRAR UMA COLUNA
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
@@ -232,6 +194,7 @@ public final class Home2 extends JFrame {
            
         reloadListaEscolas();
         reloadPagInicialCampeonato();
+        reloadTorneios();
     }
     
     public void verificaUser(Utilizador user) {
@@ -241,24 +204,34 @@ public final class Home2 extends JFrame {
                 reloadHeaderUserAdmin();
                 reloadTabEscolasAdmin();
                 reloadOptions();
+                verificaOpcoesCamp(true);
             }
             
             if(user instanceof ResponsavelEscola) {
                 reloadHeaderUserRespEscola();
                 reloadOptions();
+                verificaOpcoesCamp(false);
+                this.inscreverCamp.setVisible(true);
             }
             
             if(user instanceof Arbitro) {
                 reloadHeaderUserArbitro();
+                verificaOpcoesCamp(false);
             }     
         }
         
         else {
             reloadHeaderConvidado();
             reloadTabEscolasConvidado();
+            verificaOpcoesCamp(false);
         }
     }
     
+    public void verificaOpcoesCamp(boolean flag) {
+        this.IniciarCamp.setVisible(flag);
+        this.inscreverCamp.setVisible(flag);
+        this.criarCamp.setVisible(flag);
+    }
     
     /** NOVA TAB 
     
@@ -433,8 +406,14 @@ public final class Home2 extends JFrame {
         this.jPanel8.add(new JCampeonatoClassificacao(this,user),BorderLayout.CENTER);
         this.jPanel8.updateUI();
         this.jPanel8.validate();
-    }
-    
+        
+       for(int ano : this.sistema.getEpocas().keySet()){
+           this.jComboEpocaCampeonato.addItem(ano+"/"+(ano+1));
+       }
+       
+       
+           
+    }    
     public void reloadButtonJornada() {
         this.jPanel8.removeAll();
         this.jPanel8.add(this.headerCampeonato, BorderLayout.NORTH);
@@ -462,12 +441,37 @@ public final class Home2 extends JFrame {
         this.jPanel8.validate();
     }
     
-    //TAB TORNEIOS
+    public void reloadPagIncialHome() { 
+        //Últimos Resultados
+        ArrayList<Jogo> ures = this.sistema.jogosRealizados(15);
+        
+        Object[] columnNames = new String[] {"Casa","Golos","Golos","Fora"};
+        Object[][] data = new Object[][] {};
+        DefaultTableModel x = new DefaultTableModel(data, columnNames);
+
+        for(Jogo j : ures) {
+            x.addRow(new Object[]{j.getEscalaoCasa().getNomeEquipa(),j.getNumGolosJogoCasa(),j.getNumGolosJogoFora(),j.getEscalaoFora().getNomeEquipa()});
+        }
+        JTabResultados.setModel(x);        
+        
+        //Próximos Jogos
+        ArrayList<Jogo> pjogos = this.sistema.proximosJogos(15);
+        columnNames = new String[] {"Casa","Dia","Fora"};
+        data = new Object[][] {};
+        x = new DefaultTableModel(data, columnNames);
+        
+        
+        for(Jogo j :pjogos) {
+            x.addRow(new Object[]{j.getEscalaoCasa().getNomeEquipa(),"vs",j.getEscalaoFora().getNomeEquipa()});
+        }
+        jTabProximos.setModel(x);
+    }
     
-  /**  public void reloadTorneios(){
-        this.JTabEscolas.remove(Torneios);
-        this.JTabEscolas.add("Torneios",new JPrincipalTorneio(this,this.user));
-    }*/
+    /*TAB TORNEIOS*/
+    public void reloadTorneios(){
+        for(Integer ano : this.sistema.getEpocas().keySet())
+            this.comboEpocas.addItem(ano+"/"+(ano+1));
+    }
   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -504,13 +508,16 @@ public final class Home2 extends JFrame {
         jPanel8 = new javax.swing.JPanel();
         headerCampeonato = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        jComboEpocaCampeonato = new javax.swing.JComboBox();
+        jComboEpocaCampeonato = new javax.swing.JComboBox<String>();
         jPanel1 = new javax.swing.JPanel();
         buttonClassificacao = new javax.swing.JButton();
         jButtonJornada = new javax.swing.JButton();
         jButtonEstatistica = new javax.swing.JButton();
         jButtonCalendario = new javax.swing.JButton();
-        jComboEpocaCampeonato2 = new javax.swing.JComboBox();
+        jComboEpocaCampeonato2 = new javax.swing.JComboBox<String>();
+        inscreverCamp = new javax.swing.JButton();
+        IniciarCamp = new javax.swing.JButton();
+        criarCamp = new javax.swing.JButton();
         panelMelhoresMarcadores = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -518,7 +525,7 @@ public final class Home2 extends JFrame {
         Torneios = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox();
+        comboEpocas = new javax.swing.JComboBox();
         jPanel5 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
@@ -643,7 +650,7 @@ public final class Home2 extends JFrame {
 
         JPanelHeader.add(searchPanel, java.awt.BorderLayout.PAGE_END);
 
-        JPanelUserLogout.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
+        JPanelUserLogout.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
 
         registar.setText("Registar");
         registar.addActionListener(new java.awt.event.ActionListener() {
@@ -833,7 +840,7 @@ public final class Home2 extends JFrame {
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(26, Short.MAX_VALUE)
+                .addContainerGap(18, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -841,7 +848,7 @@ public final class Home2 extends JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
 
         JTabEscolas.addTab("Home", jPanel6);
@@ -852,6 +859,7 @@ public final class Home2 extends JFrame {
         panelListaEscolas.setBackground(new java.awt.Color(255, 255, 255));
         panelListaEscolas.setPreferredSize(new java.awt.Dimension(500, 450));
 
+        listaEscolas.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         listaEscolas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(listaEscolas);
 
@@ -867,9 +875,9 @@ public final class Home2 extends JFrame {
         panelListaEscolasLayout.setVerticalGroup(
             panelListaEscolasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelListaEscolasLayout.createSequentialGroup()
-                .addContainerGap(34, Short.MAX_VALUE)
+                .addContainerGap(26, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         JPanelEscolaConvidado.add(panelListaEscolas, java.awt.BorderLayout.LINE_START);
@@ -896,9 +904,9 @@ public final class Home2 extends JFrame {
         botoesConvidadoEscolaLayout.setVerticalGroup(
             botoesConvidadoEscolaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(botoesConvidadoEscolaLayout.createSequentialGroup()
-                .addContainerGap(39, Short.MAX_VALUE)
+                .addContainerGap(31, Short.MAX_VALUE)
                 .addComponent(consultaEscola, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(368, Short.MAX_VALUE))
+                .addContainerGap(360, Short.MAX_VALUE))
         );
 
         JPanelEscolaConvidado.add(botoesConvidadoEscola, java.awt.BorderLayout.LINE_END);
@@ -915,7 +923,11 @@ public final class Home2 extends JFrame {
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Campeonato");
 
-        jComboEpocaCampeonato.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Época", " " }));
+        jComboEpocaCampeonato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboEpocaCampeonatoActionPerformed(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -978,25 +990,46 @@ public final class Home2 extends JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jComboEpocaCampeonato2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "escalao 1", "escalao 3", "escalao4", " " }));
+        jComboEpocaCampeonato2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Infantis", "Benjamis", "Traquinas", "Petizes" }));
+
+        inscreverCamp.setText("Inscrever Plantel");
+        inscreverCamp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inscreverCampActionPerformed(evt);
+            }
+        });
+
+        IniciarCamp.setText("Iniciar");
+
+        criarCamp.setText("Criar");
+        criarCamp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                criarCampActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout headerCampeonatoLayout = new javax.swing.GroupLayout(headerCampeonato);
         headerCampeonato.setLayout(headerCampeonatoLayout);
         headerCampeonatoLayout.setHorizontalGroup(
             headerCampeonatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(headerCampeonatoLayout.createSequentialGroup()
-                .addGroup(headerCampeonatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(headerCampeonatoLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(148, 148, 148)
-                        .addComponent(jComboEpocaCampeonato, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(headerCampeonatoLayout.createSequentialGroup()
-                        .addGap(127, 127, 127)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
-                        .addComponent(jComboEpocaCampeonato2, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(159, Short.MAX_VALUE)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(222, 222, 222)
+                .addComponent(jComboEpocaCampeonato, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jComboEpocaCampeonato2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(headerCampeonatoLayout.createSequentialGroup()
+                .addGap(127, 127, 127)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
+                .addComponent(criarCamp)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(IniciarCamp)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(inscreverCamp)
+                .addGap(39, 39, 39))
         );
         headerCampeonatoLayout.setVerticalGroup(
             headerCampeonatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1004,15 +1037,17 @@ public final class Home2 extends JFrame {
                 .addGap(14, 14, 14)
                 .addGroup(headerCampeonatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboEpocaCampeonato, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLabel5)
+                    .addComponent(jComboEpocaCampeonato2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addGroup(headerCampeonatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(headerCampeonatoLayout.createSequentialGroup()
-                        .addGap(0, 3, Short.MAX_VALUE)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(headerCampeonatoLayout.createSequentialGroup()
-                        .addComponent(jComboEpocaCampeonato2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerCampeonatoLayout.createSequentialGroup()
+                        .addGroup(headerCampeonatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(inscreverCamp)
+                            .addComponent(IniciarCamp)
+                            .addComponent(criarCamp))
+                        .addContainerGap())))
         );
 
         jPanel8.add(headerCampeonato, java.awt.BorderLayout.PAGE_START);
@@ -1064,7 +1099,7 @@ public final class Home2 extends JFrame {
         );
         panelMelhoresMarcadoresLayout.setVerticalGroup(
             panelMelhoresMarcadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
         );
 
         jPanel8.add(panelMelhoresMarcadores, java.awt.BorderLayout.LINE_END);
@@ -1087,27 +1122,25 @@ public final class Home2 extends JFrame {
         jLabel4.setForeground(new java.awt.Color(102, 102, 102));
         jLabel4.setText("Lista de Torneios");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Época 1", "Época 2" }));
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap(337, Short.MAX_VALUE)
+                .addContainerGap(415, Short.MAX_VALUE)
                 .addComponent(jLabel4)
-                .addGap(194, 194, 194)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(256, 256, 256)
+                .addComponent(comboEpocas, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(25, 25, 25)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(28, Short.MAX_VALUE))
+                    .addComponent(comboEpocas, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25))
         );
 
         Torneios.add(jPanel4, java.awt.BorderLayout.PAGE_START);
@@ -1242,14 +1275,14 @@ public final class Home2 extends JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(JTabEscolas, javax.swing.GroupLayout.PREFERRED_SIZE, 1061, Short.MAX_VALUE)
+                .addComponent(JTabEscolas, javax.swing.GroupLayout.DEFAULT_SIZE, 1061, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(JTabEscolas, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
+                .addComponent(JTabEscolas, javax.swing.GroupLayout.PREFERRED_SIZE, 462, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1355,6 +1388,19 @@ public final class Home2 extends JFrame {
         frame.setVisible(true);
     }//GEN-LAST:event_entrarActionPerformed
 
+    private void criarCampActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_criarCampActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_criarCampActionPerformed
+
+    private void inscreverCampActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inscreverCampActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inscreverCampActionPerformed
+
+    private void jComboEpocaCampeonatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboEpocaCampeonatoActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jComboEpocaCampeonatoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1393,6 +1439,7 @@ public final class Home2 extends JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton IniciarCamp;
     private javax.swing.JPanel JPanelEscolaConvidado;
     private javax.swing.JPanel JPanelHeader;
     private javax.swing.JPanel JPanelUserLogout;
@@ -1403,10 +1450,13 @@ public final class Home2 extends JFrame {
     private javax.swing.JLabel avatar;
     private javax.swing.JPanel botoesConvidadoEscola;
     private javax.swing.JButton buttonClassificacao;
+    private javax.swing.JComboBox comboEpocas;
     private javax.swing.JButton consultaEscola;
+    private javax.swing.JButton criarCamp;
     private javax.swing.JLabel data;
     private javax.swing.JButton entrar;
     private javax.swing.JPanel headerCampeonato;
+    private javax.swing.JButton inscreverCamp;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -1415,9 +1465,8 @@ public final class Home2 extends JFrame {
     private javax.swing.JButton jButtonEstatistica;
     private javax.swing.JButton jButtonJornada;
     private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JComboBox jComboEpocaCampeonato;
-    private javax.swing.JComboBox jComboEpocaCampeonato2;
+    private javax.swing.JComboBox<String> jComboEpocaCampeonato;
+    private javax.swing.JComboBox<String> jComboEpocaCampeonato2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -128,6 +128,7 @@ public class JPlantelJogador extends javax.swing.JPanel {
         });
         listaJogadores.setAlignmentX(1.0F);
         listaJogadores.setAlignmentY(1.0F);
+        listaJogadores.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         listaJogadores.setShowGrid(true);
         listaJogadores.setShowVerticalLines(false);
         listaJogadores.getTableHeader().setReorderingAllowed(false);

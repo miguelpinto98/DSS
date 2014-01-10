@@ -116,6 +116,7 @@ public class Agenda {
 		
 	}
 
+    @SuppressWarnings("empty-statement")
 	public Jogo getUltimoJogoRealizado() {
 		Jogo j = null;
 		GregorianCalendar g = null;

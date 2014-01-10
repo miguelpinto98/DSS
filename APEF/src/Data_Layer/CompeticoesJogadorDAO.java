@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  *
@@ -143,8 +144,13 @@ public class CompeticoesJogadorDAO implements Map<Integer,Integer> {
 
     @Override
     public Set<Integer> keySet() {
-        throw new NullPointerException("não está implementado!");
+        Set<Integer> res = new TreeSet<>();
+        try {
+            
+        } catch (Exception e) {
         }
+        return res;
+    }
 
     @Override
     public Collection<Integer> values(){

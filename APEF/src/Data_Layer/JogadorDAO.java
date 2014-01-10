@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -103,11 +104,11 @@ public class JogadorDAO implements Map<Integer,Jogador> {
                 int removido = rs.getInt(REMOVIDO);
                 String nome = rs.getString(9);
                 int foto = rs.getInt(10);
-                GregorianCalendar g = new GregorianCalendar();
-                rs.getTimestamp(11,g);
+                Calendar dataNascT = GregorianCalendar.getInstance();
+                dataNascT.setTime(rs.getTimestamp(11));
                 int sexo = rs.getInt(12);
                 
-                jog = new Jogador(idPessoa, nome, new Imagem(), g, sexo, ngolos, this.nomeEquipa, emprestado, idEquipaEmpr);
+                jog = new Jogador(idPessoa, nome, new Imagem(), (GregorianCalendar) dataNascT, sexo, ngolos, this.nomeEquipa, emprestado, idEquipaEmpr);
             }
             
         } catch (SQLException e) {
@@ -197,7 +198,31 @@ public class JogadorDAO implements Map<Integer,Jogador> {
 
     @Override
     public Collection<Jogador> values() {
-        throw new NullPointerException("Não Definido");
+        Collection<Jogador> res = new HashSet<Jogador>();
+        try {
+            Statement stm = ConexaoBD.getConexao().createStatement();
+            ResultSet rs = stm.executeQuery("SELECT * FROM JOGADOR j, PESSOA p WHERE j.IDESCALAO = "+this.idEscalao+" and p.IDPESSOA = j.IDPESSOA");
+            
+            while(rs.next()) {
+                int id = rs.getInt(1);
+                int golos = rs.getInt(2);
+                int idesc = rs.getInt(3);
+                int emprestado = rs.getInt(4);
+                int idequi = rs.getInt(5);
+                int idequiempr = rs.getInt(6);
+                
+                String nome = rs.getString(9);
+                GregorianCalendar g = new GregorianCalendar();
+                rs.getTimestamp(11, g);
+                int sexo = rs.getInt(12);
+                
+                Jogador j = new Jogador(id, nome, new Imagem(), g, sexo, golos, this.nomeEquipa, emprestado, idequiempr);
+                
+                res.add(j);
+            }
+        } catch (Exception e) {
+        }
+        return res;
     }
 
     @Override

@@ -50,7 +50,7 @@ public final class ConsultasEscola extends javax.swing.JFrame {
         
         initComponents();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        this.root.setEnabled(true);
+        //this.root.setEnabled(true);
                 
 
         
@@ -80,7 +80,8 @@ public final class ConsultasEscola extends javax.swing.JFrame {
         } else {
             reloadOpcaoTreinadorConvidado();
             reloadOpcaoJogadoresConvidado();
-            //this.criarPlantel.setVisible(false);
+            //this.criarPlantel.setVisible(false);        this.panelGeralEscolas.setBorder(javax.swing.BorderFactory.createTitledBorder(esc.getNome()));
+
             //this.removerPlantel.setVisible(false);
         }
     }
@@ -234,6 +235,7 @@ public final class ConsultasEscola extends javax.swing.JFrame {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
+        jSeparator2 = new javax.swing.JSeparator();
         jPanel1 = new javax.swing.JPanel();
         panelGeralEscolas = new javax.swing.JPanel();
         jPanelDetalhesEscolaConvidado = new javax.swing.JPanel();
@@ -249,7 +251,6 @@ public final class ConsultasEscola extends javax.swing.JFrame {
         jPanelOpcoes = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         comboEscalao = new javax.swing.JComboBox<String>();
-        jSeparator2 = new javax.swing.JSeparator();
         jButtonTreinador = new javax.swing.JButton();
         jButtonJogadores = new javax.swing.JButton();
         jButtonAgenda = new javax.swing.JButton();
@@ -280,10 +281,10 @@ public final class ConsultasEscola extends javax.swing.JFrame {
             jPanelDetalhesEscolaConvidadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelDetalhesEscolaConvidadoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(local, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(campo, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(420, Short.MAX_VALUE))
+                .addComponent(local, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(campo, javax.swing.GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanelDetalhesEscolaConvidadoLayout.setVerticalGroup(
             jPanelDetalhesEscolaConvidadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -432,16 +433,13 @@ public final class ConsultasEscola extends javax.swing.JFrame {
                         .addComponent(jButtonDadosEst, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(25, 68, Short.MAX_VALUE))
                     .addGroup(jPanelOpcoesLayout.createSequentialGroup()
-                        .addGroup(jPanelOpcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator2)
-                            .addGroup(jPanelOpcoesLayout.createSequentialGroup()
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(comboEscalao, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(criarPlantel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(removerPlantel)))
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comboEscalao, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(criarPlantel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(removerPlantel)
                         .addContainerGap())))
         );
         jPanelOpcoesLayout.setVerticalGroup(
@@ -452,9 +450,7 @@ public final class ConsultasEscola extends javax.swing.JFrame {
                     .addComponent(comboEscalao, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(criarPlantel)
                     .addComponent(removerPlantel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(24, 24, 24)
                 .addGroup(jPanelOpcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonDadosEst, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonAgenda, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
