@@ -150,7 +150,7 @@ public class EquipaDAO implements Map<String,Equipa> {
 			Equipa res = null;
 			String chave = (String) key;
 			String sql = "DELETE FROM " + EQUIPA_E
-					+ " WHERE e.nome = ?";
+					+ " WHERE e.nome = '"+chave+"'";
 			PreparedStatement stm = ConexaoBD.getConexao()
 					.prepareStatement(sql);
 			stm.setInt(1, IDEQUIPA);

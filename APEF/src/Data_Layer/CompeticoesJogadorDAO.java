@@ -119,7 +119,7 @@ public class CompeticoesJogadorDAO implements Map<Integer,Integer> {
         try {
 			Integer res = null;
 			int chave = (Integer) key;
-			String sql = "DELETE FROM JOGADORCOMPETICAO j WHERE j.COMPETICAOIDCOMPETICAO = ?";
+			String sql = "DELETE FROM JOGADORCOMPETICAO j WHERE j.COMPETICAOIDCOMPETICAO = "+chave;
 			PreparedStatement stm = ConexaoBD.getConexao()
 					.prepareStatement(sql);
 			stm.setInt(2, chave);
