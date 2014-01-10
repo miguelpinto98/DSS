@@ -405,6 +405,13 @@ public final class Home2 extends JFrame {
         this.jPanel8.add(new JCampeonatoClassificacao(this,user),BorderLayout.CENTER);
         this.jPanel8.updateUI();
         this.jPanel8.validate();
+        
+       for(int ano : this.sistema.getEpocas().keySet()){
+           this.jComboEpocaCampeonato.addItem(ano+"/"+(ano+1));
+       }
+       
+       
+           
     }
     
     public void reloadButtonJornada() {
@@ -502,13 +509,13 @@ public final class Home2 extends JFrame {
         jPanel8 = new javax.swing.JPanel();
         headerCampeonato = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        jComboEpocaCampeonato = new javax.swing.JComboBox();
+        jComboEpocaCampeonato = new javax.swing.JComboBox<String>();
         jPanel1 = new javax.swing.JPanel();
         buttonClassificacao = new javax.swing.JButton();
         jButtonJornada = new javax.swing.JButton();
         jButtonEstatistica = new javax.swing.JButton();
         jButtonCalendario = new javax.swing.JButton();
-        jComboEpocaCampeonato2 = new javax.swing.JComboBox();
+        jComboEpocaCampeonato2 = new javax.swing.JComboBox<String>();
         inscreverCamp = new javax.swing.JButton();
         IniciarCamp = new javax.swing.JButton();
         criarCamp = new javax.swing.JButton();
@@ -917,7 +924,11 @@ public final class Home2 extends JFrame {
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Campeonato");
 
-        jComboEpocaCampeonato.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Época", " " }));
+        jComboEpocaCampeonato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboEpocaCampeonatoActionPerformed(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -980,9 +991,14 @@ public final class Home2 extends JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jComboEpocaCampeonato2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "escalao 1", "escalao 3", "escalao4", " " }));
+        jComboEpocaCampeonato2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Infantis", "Benjamis", "Traquinas", "Petizes" }));
 
         inscreverCamp.setText("Inscrever Plantel");
+        inscreverCamp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inscreverCampActionPerformed(evt);
+            }
+        });
 
         IniciarCamp.setText("Iniciar");
 
@@ -1380,6 +1396,15 @@ public final class Home2 extends JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_criarCampActionPerformed
 
+    private void inscreverCampActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inscreverCampActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inscreverCampActionPerformed
+
+    private void jComboEpocaCampeonatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboEpocaCampeonatoActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jComboEpocaCampeonatoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1444,8 +1469,8 @@ public final class Home2 extends JFrame {
     private javax.swing.JButton jButtonJornada;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JComboBox jComboEpocaCampeonato;
-    private javax.swing.JComboBox jComboEpocaCampeonato2;
+    private javax.swing.JComboBox<String> jComboEpocaCampeonato;
+    private javax.swing.JComboBox<String> jComboEpocaCampeonato2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
