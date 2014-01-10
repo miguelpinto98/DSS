@@ -59,7 +59,7 @@ public final class ConsultarJogador2 extends javax.swing.JPanel {
         mes = new javax.swing.JComboBox();
         ano = new javax.swing.JComboBox();
 
-        setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Editar Dados", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 14), new java.awt.Color(102, 102, 102))); // NOI18N
+        setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Editar Dados", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 14), new java.awt.Color(102, 102, 102))); // NOI18N
 
         nome.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         nome.setForeground(new java.awt.Color(102, 102, 102));

@@ -46,7 +46,7 @@ public class Torneio implements Competicao{
         this.dataInicio = new GregorianCalendar();
         this.dataLimiteInscricoes = new GregorianCalendar();
         this.campo = new Campo();
-        this.arbs = new ArbsDAO();
+        this.arbs = new ArbsDAO(this.id);
     }
     
     public Torneio(String nome, GregorianCalendar inicio, GregorianCalendar limite, int tipoEscalao, int tipoTorneio, int nrEquipas, Campo campo){
@@ -63,7 +63,7 @@ public class Torneio implements Competicao{
         this.dataInicio = inicio;
         this.dataLimiteInscricoes = limite;
         this.campo = campo;
-        this.arbs = new ArbsDAO() ;
+        this.arbs = new ArbsDAO(this.id) ;
     }
     
     public Torneio(String nome, GregorianCalendar inicio, GregorianCalendar limite, int tipoEscalao, int nrEquipas, Campo campo){
@@ -79,7 +79,7 @@ public class Torneio implements Competicao{
         this.dataInicio = inicio;
         this.dataLimiteInscricoes = limite;
         this.campo = campo;
-        this.arbs = new ArbsDAO();
+        this.arbs = new ArbsDAO(this.id);
     }  
 
 	public Torneio(Torneio t) {
@@ -179,12 +179,7 @@ public class Torneio implements Competicao{
     }
     
     public Map<Integer,Utilizador> getArbs(){
-        Map<Integer,Utilizador> aux = new ArbsDAO();
-
-        for(Utilizador f : this.arbs.values()){
-            aux.put(f.getID(),f);
-        }
-        return aux;
+        return this.arbs;
     }
     
     public void setArbs(Map<Integer,Utilizador> a) {

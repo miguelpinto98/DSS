@@ -3,7 +3,6 @@ package GUI.Jogador;
 import Business_Layer.Admin;
 import Business_Layer.Epoca;
 import Business_Layer.Escalao;
-import Business_Layer.Escola;
 import Business_Layer.Jogador;
 import Business_Layer.ResponsavelEscola;
 import Business_Layer.Utilizador;
@@ -13,10 +12,7 @@ import java.text.ParseException;
 import java.util.GregorianCalendar;
 import GUI.Home2;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 import javax.swing.DefaultListModel;
 
 
@@ -35,17 +31,19 @@ public final class ConsultarJogador extends javax.swing.JDialog {
         this.user = user;
         this.jogador = j;
         this.pj = pla;
-        GregorianCalendar g = new GregorianCalendar();
-        int ano = g.get(GregorianCalendar.YEAR);
-        if(!this.root.getSistema().getEpocas().containsKey(ano));
-			ano--;
-        this.ep = this.root.getSistema().getEpocas().get(ano);
         
+        GregorianCalendar g = new GregorianCalendar();
+        int ano = g.get(g.YEAR);
+        
+        if(g.get(g.MONTH) >= 0 && g.get(g.MONTH) <=8)
+            ano--;
+        
+        ep = this.root.getSistema().getEpocas().get(ano);
+       
         initComponents();        
         reload();   
         reloadListaCompeticoes();
         verificaUser();
-        System.out.println(j.getCompeticoes());
     }
     
     public void reload() {
@@ -77,15 +75,23 @@ public final class ConsultarJogador extends javax.swing.JDialog {
 
     public JPlantelJogador getPlantelJogador() {return this.pj;}
     
+    public ArrayList<String> listaCompeticoes (){
+        String nome;
+        ArrayList<String> al = new ArrayList<>();
+            for(Integer n : this.jogador.getCompeticoes().keySet()){
+                /*nome=this.ep.procuraCampeonato(n);
+                if(nome != null) {al.add(nome); break;}
+                else {*/
+                    nome=this.ep.procuraTorneio(n);
+                    if(nome!=null){ al.add(nome); break;}}                
+                //}           
+        return al;}
+    
           
     public void reloadListaCompeticoes(){
-        //ArrayList<String> lcomp = listaComp();
-        DefaultListModel<Integer> str = new DefaultListModel<>(); 
-        Iterator<Integer> it = this.jogador.getCompeticoes().keySet().iterator(); 
-		while (it.hasNext()) {
-            Integer idComp = it.next();
-                str.addElement(idComp); 
-        }
+        ArrayList<String> lcomp = listaCompeticoes();
+        DefaultListModel<String> str = new DefaultListModel<>();        
+            for(String n : lcomp) {str.addElement(n);}
         comp_realizadas.setModel(str);}
    
     @SuppressWarnings("unchecked")
@@ -109,7 +115,7 @@ public final class ConsultarJogador extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         comp_ativas = new javax.swing.JList();
         jScrollPane3 = new javax.swing.JScrollPane();
-        comp_realizadas = new javax.swing.JList<Integer>();
+        comp_realizadas = new javax.swing.JList<String>();
         jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -222,7 +228,6 @@ public final class ConsultarJogador extends javax.swing.JDialog {
         comp_realizadas.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Realizadas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(102, 102, 102)));
         comp_realizadas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane3.setViewportView(comp_realizadas);
-        comp_realizadas.getAccessibleContext().setAccessibleName("Realizadas");
 
         javax.swing.GroupLayout competicoesLayout = new javax.swing.GroupLayout(competicoes);
         competicoes.setLayout(competicoesLayout);
@@ -271,7 +276,7 @@ public final class ConsultarJogador extends javax.swing.JDialog {
     private javax.swing.JLabel clube_l;
     private javax.swing.JLabel clube_t;
     private javax.swing.JList comp_ativas;
-    private javax.swing.JList<Integer> comp_realizadas;
+    private javax.swing.JList<String> comp_realizadas;
     private javax.swing.JPanel competicoes;
     private javax.swing.JPanel dados_pessoais;
     private javax.swing.JPanel header;

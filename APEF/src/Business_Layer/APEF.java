@@ -476,7 +476,8 @@ public class APEF {
         HashSet<Utilizador> arbitrosEscolhidos = g1.geraCalendario(t.getID(),t.getDataInicio(),arrayEquipasGrupo1,t.getCampo(),arrayArbitros);
         ArrayList<Utilizador> arrayArbitrosDisponiveis = new ArrayList<>();
         arrayArbitrosDisponiveis = daArbitrosDisponiveis(arbitrosEscolhidos, arrayArbitros);
-        Map<Integer,Utilizador> aux3 = new ArbsDAO();
+
+        Map<Integer,Utilizador> aux3 = new ArbsDAO(t.getID()); //Adicionei o ID do Torneio AQUI
         for(Utilizador j : arrayArbitrosDisponiveis) {
             aux3.put(j.getID(), j);
         }
