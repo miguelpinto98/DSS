@@ -92,7 +92,7 @@ public final class Home2 extends JFrame {
         Campeonato c2 = new Campeonato("Campeonato dos ainda mais lindos", new GregorianCalendar(),new GregorianCalendar(), 2, 2);
         epo1.inserirCampeonato(c1);
         epo1.inserirCampeonato(c2);
-
+        System.out.println("teste");
         epo1.inserirTorneio(t1);
         epo1.inserirTorneio(t2);
  
