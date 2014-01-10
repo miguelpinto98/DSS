@@ -142,7 +142,7 @@ public class APEF {
 	public boolean validaPassword(String pw) {
         boolean res = true;
         int i = 0;
-        if(pw.length() < 6)
+        if(pw.length() < 5)
                     return false ;
         for (; i < pw.length() && res; i++) {
         	char c = pw.charAt(i);
@@ -185,6 +185,13 @@ public class APEF {
             this.users.put(user.getNomeUser(),user);
             ins = true;
         }
+        return ins;
+    }
+    
+     public boolean actualizarUtilizador(Utilizador user) {
+        boolean ins = false;       
+            this.users.put(user.getNomeUser(),user);
+            ins = true;
         return ins;
     }
 
