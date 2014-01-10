@@ -19,7 +19,7 @@ public class Jornada implements Comparable<Jornada>{
         this.id = APEF.IDENTIFICADOR;
         this.nrJornada = 0;
         this.jogosRealizados = 0;
-        this.listaJogos = new JogoDAO();
+        this.listaJogos = new JogoDAO(this.id);
         APEF.IDENTIFICADOR++;
     }
     
@@ -27,7 +27,7 @@ public class Jornada implements Comparable<Jornada>{
         this.id = APEF.IDENTIFICADOR;
         this.nrJornada = nrJornada;
         this.jogosRealizados = 0;
-        this.listaJogos = new JogoDAO();
+        this.listaJogos = new JogoDAO(this.id);
         APEF.IDENTIFICADOR++;
     }
     
@@ -51,7 +51,7 @@ public class Jornada implements Comparable<Jornada>{
     }
     
     public Map<Integer,Jogo> getListaJogos() {
-        Map<Integer,Jogo> aux = new JogoDAO();
+        Map<Integer,Jogo> aux = new JogoDAO(this.id);
         for(Jogo e: this.listaJogos.values()) 
             aux.put(e.getID(),e);
         return aux;

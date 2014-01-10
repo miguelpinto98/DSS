@@ -151,12 +151,10 @@ public final class Home2 extends JFrame {
         
         
         //this.sistema.getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").inserirEscalao(escalao2);
-        
-        
-
+         //this.sistema.getUsers().remove("maleite");
         /* TESTE USERS */
-        /*this.sistema.registarUser("maleite","pw1234","maleite@gmail.com",0);
-        this.sistema.registarUser("174Miguel","pw1234","miguel@gmail.com",1);
+        this.sistema.registarUser("maleite","pw1234","maleite@gmail.com",0);
+        /*this.sistema.registarUser("174Miguel","pw1234","miguel@gmail.com",1);
         this.sistema.registarUser("63linda","pw1234","63@gmail.com",1);
         this.sistema.registarUser("diana","pw12345","demos@gmail.com",0);
         this.sistema.registarUser("serafim","pw1234","smcp@gmail.com",2);
@@ -169,9 +167,7 @@ public final class Home2 extends JFrame {
         Utilizador u = new Admin(123,null,0,"ADMIN","serafimpinto","lol@joao","1245213s22","Felgueiras","91568544","784-545",new GregorianCalendar(),false,false,false);
         Utilizador u2 = new ResponsavelEscola(101,null,1,"Rescla","sersfismpinto","ll@josao","1245213s22","Felgueiras","91568544","784-545",new GregorianCalendar(),false,false,false,e1);
         Utilizador u3 = new Arbitro(1001,null,2,"josejose","sersfismpinto","ll@josao","1245213s22","Felgueiras","91568544","784-545",new GregorianCalendar(),false,false,aaa,false);
-        System.out.println(this.sistema.getUsers().values*/
-
-        
+        System.out.println(this.sistema.getUsers().values*/        
         /* TESTE JOGO COM ESCALOES */
         ArrayList<Jogo> tj = new ArrayList<>();
         Escalao esc1 = new Escalao(0, "LEI", "UMINHO");

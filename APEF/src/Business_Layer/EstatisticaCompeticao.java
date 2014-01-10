@@ -12,7 +12,7 @@ public class EstatisticaCompeticao {
 
     public EstatisticaCompeticao() {
         this.idEstatistica = APEF.IDENTIFICADOR;
-    	this.estatistica = new DadosEstatisticosDAO();
+    	this.estatistica = new DadosEstatisticosDAO(idEstatistica);
         APEF.IDENTIFICADOR++;
     }
 
@@ -21,7 +21,7 @@ public class EstatisticaCompeticao {
     }
 
     public Map<Integer,DadosEstatisticos> getEstatistica(){
-    	Map<Integer,DadosEstatisticos> aux = new DadosEstatisticosDAO();
+    	Map<Integer,DadosEstatisticos> aux = new DadosEstatisticosDAO(idEstatistica);
     	
     	for (DadosEstatisticos i : this.estatistica.values())
     	{ aux.put(i.getID(),i); }

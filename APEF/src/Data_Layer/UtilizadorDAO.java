@@ -93,7 +93,7 @@ public class UtilizadorDAO implements Map<String,Utilizador>{
     try {
         String chave = (String) key;
         Statement stm = ConexaoBD.getConexao().createStatement();
-        String sql = "SELECT NICKNAME FROM "+USER+" WHERE u.NICKNAME = '" + chave+"'";
+        String sql = "SELECT NICKNAME FROM "+USER+" WHERE u.NICKNAME = '"+chave+"'";
             ResultSet rs = stm.executeQuery(sql);
             boolean res = rs.next();
             ConexaoBD.fecharCursor(rs, stm);
@@ -198,8 +198,7 @@ public class UtilizadorDAO implements Map<String,Utilizador>{
             if (existe) {
                 sql = "UPDATE "
                         + USER
-                        + " SET u.idUtilizador = ?, u.avatar = ?, u.nickname = ?, u.email = ?, u.password = ?, u.morada = ?, u.telemovel = ?, u.codPostal = ?, u.dataNasc = ?, u.ativo = ?, u.camposPreenchidos = ?, u.tipoUser = ?, u.removido = ?, u.nome = ? WHERE u.nickname = "
-                        + key;
+                        + " SET u.idUtilizador = ?, u.avatar = ?, u.nickname = ?, u.email = ?, u.password = ?, u.morada = ?, u.telemovel = ?, u.codPostal = ?, u.dataNasc = ?, u.ativo = ?, u.camposPreenchidos = ?, u.tipoUser = ?, u.removido = ?, u.nome = ? WHERE u.nickname = '"+key+"'";
             }
             else {
                 sql = "INSERT INTO Utilizador(idUtilizador,avatar,nickname,email,password,morada,telemovel,codPostal,dataNasc,ativo,camposPreenchidos,tipoUser,removido,nome) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -258,8 +257,48 @@ public class UtilizadorDAO implements Map<String,Utilizador>{
         
     @Override
     public Utilizador remove(Object key) {
-        throw new NullPointerException("não está implementado!");    
+        try {
+            
+            String chave = (String) key;
+            Utilizador res = null;
+            String sql = "SELECT * FROM Utilizador u WHERE u.NICKNAME = '"+chave+"'";
+            PreparedStatement stm = ConexaoBD.getConexao().prepareStatement(sql);
+            ResultSet rs = stm.executeQuery(sql);
+            if(rs.next()) {
+            int tipo = rs.getInt(TIPO);
+            int id = rs.getInt(ID);
+            stm.executeQuery();
+            stm.close();
+            if(tipo == 0) {
+                String sql1 = "DELETE FROM Admin u WHERE u.IDUTILIZADOR = '"+id+"'";
+                PreparedStatement stm1 = ConexaoBD.getConexao().prepareStatement(sql1);
+                stm1.execute();
+                stm1.close();
+            }
+            if(tipo == 1) {
+                String sql2 = "DELETE FROM ResponsavelEscola u WHERE u.IDUTILIZADOR = '"+id+"'";
+                PreparedStatement stm2 = ConexaoBD.getConexao().prepareStatement(sql2);
+                stm2.execute();
+                stm2.close();
+                
+            }
+            if(tipo == 2) {
+                String sql4 = "DELETE FROM Arbitro u WHERE u.IDUTILIZADOR = '"+id+"'";
+                PreparedStatement stm4 = ConexaoBD.getConexao().prepareStatement(sql4);
+                stm4.execute();
+                stm4.close();
+            }
+            String sql3 = "DELETE FROM Utilizador u WHERE u.NICKNAME = '"+chave+"'";
+            PreparedStatement stm3 = ConexaoBD.getConexao().prepareStatement(sql3);
+            stm3.execute();
+            stm3.close();
+            }
+            return res;
+        } catch (Exception e) {
+            throw new NullPointerException(e.getMessage());
+        }
     }
+    
 
     @Override
     public void putAll(Map<? extends String, ? extends Utilizador> m) {

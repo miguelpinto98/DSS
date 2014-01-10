@@ -18,7 +18,7 @@ public class Agenda {
             this.idAgenda = APEF.IDENTIFICADOR;
             this.jogos = new JogoDAO(idAgenda);
             this.idAgenda = APEF.IDENTIFICADOR;;
-            this.jogos = new JogoDAO();
+            this.jogos = new JogoDAO(this.idAgenda);
             APEF.IDENTIFICADOR++;
         }
         
@@ -34,11 +34,11 @@ public class Agenda {
 
     public Agenda(int idAgenda) {
         this.idAgenda = idAgenda;
-        this.jogos = new JogoDAO(); //JOGODAO()
+        this.jogos = new JogoDAO(idAgenda); //JOGODAO()
     }
 
         public Map<Integer,Jogo> getJogos() {
-            Map<Integer,Jogo> aux = new JogoDAO();
+            Map<Integer,Jogo> aux = new JogoDAO(idAgenda);
          for(Integer s : this.jogos.keySet()){
              aux.put(s,this.jogos.get(s));
          }

@@ -19,7 +19,6 @@ import java.util.TreeSet;
  */
 public class JornadaDAO implements Map<Integer,Jornada> {
     private int idCalendario;
-    private HashMap<Integer,Jornada> jornadas;
     
     public JornadaDAO() {
         
@@ -61,14 +60,15 @@ public class JornadaDAO implements Map<Integer,Jornada> {
         try {
             Integer chave = (Integer) key;
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT IDJORNADA FROM Jornada j WHERE j.IDJORNADA = " +chave+"";
+            String sql = "SELECT IDJORNADA FROM Jornada j WHERE j.IDJORNADA = '"+chave+"'";
             ResultSet rs = stm.executeQuery(sql);
             boolean res = rs.next();
             ConexaoBD.fecharCursor(rs, stm);
             return res;
         } catch (SQLException e) {
             throw new NullPointerException(e.getMessage());
-        }    }
+        }    
+    }
 
     @Override
     public boolean containsValue(Object value) {
@@ -79,9 +79,9 @@ public class JornadaDAO implements Map<Integer,Jornada> {
     public Jornada get(Object key) {
         try {
             Jornada res = null;
-            String chave = (String) key;
+            Integer chave = (Integer) key;
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * FROM JORNADA j WHERE j.IDJORNADA = "+chave+"";
+            String sql = "SELECT * FROM JORNADA j WHERE j.IDJORNADA = '"+chave+"'";
             ResultSet rs = stm.executeQuery(sql);
             if(rs.next()) {
                 int idJornada = rs.getInt(1);
@@ -104,7 +104,7 @@ public class JornadaDAO implements Map<Integer,Jornada> {
             boolean existe = this.containsKey(key);
             String sql;
             if (existe) {
-                sql = "UPDATE Jornada SET nrJornada = ?, jogosRealizados = ?, idCalendario = ? WHERE idJornada = ?";
+                sql = "UPDATE Jornada SET nrJornada = ?, jogosRealizados = ?, idCalendario = ? WHERE idJornada = '"+key+"'";
             }
             else {
                 sql = "INSERT INTO Jornada(idJornada,nrJornada,jogosRealizados,idCalendario) VALUES(?, ?, ?, ?)";

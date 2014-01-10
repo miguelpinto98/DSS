@@ -24,7 +24,7 @@ public class Calendario {
 
     //Getters
     public Map<Integer,Jornada> getJornadas() {
-    	Map<Integer,Jornada> aux = new JornadaDAO();
+    	Map<Integer,Jornada> aux = new JornadaDAO(this.idCalendario);
         for(Jornada j: this.jornadas.values()) 
             aux.put(j.getID(), j);
         return aux;
