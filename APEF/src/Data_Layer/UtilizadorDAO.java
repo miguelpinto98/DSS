@@ -206,10 +206,10 @@ public class UtilizadorDAO implements Map<String,Utilizador>{
             stm.setInt(ID, value.getID());
             stm.setString(NICKNAME,value.getNomeUser());
             stm.setString(EMAIL,value.getEmail());
-            if(existe)
+            //if(existe)
                 stm.setString(PASSWORD, value.getPass());
-            else
-                stm.setString(PASSWORD, Utilizador.encriptarPassword(value.getPass()));
+            /*else
+                stm.setString(PASSWORD, Utilizador.encriptarPassword(value.getPass()));*/
             stm.setString(AVATAR,null);
             stm.setString(MORADA,value.getMorada());
             stm.setString(TELEMOVEL, value.getTelemovel());

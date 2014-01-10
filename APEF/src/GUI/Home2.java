@@ -137,7 +137,7 @@ public final class Home2 extends JFrame {
         Jogador lindo5 = new Jogador("63linda", new GregorianCalendar(), 2, new Imagem());
     
                
-        eq3.getEscaloes().get(0).inserirJogador(lindo1);
+/*        eq3.getEscaloes().get(0).inserirJogador(lindo1);
         eq3.getEscaloes().get(0).inserirJogador(lindo2);
         eq3.getEscaloes().get(0).inserirJogador(lindo3);
         eq3.getEscaloes().get(0).inserirJogador(lindo4);

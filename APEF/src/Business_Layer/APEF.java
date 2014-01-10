@@ -205,9 +205,9 @@ public class APEF {
         
         if (validaLogin(nickname,password)) {
             if ((this.users.get(nickname).isAtivo())) { 
-		this.emSessao = this.users.get(nickname);
+                this.emSessao = this.users.get(nickname);
                 lg = true;
-		if(this.users.get(nickname).isAtivo() && !this.users.get(nickname).isCamposPreenchidos()) {
+                if(this.users.get(nickname).isAtivo() && !this.users.get(nickname).isCamposPreenchidos()) {
                     /** metodo prencher campos*/
                     lg = true;
                 }
