@@ -50,10 +50,7 @@ public class APEF {
 	}
 
 	public Map<String, Utilizador> getUsers() {
-		Map<String,Utilizador> aux = new UtilizadorDAO();
-		for(String s : this.users.keySet())
-			aux.put(s, this.users.get(s).clone());
-		return aux;
+            return this.users;
 	}
 
 	public HashSet<Campo> getCampos() {
@@ -124,7 +121,7 @@ public class APEF {
 	*/
 	public boolean existeEmail(String e) {
 		boolean res=false;
-		Iterator<String> it = this.users.keySet().iterator(); 
+		Iterator<String> it = this.users.keySet().iterator();
 		while (it.hasNext() && !res) {
 			String u = it.next();
 			if (this.users.get(u).getEmail().equals(e)) {

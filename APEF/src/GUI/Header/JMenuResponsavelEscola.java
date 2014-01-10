@@ -29,7 +29,7 @@ public class JMenuResponsavelEscola extends javax.swing.JPanel {
         initComponents();
         this.root = aThis;
         this.u=user;
-        this.bemvindo.setText("Bem-Vindo "+user.getNome()+"!");
+        this.bemvindo.setText("Bem-Vindo "+user.getNomeUser()+"!");
     }
 
     /**

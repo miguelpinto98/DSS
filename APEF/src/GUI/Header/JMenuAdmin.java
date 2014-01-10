@@ -29,7 +29,7 @@ public class JMenuAdmin extends JPanel {
         initComponents();
         this.root = root;
         this.u=user;
-        this.bemvindo.setText("Bem-Vindo "+user.getNome()+"!");
+        this.bemvindo.setText("Bem-Vindo "+user.getNomeUser()+"!");
     }
 
     /**

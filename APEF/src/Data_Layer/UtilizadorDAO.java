@@ -92,7 +92,7 @@ public class UtilizadorDAO implements Map<String,Utilizador>{
     try {
         String chave = (String) key;
         Statement stm = ConexaoBD.getConexao().createStatement();
-        String sql = "SELECT NICKNAME FROM "+USER+" WHERE u.NICKNAME = '"+chave+"'";
+        String sql = "SELECT NICKNAME FROM Utilizador u WHERE u.NICKNAME = '"+chave+"'";
             ResultSet rs = stm.executeQuery(sql);
             boolean res = rs.next();
             ConexaoBD.fecharCursor(rs, stm);
@@ -206,10 +206,7 @@ public class UtilizadorDAO implements Map<String,Utilizador>{
             stm.setInt(ID, value.getID());
             stm.setString(NICKNAME,value.getNomeUser());
             stm.setString(EMAIL,value.getEmail());
-            //if(existe)
-                stm.setString(PASSWORD, value.getPass());
-            /*else
-                stm.setString(PASSWORD, Utilizador.encriptarPassword(value.getPass()));*/
+            stm.setString(PASSWORD, value.getPass());
             stm.setString(AVATAR,null);
             stm.setString(MORADA,value.getMorada());
             stm.setString(TELEMOVEL, value.getTelemovel());
@@ -232,7 +229,7 @@ public class UtilizadorDAO implements Map<String,Utilizador>{
              if(value.getTipo() == 1)  {
                 ResponsavelEscola r = (ResponsavelEscola) value; 
                 String s = r.getEscola().getNome();
-                String sql3 = "INSERT INTO ResponsavelEscola(idUtilizador,escolaNome) VALUES ("+value.getID()+",'"+s+"')";
+                String sql3 = "INSERT INTO ResponsavelEscola(idUtilizador,escolaNome) VALUES ("+value.getID()+","+null+")";
                 PreparedStatement stm3 = ConexaoBD.getConexao().prepareStatement(sql3);
                 stm3.execute();
                 stm3.close();
@@ -240,12 +237,11 @@ public class UtilizadorDAO implements Map<String,Utilizador>{
              if(value.getTipo() == 2) {
                 Arbitro a = (Arbitro) value;
                 int idAgenda = a.getAgenda().getIDAgenda();
-                String sql4 = "INSERT INTO Arbitro(idUtilizador,idTorneio,idAgenda) VALUES ("+value.getID()+",null,null)";
+                String sql4 = "INSERT INTO Arbitro(idUtilizador,idTorneio,idAgenda) VALUES ("+value.getID()+","+null+","+null+")";
                 PreparedStatement stm4 = ConexaoBD.getConexao().prepareStatement(sql4);
                 stm4.execute();
                 stm4.close();
             }
-
          }
        
         catch (SQLException e) {
@@ -311,18 +307,18 @@ public class UtilizadorDAO implements Map<String,Utilizador>{
 
     @Override
     public Set<String> keySet() {
-        Set<String> res = new TreeSet<>();
+        Set<String> res = new TreeSet<String>();
         try {
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT NICKNAME FROM UTILIZADOR";
+            String sql = "SELECT NICKNAME FROM Utilizador u";
             ResultSet rs = stm.executeQuery(sql);
-            
             while(rs.next())
-                res.add(rs.getString(NICKNAME));
+                res.add(rs.getString("NICKNAME"));
            
             ConexaoBD.fecharCursor(rs, stm);
         } catch (SQLException e) {
-        }
+              throw new NullPointerException(e.getMessage());
+            }
         return res;
     }
 
@@ -334,30 +330,30 @@ public class UtilizadorDAO implements Map<String,Utilizador>{
             String sql = "SELECT * FROM UTILIZADOR u";
             ResultSet rsCiclo = stm.executeQuery(sql);
             while(rsCiclo.next()) {
-                int id = rsCiclo.getInt(ID);
+                int id = rsCiclo.getInt("IDUTILIZADOR");
                 Imagem avatar = null;
-                if(rsCiclo.getBlob(AVATAR) == null)
+                if(rsCiclo.getBlob("AVATAR") == null)
                     avatar = new Imagem();
-                int tipo = rsCiclo.getInt(TIPO);
-                String nick = rsCiclo.getString(NICKNAME);
-                String nome = rsCiclo.getString(NOME);
-                String email = rsCiclo.getString(EMAIL);
-                String pw = rsCiclo.getString(PASSWORD);
-                String morada = rsCiclo.getString(MORADA);
-                String tlmvl = rsCiclo.getString(TELEMOVEL);
-                String codPostal = rsCiclo.getString(CODPOSTAL);
+                int tipo = rsCiclo.getInt("TIPOUSER");
+                String nick = rsCiclo.getString("NICKNAME");
+                String nome = rsCiclo.getString("NOME");
+                String email = rsCiclo.getString("EMAIL");
+                String pw = rsCiclo.getString("PASSWORD");
+                String morada = rsCiclo.getString("MORADA");
+                String tlmvl = rsCiclo.getString("TELEMOVEL");
+                String codPostal = rsCiclo.getString("CODPOSTAL");
                 GregorianCalendar dataNasc = new GregorianCalendar();
-                rsCiclo.getTimestamp(DATANASC, dataNasc);
-                int ativo = rsCiclo.getInt(ATIVO); 
-                int camposPreenchidos = rsCiclo.getInt(CAMPOSPREENCHIDOS);  
-                int removido = rsCiclo.getInt(REMOVIDO);                
+                rsCiclo.getTimestamp("DATANASC", dataNasc);
+                int ativo = rsCiclo.getInt("ATIVO"); 
+                int camposPreenchidos = rsCiclo.getInt("CAMPOSPREENCHIDOS");  
+                int removido = rsCiclo.getInt("REMOVIDO");                
                 if(tipo == 2) {
                     Arbitro a = null;
                     stm = ConexaoBD.getConexao().createStatement();
                     sql = "SELECT * FROM ARBITRO u where u.IDUTILIZADOR = '"+id+"'";
                     ResultSet rs = stm.executeQuery(sql);
                     if(rs.next()) {
-                    int idAgenda = rs.getInt(IDAGENDA);
+                    int idAgenda = rs.getInt("IDAGENDA");
                                         
                     JogoDAO ag = new JogoDAO(idAgenda);
                     Agenda agenda = new Agenda(idAgenda,ag);
@@ -373,7 +369,7 @@ public class UtilizadorDAO implements Map<String,Utilizador>{
                     sql = "SELECT * FROM RESPONSAVELESCOLA a where a.IDUTILIZADOR = '"+id+"'";
                     ResultSet rs = stm.executeQuery(sql);
                     if(rs.next()) {
-                    String nomeEscola = rs.getString(ESCOLANOME);
+                    String nomeEscola = rs.getString("ESCOLANOME");
                     EscolaDAO x = new EscolaDAO();
                     Escola y = x.get(nomeEscola);
                     r = new ResponsavelEscola(id,avatar,tipo,nick,nome,email,pw,morada,tlmvl,

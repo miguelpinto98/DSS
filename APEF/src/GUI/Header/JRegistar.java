@@ -20,6 +20,8 @@ public class JRegistar extends javax.swing.JDialog {
     
     public JRegistar(Home2 sistema) {
         initComponents();
+        this.buttonGroup1.add(this.resp);
+        this.buttonGroup1.add(this.arb);
         this.sys = sistema;
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -35,10 +37,6 @@ public class JRegistar extends javax.swing.JDialog {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        buttonGroup2 = new javax.swing.ButtonGroup();
-        buttonGroup3 = new javax.swing.ButtonGroup();
-        buttonGroup4 = new javax.swing.ButtonGroup();
-        buttonGroup5 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -131,6 +129,7 @@ public class JRegistar extends javax.swing.JDialog {
         error.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         getContentPane().add(error, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 210, 20));
 
+        resp.setSelected(true);
         resp.setText("Responsável Escola");
         getContentPane().add(resp, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, -1, -1));
 
@@ -183,9 +182,9 @@ public class JRegistar extends javax.swing.JDialog {
                 else {
                     int tipo = -999;
                     if(a)
-                        tipo = 1;
-                    else
                         tipo = 2;
+                    else
+                        tipo = 1;
                 
                     inserido = sistema.registarUser(nomeUser, pw, mail, tipo);
                     if(inserido) {
@@ -215,10 +214,6 @@ public class JRegistar extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton arb;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.ButtonGroup buttonGroup3;
-    private javax.swing.ButtonGroup buttonGroup4;
-    private javax.swing.ButtonGroup buttonGroup5;
     private javax.swing.JButton cancela;
     private javax.swing.JTextField confemail;
     private javax.swing.JButton confirma;

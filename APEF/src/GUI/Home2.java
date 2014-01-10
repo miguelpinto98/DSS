@@ -85,7 +85,7 @@ public final class Home2 extends JFrame {
         Epoca epo3 = new Epoca(2010);
         Epoca epo4 = new Epoca(2014);
         Epoca epo5 = new Epoca(1995);
- 
+        System.out.println(this.sistema.existeEmail("lol"));
         Torneio t1 = new Torneio("Uminho Cup",new GregorianCalendar(),new GregorianCalendar(),2,2,new Campo("UM"));
         Torneio t2 = new Torneio("Uminho Cup",new GregorianCalendar(),new GregorianCalendar(),1,2,new Campo("UM"));
         Campeonato c1 = new Campeonato("Campeonato dos lindos", new GregorianCalendar(),new GregorianCalendar(), 1, 2);
@@ -152,12 +152,12 @@ public final class Home2 extends JFrame {
         
 
         /* TESTE USERS */
-        this.sistema.registarUser("maleite","pw1234","maleite@gmail.com",0);
+        /*this.sistema.registarUser("maleite","pw1234","maleite@gmail.com",0);
         this.sistema.registarUser("174Miguel","pw1234","miguel@gmail.com",1);
         this.sistema.registarUser("63linda","pw1234","63@gmail.com",2);
         this.sistema.registarUser("diana","pw1234","demossbb@gmail.com",2);
         this.sistema.registarUser("serafim","pw1234","smcp@gmail.com",2);
-        this.sistema.registarUser("atum","pw1234","atum@gmail.com",0);
+        this.sistema.registarUser("atum","pw1234","atum@gmail.com",0);*/
         
         eq3.atualizaPalmares("Liga dos Campeões Infantis");
         eq3.atualizaPalmares("Liga dos Campeões Infantis");
@@ -173,7 +173,6 @@ public final class Home2 extends JFrame {
         //this.sistema.getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").inserirEscalao(escalao2);
          //this.sistema.getUsers().remove("maleite");
         /* TESTE USERS */
-        this.sistema.registarUser("maleite","pw1234","maleite@gmail.com",0);
         /*this.sistema.registarUser("174Miguel","pw1234","miguel@gmail.com",1);
         this.sistema.registarUser("63linda","pw1234","63@gmail.com",1);
         this.sistema.registarUser("diana","pw12345","demos@gmail.com",0);
