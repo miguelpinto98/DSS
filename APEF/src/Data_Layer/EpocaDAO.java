@@ -108,7 +108,7 @@ public class EpocaDAO implements Map<Integer,Epoca> {
         try {
                 Set<Integer> res = new TreeSet<Integer>();
                 Statement stm = ConexaoBD.getConexao().createStatement();
-                ResultSet rs = stm.executeQuery("SELECT ANO FROM EPOCA ORDER BY ANO DESC");
+                ResultSet rs = stm.executeQuery("SELECT ANO FROM EPOCA");
                 while (rs.next())
                 res.add(rs.getInt(ANO));
                 ConexaoBD.fecharCursor(rs, stm);
