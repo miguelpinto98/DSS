@@ -15,13 +15,11 @@ import java.util.Set;
  * @author serafim
  */
 public class CompeticoesJogadorDAO implements Map<Integer,Integer> {
-    private HashMap<Integer,Integer> competicoes;
     
     private static final int IDPESSOA = 1;
     private static final int COMPETICAOIDCOMPETICAO = 2;
 
     public CompeticoesJogadorDAO() {
-        this.competicoes = new HashMap<>();
     }
     
     @Override
@@ -43,9 +41,9 @@ public class CompeticoesJogadorDAO implements Map<Integer,Integer> {
     }
 
     @Override
-    public boolean isEmpty() {
-        return this.competicoes.isEmpty();
-    }
+    public boolean isEmpty(){
+        throw new NullPointerException("não está implementado!");
+        }
 
     @Override
     public boolean containsKey(Object key) {
@@ -67,8 +65,8 @@ public class CompeticoesJogadorDAO implements Map<Integer,Integer> {
 
     @Override
     public boolean containsValue(Object value) {
-        return this.competicoes.containsValue(value);
-    }
+        throw new NullPointerException("não está implementado!");
+        }
 
     @Override
     public Integer get(Object key) {
@@ -135,34 +133,31 @@ public class CompeticoesJogadorDAO implements Map<Integer,Integer> {
 
     @Override
     public void putAll(Map<? extends Integer, ? extends Integer> m) {
-        this.competicoes.putAll(m);
-    }
+        throw new NullPointerException("não está implementado!");
+        }
 
     @Override
     public void clear() {
-        this.competicoes.clear();
-    }
+        throw new NullPointerException("não está implementado!");
+        }
 
     @Override
     public Set<Integer> keySet() {
-        return this.competicoes.keySet();
-    }
+        throw new NullPointerException("não está implementado!");
+        }
 
     @Override
-    public Collection<Integer> values() {
-        return this.competicoes.values();
-    }
+    public Collection<Integer> values(){
+        throw new NullPointerException("não está implementado!");
+        }
 
     @Override
     public Set<Map.Entry<Integer, Integer>> entrySet() {
-        return this.competicoes.entrySet();
-    }
+        throw new NullPointerException("não está implementado!");
+        }
     
     public int hashCode() {     
-        final int prime = 7;
-        int result = 1;
-        result = prime * result + ((this.competicoes == null) ? 0 : this.competicoes.hashCode());
-        return result;
+        return ConexaoBD.getConexao().hashCode();
     }
 }
 

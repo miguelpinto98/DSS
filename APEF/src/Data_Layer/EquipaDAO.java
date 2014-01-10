@@ -22,7 +22,6 @@ import oracle.sql.BLOB;
 
 
 public class EquipaDAO implements Map<String,Equipa> {
-    private HashMap<String,Equipa> equipas;
     
     public static final String EQUIPA_E = "Equipa e";
     public static final int IDEQUIPA = 1;
@@ -55,8 +54,9 @@ public class EquipaDAO implements Map<String,Equipa> {
 
     @Override
     public boolean isEmpty() {
-        return this.equipas.isEmpty();
-    }
+        throw new NullPointerException("não está implementado!");
+        }
+
 
     @Override
     public boolean containsKey(Object key) {
@@ -79,8 +79,9 @@ public class EquipaDAO implements Map<String,Equipa> {
 
     @Override
     public boolean containsValue(Object value) {
-        return this.equipas.containsValue(value);
-    }
+        throw new NullPointerException("não está implementado!");
+        }
+
 
     @Override
     public Equipa get(Object key) {
@@ -163,14 +164,15 @@ public class EquipaDAO implements Map<String,Equipa> {
     }
 
     @Override
-    public void putAll(Map<? extends String, ? extends Equipa> m) {
-        this.equipas.putAll(m);
-    }
+    public void putAll(Map<? extends String, ? extends Equipa> m){
+        throw new NullPointerException("não está implementado!");
+        }
+
 
     @Override
     public void clear() {
-        this.equipas.clear();
-    }
+        throw new NullPointerException("não está implementado!");
+        }
 
     @Override
     public Set<String> keySet() {
@@ -191,13 +193,15 @@ public class EquipaDAO implements Map<String,Equipa> {
 
     @Override
     public Collection<Equipa> values() {
-        return this.equipas.values();
-    }
+        throw new NullPointerException("não está implementado!");
+        }
+
 
     @Override
     public Set<Map.Entry<String, Equipa>> entrySet() {
-        return this.equipas.entrySet();
-    }
+        throw new NullPointerException("não está implementado!");
+        }
+
     
     public int hashCode() {
         return ConexaoBD.getConexao().hashCode();
