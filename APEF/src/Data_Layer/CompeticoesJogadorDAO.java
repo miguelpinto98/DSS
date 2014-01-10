@@ -1,6 +1,10 @@
 package Data_Layer;
 
 import Business_Layer.Jogador;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,6 +16,9 @@ import java.util.Set;
  */
 public class CompeticoesJogadorDAO implements Map<Integer,Integer> {
     private HashMap<Integer,Integer> competicoes;
+    
+    private static final int IDPESSOA = 1;
+    private static final int COMPETICAOIDCOMPETICAO = 2;
 
     public CompeticoesJogadorDAO() {
         this.competicoes = new HashMap<>();
@@ -19,7 +26,20 @@ public class CompeticoesJogadorDAO implements Map<Integer,Integer> {
     
     @Override
     public int size() {
-        return this.competicoes.size();
+        int res = 0;
+        try {
+            Statement stm = ConexaoBD.getConexao().createStatement();          
+            String sql = "SELECT * FROM JOGADORCOMPETICAO";
+            ResultSet rs = stm.executeQuery(sql);
+            
+            while(rs.next())
+                res++;
+            
+            ConexaoBD.fecharCursor(rs, stm);    
+        } catch (SQLException e) {
+        }
+        
+        return res;
     }
 
     @Override
@@ -29,7 +49,20 @@ public class CompeticoesJogadorDAO implements Map<Integer,Integer> {
 
     @Override
     public boolean containsKey(Object key) {
-        return this.competicoes.containsKey(key);
+        boolean res = false;
+        try {
+            int chave = (Integer) key;
+            //String chave = c.toUpperCase();
+            
+            Statement stm = ConexaoBD.getConexao().createStatement();          
+            String sql = "SELECT * FROM JOGADORCOMPETICAO e WHERE e.COMPETICAOIDCOMPETICAO = "+chave;
+            ResultSet rs = stm.executeQuery(sql);
+            res = rs.next();
+            
+            ConexaoBD.fecharCursor(rs, stm);   
+        } catch (SQLException e) {
+        }
+        return res;
     }
 
     @Override
@@ -39,17 +72,65 @@ public class CompeticoesJogadorDAO implements Map<Integer,Integer> {
 
     @Override
     public Integer get(Object key) {
-        return this.competicoes.get(key);
+        Integer res = null;
+        
+        try {
+            int chave = (Integer) key;
+            //String chave = c.toUpperCase();
+            Statement stm = ConexaoBD.getConexao().createStatement();
+            String sql = "SELECT * FROM JOGADORCOMPETICAO e WHERE e.COMPETICAOIDCOMPETICAO = "+chave;
+            ResultSet rs = stm.executeQuery(sql);
+            
+            if(rs.next()) {
+                int idPessoa = rs.getInt(IDPESSOA);
+                int idComp = rs.getInt(COMPETICAOIDCOMPETICAO);
+                res = idPessoa;
+            }
+                
+        ConexaoBD.fecharCursor(rs, stm);
+        } catch (Exception e) {
+        }        
+        return res;
     }
 
     @Override
     public Integer put(Integer key, Integer value) {
-        return this.competicoes.put(key, value);
+        Integer res = null;
+        try {
+            int c = (Integer) key;
+            boolean existe = this.containsKey(key);
+            
+            if(!existe) {
+                //String chave = c.toUpperCase();
+                    String sql = "";
+                    sql = "INSERT INTO Campo(idCampo, nome) VALUES (?, ?)";
+                    PreparedStatement stm = ConexaoBD.getConexao().prepareStatement(sql);
+                    stm.setInt(IDPESSOA, key);
+                    stm.setInt(COMPETICAOIDCOMPETICAO, value);
+                    stm.execute();
+                    stm.close();
+                    res = value;
+            }
+        } catch (SQLException e) {
+        }
+        return res;
     }
 
     @Override
     public Integer remove(Object key) {
-        return this.competicoes.remove(key);
+        try {
+			Integer res = null;
+			int chave = (Integer) key;
+			String sql = "DELETE FROM JOGADORCOMPETICAO j WHERE j.COMPETICAOIDCOMPETICAO = ?";
+			PreparedStatement stm = ConexaoBD.getConexao()
+					.prepareStatement(sql);
+			stm.setInt(2, chave);
+			stm.execute();
+                        ConexaoBD.fecharCursor(null, stm);
+			return res;
+		} catch (Exception e) {
+			throw new NullPointerException(e.getMessage());
+		}
     }
 
     @Override

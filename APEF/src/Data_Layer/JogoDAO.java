@@ -86,13 +86,9 @@ public class JogoDAO implements Map<Integer,Jogo> {
         this.jogos = new HashMap<Integer,Jogo>(); 
     }
 
-    public JogoDAO(int idAgenda) {
-        this.id = idAgenda;
-    }
-    
-    public JogoDAO(int idAgenda, int idJornada) {
-        this.id = idAgenda;
-        this.idJornada = idJornada;
+    public JogoDAO(int id) {
+        this.id = id;
+        this.idJornada = id; 
     }
     
     public boolean converte(int a) {
@@ -216,7 +212,7 @@ public class JogoDAO implements Map<Integer,Jogo> {
                 int camposPreenchidos = rs.getInt(CAMPOSPREENCHIDOS);  
                 int removido = rs.getInt(REMOVIDO);
                                         
-                JogoDAO ag = new JogoDAO(idAgenda,idJornada);
+                JogoDAO ag = new JogoDAO(idAgenda);
                 Agenda agenda = new Agenda(idAgenda,ag);
                 arb = new Arbitro(id,avatar,tipo,nick,nome,email,pw,morada,tlmvl,
                                         codPostal,dataNasc,converte(ativo),converte(camposPreenchidos),
