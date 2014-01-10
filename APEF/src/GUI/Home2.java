@@ -853,6 +853,7 @@ public final class Home2 extends JFrame {
         panelListaEscolas.setBackground(new java.awt.Color(255, 255, 255));
         panelListaEscolas.setPreferredSize(new java.awt.Dimension(500, 450));
 
+        listaEscolas.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         listaEscolas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(listaEscolas);
 
