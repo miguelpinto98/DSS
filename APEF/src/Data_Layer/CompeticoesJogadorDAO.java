@@ -101,7 +101,7 @@ public class CompeticoesJogadorDAO implements Map<Integer,Integer> {
             if(!existe) {
                 //String chave = c.toUpperCase();
                     String sql = "";
-                    sql = "INSERT INTO Campo(idCampo, nome) VALUES (?, ?)";
+                    sql = "INSERT INTO JOGADORCOMPETICAO (idPessoa, idCompeticao) VALUES (?, ?)";
                     PreparedStatement stm = ConexaoBD.getConexao().prepareStatement(sql);
                     stm.setInt(IDPESSOA, key);
                     stm.setInt(COMPETICAOIDCOMPETICAO, value);

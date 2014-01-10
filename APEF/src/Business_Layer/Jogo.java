@@ -29,7 +29,7 @@ public class Jogo implements Comparable<Jogo>{
     	this.efora = new Escalao();
     	this.numGolosCasa = 0;
     	this.numGolosFora = 0;
-    	this.goleadores = new GoleadoresDAO();
+    	this.goleadores = new GoleadoresDAO(id);
     }
     
     public Jogo(int i, GregorianCalendar g, Campo c, Arbitro a, Escalao ec, Escalao ef) {
@@ -43,13 +43,13 @@ public class Jogo implements Comparable<Jogo>{
     	this.efora = ef;
     	this.numGolosCasa = 0;
     	this.numGolosFora = 0;
-    	this.goleadores = new GoleadoresDAO();
+    	this.goleadores = new GoleadoresDAO(id);
         APEF.IDENTIFICADOR++;
     }
     
-    public Jogo(int idJogo, int i, GregorianCalendar g, Campo c, Arbitro a, Escalao ec, Escalao ef) {
+    public Jogo(int idJogo, int idCompeticao, GregorianCalendar g, Campo c, Arbitro a, Escalao ec, Escalao ef) {
     	this.id = idJogo;
-        this.idCompeticao = i;
+        this.idCompeticao = idCompeticao;
     	this.realizado = false;
     	this.dia = g;
     	this.campo = c;
@@ -58,7 +58,7 @@ public class Jogo implements Comparable<Jogo>{
     	this.efora = ef;
     	this.numGolosCasa = 0;
     	this.numGolosFora = 0;
-    	this.goleadores = new GoleadoresDAO();
+    	this.goleadores = new GoleadoresDAO(id);
     }
     
     public Jogo(int idCompeticao, GregorianCalendar g, Campo campo, Escalao c, Escalao f){
@@ -94,7 +94,7 @@ public class Jogo implements Comparable<Jogo>{
     	this.arbitro = arb;
     	this.numGolosCasa = 0;
     	this.numGolosFora = 0;
-    	this.goleadores = new GoleadoresDAO();
+    	this.goleadores = new GoleadoresDAO(id);
     }
     
     public int getID() {
@@ -178,7 +178,7 @@ public class Jogo implements Comparable<Jogo>{
 	}
 
 	public Map<Integer,Integer> getGoleadoresJogo() {
-		Map<Integer,Integer> hsg = new GoleadoresDAO();
+		Map<Integer,Integer> hsg = new GoleadoresDAO(this.id);
 		
 		for(Integer n : this.goleadores.values())
 			hsg.put(this.getID(),n);
