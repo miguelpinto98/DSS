@@ -29,7 +29,7 @@ public class Campeonato implements Competicao{
 
     //Construtores
     public Campeonato() {
-    	this.id = APEF.IDENTIFICADOR;
+    	this.id = APEF.getID();
         this.tipoEscalao = -1;
     	this.nome = "";
     	this.nrEscaloes = 0;
@@ -39,7 +39,7 @@ public class Campeonato implements Competicao{
         this.classificacao = null;
         this.dataInicio = new GregorianCalendar();
         this.dataLimiteInscricoes = new GregorianCalendar();
-        APEF.IDENTIFICADOR++;
+        APEF.putID();
     }
     
     public Campeonato(Campeonato ca) {
@@ -56,7 +56,7 @@ public class Campeonato implements Competicao{
     }
 
     public Campeonato(String nome, GregorianCalendar inicio, GregorianCalendar limiteInscricao, int tipo, int nrEquipasMax) {
-        this.id = APEF.IDENTIFICADOR;
+        this.id = APEF.getID();
         this.tipoEscalao = tipo;
         this.nome = nome;
         this.nrEscaloes = nrEquipasMax;
@@ -66,7 +66,7 @@ public class Campeonato implements Competicao{
         this.classificacao = null;
         this.dataInicio = inicio;
         this.dataLimiteInscricoes = limiteInscricao;
-        APEF.IDENTIFICADOR++;
+        APEF.putID();
     }
 
     //Getters e Setters

@@ -18,12 +18,12 @@ public abstract class Pessoa {
     }
 
     public Pessoa(String name, Imagem img, GregorianCalendar data, int genero) {
-	this.id = APEF.IDENTIFICADOR;
+	this.id = APEF.getID();
 	this.nome = name;
 	this.foto = img;
 	this.dataNascimento = data;
 	this.sexo = genero;
-        APEF.IDENTIFICADOR++;
+        APEF.putID();
     }
 
     public Pessoa(int id, String name, Imagem img, GregorianCalendar data, int genero) {
@@ -35,11 +35,11 @@ public abstract class Pessoa {
     }
     
     public Pessoa(String name, int genero) {
-	this.id = APEF.IDENTIFICADOR;
+	this.id = APEF.getID();
 	this.nome = name;
 	this.sexo = genero;
         this.dataNascimento = new GregorianCalendar();
-        APEF.IDENTIFICADOR++;
+        APEF.putID();
     }
         
 	public Pessoa(Pessoa p) {

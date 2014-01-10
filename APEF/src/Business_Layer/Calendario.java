@@ -13,9 +13,9 @@ public class Calendario {
 
     //Construtores
 	public Calendario() {
-        this.idCalendario = APEF.IDENTIFICADOR;
+        this.idCalendario = APEF.getID();
 		this.jornadas = new JornadaDAO(idCalendario);
-        APEF.IDENTIFICADOR++;
+        APEF.putID();
     }
     
     public Calendario(int id, Map<Integer,Jornada> jo) {

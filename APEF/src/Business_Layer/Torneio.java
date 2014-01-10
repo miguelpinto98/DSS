@@ -50,7 +50,7 @@ public class Torneio implements Competicao{
     }
     
     public Torneio(String nome, GregorianCalendar inicio, GregorianCalendar limite, int tipoEscalao, int tipoTorneio, int nrEquipas, Campo campo){
-        this.id = APEF.IDENTIFICADOR;
+        this.id = APEF.getID();
         this.tipoEscalao = tipoEscalao;
         this.tipoTorneio = tipoTorneio;
         this.nome = nome;
@@ -64,10 +64,11 @@ public class Torneio implements Competicao{
         this.dataLimiteInscricoes = limite;
         this.campo = campo;
         this.arbs = new ArbsDAO(this.id) ;
+        APEF.putID();
     }
     
     public Torneio(String nome, GregorianCalendar inicio, GregorianCalendar limite, int tipoEscalao, int nrEquipas, Campo campo){
-        this.id = APEF.IDENTIFICADOR;
+        this.id = APEF.getID();
         this.tipoEscalao = tipoEscalao;
         this.nome = nome;
         this.nrEscaloes = nrEquipas;
@@ -80,6 +81,7 @@ public class Torneio implements Competicao{
         this.dataLimiteInscricoes = limite;
         this.campo = campo;
         this.arbs = new ArbsDAO(this.id);
+        APEF.putID();
     }  
 
 	public Torneio(Torneio t) {

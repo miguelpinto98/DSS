@@ -33,7 +33,7 @@ public class Jogo implements Comparable<Jogo>{
     }
     
     public Jogo(int i, GregorianCalendar g, Campo c, Arbitro a, Escalao ec, Escalao ef) {
-    	this.id = APEF.IDENTIFICADOR;
+    	this.id = APEF.getID();
         this.idCompeticao = i;
     	this.realizado = false;
     	this.dia = (GregorianCalendar) g.clone();
@@ -44,7 +44,7 @@ public class Jogo implements Comparable<Jogo>{
     	this.numGolosCasa = 0;
     	this.numGolosFora = 0;
     	this.goleadores = new GoleadoresDAO(id);
-        APEF.IDENTIFICADOR++;
+        APEF.putID();
     }
     
     public Jogo(int idJogo, int idCompeticao, GregorianCalendar g, Campo c, Arbitro a, Escalao ec, Escalao ef) {
@@ -62,13 +62,13 @@ public class Jogo implements Comparable<Jogo>{
     }
     
     public Jogo(int idCompeticao, GregorianCalendar g, Campo campo, Escalao c, Escalao f){
-        this.id = APEF.IDENTIFICADOR;
+        this.id = APEF.getID();
         this.idCompeticao = idCompeticao;
         this.campo = campo;
         this.dia = g;
         this.ecasa = c;
         this.efora = f;
-        APEF.IDENTIFICADOR++;
+        APEF.putID();
     }
 
     public Jogo(Jogo j) {

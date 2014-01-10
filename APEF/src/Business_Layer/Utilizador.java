@@ -23,7 +23,7 @@ public abstract class Utilizador {
     private boolean removido;
     //Construtores
     public Utilizador() {
-    	this.id = APEF.IDENTIFICADOR++;
+    	this.id = APEF.getID();
         this.tipo = -1;
         this.avatar = null;
         this.nomeUtilizador = "";
@@ -37,14 +37,14 @@ public abstract class Utilizador {
         this.ativo = false;
         this.camposPreenchidos = false;
         this.removido = false;
-        APEF.IDENTIFICADOR++;
+        APEF.putID();
     }
 
     public Utilizador(Imagem img, int tipo, String nickname, String nome, String email, 
                         String pw, String morada, String tlmvl, 
                         String codPostal, GregorianCalendar data, 
                         boolean ativo, boolean camposPreenchidos, boolean removido) {
-        this.id = APEF.IDENTIFICADOR;
+        this.id = APEF.getID();
         this.tipo = tipo;
         this.avatar = img;
         this.nomeUtilizador = nickname;
@@ -58,7 +58,7 @@ public abstract class Utilizador {
         this.ativo = ativo;
         this.camposPreenchidos = camposPreenchidos;
         this.removido = removido;
-        APEF.IDENTIFICADOR++;
+        APEF.putID();
     }
     
     public Utilizador(int id, Imagem avatar, int tipo, String nick, String nome, String email, String pw, 

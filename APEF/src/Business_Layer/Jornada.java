@@ -16,19 +16,19 @@ public class Jornada implements Comparable<Jornada>{
 
     //Construtores
     public Jornada() {
-        this.id = APEF.IDENTIFICADOR;
+        this.id = APEF.getID();
         this.nrJornada = 0;
         this.jogosRealizados = 0;
         this.listaJogos = new JogoDAO(this.id);
-        APEF.IDENTIFICADOR++;
+        APEF.putID();
     }
     
     public Jornada(int nrJornada) {
-        this.id = APEF.IDENTIFICADOR;
+        this.id = APEF.getID();
         this.nrJornada = nrJornada;
         this.jogosRealizados = 0;
         this.listaJogos = new JogoDAO(this.id);
-        APEF.IDENTIFICADOR++;
+        APEF.putID();
     }
     
     public Jornada(int id, int nr, int realizados, Map<Integer,Jogo> jogos) {

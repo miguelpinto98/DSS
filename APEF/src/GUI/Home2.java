@@ -213,7 +213,8 @@ public final class Home2 extends JFrame {
         jTabProximos.setModel(x);
          */
         
-        
+        this.sistema.registarUser("admin1","admin1","admin1@admin.pt",2);
+
         
         /* Inicia Aplicação */
         initComponents();  

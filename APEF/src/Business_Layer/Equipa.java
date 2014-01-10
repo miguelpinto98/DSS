@@ -24,30 +24,30 @@ public class Equipa {
     private Map<Integer,Escalao> escaloes; //<tipo de escalao(0,1,2 ou 3), Escalao>  
     
     public Equipa() {
-    	this.id = APEF.IDENTIFICADOR;
+    	this.id = APEF.getID();
     	this.nome = new String();
     	this.emblema = new Imagem();
     	this.palmares = new PalmaresDAO(this.id);
     	this.escaloes = new EscalaoDAO(this.id);
-        APEF.IDENTIFICADOR++;
+        APEF.putID();
     }
     
     public Equipa(String n, Imagem e) {
-    	this.id = APEF.IDENTIFICADOR;
+    	this.id = APEF.getID();
     	this.nome = n;
     	this.emblema = e;
     	this.palmares = new PalmaresDAO(this.id);
     	this.escaloes = new EscalaoDAO(this.id);
-    	APEF.IDENTIFICADOR++;	
+    	APEF.putID();
     }
 
     public Equipa(String n) {
-    	this.id = APEF.IDENTIFICADOR;
+    	this.id = APEF.getID();
     	this.nome = n;
     	this.emblema = new Imagem();
     	this.palmares = new PalmaresDAO(this.id);
     	this.escaloes = new EscalaoDAO(this.id);
-    	APEF.IDENTIFICADOR++;	
+    	APEF.putID();
     }
     
     public Equipa(int id, String n) {
