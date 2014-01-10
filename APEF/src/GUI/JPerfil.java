@@ -50,7 +50,8 @@ public class JPerfil extends javax.swing.JDialog {
      
      private int mudaPass(int ok){
         String n = pass_t.getText();
-        if (n!=null && (converte2(this.sistema.validaPassword(n)))==0) {this.utilizador.setPass(n); ok=1;}
+        if ((this.sistema.validaPassword(n))==true){this.utilizador.setPass(n);}
+        else ok=1;
      return ok;}
      
     
@@ -346,11 +347,7 @@ public class JPerfil extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public int converte2(boolean a){
-        if(a==true)
-            return 1;
-        else return 0;}
-    
+        
     private void alterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alterarActionPerformed
         int ok=0;
         mudaNome();
@@ -369,10 +366,10 @@ public class JPerfil extends javax.swing.JDialog {
                         ok=mudaPass(ok);
                         if(ok==1) {validadeDados.setText("Introduza uma password com pelo menos 6 caracteres.");}
                         else{
+                            validadeDados.setText("Dados Alterados com Sucesso");
                             String pw = this.utilizador.encriptarPassword(this.utilizador.getPass());
                             this.utilizador.setPass(pw);
                             this.sistema.actualizarUtilizador(this.utilizador);
-                            validadeDados.setText("Dados Alterados com Sucesso");
                     }}}}
     }//GEN-LAST:event_alterarActionPerformed
 

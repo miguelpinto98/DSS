@@ -189,12 +189,7 @@ public class APEF {
         return ins;
     }
     
-     public boolean actualizarUtilizador(Utilizador user) {
-        boolean ins = false;       
-            this.users.put(user.getNomeUser(),user);
-            ins = true;
-        return ins;
-    }
+     public void actualizarUtilizador(Utilizador user) {this.users.put(user.getNomeUser(),user);}
 
     public void removerUtilizador(Utilizador user) {
         this.users.remove(user.getNomeUser());
