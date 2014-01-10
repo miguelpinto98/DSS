@@ -29,6 +29,8 @@ public class Calendario {
             aux.put(j.getID(), j);
         return aux;
     }
+    
+    public int getID(){return this.idCalendario;}
 
     //Setters
     public void setJornadas(Map<Integer,Jornada> j) {
