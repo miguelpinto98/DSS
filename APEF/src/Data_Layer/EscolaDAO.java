@@ -11,7 +11,10 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class EscolaDAO implements Map<String,Escola> {    
+public class EscolaDAO implements Map<String,Escola> {
+    
+    public static final String ESCOLA = "Escola e";
+    
     public static final int NOME = 1;
     public static final int LOCAL = 2;
     public static final int IDCAMPO = 3;
@@ -109,10 +112,14 @@ public class EscolaDAO implements Map<String,Escola> {
         try {
             String c = (String) key;
             boolean existe = this.containsKey(key);
+            String sql="";
+            if (existe) {}
+                //sql = "UPDATE " + ESCOLA + " SET e.local = ? WHERE e.nome = '"+key+"', nomeCampo = "NOME_CAMPO+" WHERE campo.getID= '"+this.value.getCampo.getID()+"'";}
             
-            if(!existe) {
+            
+            else{
                 //String chave = c.toUpperCase();
-                String sql = "";
+                
                 Campo campo = value.getCampo();
                 
                 if(campo != null) {
