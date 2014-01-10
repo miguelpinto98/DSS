@@ -164,7 +164,7 @@ public final class ConsultarJogador extends javax.swing.JDialog {
 
         clube_l.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         clube_l.setForeground(new java.awt.Color(102, 102, 102));
-        clube_l.setText("Clube:");
+        clube_l.setText("Equipa:");
 
         javax.swing.GroupLayout dados_pessoaisLayout = new javax.swing.GroupLayout(dados_pessoais);
         dados_pessoais.setLayout(dados_pessoaisLayout);
