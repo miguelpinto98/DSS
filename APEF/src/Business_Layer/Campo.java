@@ -8,9 +8,9 @@ public class Campo {
 
     //Construtores
     public Campo() {
-    	this.id = APEF.IDENTIFICADOR;
+    	this.id = APEF.getID();
     	this.nome = "";
-        APEF.IDENTIFICADOR++;
+        APEF.putID();
     }
 
     public Campo(Campo c) {
@@ -19,9 +19,9 @@ public class Campo {
     }
 
     public Campo(String n) {
-        this.id = APEF.IDENTIFICADOR;
+        this.id = APEF.getID();
         this.nome = n;
-        APEF.IDENTIFICADOR++;
+        APEF.putID();
     }
     
     public Campo(int id, String nome) {

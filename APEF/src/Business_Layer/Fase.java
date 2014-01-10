@@ -18,23 +18,23 @@ public abstract class Fase {
     private int nFase;
 
     public Fase() {
-        this.idFase = APEF.IDENTIFICADOR;
+        this.idFase = APEF.getID();
         this.nome = "";
         this.listaEscaloes = new EscalaoDAO(this.idFase);
         this.calendario = new Calendario();
         this.tipo = -1;
         this.nFase = 0;
-        APEF.IDENTIFICADOR++;
+        APEF.putID();
     }
 
     public Fase(String nome, int tipo,int n) {
-        this.idFase = APEF.IDENTIFICADOR;
+        this.idFase = APEF.getID();
         this.nome = nome;
         this.listaEscaloes = new EscalaoDAO(this.nFase);
         this.calendario = new Calendario();
         this.tipo = tipo;
         this.nFase = n;
-        APEF.IDENTIFICADOR++;
+        APEF.putID();
     }
     
     public Fase(int id, String n, Map<Integer,Escalao> l, Calendario c, int t, int nf) {

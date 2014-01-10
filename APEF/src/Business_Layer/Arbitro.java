@@ -15,7 +15,7 @@ public class Arbitro extends Utilizador {
     public Arbitro(int tipo,String nickname, String password, String email, GregorianCalendar g, APEF a) {
 		super(null,tipo,nickname,"",email,password,"","","",g,false,false,false);
 		this.agenda = new Agenda();
-        APEF.IDENTIFICADOR++; 
+        APEF.putID(); 
 	}
     
     public Arbitro(int id, Imagem avatar, int tipo, String nick, String nome, 

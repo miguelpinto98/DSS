@@ -59,12 +59,7 @@ public class Escola {
      }
  
      public Map<String,Equipa> getEquipas() {
-         Map<String,Equipa> aux = new HashMap<>();
-         
-         for(String s : this.equipas.keySet())
-             aux.put(s,this.equipas.get(s));
-         
-         return aux;
+         return this.equipas;
      }
      
      

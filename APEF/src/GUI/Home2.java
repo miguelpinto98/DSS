@@ -68,11 +68,14 @@ public final class Home2 extends JFrame {
     private APEF sistema;
     private Utilizador user;
     
-   
+
     public Home2() {
         this.sistema = new APEF();
         this.user = null;
+
         
+        this.sistema.registarUser("serafim","serafim67","serafim@admin",0);
+
         /*
         Epoca epo1 = new Epoca(2014);
         Epoca epo2 = new Epoca(2003);
@@ -212,8 +215,6 @@ public final class Home2 extends JFrame {
         }
         jTabProximos.setModel(x);
          */
-        
-        
         
         /* Inicia Aplicação */
         initComponents();  
@@ -555,7 +556,7 @@ public final class Home2 extends JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TitleHeaderLayout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(avatar, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 160, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 658, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -615,7 +616,7 @@ public final class Home2 extends JFrame {
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(data, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 480, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 452, Short.MAX_VALUE)
                 .addComponent(jXSearchField1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -663,7 +664,7 @@ public final class Home2 extends JFrame {
         JPanelUserLogoutLayout.setHorizontalGroup(
             JPanelUserLogoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPanelUserLogoutLayout.createSequentialGroup()
-                .addContainerGap(728, Short.MAX_VALUE)
+                .addContainerGap(732, Short.MAX_VALUE)
                 .addComponent(entrar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(registar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -986,14 +987,14 @@ public final class Home2 extends JFrame {
             .addGroup(headerCampeonatoLayout.createSequentialGroup()
                 .addGroup(headerCampeonatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(headerCampeonatoLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(148, 148, 148)
                         .addComponent(jComboEpocaCampeonato, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(headerCampeonatoLayout.createSequentialGroup()
                         .addGap(127, 127, 127)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 183, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
                         .addComponent(jComboEpocaCampeonato2, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -1072,18 +1073,7 @@ public final class Home2 extends JFrame {
         panelAlteracaoesCamp.setMaximumSize(new java.awt.Dimension(703, 338));
         panelAlteracaoesCamp.setMinimumSize(new java.awt.Dimension(703, 338));
         panelAlteracaoesCamp.setPreferredSize(new java.awt.Dimension(703, 338));
-
-        javax.swing.GroupLayout panelAlteracaoesCampLayout = new javax.swing.GroupLayout(panelAlteracaoesCamp);
-        panelAlteracaoesCamp.setLayout(panelAlteracaoesCampLayout);
-        panelAlteracaoesCampLayout.setHorizontalGroup(
-            panelAlteracaoesCampLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 740, Short.MAX_VALUE)
-        );
-        panelAlteracaoesCampLayout.setVerticalGroup(
-            panelAlteracaoesCampLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 352, Short.MAX_VALUE)
-        );
-
+        panelAlteracaoesCamp.setLayout(new java.awt.BorderLayout());
         jPanel8.add(panelAlteracaoesCamp, java.awt.BorderLayout.CENTER);
 
         JTabEscolas.addTab("Campeonatos", jPanel8);
@@ -1252,7 +1242,7 @@ public final class Home2 extends JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(JTabEscolas, javax.swing.GroupLayout.DEFAULT_SIZE, 1061, Short.MAX_VALUE)
+                .addComponent(JTabEscolas, javax.swing.GroupLayout.PREFERRED_SIZE, 1061, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(

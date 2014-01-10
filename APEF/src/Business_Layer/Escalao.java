@@ -19,7 +19,7 @@ public class Escalao {
 
     //Construtores
     public Escalao() {
-        this.id = APEF.IDENTIFICADOR;
+        this.id = APEF.getID();
         this.tipoEscalao = -1;
         this.nomeEscola = "";
         this.nomeEquipa = "";
@@ -27,19 +27,19 @@ public class Escalao {
     	this.jogadores = new JogadorDAO(this.id,this.nomeEquipa);
         this.agenda = new Agenda();
         this.dados = new DadosEstatisticos();
-        APEF.IDENTIFICADOR++;
+        APEF.putID();
     }
     
     public Escalao(int tipo, String nomeEquipa, String nomeEscola) {
-        this. id = APEF.IDENTIFICADOR;
+        this.id = APEF.getID();
         this.tipoEscalao = tipo;
         this.nomeEscola = nomeEscola;
         this.nomeEquipa = nomeEquipa;
         this.treinador = new Treinador();
     	this.jogadores = new JogadorDAO(this.id,this.nomeEquipa);
         this.agenda = new Agenda();
-        this.dados = new DadosEstatisticos(APEF.IDENTIFICADOR);
-        APEF.IDENTIFICADOR++;
+        this.dados = new DadosEstatisticos(APEF.getID());
+        APEF.putID();
     }
 
     public Escalao(Escalao p) {
@@ -54,7 +54,7 @@ public class Escalao {
     }
     
     public Escalao(int tipo, String nEscola, String nEquipa, Treinador t) {
-        this.id = APEF.IDENTIFICADOR; APEF.IDENTIFICADOR++;
+        this.id = APEF.getID(); APEF.putID();
         this.tipoEscalao = tipo;
         this.nomeEscola = nEscola;
         this.nomeEquipa = nEquipa;
