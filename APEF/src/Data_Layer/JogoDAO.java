@@ -31,8 +31,6 @@ public class JogoDAO implements Map<Integer,Jogo> {
     private int id;
     private int idJornada;
     
-    private HashMap<Integer,Jogo> jogos;
-    
     public static final String JOGO_O = "Jogo o";
     public static final int IDJOGO = 1;
     public static final int IDCOMPETICAO = 2;
@@ -83,16 +81,11 @@ public class JogoDAO implements Map<Integer,Jogo> {
     private static final int SEXO = 5;
     
     public JogoDAO() {
-        this.jogos = new HashMap<Integer,Jogo>(); 
     }
 
-    public JogoDAO(int idAgenda) {
-        this.id = idAgenda;
-    }
-    
-    public JogoDAO(int idAgenda, int idJornada) {
-        this.id = idAgenda;
-        this.idJornada = idJornada;
+    public JogoDAO(int id) {
+        this.id = id;
+        this.idJornada = id; 
     }
     
     public boolean converte(int a) {
@@ -126,8 +119,8 @@ public class JogoDAO implements Map<Integer,Jogo> {
 
     @Override
     public boolean isEmpty() {
-        return this.jogos.isEmpty();
-    }
+        throw new NullPointerException("não está implementado!");
+        }
 
     @Override
     public boolean containsKey(Object key) {
@@ -146,8 +139,8 @@ public class JogoDAO implements Map<Integer,Jogo> {
 
     @Override
     public boolean containsValue(Object value) {
-        return this.jogos.containsValue(value);
-    }
+        throw new NullPointerException("não está implementado!");
+        }
 
     @Override
     public Jogo get(Object key) {
@@ -216,7 +209,7 @@ public class JogoDAO implements Map<Integer,Jogo> {
                 int camposPreenchidos = rs.getInt(CAMPOSPREENCHIDOS);  
                 int removido = rs.getInt(REMOVIDO);
                                         
-                JogoDAO ag = new JogoDAO(idAgenda,idJornada);
+                JogoDAO ag = new JogoDAO(idAgenda);
                 Agenda agenda = new Agenda(idAgenda,ag);
                 arb = new Arbitro(id,avatar,tipo,nick,nome,email,pw,morada,tlmvl,
                                         codPostal,dataNasc,converte(ativo),converte(camposPreenchidos),
@@ -359,7 +352,7 @@ public class JogoDAO implements Map<Integer,Jogo> {
         try {
 			Jogo res = null;
 			int chave = (Integer) key;
-			String sql = "DELETE FROM JOGO j WHERE j.IDJOGO = ?";
+			String sql = "DELETE FROM JOGO j WHERE j.IDJOGO = "+chave;
 			PreparedStatement stm = ConexaoBD.getConexao()
 					.prepareStatement(sql);
 			stm.setInt(1, chave);
@@ -372,15 +365,15 @@ public class JogoDAO implements Map<Integer,Jogo> {
     }
 
     @Override
-    public void putAll(Map<? extends Integer, ? extends Jogo> m) {
-        this.jogos.putAll(m);
-    }
+    public void putAll(Map<? extends Integer, ? extends Jogo> m)  {
+        throw new NullPointerException("não está implementado!");
+        }
 
     @Override
-    public void clear() {
-        this.jogos.clear();
-    }
-
+    public void clear()  {
+        throw new NullPointerException("não está implementado!");
+        }
+    
     @Override
     public Set<Integer> keySet() {
         Set<Integer> res = new HashSet<>();
@@ -419,11 +412,11 @@ public class JogoDAO implements Map<Integer,Jogo> {
 }
 
     @Override
-    public Set<Map.Entry<Integer, Jogo>> entrySet() {
-        return this.jogos.entrySet();
-    }
+    public Set<Map.Entry<Integer, Jogo>> entrySet()  {
+        throw new NullPointerException("não está implementado!");
+        }
     
-    public int hashCode() {
+    public int hashCode() {     
         return ConexaoBD.getConexao().hashCode();
     }
 }
