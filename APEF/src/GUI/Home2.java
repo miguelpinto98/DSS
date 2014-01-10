@@ -58,10 +58,6 @@ import javax.swing.event.ListDataListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author miguelpinto
- */
 public final class Home2 extends JFrame {
 
     public static final String OS = System.getProperty("os.name").toLowerCase();
@@ -72,14 +68,12 @@ public final class Home2 extends JFrame {
     private APEF sistema;
     private Utilizador user;
     
-    /**
-     * Creates new form Home2
-     */
+   
     public Home2() {
         this.sistema = new APEF();
         this.user = null;
         
-        /* EPOCA */ /**TORNEIOS*/
+        /*
         Epoca epo1 = new Epoca(2014);
         Epoca epo2 = new Epoca(2003);
         Epoca epo3 = new Epoca(2010);
@@ -102,7 +96,7 @@ public final class Home2 extends JFrame {
         this.sistema.inserirEpoca(epo4);
         this.sistema.inserirEpoca(epo5);
 
-        /* ESCOLAS */
+        //ESCOLAS
         Escola e1 = new Escola("Escola Secundária da Lixa", "Lixa", new Campo("Lixa Futebol"));
         Escola e2 = new Escola("Escola Secundária de Felgueiras", "Felgueiras", new Campo("Dr. Machado Matos"));
         Escola e3 = new Escola("Universidade do Minho", "Braga", new Campo("Rodovia"));
@@ -117,7 +111,7 @@ public final class Home2 extends JFrame {
         
         
         
-        /* EQUIPAS */
+        //EQUIPAS
         Equipa eq1 = new Equipa("Gelbots");
         Equipa eq2 = new Equipa("LEI");
         Equipa eq3 = new Equipa("CeSIUM");
@@ -126,7 +120,7 @@ public final class Home2 extends JFrame {
         this.sistema.getEscolas().get("Universidade do Minho").inserirEquipa(eq2);
         this.sistema.getEscolas().get("Universidade do Minho").inserirEquipa(eq3);
         
-        /* ESCALOES */
+        //ESCALOES
         eq3.criarEscalao(0, "Universidade do Minho", "CeSIUM","Manuel Pato", new Date(), 0, new Imagem());
         Escalao escalao2 = new Escalao(3, "CeSIUM", "Universidade do Minho");
         
@@ -137,43 +131,34 @@ public final class Home2 extends JFrame {
         Jogador lindo5 = new Jogador("63linda", new GregorianCalendar(), 2, new Imagem());
     
                
-/*        eq3.getEscaloes().get(0).inserirJogador(lindo1);
+        eq3.getEscaloes().get(0).inserirJogador(lindo1);
         eq3.getEscaloes().get(0).inserirJogador(lindo2);
         eq3.getEscaloes().get(0).inserirJogador(lindo3);
         eq3.getEscaloes().get(0).inserirJogador(lindo4);
         eq3.getEscaloes().get(0).inserirJogador(lindo5);
         
-//        this.getSistema().getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").getEscaloes().get(0).getJogadores().get(17).addCompeticao(t1.getID());
-//        this.getSistema().getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").getEscaloes().get(0).getJogadores().get(17).addCompeticao(t2.getID());
-        
-        
+        this.getSistema().getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").getEscaloes().get(0).getJogadores().get(17).addCompeticao(t1.getID());
+        this.getSistema().getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").getEscaloes().get(0).getJogadores().get(17).addCompeticao(t2.getID());
         
         this.sistema.getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").inserirEscalao(escalao2);
         
 
-        /* TESTE USERS */
-        /*this.sistema.registarUser("maleite","pw1234","maleite@gmail.com",0);
-        this.sistema.registarUser("174Miguel","pw1234","miguel@gmail.com",1);
-        this.sistema.registarUser("63linda","pw1234","63@gmail.com",2);
-        this.sistema.registarUser("diana","pw1234","demossbb@gmail.com",2);
-        this.sistema.registarUser("serafim","pw1234","smcp@gmail.com",2);
-        this.sistema.registarUser("atum","pw1234","atum@gmail.com",0);*/
-        
+               
         eq3.atualizaPalmares("Liga dos Campeões Infantis");
         eq3.atualizaPalmares("Liga dos Campeões Infantis");
 
         
-//        this.getSistema().getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").getEscaloes().get(0).getJogadores().get(17).addCompeticao(t1.getID());
-     //   this.getSistema().getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").getEscaloes().get(0).getJogadores().get(17).addCompeticao(t2.getID());
-        //this.getSistema().getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").getEscaloes().get(0).getJogadores().get(17).addCompeticao(t1.getID());
-        //this.getSistema().getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").getEscaloes().get(0).getJogadores().get(17).addCompeticao(t2.getID());
+        this.getSistema().getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").getEscaloes().get(0).getJogadores().get(17).addCompeticao(t1.getID());
+        this.getSistema().getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").getEscaloes().get(0).getJogadores().get(17).addCompeticao(t2.getID());
+        this.getSistema().getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").getEscaloes().get(0).getJogadores().get(17).addCompeticao(t1.getID());
+        this.getSistema().getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").getEscaloes().get(0).getJogadores().get(17).addCompeticao(t2.getID());
         
         
         
-        //this.sistema.getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").inserirEscalao(escalao2);
-         //this.sistema.getUsers().remove("maleite");
-        /* TESTE USERS */
-        /*this.sistema.registarUser("174Miguel","pw1234","miguel@gmail.com",1);
+        this.sistema.getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").inserirEscalao(escalao2);
+        this.sistema.getUsers().remove("maleite");
+        //TESTE USERS
+        this.sistema.registarUser("174Miguel","pw1234","miguel@gmail.com",1);
         this.sistema.registarUser("63linda","pw1234","63@gmail.com",1);
         this.sistema.registarUser("diana","pw12345","demos@gmail.com",0);
         this.sistema.registarUser("serafim","pw1234","smcp@gmail.com",2);
@@ -186,9 +171,9 @@ public final class Home2 extends JFrame {
         Utilizador u = new Admin(123,null,0,"ADMIN","serafimpinto","lol@joao","1245213s22","Felgueiras","91568544","784-545",new GregorianCalendar(),false,false,false);
         Utilizador u2 = new ResponsavelEscola(101,null,1,"Rescla","sersfismpinto","ll@josao","1245213s22","Felgueiras","91568544","784-545",new GregorianCalendar(),false,false,false,e1);
         Utilizador u3 = new Arbitro(1001,null,2,"josejose","sersfismpinto","ll@josao","1245213s22","Felgueiras","91568544","784-545",new GregorianCalendar(),false,false,aaa,false);
-        System.out.println(this.sistema.getUsers().values*/        
+                
 
-        /* TESTE JOGO COM ESCALOES */
+        //TESTE JOGO COM ESCALOES
         ArrayList<Jogo> tj = new ArrayList<>();
         Escalao esc1 = new Escalao(0, "LEI", "UMINHO");
         Escalao esc2 = new Escalao(0, "ESF", "ESF");
@@ -200,7 +185,9 @@ public final class Home2 extends JFrame {
         j2.setRealizado(true);
         
         tj.add(j1);
-        tj.add(j2);
+        tj.add(j2); 
+        
+        */
         
         /* Inicia Aplicação */
         initComponents();  
