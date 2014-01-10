@@ -195,8 +195,8 @@ public class jAdicionarEquipa extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        dispose();
         this.root.setEnabled(true);
+        dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void adicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adicionarActionPerformed

@@ -115,6 +115,10 @@ public class JEntrar extends JDialog {
             root.verificaUser(user);
             root.setEnabled(true);
             dispose();
+            if(user.isCamposPreenchidos()==false){
+            JDialog frame1 = new JPreencherRegisto(this.root, user);
+            frame1.setLocationRelativeTo(null);
+            frame1.setVisible(true);}
         }
     }                                        
     
