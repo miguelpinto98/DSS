@@ -89,7 +89,7 @@ public final class Home2 extends JFrame {
         Torneio t1 = new Torneio("Uminho Cup",new GregorianCalendar(),new GregorianCalendar(),2,2,new Campo("UM"));
         Torneio t2 = new Torneio("Uminho Cup",new GregorianCalendar(),new GregorianCalendar(),1,2,new Campo("UM"));
         Campeonato c1 = new Campeonato("Campeonato dos lindos", new GregorianCalendar(),new GregorianCalendar(), 1, 2);
-        Campeonato c2 = new Campeonato("Campeonato dos ainda mais lindos", new GregorianCalendar(),new GregorianCalendar(), 1, 2);
+        Campeonato c2 = new Campeonato("Campeonato dos ainda mais lindos", new GregorianCalendar(),new GregorianCalendar(), 2, 2);
         epo1.inserirCampeonato(c1);
         epo1.inserirCampeonato(c2);
 
