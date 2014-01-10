@@ -1,10 +1,8 @@
 package GUI.Header;
 
-import Business_Layer.APEF;
 import Business_Layer.Imagem;
 import Business_Layer.Utilizador;
 import GUI.Home2;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import javax.swing.JDialog;
@@ -13,11 +11,11 @@ import javax.swing.JDialog;
 public class JPreencherRegisto extends javax.swing.JDialog {
     
     private Utilizador user;
-    private Home2 p;
+    private Home2 home;
     
     public JPreencherRegisto(Home2 h,Utilizador u) {
         this.user=u;
-        this.p=h;
+        this.home=h;
         initComponents();
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -198,28 +196,27 @@ public class JPreencherRegisto extends javax.swing.JDialog {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         Imagem img = new Imagem(); 
-        String nome = this.jTextField1.getText();
-        
+        String nome = this.jTextField1.getText();        
         Date dn = this.jXDatePicker1.getDate();
-        Calendar g = new GregorianCalendar();
-        g.setTime(dn);
-        
+        GregorianCalendar g = new GregorianCalendar();
+        g.setTime(dn);        
         String telemovel = this.jTextField3.getText();
         String morada = this.jTextField4.getText();
         String codigoPostal = this.jTextField5.getText();
         
         if(nome.equals("") || telemovel.equals("") || morada.equals("") || codigoPostal.equals(""))
-            jLabel8.setText("Preencha todos os campos");
+         jLabel8.setText("Preencha todos os campos");
         
         this.user.setAvatar(img);
         this.user.setNome(nome);
-        this.user.setDataNasc((GregorianCalendar) g);
+        this.user.setDataNasc(g);
         this.user.setTelemovel(telemovel);
         this.user.setMorada(morada);
         this.user.setCodPostal(codigoPostal);
         this.user.setCamposPreenchidos(true);
-        dispose();
-       
+        
+        this.home.getSistema().actualizarUtilizador(user);                                   
+        dispose();      
     }//GEN-LAST:event_jButton2ActionPerformed
 
     

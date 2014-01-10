@@ -120,6 +120,7 @@ public class JEntrar extends JDialog {
             frame1.setLocationRelativeTo(null);
             frame1.setVisible(true);}
         }
+        
     }                                        
     
     

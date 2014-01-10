@@ -17,7 +17,7 @@ public class JPerfil extends javax.swing.JDialog {
         this.root = root;
         this.sistema=this.root.getSistema();
         initComponents();                 
-        reloadDadosUtilizador();  
+        reloadDadosUtilizador();
     }
 
      public final void reloadDadosUtilizador(){
@@ -34,7 +34,7 @@ public class JPerfil extends javax.swing.JDialog {
         String diaa = Integer.toString(aux.get(GregorianCalendar.DAY_OF_MONTH));
         this.dia.setSelectedItem(diaa);
         this.mes.setSelectedItem(mesa);
-        this.ano.setSelectedItem(anoa);        
+        this.ano.setSelectedItem(anoa);
     }
      
      private void mudaNome(){ 
@@ -48,9 +48,12 @@ public class JPerfil extends javax.swing.JDialog {
             if (n!=null && (n.equals(this.utilizador.getNomeUser()))) this.utilizador.setNomeUser(n);
         return ok;}
      
-     private void mudaPass(){
+     private int mudaPass(int ok){
         String n = pass_t.getText();
-        if (n!=null) this.utilizador.setPass(n);}
+        if (n!=null && (converte2(this.sistema.validaPassword(n)))==0) {this.utilizador.setPass(n); ok=1;}
+     return ok;}
+     
+    
      
      private int mudaEmail(int ok){
         String n = mail_t.getText();
@@ -161,7 +164,7 @@ public class JPerfil extends javax.swing.JDialog {
             }
         });
 
-        jButton1.setText("Cancelar");
+        jButton1.setText("Sair");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -343,13 +346,17 @@ public class JPerfil extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public int converte2(boolean a){
+        if(a==true)
+            return 1;
+        else return 0;}
+    
     private void alterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alterarActionPerformed
-          System.out.println("ok");int ok=0;
+        int ok=0;
         mudaNome();
         mudaMorada();
         mudaCodPostal();
         mudaTelemovel();
-        mudaPass();
         ok=mudaNomeUtilizador(ok);
             if (ok==1){validadeDados.setText("Escolha outro Nome de Utilizador");}
             else {
@@ -358,8 +365,15 @@ public class JPerfil extends javax.swing.JDialog {
                 else{
                     ok=mudaNascimento(ok);
                     if(ok==1) {validadeDados.setText("Data Inválida");}
-                    else {        
-            validadeDados.setText("Dados Alterados com Sucesso");}}}
+                    else {
+                        ok=mudaPass(ok);
+                        if(ok==1) {validadeDados.setText("Introduza uma password com pelo menos 6 caracteres.");}
+                        else{
+                            String pw = this.utilizador.encriptarPassword(this.utilizador.getPass());
+                            this.utilizador.setPass(pw);
+                            this.sistema.actualizarUtilizador(this.utilizador);
+                            validadeDados.setText("Dados Alterados com Sucesso");
+                    }}}}
     }//GEN-LAST:event_alterarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
