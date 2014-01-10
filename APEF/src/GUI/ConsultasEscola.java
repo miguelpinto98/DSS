@@ -129,7 +129,7 @@ public final class ConsultasEscola extends javax.swing.JFrame {
         Map<Integer, Escalao> es = e.getEscaloes();
         
         for(int i=0; i<4; i++)
-            if(es.get(i) != null) {
+            if(es.containsKey(i)) {
                 dcb.addElement(devolveEscalaoTipo(i));
                 res++;
             }                

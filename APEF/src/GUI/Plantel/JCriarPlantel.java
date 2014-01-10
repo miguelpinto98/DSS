@@ -36,8 +36,8 @@ public final class JCriarPlantel extends javax.swing.JDialog {
     }
         
     public void verificaEscalaoesDisponiveis() {
-        for(int i=0; i<this.equipa.getEscaloes().size(); i++)
-            if(this.equipa.getEscaloes().get(i) == null)
+        for(Integer i: this.equipa.getEscaloes().keySet()) 
+            if(!this.equipa.getEscaloes().containsKey(i))
                 this.comboEscaloesDisponiveis.addItem(ce.devolveEscalaoTipo(i));
     }
 
@@ -78,6 +78,12 @@ public final class JCriarPlantel extends javax.swing.JDialog {
         title.setFont(new java.awt.Font("Osaka", 1, 22)); // NOI18N
         title.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         title.setText("Adicionar Plantel");
+
+        comboEscaloesDisponiveis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboEscaloesDisponiveisActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -127,7 +133,7 @@ public final class JCriarPlantel extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(error, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(criar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -264,6 +270,10 @@ public final class JCriarPlantel extends javax.swing.JDialog {
         dispose();
         this.root.setEnabled(true);
     }//GEN-LAST:event_cancelarActionPerformed
+
+    private void comboEscaloesDisponiveisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboEscaloesDisponiveisActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboEscaloesDisponiveisActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton alterar;

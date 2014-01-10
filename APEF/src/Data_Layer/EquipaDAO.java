@@ -116,18 +116,17 @@ public class EquipaDAO implements Map<String,Equipa> {
     public Equipa put(String key, Equipa value) {
         Equipa res = null;
         try {
+            boolean existe = this.containsKey(key);
             String sql = "INSERT INTO Equipa(idEquipa, nome, emblema, nomeEscola, removido) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement stm = ConexaoBD.getConexao().prepareStatement(sql);
-            
-            File f = new File(value.getEmblema().getPath());
-            
+            //File f = new File(value.getEmblema().getPath());            
             stm.setInt(IDEQUIPA, value.getID());
             stm.setString(NOME, value.getNome());
             stm.setString(EMBLEMA, null);
             stm.setString(NOME_ESCOLA, this.nomeEscola);
             stm.setInt(REMOVIDO, 0);
-            stm.execute();
-            
+            stm.executeQuery();
+            stm.close();
             /**if (f.exists()) {
                 FileInputStream fis = new FileInputStream(f);
                 stm.setBlob(EMBLEMA, fis);
@@ -136,8 +135,6 @@ public class EquipaDAO implements Map<String,Equipa> {
                 stm.setBlob(EMBLEMA, (Blob) null);
                 stm.setString(NOME_IMAGEM, "");
             }*/
-            ConexaoBD.fecharCursor(null, stm);
-            res = value;
         } catch (SQLException e) {
             throw new NullPointerException(e.getMessage());
         }

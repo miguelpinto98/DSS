@@ -68,11 +68,14 @@ public final class Home2 extends JFrame {
     private APEF sistema;
     private Utilizador user;
     
-   
+
     public Home2() {
         this.sistema = new APEF();
         this.user = null;
+
         
+        this.sistema.registarUser("serafim","serafim67","serafim@admin",0);
+
         /*
         Epoca epo1 = new Epoca(2014);
         Epoca epo2 = new Epoca(2003);
