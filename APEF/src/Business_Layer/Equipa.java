@@ -27,7 +27,7 @@ public class Equipa {
     	this.id = APEF.IDENTIFICADOR;
     	this.nome = new String();
     	this.emblema = new Imagem();
-    	this.palmares = new PalmaresDAO();
+    	this.palmares = new PalmaresDAO(this.id);
     	this.escaloes = new EscalaoDAO(this.id);
         APEF.IDENTIFICADOR++;
     }
@@ -36,7 +36,7 @@ public class Equipa {
     	this.id = APEF.IDENTIFICADOR;
     	this.nome = n;
     	this.emblema = e;
-    	this.palmares = new PalmaresDAO();
+    	this.palmares = new PalmaresDAO(this.id);
     	this.escaloes = new EscalaoDAO(this.id);
     	APEF.IDENTIFICADOR++;	
     }
@@ -45,7 +45,7 @@ public class Equipa {
     	this.id = APEF.IDENTIFICADOR;
     	this.nome = n;
     	this.emblema = new Imagem();
-    	this.palmares = new PalmaresDAO();
+    	this.palmares = new PalmaresDAO(this.id);
     	this.escaloes = new EscalaoDAO(this.id);
     	APEF.IDENTIFICADOR++;	
     }
@@ -54,7 +54,7 @@ public class Equipa {
     	this.id = id;
     	this.nome = n;
     	this.emblema = new Imagem();
-    	this.palmares = new PalmaresDAO();
+    	this.palmares = new PalmaresDAO(this.id);
     	this.escaloes = new EscalaoDAO(this.id);
     }
 

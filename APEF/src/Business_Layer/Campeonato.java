@@ -3,6 +3,7 @@ package Business_Layer;
 import Data_Layer.EscalaoDAO;
 import Data_Layer.GoleadoresDAO;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -10,6 +11,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
+import java.util.TreeSet;
 
 public class Campeonato implements Competicao{
     
@@ -406,8 +408,10 @@ public class Campeonato implements Competicao{
     
 	public boolean atualizaCampeonato(Jogo j, APEF a) {
         boolean res = false;
+        Collection<DadosEstatisticos> ds = this.classificacao.getEstatistica().values();
+        TreeSet<DadosEstatisticos> dss = (TreeSet<DadosEstatisticos>) ds;
         if(this.acabou()) {
-            int idEscalao = this.classificacao.getEstatistica().first().getIdEscalao();
+            int idEscalao = dss.first().getIdEscalao();
             Escalao es = this.buscaEscalao(idEscalao);
             a.atualizaPalmaresEquipa(this.nome, es.getNomeEscola(), es.getNomeEquipa());
         }

@@ -47,6 +47,15 @@ public class DadosEstatisticos implements Comparable<DadosEstatisticos> {
         this.forma[4] = '-';
         APEF.IDENTIFICADOR++;
     }
+    public DadosEstatisticos(int id, int vitorias, int derrotas, int empates, int gmarcados, int gsofridos, int idEscalao) {
+        this.idDados = id;
+    	this.vitorias = vitorias;
+    	this.derrotas = derrotas;
+    	this.empates = empates;
+    	this.gmarcados = gmarcados;
+    	this.gsofridos = gsofridos;
+        this.idEscalao = idEscalao;
+    }
 
     public DadosEstatisticos(DadosEstatisticos d){
         this.idEscalao = d.getIdEscalao();
@@ -56,6 +65,10 @@ public class DadosEstatisticos implements Comparable<DadosEstatisticos> {
     	this.gmarcados = d.getGmarcados();
     	this.gsofridos = d.getGsofridos();
         this.forma = d.getForma();
+    }
+    
+    public int getID() {
+        return this.idDados;
     }
 
     public int getIdEscalao() {

@@ -20,7 +20,6 @@ import java.util.Set;
  * @author serafim
  */
 public class JogadorDAO implements Map<Integer,Jogador> {
-    private HashMap<Integer,Jogador> jogadores;
     private static final int ID_PESSOA = 1;
     private static final int NOME_PESSOA = 2;
     private static final int FOTO_PESSOA = 3;
@@ -166,17 +165,17 @@ public class JogadorDAO implements Map<Integer,Jogador> {
 
     @Override
     public Jogador remove(Object key) {
-        return this.jogadores.remove(key);
+        throw new NullPointerException("Não Definido");
     }
 
     @Override
     public void putAll(Map<? extends Integer, ? extends Jogador> m) {
-        this.jogadores.putAll(m);
+        throw new NullPointerException("Não Definido");
     }
 
     @Override
     public void clear() {
-        this.jogadores.clear();
+        throw new NullPointerException("Não Definido");
     }
 
     @Override
@@ -198,12 +197,12 @@ public class JogadorDAO implements Map<Integer,Jogador> {
 
     @Override
     public Collection<Jogador> values() {
-        return this.jogadores.values();
+        throw new NullPointerException("Não Definido");
     }
 
     @Override
     public Set<Map.Entry<Integer, Jogador>> entrySet() {
-        return this.jogadores.entrySet();
+        throw new NullPointerException("Não Definido");
     }
     
      public int hashCode() {

@@ -27,7 +27,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
         
 public class UtilizadorDAO implements Map<String,Utilizador>{
-    private HashMap<String,Utilizador> users;
 
     public static final String USER = "Utilizador u";
     public static final String ADMIN = "Admin u";
@@ -58,7 +57,6 @@ public class UtilizadorDAO implements Map<String,Utilizador>{
     public static int ESCOLANOME = 2;    
             
     public UtilizadorDAO() {
-        this.users = new HashMap<>();
     }
     
     @Override
@@ -95,7 +93,7 @@ public class UtilizadorDAO implements Map<String,Utilizador>{
     try {
         String chave = (String) key;
         Statement stm = ConexaoBD.getConexao().createStatement();
-        String sql = "SELECT NICKNAME FROM "+USER+" WHERE u.NICKNAME = '" + chave+"'";
+        String sql = "SELECT NICKNAME FROM "+USER+" WHERE u.NICKNAME = '"+chave+"'";
             ResultSet rs = stm.executeQuery(sql);
             boolean res = rs.next();
             ConexaoBD.fecharCursor(rs, stm);
@@ -107,8 +105,8 @@ public class UtilizadorDAO implements Map<String,Utilizador>{
 
     @Override
     public boolean containsValue(Object value) {
-        return this.users.containsValue(value);
-    }
+        throw new NullPointerException("não está implementado!");
+        }    
     
     public boolean converte(int a) {
         if(a==0)
@@ -155,7 +153,7 @@ public class UtilizadorDAO implements Map<String,Utilizador>{
                     if(rs.next()) {
                     int idAgenda = rs.getInt(IDAGENDA);
                                         
-                    AgendaDAO ag = new AgendaDAO(idAgenda);
+                    JogoDAO ag = new JogoDAO(idAgenda);
                     Agenda agenda = new Agenda(idAgenda,ag);
                     res = new Arbitro(id,avatar,tipo,nick,nome,email,pw,morada,tlmvl,
                             codPostal,dataNasc,converte(ativo),converte(camposPreenchidos),
@@ -200,8 +198,7 @@ public class UtilizadorDAO implements Map<String,Utilizador>{
             if (existe) {
                 sql = "UPDATE "
                         + USER
-                        + " SET u.idUtilizador = ?, u.avatar = ?, u.nickname = ?, u.email = ?, u.password = ?, u.morada = ?, u.telemovel = ?, u.codPostal = ?, u.dataNasc = ?, u.ativo = ?, u.camposPreenchidos = ?, u.tipoUser = ?, u.removido = ?, u.nome = ? WHERE u.nickname = "
-                        + key;
+                        + " SET u.idUtilizador = ?, u.avatar = ?, u.nickname = ?, u.email = ?, u.password = ?, u.morada = ?, u.telemovel = ?, u.codPostal = ?, u.dataNasc = ?, u.ativo = ?, u.camposPreenchidos = ?, u.tipoUser = ?, u.removido = ?, u.nome = ? WHERE u.nickname = '"+key+"'";
             }
             else {
                 sql = "INSERT INTO Utilizador(idUtilizador,avatar,nickname,email,password,morada,telemovel,codPostal,dataNasc,ativo,camposPreenchidos,tipoUser,removido,nome) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -242,9 +239,9 @@ public class UtilizadorDAO implements Map<String,Utilizador>{
                 stm3.close();
              }
              if(value.getTipo() == 2) {
-                 Arbitro a = (Arbitro) value;
+                Arbitro a = (Arbitro) value;
                 int idAgenda = a.getAgenda().getIDAgenda();
-                String sql4 = "INSERT INTO Arbitro(idUtilizador,idTorneio,idAgenda) VALUES ("+value.getID()+",null,"+idAgenda+")";
+                String sql4 = "INSERT INTO Arbitro(idUtilizador,idTorneio,idAgenda) VALUES ("+value.getID()+",null,null)";
                 PreparedStatement stm4 = ConexaoBD.getConexao().prepareStatement(sql4);
                 stm4.execute();
                 stm4.close();
@@ -260,17 +257,57 @@ public class UtilizadorDAO implements Map<String,Utilizador>{
         
     @Override
     public Utilizador remove(Object key) {
-        return this.users.remove(key);
+        try {
+            
+            String chave = (String) key;
+            Utilizador res = null;
+            String sql = "SELECT * FROM Utilizador u WHERE u.NICKNAME = '"+chave+"'";
+            PreparedStatement stm = ConexaoBD.getConexao().prepareStatement(sql);
+            ResultSet rs = stm.executeQuery(sql);
+            if(rs.next()) {
+            int tipo = rs.getInt(TIPO);
+            int id = rs.getInt(ID);
+            stm.executeQuery();
+            stm.close();
+            if(tipo == 0) {
+                String sql1 = "DELETE FROM Admin u WHERE u.IDUTILIZADOR = '"+id+"'";
+                PreparedStatement stm1 = ConexaoBD.getConexao().prepareStatement(sql1);
+                stm1.execute();
+                stm1.close();
+            }
+            if(tipo == 1) {
+                String sql2 = "DELETE FROM ResponsavelEscola u WHERE u.IDUTILIZADOR = '"+id+"'";
+                PreparedStatement stm2 = ConexaoBD.getConexao().prepareStatement(sql2);
+                stm2.execute();
+                stm2.close();
+                
+            }
+            if(tipo == 2) {
+                String sql4 = "DELETE FROM Arbitro u WHERE u.IDUTILIZADOR = '"+id+"'";
+                PreparedStatement stm4 = ConexaoBD.getConexao().prepareStatement(sql4);
+                stm4.execute();
+                stm4.close();
+            }
+            String sql3 = "DELETE FROM Utilizador u WHERE u.NICKNAME = '"+chave+"'";
+            PreparedStatement stm3 = ConexaoBD.getConexao().prepareStatement(sql3);
+            stm3.execute();
+            stm3.close();
+            }
+            return res;
+        } catch (Exception e) {
+            throw new NullPointerException(e.getMessage());
+        }
     }
+    
 
     @Override
     public void putAll(Map<? extends String, ? extends Utilizador> m) {
-        this.users.putAll(m);
+        throw new NullPointerException("não está implementado!");
     }
 
     @Override
     public void clear() {
-        this.users.clear();
+        throw new NullPointerException("não está implementado!");
     }
 
     @Override
@@ -323,7 +360,7 @@ public class UtilizadorDAO implements Map<String,Utilizador>{
                     if(rs.next()) {
                     int idAgenda = rs.getInt(IDAGENDA);
                                         
-                    AgendaDAO ag = new AgendaDAO(idAgenda);
+                    JogoDAO ag = new JogoDAO(idAgenda);
                     Agenda agenda = new Agenda(idAgenda,ag);
                     a = new Arbitro(id,avatar,tipo,nick,nome,email,pw,morada,tlmvl,
                             codPostal,dataNasc,converte(ativo),converte(camposPreenchidos),
@@ -367,7 +404,7 @@ public class UtilizadorDAO implements Map<String,Utilizador>{
 
     @Override
     public Set<Entry<String, Utilizador>> entrySet() {
-        return this.users.entrySet();
+        throw new NullPointerException("não está implementado!");
     }
     
     public int hashCode() {

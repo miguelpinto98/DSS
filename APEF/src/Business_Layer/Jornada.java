@@ -1,6 +1,6 @@
 package Business_Layer;
 
-import Data_Layer.AgendaDAO;
+import Data_Layer.JogoDAO;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Objects;
@@ -19,7 +19,7 @@ public class Jornada implements Comparable<Jornada>{
         this.id = APEF.IDENTIFICADOR;
         this.nrJornada = 0;
         this.jogosRealizados = 0;
-        this.listaJogos = new AgendaDAO();
+        this.listaJogos = new JogoDAO(this.id);
         APEF.IDENTIFICADOR++;
     }
     
@@ -27,8 +27,15 @@ public class Jornada implements Comparable<Jornada>{
         this.id = APEF.IDENTIFICADOR;
         this.nrJornada = nrJornada;
         this.jogosRealizados = 0;
-        this.listaJogos = new AgendaDAO();
+        this.listaJogos = new JogoDAO(this.id);
         APEF.IDENTIFICADOR++;
+    }
+    
+    public Jornada(int id, int nr, int realizados, Map<Integer,Jogo> jogos) {
+        this.id = id;
+        this.nrJornada = nr;
+        this.jogosRealizados = realizados;
+        this.listaJogos = jogos;
     }
     
     public Jornada(Jornada j) {
@@ -44,7 +51,7 @@ public class Jornada implements Comparable<Jornada>{
     }
     
     public Map<Integer,Jogo> getListaJogos() {
-        Map<Integer,Jogo> aux = new AgendaDAO();
+        Map<Integer,Jogo> aux = new JogoDAO(this.id);
         for(Jogo e: this.listaJogos.values()) 
             aux.put(e.getID(),e);
         return aux;
@@ -52,6 +59,9 @@ public class Jornada implements Comparable<Jornada>{
     
     public int getJogosRealizados() {
     	return this.jogosRealizados;
+    }
+    public int getID() {
+        return this.id;
     }
     
     //Setter

@@ -1,9 +1,11 @@
 package Business_Layer;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.TreeSet;
 
 public class Grupo extends Fase {    
     
@@ -186,8 +188,10 @@ public class Grupo extends Fase {
     
     public ArrayList<Integer> doisMelhores() {
         ArrayList<Integer> aux = new ArrayList<>();
-        DadosEstatisticos d1 = this.classificacao.getEstatistica().first();
-        DadosEstatisticos d2 = this.classificacao.getEstatistica().higher(this.classificacao.getEstatistica().first());
+        Collection<DadosEstatisticos> ds = this.classificacao.getEstatistica().values();
+        TreeSet<DadosEstatisticos> dss = (TreeSet<DadosEstatisticos>) ds;
+        DadosEstatisticos d1 = dss.first();
+        DadosEstatisticos d2 = dss.higher(dss.first());
         
         aux.add(0, d1.getIdEscalao());
         aux.add(1, d2.getIdEscalao());
