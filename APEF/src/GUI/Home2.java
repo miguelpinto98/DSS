@@ -79,22 +79,23 @@ public final class Home2 extends JFrame {
         Epoca epo3 = new Epoca(2010);
         Epoca epo4 = new Epoca(2014);
         Epoca epo5 = new Epoca(1995);
-        System.out.println(this.sistema.existeEmail("lol"));
+        
+        this.sistema.inserirEpoca(epo1);
+        this.sistema.inserirEpoca(epo2);
+        this.sistema.inserirEpoca(epo3);
+        this.sistema.inserirEpoca(epo4);
+        this.sistema.inserirEpoca(epo5);
+         
         Torneio t1 = new Torneio("Uminho Cup",new GregorianCalendar(),new GregorianCalendar(),2,2,new Campo("UM"));
         Torneio t2 = new Torneio("Uminho Cup",new GregorianCalendar(),new GregorianCalendar(),1,2,new Campo("UM"));
         Campeonato c1 = new Campeonato("Campeonato dos lindos", new GregorianCalendar(),new GregorianCalendar(), 1, 2);
         Campeonato c2 = new Campeonato("Campeonato dos ainda mais lindos", new GregorianCalendar(),new GregorianCalendar(), 2, 2);
         epo1.inserirCampeonato(c1);
         epo1.inserirCampeonato(c2);
-        System.out.println("teste");
         epo1.inserirTorneio(t1);
         epo1.inserirTorneio(t2);
  
-        this.sistema.inserirEpoca(epo1);
-        this.sistema.inserirEpoca(epo2);
-        this.sistema.inserirEpoca(epo3);
-        this.sistema.inserirEpoca(epo4);
-        this.sistema.inserirEpoca(epo5);
+        
 
         //ESCOLAS
         Escola e1 = new Escola("Escola Secundária da Lixa", "Lixa", new Campo("Lixa Futebol"));
@@ -142,8 +143,7 @@ public final class Home2 extends JFrame {
         
         this.sistema.getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").inserirEscalao(escalao2);
         
-
-               
+       
         eq3.atualizaPalmares("Liga dos Campeões Infantis");
         eq3.atualizaPalmares("Liga dos Campeões Infantis");
 
@@ -187,7 +187,33 @@ public final class Home2 extends JFrame {
         tj.add(j1);
         tj.add(j2); 
         
-        */
+        //Últimos Resultados
+        ArrayList<Jogo> ures = this.sistema.jogosRealizados(15);
+        
+        Object[] columnNames = new String[] {"Casa","Golos","Golos","Fora"};
+        Object[][] data = new Object[][] {};
+        DefaultTableModel x = new DefaultTableModel(data, columnNames);
+
+        for(Jogo j : tj) {
+            x.addRow(new Object[]{j.getEscalaoCasa().getNomeEquipa(),j.getNumGolosJogoCasa(),j.getNumGolosJogoFora(),j.getEscalaoFora().getNomeEquipa()});
+        }
+        JTabResultados.setModel(x); 
+        
+        
+        //Próximos Jogos
+        ArrayList<Jogo> pjogos = this.sistema.proximosJogos(15);
+        columnNames = new String[] {"Casa","Dia","Fora"};
+        data = new Object[][] {};
+        x = new DefaultTableModel(data, columnNames);
+        
+        
+        for(Jogo j : tj) {
+            x.addRow(new Object[]{j.getEscalaoCasa().getNomeEquipa(),"XX",j.getEscalaoFora().getNomeEquipa()});
+        }
+        jTabProximos.setModel(x);
+         */
+        
+        
         
         /* Inicia Aplicação */
         initComponents();  
@@ -202,34 +228,7 @@ public final class Home2 extends JFrame {
         centerRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
         JTabResultados.getColumn("Dia").setCellRenderer( centerRenderer );
         */
-        
-        /* Últimos Resultados */
-        ArrayList<Jogo> ures = this.sistema.jogosRealizados(15);
-        
-        Object[] columnNames = new String[] {"Casa","Golos","Golos","Fora"};
-        Object[][] data = new Object[][] {};
-        DefaultTableModel x = new DefaultTableModel(data, columnNames);
-
-        for(Jogo j : tj) {
-            x.addRow(new Object[]{j.getEscalaoCasa().getNomeEquipa(),j.getNumGolosJogoCasa(),j.getNumGolosJogoFora(),j.getEscalaoFora().getNomeEquipa()});
-        }
-        JTabResultados.setModel(x); 
-        
-        
-        /* Próximos Jogos */
-        ArrayList<Jogo> pjogos = this.sistema.proximosJogos(15);
-        columnNames = new String[] {"Casa","Dia","Fora"};
-        data = new Object[][] {};
-        x = new DefaultTableModel(data, columnNames);
-        
-        
-        for(Jogo j : tj) {
-            x.addRow(new Object[]{j.getEscalaoCasa().getNomeEquipa(),"XX",j.getEscalaoFora().getNomeEquipa()});
-        }
-        jTabProximos.setModel(x);
-        
-        /* XXXX */
-        
+           
         reloadListaEscolas();
         reloadPagInicialCampeonato();
     }
