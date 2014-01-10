@@ -48,7 +48,7 @@ public class PalmaresDAO implements Map<String,Integer> {
         try {
             String chave = (String) key;
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * FROM PALMARES p WHERE p.IDEQUIPA = "+this.idEquipa+" and pp.NOMECOMPETICAO = "+chave;
+            String sql = "SELECT * FROM PALMARES p WHERE p.IDEQUIPA = "+this.idEquipa+" and p.NOMECOMPETICAO = '"+chave+"'";
             ResultSet rs = stm.executeQuery(sql);
             res = rs.next();
             
@@ -65,11 +65,11 @@ public class PalmaresDAO implements Map<String,Integer> {
 
     @Override
     public Integer get(Object key) {
-        int res = -999;
+        int res = 0;
         try {
             String chave = (String) key;
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT NRVEZES FROM PALMARES p WHERE p.IDEQUIPA = "+this.idEquipa+" and p.NOMECOMPETICAO = "+chave;
+            String sql = "SELECT NRVEZES FROM PALMARES p WHERE p.IDEQUIPA = "+this.idEquipa+" and p.NOMECOMPETICAO = '"+chave+"'";
             ResultSet rs = stm.executeQuery(sql);
             
             if(rs.next())
@@ -81,11 +81,12 @@ public class PalmaresDAO implements Map<String,Integer> {
 
     @Override
     public Integer put(String key, Integer value) {
-        int res = -999;
+        int res = 0;
         try {
             boolean existe = this.containsKey(key);
             String sql = "";           
-            if(existe) {                
+            if(existe) {
+                System.out.println("ATUALIZAR PALMARES - "+this.idEquipa);
                 sql = "UPDATE Palmares SET nrVezes = "+value+", idEquipa = "+this.idEquipa+" WHERE nomeCompeticao = '"+key+"'";
                 Statement st = ConexaoBD.getConexao().createStatement();
                 ResultSet rse = st.executeQuery(sql);

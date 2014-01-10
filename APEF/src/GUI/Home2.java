@@ -137,12 +137,16 @@ public final class Home2 extends JFrame {
         Jogador lindo5 = new Jogador("63linda", new GregorianCalendar(), 2, new Imagem());
     
                
-/*        eq3.getEscaloes().get(0).inserirJogador(lindo1);
+        eq3.getEscaloes().get(0).inserirJogador(lindo1);
         eq3.getEscaloes().get(0).inserirJogador(lindo2);
         eq3.getEscaloes().get(0).inserirJogador(lindo3);
         eq3.getEscaloes().get(0).inserirJogador(lindo4);
         eq3.getEscaloes().get(0).inserirJogador(lindo5);
-        */
+        
+        eq3.atualizaPalmares("Liga dos Campeões Infantis");
+        eq3.atualizaPalmares("Liga dos Campeões Infantis");
+
+        
 //        this.getSistema().getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").getEscaloes().get(0).getJogadores().get(17).addCompeticao(t1.getID());
      //   this.getSistema().getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").getEscaloes().get(0).getJogadores().get(17).addCompeticao(t2.getID());
         //this.getSistema().getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").getEscaloes().get(0).getJogadores().get(17).addCompeticao(t1.getID());
