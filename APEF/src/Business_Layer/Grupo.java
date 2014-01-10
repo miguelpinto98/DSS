@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.TreeSet;
 
 public class Grupo extends Fase {    
@@ -18,9 +19,14 @@ public class Grupo extends Fase {
     	this.classificacao = new EstatisticaCompeticao();
     }
 
-    public Grupo(String n, HashSet<Escalao> le){
-        super(n,le);
+    public Grupo(String n, int t,int nf){
+        super(n,t,nf);
         this.classificacao = new EstatisticaCompeticao();
+    }
+    
+    public Grupo(int id, String n, Map<Integer,Escalao> l, Calendario c, int t, EstatisticaCompeticao e,int nf) {
+        super(id,n,l,c,t,nf);
+        this.classificacao = e;
     }
 
     public Grupo(Grupo g) {

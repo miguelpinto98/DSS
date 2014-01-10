@@ -17,6 +17,11 @@ public class Calendario {
 		this.jornadas = new JornadaDAO(idCalendario);
         APEF.IDENTIFICADOR++;
     }
+    
+    public Calendario(int id, Map<Integer,Jornada> jo) {
+        this.idCalendario = id;
+        this.jornadas = jo;
+    }
 
     public Calendario(Calendario c) {
     	this.jornadas = c.getJornadas();
@@ -28,6 +33,10 @@ public class Calendario {
         for(Jornada j: this.jornadas.values()) 
             aux.put(j.getID(), j);
         return aux;
+    }
+    
+    public int getID() {
+        return this.idCalendario;
     }
 
     //Setters

@@ -3,6 +3,7 @@ package Business_Layer;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
+import java.util.Map;
 
 public class Eliminatoria extends Fase {    
     
@@ -15,8 +16,12 @@ public class Eliminatoria extends Fase {
         super(g);
     }
     
-    public Eliminatoria(String n, HashSet<Escalao> le){
-        super(n,le);
+    public Eliminatoria(String n,int t, int nf){
+        super(n,t,nf);
+    }
+    
+    public Eliminatoria(int id, String n, Map<Integer,Escalao> l, Calendario c, int t,int nf){
+        super(id,n,l,c,t,nf);
     }
 
     //Equals,Clone,toString

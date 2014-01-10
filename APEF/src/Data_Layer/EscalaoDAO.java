@@ -21,6 +21,7 @@ import java.util.Set;
  */
 public class EscalaoDAO implements Map<Integer,Escalao> {
     private int idEquipa;
+    private int idFase;
     
     private static final int ID_PESSOA = 1;
     private static final int TREINADOR_NOME = 2;
@@ -43,8 +44,9 @@ public class EscalaoDAO implements Map<Integer,Escalao> {
     public EscalaoDAO() {
     }
     
-    public EscalaoDAO(int idEquipa) {
-        this.idEquipa = idEquipa;
+    public EscalaoDAO(int id) {
+        this.idEquipa = id;
+        this.idFase = id;
     }
     
     @Override

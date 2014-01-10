@@ -15,6 +15,11 @@ public class EstatisticaCompeticao {
     	this.estatistica = new DadosEstatisticosDAO(idEstatistica);
         APEF.IDENTIFICADOR++;
     }
+    
+    public EstatisticaCompeticao(int id, Map<Integer,DadosEstatisticos> et) {
+        this.idEstatistica = id;
+        this.estatistica = et;
+    }
 
     public EstatisticaCompeticao(EstatisticaCompeticao ec){
     	this.estatistica = ec.getEstatistica();

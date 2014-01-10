@@ -3,6 +3,7 @@ package Business_Layer;
 import Data_Layer.ArbsDAO;
 import Data_Layer.ConexaoBD;
 import Data_Layer.EpocaDAO;
+import Data_Layer.EscalaoDAO;
 import Data_Layer.EscolaDAO;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -443,8 +444,19 @@ public class APEF {
             equipasGrupo2.add(t.buscaEscalao(arrayEquipas.get(i)));
         }
         
-        Grupo g1 = new Grupo("Grupo A",equipasGrupo1);
-        Grupo g2 = new Grupo("Grupo B",equipasGrupo2);
+        Grupo g1 = new Grupo("Grupo A",0,t.getFases().get(t.getNFase()).getID());
+        Map<Integer,Escalao> aux = new EscalaoDAO(g1.getID());
+        for(Escalao e : equipasGrupo1) {
+            aux.put(e.getID(), e);
+        }
+        g1.setListaEquipas(aux);
+       Grupo g2 = new Grupo("Grupo B",0,t.getFases().get(t.getNFase()).getID());
+       Map<Integer,Escalao> aux2 = new EscalaoDAO(g2.getID());
+        for(Escalao e : equipasGrupo2) {
+            aux2.put(e.getID(), e);
+        }
+        g2.setListaEquipas(aux2);
+
         
         for (Escalao e : equipasGrupo1){
                 arrayEquipasGrupo1.add(e.getID());
@@ -464,9 +476,9 @@ public class APEF {
         HashSet<Utilizador> arbitrosEscolhidos = g1.geraCalendario(t.getID(),t.getDataInicio(),arrayEquipasGrupo1,t.getCampo(),arrayArbitros);
         ArrayList<Utilizador> arrayArbitrosDisponiveis = new ArrayList<>();
         arrayArbitrosDisponiveis = daArbitrosDisponiveis(arbitrosEscolhidos, arrayArbitros);
-        Map<Integer,Utilizador> aux = new ArbsDAO();
+        Map<Integer,Utilizador> aux3 = new ArbsDAO();
         for(Utilizador j : arrayArbitrosDisponiveis) {
-            aux.put(j.getID(), j);
+            aux3.put(j.getID(), j);
         }
         g2.geraCalendario(t.getID(),t.getDataInicio(),arrayEquipasGrupo2,t.getCampo(),arrayArbitrosDisponiveis);
         
@@ -476,7 +488,7 @@ public class APEF {
         t.inserirGrupo(t.getNFase(),f1);
         t.inserirGrupo(t.getNFase(),f2);
         
-        t.setArbs(aux);
+        t.setArbs(aux3);
         
         return t;
     }

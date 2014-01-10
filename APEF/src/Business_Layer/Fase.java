@@ -14,31 +14,55 @@ public abstract class Fase {
     private String nome;
     private Map<Integer,Escalao> listaEscaloes;
     private Calendario calendario;
+    private int tipo;
+    private int nFase;
 
     public Fase() {
         this.idFase = APEF.IDENTIFICADOR;
         this.nome = "";
-        this.listaEscaloes = new EscalaoDAO();
+        this.listaEscaloes = new EscalaoDAO(this.idFase);
         this.calendario = new Calendario();
+        this.tipo = -1;
+        this.nFase = 0;
         APEF.IDENTIFICADOR++;
     }
 
-    public Fase(String nome, HashSet<Escalao> le) {
+    public Fase(String nome, int tipo,int n) {
         this.idFase = APEF.IDENTIFICADOR;
         this.nome = nome;
-        this.listaEscaloes = new EscalaoDAO();
+        this.listaEscaloes = new EscalaoDAO(this.nFase);
         this.calendario = new Calendario();
+        this.tipo = tipo;
+        this.nFase = n;
         APEF.IDENTIFICADOR++;
+    }
+    
+    public Fase(int id, String n, Map<Integer,Escalao> l, Calendario c, int t, int nf) {
+        this.idFase = id;
+        this.nome = n;
+        this.listaEscaloes = l;
+        this.calendario = c;
+        this.tipo = t;
+        this.nFase = nf;
     }
 
     public Fase(Fase f) {
         this.nome = f.getNome();
         this.listaEscaloes = f.getListaEscaloes();
         this.calendario = f.getCalendario();
+        this.tipo = f.getTipo();
     }
 
     public String getNome(){
         return this.nome;
+    }
+    
+    public int getTipo() {
+        return this.tipo = tipo;
+    }
+    
+    public int getNFase() {
+        return this.nFase;
     }
     
     public int getID() {
@@ -50,7 +74,7 @@ public abstract class Fase {
     }
     
     public Map<Integer,Escalao> getListaEscaloes() {
-         Map<Integer,Escalao> aux = new EscalaoDAO();
+         Map<Integer,Escalao> aux = new EscalaoDAO(this.idFase);
          for(Integer s : this.listaEscaloes.keySet()){
              aux.put(s,this.listaEscaloes.get(s));
          }

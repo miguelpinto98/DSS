@@ -72,7 +72,6 @@ public class UtilizadorDAO implements Map<String,Utilizador>{
         } catch (SQLException e) {
             throw new NullPointerException(e.getMessage());
         }
-       
     }
 
     @Override
@@ -315,7 +314,7 @@ public class UtilizadorDAO implements Map<String,Utilizador>{
         Set<String> res = new TreeSet<>();
         try {
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT NOME FROM ESCOLA";
+            String sql = "SELECT NICKNAME FROM UTILIZADOR";
             ResultSet rs = stm.executeQuery(sql);
             
             while(rs.next())

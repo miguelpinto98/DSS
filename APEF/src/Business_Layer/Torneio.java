@@ -41,7 +41,7 @@ public class Torneio implements Competicao{
         this.goleadores = new GoleadoresDAO();
         this.listaEscaloes = new EscalaoDAO();
         this.estatisticaCompeticao = new EstatisticaCompeticao();
-        this.fases = new FaseDAO();
+        this.fases = new FaseDAO(this.id);
         this.nFase = 0;
         this.dataInicio = new GregorianCalendar();
         this.dataLimiteInscricoes = new GregorianCalendar();
@@ -58,7 +58,7 @@ public class Torneio implements Competicao{
         this.goleadores = new GoleadoresDAO();
         this.listaEscaloes = new EscalaoDAO();
         this.estatisticaCompeticao = new EstatisticaCompeticao();
-        this.fases = new FaseDAO();
+        this.fases = new FaseDAO(this.id);
         this.nFase = 0;
         this.dataInicio = inicio;
         this.dataLimiteInscricoes = limite;
@@ -74,7 +74,7 @@ public class Torneio implements Competicao{
         this.goleadores = new GoleadoresDAO();
         this.listaEscaloes = new EscalaoDAO();
         this.estatisticaCompeticao = new EstatisticaCompeticao();
-        this.fases = new FaseDAO();
+        this.fases = new FaseDAO(this.id);
         this.nFase = 0;
         this.dataInicio = inicio;
         this.dataLimiteInscricoes = limite;
@@ -170,10 +170,10 @@ public class Torneio implements Competicao{
         this.estatisticaCompeticao = ec;
     }
     public Map<Integer,Fase> getFases(){
-        Map<Integer,Fase> aux = new FaseDAO();
+        Map<Integer,Fase> aux = new FaseDAO(this.id);
 
         for(Fase f : this.fases.values()){
-            aux.put(f.getID(),f);
+            aux.put(f.getNFase(),f);
         }
         return aux;
     }
@@ -363,7 +363,12 @@ public class Torneio implements Competicao{
         for (int i = 0; i < grupoB.size(); i++) {
             equipas.add(this.buscaEscalao(grupoB.get(i)));
         }
-        Eliminatoria meiaFinal = new Eliminatoria("Meia-Final",equipas);
+        Eliminatoria meiaFinal = new Eliminatoria("Meia-Final",1,nFase);
+        Map<Integer,Escalao> aux = new EscalaoDAO(meiaFinal.getID());
+        for(Escalao e : equipas) {
+            aux.put(e.getID(), e);
+        }
+        meiaFinal.setListaEquipas(aux);
         meiaFinal.geraCalendarioTipo1(this.getID(), this.getDataInicio(), arbs, grupoA, grupoB, this.getCampo());
         Fase f = (Fase) meiaFinal;
         this.getFases().put(this.nFase,f);
@@ -377,7 +382,12 @@ public class Torneio implements Competicao{
         for(Utilizador j : this.getArbs().values()) {
             arbs.add(j);
         }          
-        Eliminatoria finale = new Eliminatoria("Final",finalistas);
+        Eliminatoria finale = new Eliminatoria("Final",1,this.nFase);
+        Map<Integer,Escalao> aux = new EscalaoDAO(finale.getID());
+        for(Escalao e : finalistas) {
+            aux.put(e.getID(), e);
+        }
+        finale.setListaEquipas(aux);
         finale.geraFinal(this.getID(),this.getDataInicio(),arbs,finalistas,this.getCampo());
         Fase f = (Fase) finale;
         this.getFases().put(this.nFase,f);
@@ -448,7 +458,12 @@ public class Torneio implements Competicao{
         ArrayList<Utilizador> arbs = new ArrayList<>();
         arbs = arrayArbitros;
         String nomeEliminatoria = nomeElim;
-        Eliminatoria elimi = new Eliminatoria(nomeEliminatoria,equipas);
+        Eliminatoria elimi = new Eliminatoria(nomeEliminatoria,1,this.nFase);
+        Map<Integer,Escalao> aux = new EscalaoDAO(elimi.getID());
+        for(Escalao e : equipas) {
+            aux.put(e.getID(), e);
+        }
+        elimi.setListaEquipas(aux);
         elimi.geraCalendarioTipo2(t.getID(), t.getDataInicio(), arbs, arrayEquipas, t.getCampo());
         //System.out.println(elimi);
         Fase f = (Fase) elimi;
@@ -482,7 +497,12 @@ public class Torneio implements Competicao{
             equipas.add(e.getID());
         }
         String nm = daNomeEliminatoria(nrEquipas);
-        Eliminatoria elim = new Eliminatoria(nm,escaloes);
+        Eliminatoria elim = new Eliminatoria(nm,1,this.nFase);
+        Map<Integer,Escalao> aux = new EscalaoDAO(elim.getID());
+        for(Escalao e : escaloes) {
+            aux.put(e.getID(), e);
+        }
+        elim.setListaEquipas(aux);
         elim.geraCalendarioTipo2(this.getID(), this.getDataInicio(), arbs, equipas, this.getCampo());
         Fase f = (Fase) elim;
         this.inserirEliminatoria(this.nFase,f);
