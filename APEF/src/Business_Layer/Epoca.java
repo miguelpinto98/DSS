@@ -24,7 +24,7 @@ public class Epoca implements Comparable<Epoca>{
     //Construtores
     public Epoca() {
     	this.ano = 0;
-    	this.campeonatos = new CampeonatoDAO();
+    	this.campeonatos = new CampeonatoDAO(this.ano);
     	this.torneios = new ArrayList<HashSet<Torneio>>();
     }
 
@@ -42,7 +42,7 @@ public class Epoca implements Comparable<Epoca>{
     
     public Epoca(int ano) {
     	this.ano = ano;
-    	this.campeonatos = new CampeonatoDAO();
+    	this.campeonatos = new CampeonatoDAO(this.ano);
         this.torneios = new ArrayList<>();
         HashSet<Torneio> tor = new HashSet<>();
         this.torneios.add(0,tor);
@@ -58,11 +58,7 @@ public class Epoca implements Comparable<Epoca>{
     }
     
     public Map<Integer,Campeonato> getCampeonatos() {
-        Map<Integer,Campeonato> aux = new CampeonatoDAO();
-         for(Integer s : this.campeonatos.keySet()){
-             aux.put(s,this.campeonatos.get(s));
-         }
-         return aux;
+        return this.campeonatos;
     }
     
     public ArrayList<HashSet<Torneio>> getTorneios() {

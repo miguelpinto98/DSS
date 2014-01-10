@@ -30,10 +30,9 @@ public class CampeonatoDAO implements Map<Integer,Campeonato>/*IDCAMPEONATO->CAM
     private static final int ID_CALENDARIO = 8;
     private static final int ID_EPOCA = 9;
     
-    public CampeonatoDAO(int id) {this.idEpoca=id;}
-    
-    public CampeonatoDAO(){}
-    
+    public CampeonatoDAO(int id) {
+        this.idEpoca=id;
+    }
    
     @Override
     public int size(){
@@ -55,7 +54,7 @@ public class CampeonatoDAO implements Map<Integer,Campeonato>/*IDCAMPEONATO->CAM
         try {
             int chave = (Integer) key;
             Statement stm = ConexaoBD.getConexao().createStatement();          
-            String sql = "SELECT * FROM CAMPEONATO camp WHERE camp.EPOCAANO = "+this.idEpoca+" and camp.IDCAMPEONATO= '"+chave+"'";
+            String sql = "SELECT * FROM CAMPEONATO camp WHERE camp.EPOCAANO = "+this.idEpoca+" and camp.TIPOESCALAO= '"+chave+"'";
             ResultSet rs = stm.executeQuery(sql);
             res = rs.next();
             ConexaoBD.fecharCursor(rs, stm);}
@@ -96,16 +95,30 @@ public class CampeonatoDAO implements Map<Integer,Campeonato>/*IDCAMPEONATO->CAM
         Integer idC = (Integer) key;
         try{            
             boolean existe = this.containsKey(key);
-            String sql = "";
-            PreparedStatement stm = null;
+            String sql;
                       
             if(!existe) {
-                sql = "INSERT INTO Campeonato(TIPOESCALAO, NOME, NRESCALOES, DATAINICIO, DATALIMINSCRICOES, IDESTATISTICACOMP, IDCALENDARIO, EPOCAANO) VALUES ("+value.getTipoEscalao()+", "+value.getNome()+", "+value.getNrEscaloes()+", "+value.getDataInicio()+", "+value.getDataLimiteInscricoes()+", "+value.getClassificacao().getID()+", "+value.getCalendario().getID()+", "+this.idEpoca+")";
-                stm = ConexaoBD.getConexao().prepareStatement(sql);
-                ResultSet rs = stm.executeQuery(sql);}        
-            }     
-        catch (SQLException e) {}
-    return res;}
+                sql = "INSERT INTO Campeonato(idCampeonato, tipoEscalao, nome, nrEscaloes, dataInicio, dataLimInscricoes, Epocaano) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                PreparedStatement stm = ConexaoBD.getConexao().prepareStatement(sql);
+                stm.setInt(1, value.getID());
+                stm.setInt(2, value.getTipoEscalao());
+                stm.setString(3, value.getNome());
+                stm.setInt(4, value.getNrEscaloes());
+                Timestamp di = new Timestamp(value.getDataInicio().getTimeInMillis());
+                stm.setTimestamp(5, di);
+                Timestamp dfi = new Timestamp(value.getDataLimiteInscricoes().getTimeInMillis());
+                stm.setTimestamp(6, dfi);
+                stm.setInt(7, this.idEpoca);
+                
+                stm.executeQuery();
+                stm.close();
+                System.out.println("CAMPEONATO INSERIDO");
+                res = value;
+            }        
+        } catch (SQLException e) {
+        }
+    return res;
+    }
     
        
     @Override
@@ -113,13 +126,14 @@ public class CampeonatoDAO implements Map<Integer,Campeonato>/*IDCAMPEONATO->CAM
         Campeonato res = null;
         try {            
             Integer chave = (Integer) key;
-            String sql = "DELETE FROM CAMPEONATO WHERE CAMPEONATO.IDCAMPEONATO = ?";
+            String sql = "DELETE FROM CAMPEONATO WHERE CAMPEONATO.IDCAMPEONATO = "+chave;
             PreparedStatement stm = ConexaoBD.getConexao().prepareStatement(sql);
-            stm.setInt(ID_CAMPEONATO, chave);
             stm.execute();
             ConexaoBD.fecharCursor(null, stm);
-            return res;}
-        catch (Exception e){throw new NullPointerException(e.getMessage());}
+            return res;
+        } catch (Exception e) {
+            throw new NullPointerException(e.getMessage());
+        }
     }
 
     @Override
