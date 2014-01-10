@@ -17,7 +17,7 @@ public final class ConsultarJogador2 extends javax.swing.JPanel {
         this.root = root;
         this.escalao = e;
         this.cj = cj;
-        this.jogador = this.root.getSistema().getEscolas().get(escalao.getNomeEscola()).getEquipas().get(escalao.getNomeEquipa()).getEscaloes()[escalao.getTipoEscalao()].getJogadores().get(jogador.getID());
+        this.jogador = this.root.getSistema().getEscolas().get(escalao.getNomeEscola()).getEquipas().get(escalao.getNomeEquipa()).getEscaloes().get(escalao.getTipoEscalao()).getJogadores().get(jogador.getID());
         initComponents();          
         reloadDadosJogador();     
     }

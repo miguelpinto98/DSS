@@ -5,6 +5,7 @@ import Business_Layer.Utilizador;
 import Business_Layer.Admin;
 import Business_Layer.Agenda;
 import Business_Layer.Arbitro;
+import Business_Layer.Campeonato;
 import Business_Layer.Campo;
 import Business_Layer.DadosEstatisticos;
 import Business_Layer.Epoca;
@@ -80,14 +81,26 @@ public final class Home2 extends JFrame {
         
         /* EPOCA */ /**TORNEIOS*/
         Epoca epo1 = new Epoca(2014);
+        Epoca epo2 = new Epoca(2003);
+        Epoca epo3 = new Epoca(2010);
+        Epoca epo4 = new Epoca(2014);
+        Epoca epo5 = new Epoca(1995);
  
         Torneio t1 = new Torneio("Uminho Cup",new GregorianCalendar(),new GregorianCalendar(),2,2,new Campo("UM"));
-        Torneio t2 = new Torneio("uminho Cup",new GregorianCalendar(),new GregorianCalendar(),1,2,new Campo("UM"));
-        
+        Torneio t2 = new Torneio("Uminho Cup",new GregorianCalendar(),new GregorianCalendar(),1,2,new Campo("UM"));
+        Campeonato c1 = new Campeonato("Campeonato dos lindos", new GregorianCalendar(),new GregorianCalendar(), 1, 2);
+        Campeonato c2 = new Campeonato("Campeonato dos ainda mais lindos", new GregorianCalendar(),new GregorianCalendar(), 1, 2);
+        epo1.inserirCampeonato(c1);
+        epo1.inserirCampeonato(c2);
+
         epo1.inserirTorneio(t1);
         epo1.inserirTorneio(t2);
-
+ 
         this.sistema.inserirEpoca(epo1);
+        this.sistema.inserirEpoca(epo2);
+        this.sistema.inserirEpoca(epo3);
+        this.sistema.inserirEpoca(epo4);
+        this.sistema.inserirEpoca(epo5);
 
         /* ESCOLAS */
         Escola e1 = new Escola("Escola Secundária da Lixa", "Lixa", new Campo("Lixa Futebol"));
@@ -124,15 +137,14 @@ public final class Home2 extends JFrame {
         Jogador lindo5 = new Jogador("63linda", new GregorianCalendar(), 2, new Imagem());
     
                
-        eq3.getEscaloes()[0].inserirJogador(lindo1);
-        eq3.getEscaloes()[0].inserirJogador(lindo2);
-        eq3.getEscaloes()[0].inserirJogador(lindo3);
-        eq3.getEscaloes()[0].inserirJogador(lindo4);
-        eq3.getEscaloes()[0].inserirJogador(lindo5);
+        eq3.getEscaloes().get(0).inserirJogador(lindo1);
+        eq3.getEscaloes().get(0).inserirJogador(lindo2);
+        eq3.getEscaloes().get(0).inserirJogador(lindo3);
+        eq3.getEscaloes().get(0).inserirJogador(lindo4);
+        eq3.getEscaloes().get(0).inserirJogador(lindo5);
         
-<<<<<<< HEAD
-        this.getSistema().getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").getEscaloes()[0].getJogadores().get(17).addCompeticao(t1.getID());
-        this.getSistema().getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").getEscaloes()[0].getJogadores().get(17).addCompeticao(t2.getID());
+//        this.getSistema().getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").getEscaloes().get(0).getJogadores().get(17).addCompeticao(t1.getID());
+//        this.getSistema().getEscolas().get("Universidade do Minho").getEquipas().get("CeSIUM").getEscaloes().get(0).getJogadores().get(17).addCompeticao(t2.getID());
         
         
         
@@ -147,7 +159,6 @@ public final class Home2 extends JFrame {
         this.sistema.registarUser("serafim","pw1234","smcp@gmail.com",2);
         this.sistema.registarUser("atum","pw1234","atum@gmail.com",0);
         
-=======
         eq3.atualizaPalmares("Liga dos Campeões Infantis");
         eq3.atualizaPalmares("Liga dos Campeões Infantis");
 
@@ -177,7 +188,7 @@ public final class Home2 extends JFrame {
         Utilizador u2 = new ResponsavelEscola(101,null,1,"Rescla","sersfismpinto","ll@josao","1245213s22","Felgueiras","91568544","784-545",new GregorianCalendar(),false,false,false,e1);
         Utilizador u3 = new Arbitro(1001,null,2,"josejose","sersfismpinto","ll@josao","1245213s22","Felgueiras","91568544","784-545",new GregorianCalendar(),false,false,aaa,false);
         System.out.println(this.sistema.getUsers().values*/        
->>>>>>> b1bccf2d7eabb0b63dc5b92343ab8fce2a9d1267
+
         /* TESTE JOGO COM ESCALOES */
         ArrayList<Jogo> tj = new ArrayList<>();
         Escalao esc1 = new Escalao(0, "LEI", "UMINHO");
@@ -1476,11 +1487,4 @@ public final class Home2 extends JFrame {
     private javax.swing.JButton registar;
     private javax.swing.JPanel searchPanel;
     // End of variables declaration//GEN-END:variables
-
-    private static class JArbitroOtion extends PopupMenu {
-
-        public JArbitroOtion() {
-        }
-    }
-
 }

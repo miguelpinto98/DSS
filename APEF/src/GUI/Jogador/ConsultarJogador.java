@@ -31,8 +31,15 @@ public final class ConsultarJogador extends javax.swing.JDialog {
         this.user = user;
         this.jogador = j;
         this.pj = pla;
-        Map.Entry<Integer, Epoca> firstEntry = this.root.getSistema().getEpocas().firstEntry();
-        this.ep = firstEntry.getValue();
+        
+        GregorianCalendar g = new GregorianCalendar();
+        int ano = g.get(g.YEAR);
+        
+        if(g.get(g.MONTH) >= 0 && g.get(g.MONTH) <=8)
+            ano--;
+        
+        ep = this.root.getSistema().getEpocas().get(ano);
+       
         initComponents();        
         reload();   
         reloadListaCompeticoes();
@@ -71,7 +78,7 @@ public final class ConsultarJogador extends javax.swing.JDialog {
     public ArrayList<String> listaCompeticoes (){
         String nome;
         ArrayList<String> al = new ArrayList<>();
-            for(Integer n : this.jogador.getCompeticoes()){
+            for(Integer n : this.jogador.getCompeticoes().keySet()){
                 /*nome=this.ep.procuraCampeonato(n);
                 if(nome != null) {al.add(nome); break;}
                 else {*/

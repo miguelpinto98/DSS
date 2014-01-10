@@ -36,11 +36,8 @@ public final class JCriarPlantel extends javax.swing.JDialog {
     }
         
     public void verificaEscalaoesDisponiveis() {
-        Escalao[] esc = this.equipa.getEscaloes();
-        
-        
-        for(int i=0; i<esc.length; i++)
-            if(esc[i] == null)
+        for(int i=0; i<this.equipa.getEscaloes().size(); i++)
+            if(this.equipa.getEscaloes().get(i) == null)
                 this.comboEscaloesDisponiveis.addItem(ce.devolveEscalaoTipo(i));
     }
 
