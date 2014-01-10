@@ -15,11 +15,11 @@ public class Agenda {
     private Map<Integer,Jogo> jogos;
         
         public Agenda(){
-            this.idAgenda = APEF.IDENTIFICADOR;
+            this.idAgenda = APEF.getID();
             this.jogos = new JogoDAO(idAgenda);
-            this.idAgenda = APEF.IDENTIFICADOR;;
+            this.idAgenda = APEF.getID();
             this.jogos = new JogoDAO(this.idAgenda);
-            APEF.IDENTIFICADOR++;
+            APEF.putID();
         }
         
         public Agenda(int id,Map<Integer,Jogo> j){

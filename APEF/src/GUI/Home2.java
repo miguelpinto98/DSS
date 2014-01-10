@@ -216,8 +216,6 @@ public final class Home2 extends JFrame {
         jTabProximos.setModel(x);
          */
         
-        
-        
         /* Inicia Aplicação */
         initComponents();  
         verificaUser(user);

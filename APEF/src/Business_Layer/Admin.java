@@ -14,7 +14,7 @@ public class Admin extends Utilizador {
 	public Admin(int tipo,String nickname, String password, String email, GregorianCalendar g, APEF a){
 		super(null,tipo,nickname,"",email,password,"","","",g,false,false,false);
 		this.gestao = a;
-		APEF.IDENTIFICADOR++;
+		APEF.putID();
 	}
     
     public Admin(int id, Imagem avatar, int tipo, String nick, String nome, 

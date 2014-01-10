@@ -5,6 +5,7 @@ import Data_Layer.ConexaoBD;
 import Data_Layer.EpocaDAO;
 import Data_Layer.EscalaoDAO;
 import Data_Layer.EscolaDAO;
+import Data_Layer.IDENTIFICADORDAO;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
@@ -20,8 +21,7 @@ public class APEF {
     private Map<String, Utilizador> users;
     private HashSet<Campo> campos; /*Sao os campos que nao estao associados a escolas*/
     private Utilizador emSessao;
-
-    public static int IDENTIFICADOR=1;
+    public static Map<Integer,Integer> idApef;
     
     public APEF() {
     	this.escolas = new EscolaDAO();
@@ -31,6 +31,7 @@ public class APEF {
         this.iniciarConexao();
         //this.registaUtilizador();
         this.emSessao = null;
+        APEF.idApef = new IDENTIFICADORDAO(1);
     }
     
     public APEF(APEF a) {
@@ -615,5 +616,13 @@ public class APEF {
     
     public void atualizaPalmaresEquipa(String nomeCompeticao,String escola, String equipa) {
       this.escolas.get(escola).getEquipas().get(equipa).atualizaPalmares(nomeCompeticao);
+    }
+    
+    public static int getID() {
+        return APEF.idApef.get(1);
+    }
+    
+    public static void putID() {
+        APEF.idApef.put(1, APEF.idApef.get(1)+1);
     }
 }
