@@ -60,10 +60,10 @@ public class Campeonato implements Competicao{
         this.tipoEscalao = tipo;
         this.nome = nome;
         this.nrEscaloes = nrEquipasMax;
-        this.calendario = new Calendario();
-        this.listaEscaloes = new EscalaoDAO();
-        this.goleadores = new GoleadoresDAO();
-        this.classificacao = new EstatisticaCompeticao();
+        this.calendario =  null;
+        this.listaEscaloes = null;
+        this.goleadores = null;
+        this.classificacao = null;
         this.dataInicio = inicio;
         this.dataLimiteInscricoes = limiteInscricao;
         APEF.IDENTIFICADOR++;
