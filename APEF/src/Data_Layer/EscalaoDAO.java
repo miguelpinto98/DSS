@@ -23,6 +23,9 @@ import java.util.Set;
 public class EscalaoDAO implements Map<Integer,Escalao> {
     private int idEquipa;
     private int idFase;
+    private int idCamp;
+    private int contr;
+    private String nomeesc;
     
     private static final int ID_PESSOA = 1;
     private static final int TREINADOR_NOME = 2;
@@ -48,6 +51,13 @@ public class EscalaoDAO implements Map<Integer,Escalao> {
     public EscalaoDAO(int id) {
         this.idEquipa = id;
         this.idFase = id;
+        this.contr = 0;
+    }
+    
+    public EscalaoDAO(int id, int dif) {
+        this.idCamp = id;
+        this.contr = dif;
+        this.nomeesc = "";
     }
     
     @Override
@@ -72,8 +82,9 @@ public class EscalaoDAO implements Map<Integer,Escalao> {
     public boolean isEmpty() {
         boolean res = false;
         try {
+            String sql = "SELECT * FROM ESCALAO e WHERE e.IDEQUIPA = "+this.idEquipa;
             Statement stm = ConexaoBD.getConexao().createStatement();
-            ResultSet rs = stm.executeQuery("SELECT * FROM ESCALAO e WHERE e.IDEQUIPA = "+this.idEquipa);
+            ResultSet rs = stm.executeQuery(sql);
             
             if(rs.next())
                 res = true;
@@ -91,8 +102,13 @@ public class EscalaoDAO implements Map<Integer,Escalao> {
             int chave = (Integer) key;
             //String chave = c.toUpperCase();
             
+            String sql;
+            if(this.contr != 99) 
+                sql = "SELECT * FROM ESCALAO e WHERE e.IDEQUIPA = "+this.idEquipa;
+            else
+                sql = "SELECT * FROM ESCALAO e WHERE e.TIPOESCALAO = "+chave+" and e.ESCOLANOME = '"+this.nomeesc+"'";
+            
             Statement stm = ConexaoBD.getConexao().createStatement();          
-            String sql = "SELECT * FROM ESCALAO e WHERE e.TIPOESCALAO = "+chave+" and e.IDEQUIPA = "+this.idEquipa;
             ResultSet rs = stm.executeQuery(sql);
             res = rs.next();
             
@@ -166,12 +182,15 @@ public class EscalaoDAO implements Map<Integer,Escalao> {
         Escalao res = null;
         try {
             Integer c = (Integer) key;
-            boolean existe = this.containsKey(key);
             PreparedStatement stm = null;
             
-            if(!existe && c < 4) {
-                String sql = "";
-                
+            if(this.contr == 99)
+                this.nomeesc = value.getNomeEscola();
+            
+            boolean existe = this.containsKey(key);
+
+            String sql = "";
+            if(!existe && c < 4) {               
                 Treinador tre = value.getTreinador();
                 if(tre != null) {
                     sql = "INSERT INTO Pessoa(idPessoa, nome, foto, dataNasc, sexo) VALUES (?, ?, ?, ?, ?)";
@@ -208,6 +227,10 @@ public class EscalaoDAO implements Map<Integer,Escalao> {
                         System.out.println("INSERIDA");
                     stm.close();
                 }
+            } else {
+               sql = "UPDATE ESCALAO SET IDCAMPEONATO = "+this.idCamp+" WHERE IDESCALAO = "+value.getID();
+               PreparedStatement stm1 = ConexaoBD.getConexao().prepareStatement(sql);
+               ResultSet rs1 = stm1.executeQuery();
             }
             res = value;
         } catch (SQLException e) {

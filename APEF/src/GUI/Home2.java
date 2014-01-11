@@ -1395,7 +1395,13 @@ public final class Home2 extends JFrame {
 
     private void inscreverCampActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inscreverCampActionPerformed
         // TODO add your handling code here:
-        JDialog frame = new JInscreverCampeonato(this);
+        GregorianCalendar g = new GregorianCalendar();
+        int anos = g.get(g.YEAR);
+        
+        if(!this.sistema.getEpocas().containsKey(anos))
+            anos--;
+        
+        JDialog frame = new JInscreverCampeonato(this,anos);
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);        
     }//GEN-LAST:event_inscreverCampActionPerformed

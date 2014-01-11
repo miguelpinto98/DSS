@@ -75,12 +75,13 @@ public class EpocaDAO implements Map<Integer,Epoca> {
         
         try {
             int chave = (Integer) key;
-            Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * FROM EPOCA WHERE EPOCA.ANO = "+chave;
-            ResultSet rs = stm.executeQuery(sql);
+            PreparedStatement stm = ConexaoBD.getConexao().prepareStatement("SELECT * FROM EPOCA e WHERE e.ANO = "+chave);
+            ResultSet rs = stm.executeQuery();
             
-            if(rs.next()) { int ano = rs.getInt(ANO); ep= new Epoca(ano);}
-            
+            if(rs.next()) {
+                int ano = rs.getInt(ANO);
+                ep = new Epoca(ano);
+            }
             rs.close();
             stm.close();}
         catch (Exception e) {}        

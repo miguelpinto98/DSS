@@ -69,9 +69,10 @@ public class CampeonatoDAO implements Map<Integer,Campeonato>/*IDCAMPEONATO->CAM
         try {
             Integer chave = (Integer) key;
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * FROM CAMPEONATO camp WHERE camp.EPOCAANO = "+this.idEpoca+" and camp.IDCAMPEONATO="+chave;
+            String sql = "SELECT * FROM CAMPEONATO camp WHERE camp.EPOCAANO = "+this.idEpoca+" and camp.TIPOESCALAO="+chave;
             ResultSet rs = stm.executeQuery(sql);         
             if(rs.next()) {
+                int idcamp = rs.getInt(1);
                 int tipoEsc = rs.getInt(TIPO_ESCALAO);
                 String nome = rs.getString(NOME);
                 int nrEscaloes = rs.getInt(NR_ESCALOES);                   
@@ -80,10 +81,12 @@ public class CampeonatoDAO implements Map<Integer,Campeonato>/*IDCAMPEONATO->CAM
                 GregorianCalendar g1 = new GregorianCalendar();
                 rs.getTimestamp(DATA_LIMITE,g1);
                            
-            camp = new Campeonato (nome,g, g1, tipoEsc, nrEscaloes);}
+            camp = new Campeonato(idcamp,nome,g, g1, tipoEsc, nrEscaloes);
+            }
             
-           } catch (SQLException e) {}
-        return camp;}
+        } catch (SQLException e) {}
+        return camp;
+    }
     
 
     @Override

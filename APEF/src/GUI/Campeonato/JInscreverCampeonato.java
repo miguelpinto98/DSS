@@ -7,10 +7,13 @@
 package GUI.Campeonato;
 
 import Business_Layer.APEF;
+import Business_Layer.Epoca;
 import Business_Layer.Equipa;
 import Business_Layer.Escalao;
 import Business_Layer.Escola;
+import Business_Layer.Jogador;
 import GUI.Home2;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JDialog;
@@ -21,12 +24,14 @@ public class JInscreverCampeonato extends JDialog {
     private String equipa;
     private Map<String,Escola> aux;
     private String escola;
+    private int ano;
     
-    public JInscreverCampeonato(Home2 j) {
+    public JInscreverCampeonato(Home2 j, int ano) {
         this.root = j;
         this.sys = this.root.getSistema();
         this.aux = this.sys.getEscolas();
         this.escola = "";
+        this.ano = ano;
         initComponents();
         
         atualizacombosEscola();
@@ -110,7 +115,9 @@ public class JInscreverCampeonato extends JDialog {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(429, 313));
+        setMaximumSize(new java.awt.Dimension(587, 185));
+        setMinimumSize(new java.awt.Dimension(587, 185));
+        setResizable(false);
 
         jPanel2.setBackground(new java.awt.Color(153, 153, 153));
 
@@ -156,6 +163,11 @@ public class JInscreverCampeonato extends JDialog {
         treinador.setText("jLabel6");
 
         confirmar.setText("Confirmar");
+        confirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmarActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("cancelar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -238,6 +250,30 @@ public class JInscreverCampeonato extends JDialog {
     private void nequipaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nequipaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nequipaActionPerformed
+
+    private void confirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarActionPerformed
+        // TODO add your handling code here:
+        String equi = (String) this.nequipa.getSelectedItem();
+        int tipo = (int) this.nescalao.getSelectedIndex();
+        
+        //Epoca ep = this.sys.getEpocas().get(this.ano);
+         
+        int idcamp = this.sys.getEpocas().get(this.ano).getCampeonatos().get(tipo).getID();
+        
+        Escalao e = null;
+        for(String s : this.sys.getEscolas().keySet())
+            for(String ss : this.sys.getEscolas().get(s).getEquipas().keySet())
+                if(ss.equals(equi))
+                    e = this.sys.getEscolas().get(s).getEquipas().get(ss).getEscaloes().get(tipo);
+        
+        ArrayList<Jogador> aux1 = new ArrayList<>();
+        if(e != null)
+            for(int nn : e.getJogadores().keySet())
+                aux1.add(e.getJogadores().get(nn));
+        
+        this.sys.inscreverCompeticaoCampeonato(this.ano, idcamp, e, aux1);
+        dispose();
+    }//GEN-LAST:event_confirmarActionPerformed
 
     
 
