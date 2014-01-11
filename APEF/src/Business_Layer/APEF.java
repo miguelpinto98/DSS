@@ -367,7 +367,7 @@ public class APEF {
            
             for(Escalao e : c.getListaEscaloes().values()) {
                 DadosEstatisticos x = new DadosEstatisticos(e.getID());
-                c.getClassificacao().inserirDados(x);
+                c.getClassificacao().get(c.getID()).inserirDados(x);
             }
     	}
         return res;

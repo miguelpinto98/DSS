@@ -1,5 +1,6 @@
 package Business_Layer;
 
+import Data_Layer.DadosEstatisticosDAO;
 import Data_Layer.JogadorDAO;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
@@ -15,7 +16,7 @@ public class Escalao {
     private Treinador treinador;
     private Map<Integer,Jogador> jogadores;
     private Agenda agenda;          //Jogos 
-    private DadosEstatisticos dados;
+    private Map<Integer,DadosEstatisticos> dados;
 
     //Construtores
     public Escalao() {
@@ -26,7 +27,7 @@ public class Escalao {
     	this.treinador = new Treinador();
     	this.jogadores = new JogadorDAO(this.id,this.nomeEquipa);
         this.agenda = new Agenda();
-        this.dados = new DadosEstatisticos();
+        this.dados = new DadosEstatisticosDAO(this.id);
         APEF.putID();
     }
     
@@ -38,7 +39,7 @@ public class Escalao {
         this.treinador = new Treinador();
     	this.jogadores = new JogadorDAO(this.id,this.nomeEquipa);
         this.agenda = new Agenda();
-        this.dados = new DadosEstatisticos(APEF.getID());
+        this.dados = new DadosEstatisticosDAO(this.id);
         APEF.putID();
     }
 
@@ -61,7 +62,7 @@ public class Escalao {
         this.treinador = t;
         this.jogadores = new JogadorDAO(this.id, this.nomeEquipa);
         this.agenda = new Agenda();
-        this.dados = new DadosEstatisticos(); 
+        this.dados = new DadosEstatisticosDAO(this.id); 
     }
     
     public Escalao(int id, int tipo, String nEscola, String nEquipa, Treinador t, int idAgenda, int idDadosEst) {
@@ -72,7 +73,7 @@ public class Escalao {
         this.treinador = t;
         this.jogadores = new JogadorDAO(this.id, this.nomeEquipa);
         this.agenda = new Agenda(idAgenda);
-        this.dados = new DadosEstatisticosDAO(idDadosEst);
+        this.dados = new DadosEstatisticosDAO(this.id);
     }
 
     //Getters
@@ -104,7 +105,7 @@ public class Escalao {
         return this.agenda;
     }
     
-    public DadosEstatisticos getDados() {
+    public Map<Integer,DadosEstatisticos> getDados() {
         return this.dados;
     }
 
@@ -137,7 +138,7 @@ public class Escalao {
         this.agenda = agenda;
     }
     
-    public void setDados(DadosEstatisticos dados){
+    public void setDados(Map<Integer,DadosEstatisticos> dados){
         this.dados = dados;
     }
     
@@ -261,7 +262,7 @@ public class Escalao {
     }
 
 	public void adicionaDadosEscalao(int numGolosMarcados, int numGolosSofridos, Map<Integer,Integer> goleadores, GregorianCalendar dia) {
-		this.dados.addDadosEstatisticos(numGolosMarcados, numGolosSofridos);
+		this.dados.get(this.id).addDadosEstatisticos(numGolosMarcados, numGolosSofridos);
 		this.agenda.atualizaAgenda(dia);
 		
 		for(Integer n : goleadores.keySet()) 

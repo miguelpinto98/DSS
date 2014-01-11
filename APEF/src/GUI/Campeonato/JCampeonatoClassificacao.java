@@ -6,8 +6,11 @@
 
 package GUI.Campeonato;
 
+import Business_Layer.Jogo;
 import Business_Layer.Utilizador;
 import GUI.Home2;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,10 +19,24 @@ import GUI.Home2;
 public class JCampeonatoClassificacao extends javax.swing.JPanel {
 
     private Home2 root;
+    private int ano;
 
-    public JCampeonatoClassificacao(Home2 aThis, Utilizador user) {
+    public JCampeonatoClassificacao(Home2 aThis, Utilizador user, int ano) {
         this.root = aThis;
+        this.ano = ano;
         initComponents();
+        
+        
+        
+        
+        Object[] columnNames = new String[] {"Posição","Equipa","Vitórias","Empates","Derrotas","G.M.","G.S.","DIF.","Pontos"};
+        Object[][] data = new Object[][] {};
+        DefaultTableModel x = new DefaultTableModel(data, columnNames);
+
+        //for(Jogo j : ures) {
+            //x.addRow(new Object[]{j.getEscalaoCasa().getNomeEquipa(),j.getNumGolosJogoCasa(),j.getNumGolosJogoFora(),j.getEscalaoFora().getNomeEquipa()});
+        //}
+        tablecamp.setModel(x);  
     }
 
     /**
@@ -31,42 +48,32 @@ public class JCampeonatoClassificacao extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablecamp = new org.jdesktop.swingx.JXTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createTitledBorder("Classificação"));
         setLayout(new java.awt.BorderLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablecamp.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"2", "aaaaaaaaaa", "2", "2", "2", "2", "2", "2", "2"},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Pos", "Equipa", "V", "E", "D", "GM", "GS", "DIF", "PTS"
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jTable1.setRowHeight(24);
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane2.setViewportView(tablecamp);
 
-        add(jScrollPane1, java.awt.BorderLayout.CENTER);
+        add(jScrollPane2, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private org.jdesktop.swingx.JXTable tablecamp;
     // End of variables declaration//GEN-END:variables
 }

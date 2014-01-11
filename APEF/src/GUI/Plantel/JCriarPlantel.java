@@ -268,7 +268,7 @@ public final class JCriarPlantel extends javax.swing.JDialog {
         
         this.equipa.criarEscalao(selEscalao, this.escola.getNome(), this.equipa.getNome(), name, date, sel, img);
         
-        this.ce.devolveComboEscalao().addItem(this.ce.devolveEscalaoTipo(selEscalao));
+        this.ce.devolveComboEscalao().addItem((String)this.ce.devolveEscalaoTipo(selEscalao));
         this.ce.verificaButtonCriar();
         dispose();
     }//GEN-LAST:event_criarActionPerformed

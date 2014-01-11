@@ -1,6 +1,7 @@
 package Business_Layer;
 
 import Data_Layer.EscalaoDAO;
+import Data_Layer.EstatisticaCompeticaoDAO;
 import Data_Layer.GoleadoresDAO;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -23,7 +24,7 @@ public class Campeonato implements Competicao{
     private Calendario calendario;
     private Map<Integer,Escalao> listaEscaloes;
     private Map<Integer,Integer> goleadores; //<id do jogador,nr golos>     
-    private EstatisticaCompeticao classificacao;
+    private Map<Integer,EstatisticaCompeticao> classificacao;
     private GregorianCalendar dataInicio;
     private GregorianCalendar dataLimiteInscricoes;
 
@@ -36,7 +37,7 @@ public class Campeonato implements Competicao{
     	this.calendario = new Calendario();
         this.listaEscaloes = new EscalaoDAO();
     	this.goleadores = new GoleadoresDAO();
-        this.classificacao = null;
+        this.classificacao = new EstatisticaCompeticaoDAO(this.id);
         this.dataInicio = new GregorianCalendar();
         this.dataLimiteInscricoes = new GregorianCalendar();
         APEF.putID();
@@ -63,7 +64,7 @@ public class Campeonato implements Competicao{
         this.calendario =  null;
         this.listaEscaloes = null;
         this.goleadores = null;
-        this.classificacao = null;
+        this.classificacao = new EstatisticaCompeticaoDAO(this.id);
         this.dataInicio = inicio;
         this.dataLimiteInscricoes = limiteInscricao;
         APEF.putID();
@@ -122,11 +123,11 @@ public class Campeonato implements Competicao{
         this.listaEscaloes = le;
     }
     
-    public EstatisticaCompeticao getClassificacao() {
+    public Map<Integer,EstatisticaCompeticao> getClassificacao() {
         return this.classificacao;
     }
 
-    public void setClassificacao(EstatisticaCompeticao classificacao) {
+    public void setClassificacao(Map<Integer,EstatisticaCompeticao> classificacao) {
         this.classificacao = classificacao;
     }
 
@@ -408,7 +409,7 @@ public class Campeonato implements Competicao{
     
 	public boolean atualizaCampeonato(Jogo j, APEF a) {
         boolean res = false;
-        Collection<DadosEstatisticos> ds = this.classificacao.getEstatistica().values();
+        Collection<DadosEstatisticos> ds = this.classificacao.get(this.id).getEstatistica().values();
         TreeSet<DadosEstatisticos> dss = (TreeSet<DadosEstatisticos>) ds;
         if(this.acabou()) {
             int idEscalao = dss.first().getIdEscalao();
@@ -420,7 +421,7 @@ public class Campeonato implements Competicao{
         if(j.getIdCompeticao() == this.id) {
             if(this.calendario.atualizaCalendario(j,a)) { 
                 this.atualizaGoleadores(j);
-                this.classificacao.actualizaClassificacao(j);
+                this.classificacao.get(this.id).actualizaClassificacao(j);
                 res = true;
             }
             return res;

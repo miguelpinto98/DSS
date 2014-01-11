@@ -16,9 +16,11 @@ import GUI.Home2;
 public class JCampeonatoEstatistica extends javax.swing.JPanel {
 
     private Home2 root;
+    private int ano;
     
-    public JCampeonatoEstatistica(Home2 aThis, Utilizador user) {
+    public JCampeonatoEstatistica(Home2 aThis, Utilizador user, int ano) {
         this.root = aThis;
+        this.ano = ano;
         initComponents();
     }
 
