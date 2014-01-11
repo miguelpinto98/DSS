@@ -22,6 +22,7 @@ import GUI.Campeonato.JCampeonatoCalendario;
 import GUI.Campeonato.JCampeonatoClassificacao;
 import GUI.Campeonato.JCampeonatoEstatistica;
 import GUI.Campeonato.JCampeonatoJornadas;
+import GUI.Campeonato.JCriarCampeonato;
 import GUI.Escola.EscolasMenuAdmin;
 import GUI.Header.JEntrar;
 import GUI.Header.JMenuAdmin;
@@ -223,7 +224,7 @@ public final class Home2 extends JFrame {
         else {
             reloadHeaderConvidado();
             reloadTabEscolasConvidado();
-            verificaOpcoesCamp(false);
+            //verificaOpcoesCamp(false);
         }
     }
     
@@ -403,12 +404,13 @@ public final class Home2 extends JFrame {
         this.jPanel8.removeAll();
         this.jPanel8.add(this.headerCampeonato, BorderLayout.NORTH);
         this.jPanel8.add(this.panelMelhoresMarcadores, BorderLayout.EAST);
-        this.jPanel8.add(new JCampeonatoClassificacao(this,user),BorderLayout.CENTER);
+       
+        for(int ano : this.sistema.getEpocas().keySet()){
+           this.jComboEpocaCampeonato.addItem(ano+"/"+(ano+1));
+           
+        this.jPanel8.add(new JCampeonatoClassificacao(this,user,ano),BorderLayout.CENTER);
         this.jPanel8.updateUI();
         this.jPanel8.validate();
-        
-       for(int ano : this.sistema.getEpocas().keySet()){
-           this.jComboEpocaCampeonato.addItem(ano+"/"+(ano+1));
        }
        
        
@@ -507,7 +509,7 @@ public final class Home2 extends JFrame {
         consultaEscola = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         headerCampeonato = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
+        campNome = new javax.swing.JLabel();
         jComboEpocaCampeonato = new javax.swing.JComboBox<String>();
         jPanel1 = new javax.swing.JPanel();
         buttonClassificacao = new javax.swing.JButton();
@@ -525,7 +527,7 @@ public final class Home2 extends JFrame {
         Torneios = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        comboEpocas = new javax.swing.JComboBox();
+        comboEpocas = new javax.swing.JComboBox<String>();
         jPanel5 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
@@ -840,7 +842,7 @@ public final class Home2 extends JFrame {
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
+                .addContainerGap(19, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -848,7 +850,7 @@ public final class Home2 extends JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
 
         JTabEscolas.addTab("Home", jPanel6);
@@ -875,9 +877,9 @@ public final class Home2 extends JFrame {
         panelListaEscolasLayout.setVerticalGroup(
             panelListaEscolasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelListaEscolasLayout.createSequentialGroup()
-                .addContainerGap(26, Short.MAX_VALUE)
+                .addContainerGap(29, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         JPanelEscolaConvidado.add(panelListaEscolas, java.awt.BorderLayout.LINE_START);
@@ -904,9 +906,9 @@ public final class Home2 extends JFrame {
         botoesConvidadoEscolaLayout.setVerticalGroup(
             botoesConvidadoEscolaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(botoesConvidadoEscolaLayout.createSequentialGroup()
-                .addContainerGap(31, Short.MAX_VALUE)
+                .addContainerGap(35, Short.MAX_VALUE)
                 .addComponent(consultaEscola, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(360, Short.MAX_VALUE))
+                .addContainerGap(363, Short.MAX_VALUE))
         );
 
         JPanelEscolaConvidado.add(botoesConvidadoEscola, java.awt.BorderLayout.LINE_END);
@@ -918,10 +920,10 @@ public final class Home2 extends JFrame {
 
         headerCampeonato.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Campeonato");
+        campNome.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        campNome.setForeground(new java.awt.Color(102, 102, 102));
+        campNome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        campNome.setText("Campeonato");
 
         jComboEpocaCampeonato.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1014,9 +1016,9 @@ public final class Home2 extends JFrame {
             headerCampeonatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(headerCampeonatoLayout.createSequentialGroup()
                 .addContainerGap(159, Short.MAX_VALUE)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(222, 222, 222)
-                .addComponent(jComboEpocaCampeonato, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(campNome, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(181, 181, 181)
+                .addComponent(jComboEpocaCampeonato, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jComboEpocaCampeonato2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -1027,7 +1029,7 @@ public final class Home2 extends JFrame {
                 .addComponent(criarCamp)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(IniciarCamp)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(inscreverCamp)
                 .addGap(39, 39, 39))
         );
@@ -1037,7 +1039,7 @@ public final class Home2 extends JFrame {
                 .addGap(14, 14, 14)
                 .addGroup(headerCampeonatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboEpocaCampeonato, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
+                    .addComponent(campNome)
                     .addComponent(jComboEpocaCampeonato2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addGroup(headerCampeonatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1099,7 +1101,7 @@ public final class Home2 extends JFrame {
         );
         panelMelhoresMarcadoresLayout.setVerticalGroup(
             panelMelhoresMarcadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
         );
 
         jPanel8.add(panelMelhoresMarcadores, java.awt.BorderLayout.LINE_END);
@@ -1275,7 +1277,7 @@ public final class Home2 extends JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(JTabEscolas, javax.swing.GroupLayout.DEFAULT_SIZE, 1061, Short.MAX_VALUE)
+                .addComponent(JTabEscolas, javax.swing.GroupLayout.PREFERRED_SIZE, 1061, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -1390,6 +1392,13 @@ public final class Home2 extends JFrame {
 
     private void criarCampActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_criarCampActionPerformed
         // TODO add your handling code here:
+        String anos = (String) this.jComboEpocaCampeonato.getSelectedItem();
+        String[] ano = anos.split("/");
+        int a = Integer.parseInt(ano[0]); System.out.println("ANO EPOCA - "+a);
+
+        JDialog frame = new JCriarCampeonato(this, this.user,a);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
     }//GEN-LAST:event_criarCampActionPerformed
 
     private void inscreverCampActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inscreverCampActionPerformed
@@ -1450,7 +1459,8 @@ public final class Home2 extends JFrame {
     private javax.swing.JLabel avatar;
     private javax.swing.JPanel botoesConvidadoEscola;
     private javax.swing.JButton buttonClassificacao;
-    private javax.swing.JComboBox comboEpocas;
+    private javax.swing.JLabel campNome;
+    private javax.swing.JComboBox<String> comboEpocas;
     private javax.swing.JButton consultaEscola;
     private javax.swing.JButton criarCamp;
     private javax.swing.JLabel data;
@@ -1471,7 +1481,6 @@ public final class Home2 extends JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;

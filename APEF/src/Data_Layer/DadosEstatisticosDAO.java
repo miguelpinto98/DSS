@@ -18,9 +18,13 @@ import java.util.concurrent.ExecutionException;
  */
 public class DadosEstatisticosDAO implements Map<Integer,DadosEstatisticos> {
     private int idEstatisticaCompeticao;
-    
-    public DadosEstatisticosDAO(int id) {
-        this.idEstatisticaCompeticao = id;
+
+    public DadosEstatisticosDAO(int idDadosEst) {
+        this.idEstatisticaCompeticao = idDadosEst;
+    }
+
+    public DadosEstatisticosDAO(int id, String nomeEquipa) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     @Override

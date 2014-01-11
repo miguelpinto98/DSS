@@ -4,15 +4,12 @@
  * and open the template in the editor.
  */
 
-package Business_Layer;
+package Data_Layer;
 
 /**
  *
  * @author miguelpinto
  */
-class DadosEstatisticosDAO extends DadosEstatisticos {
-
-    public DadosEstatisticosDAO(int idDadosEst) {
-    }
+public class EstatisticaCompeticaoDAO {
     
 }

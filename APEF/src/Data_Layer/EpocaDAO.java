@@ -74,9 +74,9 @@ public class EpocaDAO implements Map<Integer,Epoca> {
         Epoca ep = null;
         
         try {
-            String chave = (String) key;
+            int chave = (Integer) key;
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * FROM EPOCA WHERE EPOCA.ANO = "+chave+"";
+            String sql = "SELECT * FROM EPOCA WHERE EPOCA.ANO = "+chave;
             ResultSet rs = stm.executeQuery(sql);
             
             if(rs.next()) { int ano = rs.getInt(ANO); ep= new Epoca(ano);}

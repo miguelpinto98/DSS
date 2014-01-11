@@ -42,7 +42,7 @@ public class JOpcoesAdmin extends javax.swing.JPanel {
         DefaultComboBoxModel<String> dcb = new DefaultComboBoxModel<>();
         
         for(String s : this.escola.getEquipas().keySet())
-            dcb.addElement(s);
+            dcb.addElement((String)s);
         
         this.comboEquipas1.setModel(dcb);
     }

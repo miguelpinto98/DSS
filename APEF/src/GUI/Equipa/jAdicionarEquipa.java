@@ -211,7 +211,7 @@ public class jAdicionarEquipa extends javax.swing.JDialog {
             
             if(res) {
                 this.error.setText("Equipa adicionada com Sucesso");
-                this.jad.getCombo().addItem(e.getNome());
+                this.jad.getCombo().addItem((String)e.getNome());
                 dispose();
                 this.root.setEnabled(true);
             } else

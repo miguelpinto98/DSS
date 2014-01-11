@@ -6,8 +6,11 @@
 
 package GUI.Campeonato;
 
+import Business_Layer.Jogo;
 import Business_Layer.Utilizador;
 import GUI.Home2;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,10 +19,24 @@ import GUI.Home2;
 public class JCampeonatoClassificacao extends javax.swing.JPanel {
 
     private Home2 root;
+    private int ano;
 
-    public JCampeonatoClassificacao(Home2 aThis, Utilizador user) {
+    public JCampeonatoClassificacao(Home2 aThis, Utilizador user, int ano) {
         this.root = aThis;
+        this.ano = ano;
         initComponents();
+        
+        
+        
+        
+        Object[] columnNames = new String[] {"Posição","Equipa","Vitórias","Empates","Derrotas","G.M.","G.S.","DIF.","Pontos"};
+        Object[][] data = new Object[][] {};
+        DefaultTableModel x = new DefaultTableModel(data, columnNames);
+
+        //for(Jogo j : ures) {
+            //x.addRow(new Object[]{j.getEscalaoCasa().getNomeEquipa(),j.getNumGolosJogoCasa(),j.getNumGolosJogoFora(),j.getEscalaoFora().getNomeEquipa()});
+        //}
+        tablecamp.setModel(x);  
     }
 
     /**
@@ -32,15 +49,16 @@ public class JCampeonatoClassificacao extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablecamp = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createTitledBorder("Classificação"));
         setLayout(new java.awt.BorderLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablecamp.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"2", "aaaaaaaaaa", "2", "2", "2", "2", "2", "2", "2"},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null},
@@ -55,11 +73,29 @@ public class JCampeonatoClassificacao extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Pos", "Equipa", "V", "E", "D", "GM", "GS", "DIF", "PTS"
+                "Posição", "Equipa", "Vitórias", "Empates", "Derrotas", "G.M.", "G.S.", "DIF.", "Pontos"
             }
-        ));
-        jTable1.setRowHeight(24);
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tablecamp.setGridColor(new java.awt.Color(204, 204, 204));
+        tablecamp.setRowHeight(24);
+        tablecamp.setShowVerticalLines(false);
+        tablecamp.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tablecamp);
 
         add(jScrollPane1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
@@ -67,6 +103,6 @@ public class JCampeonatoClassificacao extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tablecamp;
     // End of variables declaration//GEN-END:variables
 }
