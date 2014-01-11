@@ -6,8 +6,12 @@
 
 package GUI.Campeonato;
 
+import Business_Layer.Campeonato;
+import Business_Layer.Jogo;
+import Business_Layer.Jornada;
 import Business_Layer.Utilizador;
 import GUI.Home2;
+import java.util.Map;
 
 /**
  *
@@ -22,6 +26,9 @@ public class JCampeonatoCalendario extends javax.swing.JPanel {
         this.root = aThis;
         this.ano = ano;
         initComponents();
+        
+        Campeonato get = this.root.getSistema().getEpocas().get(2013).getCampeonatos().get(0);
+        System.out.println(get.toString());
     }
 
     /**

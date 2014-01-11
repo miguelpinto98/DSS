@@ -366,10 +366,10 @@ public class APEF {
         	c.geraCalendario(arrayEquipas, arrayCampos, arrayArbitros);
             c.setNrEscaloes(nrEscaloes);
            
-            for(Integer e : c.getListaEscaloes().keySet()) {
-                DadosEstatisticos x = new DadosEstatisticos(c.getListaEscaloes().get(e).getID());
-                c.getClassificacao().get(c.getID()).inserirDados(x);
-            }
+            //for(Integer e : c.getListaEscaloes().keySet()) {
+                //DadosEstatisticos x = new DadosEstatisticos(c.getListaEscaloes().get(e).getID());
+                //c.getClassificacao().get(c.getID()).inserirDados(x);
+            //}
     	}
         return res;
     }

@@ -227,7 +227,7 @@ public final class Home2 extends JFrame {
         else {
             reloadHeaderConvidado();
             reloadTabEscolasConvidado();
-            //verificaOpcoesCamp(false);
+            verificaOpcoesCamp(false);
         }
     }
     

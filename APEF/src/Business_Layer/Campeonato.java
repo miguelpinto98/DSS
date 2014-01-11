@@ -368,6 +368,7 @@ public class Campeonato implements Competicao{
                     jogo.getArbitroJogo().preencheAgendaArbitro(jogo);
                     jogo.getEscalaoCasa().preencheAgendaEscalao(jogo);
                     jogo.getEscalaoFora().preencheAgendaEscalao(jogo);
+                    jornada = new Jornada(nrJ+i);
                 }
             }
             else {
@@ -382,7 +383,8 @@ public class Campeonato implements Competicao{
                     jornada.inserirJogo(jogo);
                     jogo.getArbitroJogo().preencheAgendaArbitro(jogo);
                     jogo.getEscalaoCasa().preencheAgendaEscalao(jogo);
-                    jogo.getEscalaoFora().preencheAgendaEscalao(jogo);                
+                    jogo.getEscalaoFora().preencheAgendaEscalao(jogo);
+                    jornada = new Jornada(nrJ+i);
                 }
             }
             nrJ++;

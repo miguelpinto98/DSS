@@ -52,8 +52,8 @@ public class Jornada implements Comparable<Jornada>{
     
     public Map<Integer,Jogo> getListaJogos() {
         Map<Integer,Jogo> aux = new JogoDAO(this.id);
-        for(Jogo e: this.listaJogos.values()) 
-            aux.put(e.getID(),e);
+        for(Integer n: this.listaJogos.keySet()) 
+            aux.put(listaJogos.get(n).getID(),listaJogos.get(n));
         return aux;
     }
     
