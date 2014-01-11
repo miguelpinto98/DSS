@@ -15,8 +15,6 @@ import java.util.Set;
 
 public class CampeonatoDAO implements Map<Integer,Campeonato>/*IDCAMPEONATO->CAMPEONATO*/{
     private int idEpoca;
-    private int idEstatisticaCompeticao;
-    private int idCalendario;
     
     
     private static final int ID_CAMPEONATO = 1;

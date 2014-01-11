@@ -236,12 +236,11 @@ public class APEF {
             System.out.println("Escola inserida "+a.getNome());
             return true;
     	}
-        else{
-            System.out.println("Escola ja existe");
-            return false;
-        }
+        else{return false;}
     }
 
+    public void actualizarEscola(Escola a) {this.escolas.put(a.getNome(),a);}
+    
     public void removerEscola(Escola escola) {
 		this.escolas.remove(escola.getNome());
 	}
@@ -261,10 +260,9 @@ public class APEF {
     
     public void inserirEpoca(Epoca e) {
         if(!(this.epocas.containsKey(e.getAno()))) {
-            System.out.println("ccc");
-            this.epocas.put(e.getAno(), e);
-        }
-    }
+            this.epocas.put(e.getAno(), e);}}
+    
+    public void actualizarEpoca(Epoca e) {this.epocas.containsKey(e.getAno());}
 	
 	public void mudarPermissoes(String name) {
 		if(this.users.get(name).isAtivo()) 

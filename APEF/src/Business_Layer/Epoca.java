@@ -196,8 +196,7 @@ public class Epoca implements Comparable<Epoca>{
                     if (t.getID()==id) {nome=t.getNome(); encontrado=true;}
                 }
            }
-      return nome;
-    }
+      return nome;}
     
     public void avancaDataCampeonto(GregorianCalendar data, int tipoEscalao) {
         boolean flag=false;
