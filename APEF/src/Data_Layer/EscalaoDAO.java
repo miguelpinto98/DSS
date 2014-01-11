@@ -64,8 +64,13 @@ public class EscalaoDAO implements Map<Integer,Escalao> {
     public int size() {
         int res = 0;
         try {
-            Statement stm = ConexaoBD.getConexao().createStatement();          
-            String sql = "SELECT * FROM ESCALAO";
+            Statement stm = ConexaoBD.getConexao().createStatement();         
+            String sql; 
+            if(this.contr != 99)
+                sql = "SELECT * FROM ESCALAO";
+            else
+                sql = "SELECT * FROM ESCALAO WHERE ESCALAO.IDCAMPEONATO = "+this.idCamp;
+            
             ResultSet rs = stm.executeQuery(sql);
             
             while(rs.next())
@@ -126,11 +131,13 @@ public class EscalaoDAO implements Map<Integer,Escalao> {
     @Override
     public Escalao get(Object key) {
         Escalao escalao = null;
+        String sql;
         try {
             Integer chave = (Integer) key;
+            
             if(chave < 4) {
                 Statement stm = ConexaoBD.getConexao().createStatement();
-                String sql = "SELECT * FROM ESCALAO e WHERE e.TIPOESCALAO = "+chave+" and e.IDEQUIPA = "+this.idEquipa;
+                sql = "SELECT * FROM ESCALAO e WHERE e.TIPOESCALAO = "+chave+" and e.IDEQUIPA = "+this.idEquipa;
                 ResultSet rs = stm.executeQuery(sql);         
                 if(rs.next()) {
                     int nIdEsc = rs.getInt(ID_ESCALAO);
@@ -169,8 +176,47 @@ public class EscalaoDAO implements Map<Integer,Escalao> {
                         
                         escalao = new Escalao(nIdEsc, nTipoEsc, nNomeEsco, nomeEquipa, t, nIdAg,nIdDadEst);
                     }
+                    ConexaoBD.fecharCursor(rs, stm);
+
+                } 
+            } else {
+                if(this.contr == 99) {
+                    sql = "SELECT * FROM Escalao e, Pessoa p WHERE e.IDESCALAO = "+chave+" and e.IDCAMPEONATO = "+this.idCamp+" and e.IDTREINADOR = p.IDPESSOA";
+                    PreparedStatement pst = ConexaoBD.getConexao().prepareStatement(sql);
+                    ResultSet rs = pst.executeQuery();
+                    
+                    if(rs.next()) {
+                        int id = rs.getInt(1);
+                        int tipo = rs.getInt(2);
+                        String nescola = rs.getString(3);
+                      
+                        
+                        
+                        int idAgen = rs.getInt(6);
+                        int idEst = rs.getInt(7);
+                        
+                        int idTrei = rs.getInt(5);
+                        String nTrei = rs.getString(13);
+                        Imagem img = new Imagem();
+                        Calendar dataNascT = GregorianCalendar.getInstance();
+                        dataNascT.setTime(rs.getTimestamp(15));
+                        int sex = rs.getInt(16);
+                        
+                        Statement stm = ConexaoBD.getConexao().createStatement();
+                        sql = "SELECT NOME FROM Equipa e WHERE e.IDEQUIPA = "+rs.getInt(4);
+                        rs = stm.executeQuery(sql);
+                        String nomeEquipa = null;
+                        if(rs.next())
+                            nomeEquipa = rs.getString(1);
+                        
+                        ConexaoBD.fecharCursor(rs, stm);
+                        
+                        Treinador t = new Treinador(idTrei, nTrei, img, (GregorianCalendar) dataNascT, sex);
+                        escalao = new Escalao(id, tipo, nescola, nomeEquipa, t, idAgen, idEst);
+                        
+                        
+                    }
                 }
-            
             }
         } catch (SQLException e) {
         }
@@ -231,6 +277,9 @@ public class EscalaoDAO implements Map<Integer,Escalao> {
                sql = "UPDATE ESCALAO SET IDCAMPEONATO = "+this.idCamp+" WHERE IDESCALAO = "+value.getID();
                PreparedStatement stm1 = ConexaoBD.getConexao().prepareStatement(sql);
                ResultSet rs1 = stm1.executeQuery();
+               
+               ConexaoBD.fecharCursor(rs1, stm);
+
             }
             res = value;
         } catch (SQLException e) {
@@ -258,7 +307,11 @@ public class EscalaoDAO implements Map<Integer,Escalao> {
         Set<Integer> res = new HashSet<>();
         try {
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT TIPOESCALAO FROM ESCALAO e WHERE e.IDEQUIPA = "+this.idEquipa;
+            String sql; 
+            if(contr != 99)
+                sql = "SELECT TIPOESCALAO FROM ESCALAO e WHERE e.IDEQUIPA = "+this.idEquipa;
+            else
+                sql = "SELECT IDESCALAO FROM ESCALAO e WHERE e.IDCAMPEONATO = "+this.idCamp;
             ResultSet rs = stm.executeQuery(sql);
             
             while(rs.next())

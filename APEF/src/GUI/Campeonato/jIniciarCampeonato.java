@@ -8,6 +8,7 @@ package GUI.Campeonato;
 
 import Business_Layer.Campeonato;
 import GUI.Home2;
+import java.util.GregorianCalendar;
 
 /**
  *
@@ -149,9 +150,14 @@ public class jIniciarCampeonato extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        GregorianCalendar g = new GregorianCalendar();
+        int anos = g.get(g.YEAR);
+        
+        if(!this.root.getSistema().getEpocas().containsKey(anos))
+            anos--;
         
         int selEscalao = this.devolveTipoEscalao((String) this.comboEscaloesDisponiveis.getSelectedItem());
-        Campeonato camp = this.root.getSistema().getEpocas().get(this.ano).getCampeonatos().get(selEscalao);
+        Campeonato camp = this.root.getSistema().getEpocas().get(anos).getCampeonatos().get(selEscalao);
         this.root.getSistema().iniciarCampeonato(camp);
         dispose();
         this.root.setEnabled(true);

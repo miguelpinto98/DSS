@@ -307,10 +307,11 @@ public class APEF {
 	}
     
     public boolean acabouInscricaoCampeonato(Campeonato c) {
-        GregorianCalendar now = new GregorianCalendar();
-        if ( c.getDataLimiteInscricoes().before(now) && c.getDataInicio().after(now) && c.getNrEscaloes()==0) 
-            return true;
-        else return false;
+        //GregorianCalendar now = new GregorianCalendar();
+        //if ( c.getDataLimiteInscricoes().before(now) && c.getDataInicio().after(now) && c.getNrEscaloes()==0) 
+            //return true;
+        //else return false;
+        return true;
     }
     
     public boolean acabouInscricaoTorneioTipo1(Torneio t) {
@@ -357,16 +358,16 @@ public class APEF {
         int nrEscaloes = c.getListaEscaloes().size();
 
         if (acabouInscricaoCampeonato(c) && countArbitros()>=((nrEscaloes)/2)){
-        	for(Escalao e : c.getListaEscaloes().values()){
-        		arrayEquipas.add(e.getID());
-                arrayCampos.add(daCampoEscalao(e));
+        	for(Integer e : c.getListaEscaloes().keySet()){
+        		arrayEquipas.add(e);
+                arrayCampos.add(daCampoEscalao(c.getListaEscaloes().get(e)));
         	}
                 
         	c.geraCalendario(arrayEquipas, arrayCampos, arrayArbitros);
             c.setNrEscaloes(nrEscaloes);
            
-            for(Escalao e : c.getListaEscaloes().values()) {
-                DadosEstatisticos x = new DadosEstatisticos(e.getID());
+            for(Integer e : c.getListaEscaloes().keySet()) {
+                DadosEstatisticos x = new DadosEstatisticos(c.getListaEscaloes().get(e).getID());
                 c.getClassificacao().get(c.getID()).inserirDados(x);
             }
     	}

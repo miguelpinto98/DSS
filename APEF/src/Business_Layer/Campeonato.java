@@ -247,14 +247,11 @@ public class Campeonato implements Competicao{
     public Escalao buscaEscalao(int id) {
         Escalao res = new Escalao();
         boolean flag = false;
-        Iterator<Escalao> it = this.listaEscaloes.values().iterator(); 
-        while (it.hasNext() && !flag) {
-            Escalao e = it.next();
-            if (e.getID()==id) {
-                res = e;
-                flag = true;
-            }
-        }
+        
+        for(Integer n : this.listaEscaloes.keySet())
+            if(this.listaEscaloes.get(n).getID() == id)
+                res = this.listaEscaloes.get(n);
+
         return res;
     }
     
@@ -390,7 +387,7 @@ public class Campeonato implements Competicao{
             }
             nrJ++;
             jornada.setNrJornada(nrJ);
-            this.calendario.inserirJornada(jornada);
+            //this.calendario.inserirJornada(jornada);
             count++;
         }
     }

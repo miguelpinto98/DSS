@@ -113,6 +113,8 @@ public class FaseDAO implements Map<Integer,Fase> {
                 }
                 
             }
+            ConexaoBD.fecharCursor(rs, stm);
+
             return res;
         }
         catch (SQLException e) {
@@ -221,6 +223,7 @@ public class FaseDAO implements Map<Integer,Fase> {
                         g = new Grupo(id,nome,es,calendario,tipo,ec,nfase);
                         res.add(g); 
                     }
+                    rs.close();
                 }
                 if(tipo == 1) {
                     Eliminatoria e = null;
@@ -231,8 +234,10 @@ public class FaseDAO implements Map<Integer,Fase> {
                         e = new Eliminatoria(id,nome,es,calendario,tipo,nfase);
                         res.add(e);
                     }
+                    rs.close();
                 }
             }
+            stm.close();
             return res;
         } catch (SQLException e) {
             throw new NullPointerException(e.getMessage());

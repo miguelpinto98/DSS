@@ -94,6 +94,7 @@ public class DadosEstatisticosDAO implements Map<Integer,DadosEstatisticos> {
                 int idEscalao = rs.getInt(8);
                 res = new DadosEstatisticos(idDados,v,d,e,gm,gs,idEscalao);
             }
+            ConexaoBD.fecharCursor(rs, stm);
             return res;
         }
         catch (SQLException e) {

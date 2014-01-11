@@ -110,6 +110,7 @@ public class JogadorDAO implements Map<Integer,Jogador> {
                 
                 jog = new Jogador(idPessoa, nome, new Imagem(), (GregorianCalendar) dataNascT, sexo, ngolos, this.nomeEquipa, emprestado, idEquipaEmpr);
             }
+            ConexaoBD.fecharCursor(rs, stm);
             
         } catch (SQLException e) {
         }
@@ -220,6 +221,7 @@ public class JogadorDAO implements Map<Integer,Jogador> {
                 
                 res.add(j);
             }
+            ConexaoBD.fecharCursor(rs, stm);
         } catch (Exception e) {
         }
         return res;

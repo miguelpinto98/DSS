@@ -125,7 +125,7 @@ public class ArbsDAO implements Map<Integer,Utilizador> {
                 Agenda agenda = new Agenda(idAg,ag);
                 u = new Arbitro(idUser, new Imagem(), tipo, nick, nome, email, pass, morada, tel, codp, g, ativo, cpreenc, agenda, removido);
             }
-            
+            ConexaoBD.fecharCursor(rs, stm);
         } catch (SQLException e) {
         }
         return u;
@@ -173,7 +173,7 @@ public class ArbsDAO implements Map<Integer,Utilizador> {
             String sql4 = "INSERT INTO Arbitro(idUtilizador,idTorneio,idAgenda) VALUES ("+value.getID()+","+this.idTorneio+","+idAgenda+")";
             PreparedStatement stm4 = ConexaoBD.getConexao().prepareStatement(sql4);
             stm4.execute();
-            stm4.close();    
+            stm4.close();
         } catch (SQLException e) {
         }
         return u;

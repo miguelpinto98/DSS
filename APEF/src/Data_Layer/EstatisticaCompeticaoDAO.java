@@ -87,6 +87,7 @@ public class EstatisticaCompeticaoDAO implements Map<Integer,EstatisticaCompetic
                 int id = rs.getInt(1);
                 res = new EstatisticaCompeticao(id);
             }
+            ConexaoBD.fecharCursor(rs, stm);
             return res;
         }
         catch (SQLException e) {

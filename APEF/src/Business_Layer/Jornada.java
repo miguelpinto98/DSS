@@ -27,7 +27,7 @@ public class Jornada implements Comparable<Jornada>{
         this.id = APEF.getID();
         this.nrJornada = nrJornada;
         this.jogosRealizados = 0;
-        this.listaJogos = new JogoDAO(this.id);
+        this.listaJogos = new JogoDAO(this.id, this.nrJornada, 99);
         APEF.putID();
     }
     
@@ -115,8 +115,7 @@ public class Jornada implements Comparable<Jornada>{
 
 
     public void inserirJogo(Jogo j) {
-        if (!this.listaJogos.containsKey(j.getID()))
-            this.listaJogos.put(j.getID(),j);
+        this.listaJogos.put(j.getID(),j);
     }
     
     

@@ -45,7 +45,9 @@ public class IDENTIFICADORDAO implements Map<Integer, Integer>{
             ResultSet rs = stm.executeQuery(sql);
             
             if(rs.next())
-                res = rs.getInt(1);    
+                res = rs.getInt(1);
+            
+            ConexaoBD.fecharCursor(rs, stm);
         } catch (SQLException e) {
         }   
         return res;
@@ -59,6 +61,7 @@ public class IDENTIFICADORDAO implements Map<Integer, Integer>{
             Statement stm = ConexaoBD.getConexao().createStatement();
             ResultSet rs = stm.executeQuery(sql);
             res = value;
+            ConexaoBD.fecharCursor(rs, stm);
         } catch (SQLException e) {
         }
         return res;

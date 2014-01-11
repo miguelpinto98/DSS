@@ -82,6 +82,7 @@ public class CampeonatoDAO implements Map<Integer,Campeonato>/*IDCAMPEONATO->CAM
                 rs.getTimestamp(DATA_LIMITE,g1);
                            
             camp = new Campeonato(idcamp,nome,g, g1, tipoEsc, nrEscaloes);
+            ConexaoBD.fecharCursor(rs, stm);
             }
             
         } catch (SQLException e) {}
@@ -149,8 +150,9 @@ public class CampeonatoDAO implements Map<Integer,Campeonato>/*IDCAMPEONATO->CAM
                 Statement stm = ConexaoBD.getConexao().createStatement();
                 ResultSet rs = stm.executeQuery("SELECT * FROM CAMPEONATO");
                 while (rs.next())
-                res.add(rs.getInt(ID_CAMPEONATO));
-                ConexaoBD.fecharCursor(rs, stm);}
+                    res.add(rs.getInt(ID_CAMPEONATO));
+                ConexaoBD.fecharCursor(rs, stm);
+        }
         catch (SQLException e) {}
         return res;
    }

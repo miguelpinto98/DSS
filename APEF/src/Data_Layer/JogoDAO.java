@@ -80,12 +80,21 @@ public class JogoDAO implements Map<Integer,Jogo> {
     private static final int DATANASC2 = 4;
     private static final int SEXO = 5;
     
+    private int nJornada;
+    private int contr;
+    
     public JogoDAO() {
     }
 
     public JogoDAO(int id) {
         this.id = id;
         this.idJornada = id; 
+    }
+    
+    public JogoDAO(int id, int njor, int contr) {
+        this.id = id;
+        this.nJornada = njor;
+        this.contr = contr;
     }
     
     public boolean converte(int a) {
@@ -319,27 +328,34 @@ public class JogoDAO implements Map<Integer,Jogo> {
             boolean existe = this.containsKey(key);
             PreparedStatement stm = null;
             
-            if(!existe) {
-                String sql = "";
+            if(true) {
+                String sql;
                 
-                sql = "INSERT INTO Jogo(idJogo,idComp,realizado,dia,idCampo,idAgenda,idEscalaoCasa,idEscalaoFora,nrGolosCasa,nrGolosFora,idJornada) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                sql = "INSERT INTO JORNADA (IDJORNADA, NRJORNADA, JOGOSREALIZADOS)"
+                        + " VALUES ("+this.id+","+this.nJornada+", 0)";
+                Statement st = ConexaoBD.getConexao().createStatement();
+                ResultSet rs = st.executeQuery(sql);
+                ConexaoBD.fecharCursor(rs, st);
                 
+                sql = "INSERT INTO Jogo(idJogo,idCompeticao,realizado,dia,idCampo,idEscalaoCasa,idEscalaoFora,nrGolosCasa,nrGolosFora,idJornada) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                stm = ConexaoBD.getConexao().prepareStatement(sql);
                 stm.setInt(IDJOGO, value.getID());
                 stm.setInt(IDCOMPETICAO,value.getIdCompeticao());
                 stm.setInt(REALIZADO,converte2(value.isJogoRealizado()));
                 Timestamp dataNasc = new Timestamp(value.getDiaJogo().getTimeInMillis());
                 stm.setTimestamp(DIA, dataNasc);
                 stm.setInt(IDCAMPO,value.getCampoJogo().getID());
-                stm.setInt(IDAGENDA, this.id);
-                stm.setInt(IDESCALAOCASA, value.getEscalaoCasa().getID());
-                stm.setInt(IDESCALAOFORA, value.getEscalaoFora().getID());
-                stm.setInt(NRGOLOSCASA, value.getNumGolosJogoCasa());
-                stm.setInt(NRGOLOSFORA, value.getNumGolosJogoFora());
-                stm.setInt(IDJORNADA, this.idJornada);
+                //stm.setInt(IDAGENDA, this.id);
+                stm.setInt(6, value.getEscalaoCasa().getID());
+                stm.setInt(7, value.getEscalaoFora().getID());
+                stm.setInt(8, value.getNumGolosJogoCasa());
+                stm.setInt(9, value.getNumGolosJogoFora());
+                stm.setInt(10, this.id);
                 
-                stm.execute();
+                stm.executeQuery();
                 stm.close();
-                
+                ConexaoBD.fecharCursor(rs, stm);
+                res = value;
             }
             res = value;
         } catch (SQLException e) {

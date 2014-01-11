@@ -108,6 +108,7 @@ public class TorneioDAO implements Map<Integer,Torneio> {
                     t = new Torneio(id,tipoEscalao,tipoTorneio,nome,nrEscaloes,gs,es,ec,f,g,g1,nfase,arbs,campo);
                 }
             }
+            ConexaoBD.fecharCursor(rs, stm);
                            
            } catch (SQLException e) {}
         return t;

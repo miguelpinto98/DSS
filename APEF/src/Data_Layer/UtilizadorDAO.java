@@ -181,6 +181,7 @@ public class UtilizadorDAO implements Map<String,Utilizador>{
                     }
                 } 
             }
+            ConexaoBD.fecharCursor(rs, stm);
             return res;
         }
         catch (SQLException e) {

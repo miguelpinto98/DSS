@@ -90,6 +90,7 @@ public class JornadaDAO implements Map<Integer,Jornada> {
                 JogoDAO ag = new JogoDAO(idJornada);
                 res = new Jornada(idJornada,nrJornada,nrJogosRealizados,ag);
             }
+            ConexaoBD.fecharCursor(rs, stm);
             return res;
         }
         catch (SQLException e) {
