@@ -141,7 +141,7 @@ public class UtilizadorDAO implements Map<String,Utilizador>{
                 String tlmvl = rs.getString(TELEMOVEL);
                 String codPostal = rs.getString(CODPOSTAL);
                 GregorianCalendar dataNasc = new GregorianCalendar();
-                rs.getTimestamp(DATANASC, dataNasc);
+                rs.getTimestamp(DATANASC,dataNasc);
                 int ativo = rs.getInt(ATIVO); 
                 int camposPreenchidos = rs.getInt(CAMPOSPREENCHIDOS);  
                 int removido = rs.getInt(REMOVIDO);                
