@@ -1419,7 +1419,7 @@ public final class Home2 extends JFrame {
 
     private void IniciarCampActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IniciarCampActionPerformed
         // TODO add your handling code here:
-
+        
         String anos = (String) this.jComboEpocaCampeonato.getSelectedItem();
         String[] ano = anos.split("/");
         int a = Integer.parseInt(ano[0]); System.out.println("ANO EPOCA COMBOBOX - "+a);
