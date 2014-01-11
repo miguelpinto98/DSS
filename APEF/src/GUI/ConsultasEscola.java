@@ -57,13 +57,10 @@ public final class ConsultasEscola extends javax.swing.JFrame {
         reloadDetalhes();
         ativarComboEscolas();
         
-        String eq = (String) this.comboEquipas.getSelectedItem();
-        ComboEscalao(eq);
-        
-        String equ = (String) this.comboEquipas.getSelectedItem();
+        String eq = (String) this.comboEquipas.getSelectedItem();      
         String esc = (String) this.comboEscalao.getSelectedItem();
-        if(equ != null && esc != null)
-            this.escalao = this.esc.getEquipas().get(equ).getEscaloes().get(devolveTipoEscalao(esc));
+        if(eq != null && esc != null)
+            this.escalao = this.esc.getEquipas().get(eq).getEscaloes().get(devolveTipoEscalao(esc));
         reloadOpcaoTreinadorConvidado();
         
         verificaUser(this.user);
@@ -121,27 +118,6 @@ public final class ConsultasEscola extends javax.swing.JFrame {
         return res;
     }
     
-    public void ComboEscalao(String eq) {
-        DefaultComboBoxModel<String> dcb = new DefaultComboBoxModel<>();
-        int res=0;
-        
-        if(eq != null) {
-        Equipa e = this.esc.getEquipas().get(eq);
-        Map<Integer, Escalao> es = e.getEscaloes();
-        
-        for(int i=0; i<4; i++)
-            if(es.containsKey(i)) {
-                dcb.addElement(devolveEscalaoTipo(i));
-                res++;
-            }                
-        }
-        
-        if(res==4)
-            this.criarPlantel.setVisible(false);
-        
-        this.comboEscalao.setModel(dcb);  
-    }
-    
     public void reloadOpcaoTreinadorConvidado() {
         this.jPanelPlantel.removeAll();
         this.jPanelPlantel.add(this.jPanelOpcoes, BorderLayout.NORTH);
@@ -177,7 +153,7 @@ public final class ConsultasEscola extends javax.swing.JFrame {
     
     /* XXX */
     public void reloadPanelEquipaGeral(String equipa) {
-        ComboEscalao(equipa);
+        //ComboEscalao(equipa);
         
         String esc = (String) this.comboEscalao.getSelectedItem();
         System.out.println(esc);
@@ -366,7 +342,7 @@ public final class ConsultasEscola extends javax.swing.JFrame {
 
         jLabel6.setText("Seleccione um escalão");
 
-        comboEscalao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboEscalao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Infantis", "Benjamins", "Traquinas", "Petizes" }));
         comboEscalao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboEscalaoActionPerformed(evt);
@@ -528,10 +504,10 @@ public final class ConsultasEscola extends javax.swing.JFrame {
 
     private void comboEscalaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboEscalaoActionPerformed
         // TODO add your handling code here:
-        String escalao = (String) this.comboEscalao.getSelectedItem();
+        String escal = (String) this.comboEscalao.getSelectedItem();
         String equipa = (String) this.comboEquipas.getSelectedItem();
 
-        verificaEscalaoSeleccionado(equipa, escalao);
+        verificaEscalaoSeleccionado(equipa, escal);
     }//GEN-LAST:event_comboEscalaoActionPerformed
 
     private void criarPlantelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_criarPlantelActionPerformed
@@ -553,10 +529,8 @@ public final class ConsultasEscola extends javax.swing.JFrame {
         if(this.escalao != null) {
             JDialog frame = new JRemoverPlantel(this.root, this.escalao, this.esc.getEquipas().get(equipa), this);
             frame.setVisible(true);
-            frame.setLocationRelativeTo(null);
-            
-        }
-        
+            frame.setLocationRelativeTo(null);    
+        }      
     }//GEN-LAST:event_removerPlantelActionPerformed
 
 

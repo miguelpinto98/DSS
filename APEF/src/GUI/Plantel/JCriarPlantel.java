@@ -32,21 +32,6 @@ public final class JCriarPlantel extends javax.swing.JDialog {
         this.equipa = equipa;
         this.ce = ce;
         initComponents();
-        
-        verificaEscalaoesDisponiveis();
-    }
-        
-    public void verificaEscalaoesDisponiveis() {        
-        if(!this.equipa.getEscaloes().isEmpty()) {
-            for(int i = 0; i<4; i++)
-               this.comboEscaloesDisponiveis.addItem(ce.devolveEscalaoTipo(i));
-        } else {
-            for(int i = 0; i<4; i++) {
-                if(!this.equipa.getEscaloes().containsKey(i)) 
-                    this.comboEscaloesDisponiveis.addItem(ce.devolveEscalaoTipo(i));
-                    
-            }
-        }
     }
 
     /**
@@ -87,6 +72,7 @@ public final class JCriarPlantel extends javax.swing.JDialog {
         title.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         title.setText("Adicionar Plantel");
 
+        comboEscaloesDisponiveis.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Infantis", "Benjamins", "Traquinas", "Petizes" }));
         comboEscaloesDisponiveis.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboEscaloesDisponiveisActionPerformed(evt);
@@ -268,7 +254,6 @@ public final class JCriarPlantel extends javax.swing.JDialog {
         
         this.equipa.criarEscalao(selEscalao, this.escola.getNome(), this.equipa.getNome(), name, date, sel, img);
         
-        this.ce.devolveComboEscalao().addItem((String)this.ce.devolveEscalaoTipo(selEscalao));
         this.ce.verificaButtonCriar();
         dispose();
     }//GEN-LAST:event_criarActionPerformed

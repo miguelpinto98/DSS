@@ -92,7 +92,7 @@ public class EscalaoDAO implements Map<Integer,Escalao> {
             //String chave = c.toUpperCase();
             
             Statement stm = ConexaoBD.getConexao().createStatement();          
-            String sql = "SELECT * FROM ESCALAO e WHERE e.TIPOESCALAO = "+chave;
+            String sql = "SELECT * FROM ESCALAO e WHERE e.TIPOESCALAO = "+chave+" and e.IDEQUIPA = "+this.idEquipa;
             ResultSet rs = stm.executeQuery(sql);
             res = rs.next();
             
@@ -235,7 +235,7 @@ public class EscalaoDAO implements Map<Integer,Escalao> {
         Set<Integer> res = new HashSet<>();
         try {
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT IDESCALAO FROM ESCALAO e WHERE e.IDEQUIPA = "+this.idEquipa;
+            String sql = "SELECT TIPOESCALAO FROM ESCALAO e WHERE e.IDEQUIPA = "+this.idEquipa;
             ResultSet rs = stm.executeQuery(sql);
             
             while(rs.next())
