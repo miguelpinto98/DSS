@@ -58,11 +58,7 @@ public class Epoca implements Comparable<Epoca>{
     }
     
     public Map<Integer,Campeonato> getCampeonatos() {
-<<<<<<< HEAD
-         return this.campeonatos;
-=======
         return this.campeonatos;
->>>>>>> 905578740472e895f902945bedc98d622765108b
     }
     
     public ArrayList<HashSet<Torneio>> getTorneios() {
