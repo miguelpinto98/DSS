@@ -68,12 +68,12 @@ public final class Home2 extends JFrame {
     
     private APEF sistema;
     private Utilizador user;
+    private int ano;
     
 
     public Home2() {
         this.sistema = new APEF();
         this.user = null;
-
         
         this.sistema.registarUser("serafim","serafim67","serafim@admin",0);
 
@@ -194,8 +194,9 @@ public final class Home2 extends JFrame {
         */
            
         reloadListaEscolas();
-        reloadPagInicialCampeonato();
         reloadTorneios();
+        reloadCampeonato();
+        reloadPagInicialCampeonato();
     }
     
     public void verificaUser(Utilizador user) {
@@ -260,6 +261,13 @@ public final class Home2 extends JFrame {
         JDialog h = new JPreencherRegisto(this, user);
         h.setLocationRelativeTo(null);
         h.setVisible(true);
+    }
+    
+    public void reloadCampeonato() {
+        for(Integer an : this.sistema.getEpocas().keySet()) {
+            this.jComboEpocaCampeonato.addItem(an+"/"+(an+1));
+            this.ano = an;
+        }
     }
     
     public void reloadOptions(){
@@ -403,19 +411,12 @@ public final class Home2 extends JFrame {
     public void reloadPagInicialCampeonato() {
         this.jPanel8.removeAll();
         this.jPanel8.add(this.headerCampeonato, BorderLayout.NORTH);
-        this.jPanel8.add(this.panelMelhoresMarcadores, BorderLayout.EAST);
-       
-        for(int ano : this.sistema.getEpocas().keySet()){
-           this.jComboEpocaCampeonato.addItem(ano+"/"+(ano+1));
-           
-        this.jPanel8.add(new JCampeonatoClassificacao(this,user,ano),BorderLayout.CENTER);
+        this.jPanel8.add(this.panelMelhoresMarcadores, BorderLayout.EAST);           
+        this.jPanel8.add(new JCampeonatoClassificacao(this,user,this.ano),BorderLayout.CENTER);
         this.jPanel8.updateUI();
-        this.jPanel8.validate();
-       }
-       
-       
-           
+        this.jPanel8.validate();    
     }    
+    
     public void reloadButtonJornada() {
         this.jPanel8.removeAll();
         this.jPanel8.add(this.headerCampeonato, BorderLayout.NORTH);
@@ -429,7 +430,7 @@ public final class Home2 extends JFrame {
         this.jPanel8.removeAll();
         this.jPanel8.add(this.headerCampeonato, BorderLayout.NORTH);
         this.jPanel8.add(this.panelMelhoresMarcadores, BorderLayout.EAST);
-        this.jPanel8.add(new JCampeonatoEstatistica(this,user),BorderLayout.CENTER);
+        this.jPanel8.add(new JCampeonatoEstatistica(this,user,this.ano),BorderLayout.CENTER);
         this.jPanel8.updateUI();
         this.jPanel8.validate();
     }
@@ -438,7 +439,7 @@ public final class Home2 extends JFrame {
         this.jPanel8.removeAll();
         this.jPanel8.add(this.headerCampeonato, BorderLayout.NORTH);
         this.jPanel8.add(this.panelMelhoresMarcadores, BorderLayout.EAST);
-        this.jPanel8.add(new JCampeonatoCalendario(this,user),BorderLayout.CENTER);
+        this.jPanel8.add(new JCampeonatoCalendario(this,user,this.ano),BorderLayout.CENTER);
         this.jPanel8.updateUI();
         this.jPanel8.validate();
     }
@@ -471,8 +472,10 @@ public final class Home2 extends JFrame {
     
     /*TAB TORNEIOS*/
     public void reloadTorneios(){
-        for(Integer ano : this.sistema.getEpocas().keySet())
-            this.comboEpocas.addItem(ano+"/"+(ano+1));
+        for(Integer an : this.sistema.getEpocas().keySet()) {
+            this.comboEpocas.addItem(an+"/"+(an+1));
+            this.ano = an;
+        } 
     }
   
     @SuppressWarnings("unchecked")
@@ -513,7 +516,6 @@ public final class Home2 extends JFrame {
         jComboEpocaCampeonato = new javax.swing.JComboBox<String>();
         jPanel1 = new javax.swing.JPanel();
         buttonClassificacao = new javax.swing.JButton();
-        jButtonJornada = new javax.swing.JButton();
         jButtonEstatistica = new javax.swing.JButton();
         jButtonCalendario = new javax.swing.JButton();
         jComboEpocaCampeonato2 = new javax.swing.JComboBox<String>();
@@ -941,14 +943,6 @@ public final class Home2 extends JFrame {
             }
         });
 
-        jButtonJornada.setBackground(new java.awt.Color(255, 255, 255));
-        jButtonJornada.setText("Jornadas");
-        jButtonJornada.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonJornadaActionPerformed(evt);
-            }
-        });
-
         jButtonEstatistica.setBackground(new java.awt.Color(255, 255, 255));
         jButtonEstatistica.setText("Estatística");
         jButtonEstatistica.addActionListener(new java.awt.event.ActionListener() {
@@ -970,15 +964,13 @@ public final class Home2 extends JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
+                .addContainerGap(81, Short.MAX_VALUE)
                 .addComponent(buttonClassificacao)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonJornada, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonCalendario, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonEstatistica, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonCalendario, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(54, 54, 54))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -986,7 +978,6 @@ public final class Home2 extends JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonClassificacao)
-                    .addComponent(jButtonJornada)
                     .addComponent(jButtonEstatistica)
                     .addComponent(jButtonCalendario))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1340,11 +1331,6 @@ public final class Home2 extends JFrame {
         reloadButtonCalendario();
     }//GEN-LAST:event_jButtonCalendarioActionPerformed
 
-    private void jButtonJornadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonJornadaActionPerformed
-        // TODO add your handling code here:
-        reloadButtonJornada();
-    }//GEN-LAST:event_jButtonJornadaActionPerformed
-
     private void buttonClassificacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonClassificacaoActionPerformed
         // TODO add your handling code here:
         reloadPagInicialCampeonato();
@@ -1407,7 +1393,12 @@ public final class Home2 extends JFrame {
 
     private void jComboEpocaCampeonatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboEpocaCampeonatoActionPerformed
         // TODO add your handling code here:
+        String anos = (String) this.jComboEpocaCampeonato.getSelectedItem();
+        String[] ano = anos.split("/");
+        int a = Integer.parseInt(ano[0]); System.out.println("ANO EPOCA COMBOBOX - "+a);
+        this.ano = a;
         
+        reloadPagInicialCampeonato();
     }//GEN-LAST:event_jComboEpocaCampeonatoActionPerformed
 
     /**
@@ -1473,7 +1464,6 @@ public final class Home2 extends JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButtonCalendario;
     private javax.swing.JButton jButtonEstatistica;
-    private javax.swing.JButton jButtonJornada;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox<String> jComboEpocaCampeonato;
     private javax.swing.JComboBox<String> jComboEpocaCampeonato2;
