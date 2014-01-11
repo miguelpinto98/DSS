@@ -110,13 +110,15 @@ public class EscolaDAO implements Map<String,Escola> {
     public Escola put(String key, Escola value) {
         Escola res = null;
         try {
+            Escola e = (Escola) value;
             String c = (String) key;
             boolean existe = this.containsKey(key);
             String sql="";
-            if (existe) {}
-                //sql = "UPDATE " + ESCOLA + " SET e.local = ? WHERE e.nome = '"+key+"', nomeCampo = "NOME_CAMPO+" WHERE campo.getID= '"+this.value.getCampo.getID()+"'";}
-            
-            
+            if (existe){
+                sql = "UPDATE " + ESCOLA + " SET e.local = ? WHERE e.nome = '"+key+"' and e.nomeCampo = "+NOME_CAMPO +" WHERE e.campo.getID= '"+value.getCampo().getID()+"'";
+                Statement st = ConexaoBD.getConexao().createStatement();
+                ResultSet rse = st.executeQuery(sql);
+                ConexaoBD.fecharCursor(rse, st);}
             else{
                 //String chave = c.toUpperCase();
                 
