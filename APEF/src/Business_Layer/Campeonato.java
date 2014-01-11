@@ -1,6 +1,7 @@
 package Business_Layer;
 
 import Data_Layer.EscalaoDAO;
+import Data_Layer.EstatisticaCompeticaoDAO;
 import Data_Layer.GoleadoresDAO;
 import java.util.ArrayList;
 import java.util.Collection;
