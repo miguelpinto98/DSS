@@ -195,38 +195,31 @@ public class JPreencherRegisto extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
         Imagem img = new Imagem(); 
         String nome = this.jTextField1.getText();
-        String telemovel = this.jTextField3.getText();
-        String morada = this.jTextField4.getText();
-        String codigoPostal = this.jTextField5.getText();
-        GregorianCalendar aux = this.user.getDataNasc();
-        this.jXDatePicker1.setDate(aux.getTime());
+        
         Date dn = this.jXDatePicker1.getDate();
         Calendar g = new GregorianCalendar();
         g.setTime(dn);
         
+        String telemovel = this.jTextField3.getText();
+        String morada = this.jTextField4.getText();
+        String codigoPostal = this.jTextField5.getText();
         
-              
-        
-        if(!(nome.equals(""))){
-            if(!(telemovel.equals(""))){
-                if(!(morada.equals(""))){
-                        if(!(codigoPostal.equals(""))){       
+        if(nome.equals("") || telemovel.equals("") || morada.equals("") || codigoPostal.equals(""))
+            jLabel8.setText("Preencha todos os campos");
+        else{        
         this.user.setAvatar(img);
         this.user.setNome(nome);
+        this.user.setDataNasc((GregorianCalendar) g);
         this.user.setTelemovel(telemovel);
         this.user.setMorada(morada);
         this.user.setCodPostal(codigoPostal);
         this.user.setCamposPreenchidos(true);
-        this.user.setDataNasc((GregorianCalendar) g);
-        dispose();
         this.home.getSistema().actualizarUtilizador(user);
-                    }}}}
-        
-        else jLabel8.setText("Preencha todos os campos");
-              
+        jLabel8.setText("Dados inseridos com sucesso.");
+        }
+        dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     

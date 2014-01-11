@@ -86,8 +86,7 @@ public class PalmaresDAO implements Map<String,Integer> {
             boolean existe = this.containsKey(key);
             String sql = "";           
             if(existe) {
-                System.out.println("ATUALIZAR PALMARES - "+this.idEquipa);
-                sql = "UPDATE Palmares SET nrVezes = "+value+", idEquipa = "+this.idEquipa+" WHERE nomeCompeticao = '"+key+"'";
+               sql = "UPDATE Palmares SET nrVezes = "+value+", idEquipa = "+this.idEquipa+" WHERE nomeCompeticao = '"+key+"'";
                 Statement st = ConexaoBD.getConexao().createStatement();
                 ResultSet rse = st.executeQuery(sql);
                 ConexaoBD.fecharCursor(rse, st);

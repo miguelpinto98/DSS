@@ -2,6 +2,7 @@ package Business_Layer;
 
 import Data_Layer.ArbsDAO;
 import Data_Layer.EscalaoDAO;
+import Data_Layer.EstatisticaCompeticaoDAO;
 import Data_Layer.FaseDAO;
 import Data_Layer.GoleadoresDAO;
 import Data_Layer.UtilizadorDAO;
@@ -82,7 +83,24 @@ public class Torneio implements Competicao{
         this.campo = campo;
         this.arbs = new ArbsDAO(this.id);
         APEF.putID();
-    }  
+    }
+    
+    public Torneio(int id,int tipoEscalao,int tipoTorneio,String nome,int nrEscaloes, GoleadoresDAO gs,EscalaoDAO es,EstatisticaCompeticao ec,FaseDAO f,GregorianCalendar g,GregorianCalendar g1,int nfase,ArbsDAO arbs,Campo campo) {
+        this.id = id;
+        this.tipoEscalao = tipoEscalao;
+        this.tipoTorneio = tipoTorneio;
+        this.nome = nome;
+        this.nrEscaloes = nrEscaloes;
+        this.goleadores = gs;
+        this.listaEscaloes = es;
+        this.estatisticaCompeticao = ec ;
+        this.fases = f;
+        this.nFase = nfase;
+        this.dataInicio = g;
+        this.dataLimiteInscricoes = g1;
+        this.campo = campo;
+        this.arbs = arbs;
+    }
 
 	public Torneio(Torneio t) {
         this.id = t.getID();

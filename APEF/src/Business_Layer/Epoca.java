@@ -58,7 +58,11 @@ public class Epoca implements Comparable<Epoca>{
     }
     
     public Map<Integer,Campeonato> getCampeonatos() {
+<<<<<<< HEAD
          return this.campeonatos;
+=======
+        return this.campeonatos;
+>>>>>>> 905578740472e895f902945bedc98d622765108b
     }
     
     public ArrayList<HashSet<Torneio>> getTorneios() {
@@ -192,8 +196,7 @@ public class Epoca implements Comparable<Epoca>{
                     if (t.getID()==id) {nome=t.getNome(); encontrado=true;}
                 }
            }
-      return nome;
-    }
+      return nome;}
     
     public void avancaDataCampeonto(GregorianCalendar data, int tipoEscalao) {
         boolean flag=false;

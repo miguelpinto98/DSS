@@ -70,6 +70,7 @@ public class JCampeonatoCalendario extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tableCal.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         tableCal.setRowHeight(20);
         tableCal.setRowMargin(2);
         tableCal.getTableHeader().setReorderingAllowed(false);

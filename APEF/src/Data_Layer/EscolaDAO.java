@@ -115,10 +115,15 @@ public class EscolaDAO implements Map<String,Escola> {
             boolean existe = this.containsKey(key);
             String sql="";
             if (existe){
-                sql = "UPDATE " + ESCOLA + " SET e.local = ? WHERE e.nome = '"+key+"' and e.nomeCampo = "+NOME_CAMPO +" WHERE e.campo.getID= '"+value.getCampo().getID()+"'";
+                sql = "UPDATE CAMPO ca SET NOME = '"+value.getCampo().getNome()+"' WHERE ca.IDCAMPO = "+value.getCampo().getID();
                 Statement st = ConexaoBD.getConexao().createStatement();
                 ResultSet rse = st.executeQuery(sql);
-                ConexaoBD.fecharCursor(rse, st);}
+                ConexaoBD.fecharCursor(rse, st);
+                
+                sql = "UPDATE ESCOLA e SET LOCAL = '"+value.getLocal()+"' WHERE e.NOME = '"+value.getNome()+"'";
+                Statement s = ConexaoBD.getConexao().createStatement();
+                ResultSet rs = s.executeQuery(sql);
+                ConexaoBD.fecharCursor(rs, s);}
             else{
                 //String chave = c.toUpperCase();
                 
@@ -151,8 +156,17 @@ public class EscolaDAO implements Map<String,Escola> {
 
     @Override
     public Escola remove(Object key) {
-        throw new NullPointerException("Não Definido");
-    }
+        Escola res = null;
+        try {            
+            String chave = (String) key;
+            String sql = "DELETE FROM ESCOLA WHERE ESCOLA.IDESCOLA = "+chave;
+            PreparedStatement stm = ConexaoBD.getConexao().prepareStatement(sql);
+            stm.execute();
+            ConexaoBD.fecharCursor(null, stm);
+            return res;
+        } catch (Exception e) {
+            throw new NullPointerException(e.getMessage());
+        }}
 
     @Override
     public void putAll(Map<? extends String, ? extends Escola> m) {

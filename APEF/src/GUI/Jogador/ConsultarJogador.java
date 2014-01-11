@@ -78,12 +78,12 @@ public final class ConsultarJogador extends javax.swing.JDialog {
         String nome;
         ArrayList<String> al = new ArrayList<>();
             for(Integer n : this.jogador.getCompeticoes().keySet()){
-                /*nome=this.ep.procuraCampeonato(n);
+                nome=this.ep.procuraCampeonato(n);
                 if(nome != null) {al.add(nome); break;}
-                else {*/
+                else {
                     nome=this.ep.procuraTorneio(n);
                     if(nome!=null){ al.add(nome); break;}}                
-                //}           
+                }           
         return al;}
     
           

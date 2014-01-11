@@ -35,7 +35,7 @@ public class Campeonato implements Competicao{
     	this.nome = "";
     	this.nrEscaloes = 0;
     	this.calendario = new Calendario();
-        this.listaEscaloes = new EscalaoDAO();
+        this.listaEscaloes = new EscalaoDAO(this.id,99);
     	this.goleadores = new GoleadoresDAO();
         this.classificacao = new EstatisticaCompeticaoDAO(this.id);
         this.dataInicio = new GregorianCalendar();
@@ -62,12 +62,25 @@ public class Campeonato implements Competicao{
         this.nome = nome;
         this.nrEscaloes = nrEquipasMax;
         this.calendario =  null;
-        this.listaEscaloes = null;
+        this.listaEscaloes = new EscalaoDAO(this.id,99);
         this.goleadores = null;
         this.classificacao = new EstatisticaCompeticaoDAO(this.id);
         this.dataInicio = inicio;
         this.dataLimiteInscricoes = limiteInscricao;
         APEF.putID();
+    }
+    
+    public Campeonato(int id, String nome, GregorianCalendar inicio, GregorianCalendar limiteInscricao, int tipo, int nrEquipasMax) {
+        this.id = id;
+        this.tipoEscalao = tipo;
+        this.nome = nome;
+        this.nrEscaloes = nrEquipasMax;
+        this.calendario =  null;
+        this.listaEscaloes = new EscalaoDAO(this.id,99);
+        this.goleadores = null;
+        this.classificacao = new EstatisticaCompeticaoDAO(this.id);
+        this.dataInicio = inicio;
+        this.dataLimiteInscricoes = limiteInscricao;
     }
 
     //Getters e Setters
@@ -195,8 +208,7 @@ public class Campeonato implements Competicao{
 
     /**Metodos*/
     public void inserirEscalao(Escalao e) {
-        if(!this.listaEscaloes.containsKey(e.getID()))
-            this.listaEscaloes.put(e.getID(),e);
+        this.listaEscaloes.put(e.getTipoEscalao(),e);
     }
 
     public void removerEscalao(Escalao e) {

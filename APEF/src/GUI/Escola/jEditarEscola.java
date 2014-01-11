@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package GUI.Escola;
 
 import Business_Layer.APEF;
@@ -13,10 +7,6 @@ import GUI.Home2;
 import javax.swing.JDialog;
 import javax.swing.JTextField;
 
-/**
- *
- * @author miguelpinto
- */
 public class jEditarEscola extends javax.swing.JDialog {
     
     private Home2 root;
@@ -208,14 +198,16 @@ public class jEditarEscola extends javax.swing.JDialog {
         String local = nLocal.getText();
         String campo = nCampo.getText();
         
-        if(local.equals("") || campo.equals("") )
+        if(local.equals("") || campo.equals(""))
             erroDados.setText("Dados Incompletos");
         else {
-            APEF sys = this.root.getSistema();
-            Campo c = new Campo(campo);
+            Escola esco = this.root.getSistema().getEscolas().get(this.e.getNome());
+            Campo c1 = esco.getCampo();
             
-            sys.getEscolas().get(e.getNome()).setCampo(c);
-            sys.getEscolas().get(e.getNome()).setLocal(local);
+            c1.setNome(campo);
+            esco.setLocal(local);
+            esco.setCampo(c1);
+            //this.root.getSistema().actualizarEscola(esco);
             
             erroDados.setText("Escola Editada com Sucesso");
             root.reloadListaEscolas();
