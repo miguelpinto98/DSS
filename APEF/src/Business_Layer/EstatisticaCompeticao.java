@@ -20,6 +20,10 @@ public class EstatisticaCompeticao {
         this.idEstatistica = id;
         this.estatistica = et;
     }
+    
+    public EstatisticaCompeticao(int id) {
+        this.idEstatistica = id;
+    }
 
     public EstatisticaCompeticao(EstatisticaCompeticao ec){
     	this.estatistica = ec.getEstatistica();
