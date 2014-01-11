@@ -23,6 +23,7 @@ import GUI.Campeonato.JCampeonatoClassificacao;
 import GUI.Campeonato.JCampeonatoEstatistica;
 import GUI.Campeonato.JCampeonatoJornadas;
 import GUI.Campeonato.JCriarCampeonato;
+import GUI.Campeonato.jIniciarCampeonato;
 import GUI.Escola.EscolasMenuAdmin;
 import GUI.Header.JEntrar;
 import GUI.Header.JMenuAdmin;
@@ -993,6 +994,11 @@ public final class Home2 extends JFrame {
         });
 
         IniciarCamp.setText("Iniciar");
+        IniciarCamp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                IniciarCampActionPerformed(evt);
+            }
+        });
 
         criarCamp.setText("Criar");
         criarCamp.addActionListener(new java.awt.event.ActionListener() {
@@ -1268,14 +1274,14 @@ public final class Home2 extends JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(JTabEscolas, javax.swing.GroupLayout.PREFERRED_SIZE, 1061, Short.MAX_VALUE)
+                .addComponent(JTabEscolas, javax.swing.GroupLayout.DEFAULT_SIZE, 1061, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(JTabEscolas, javax.swing.GroupLayout.PREFERRED_SIZE, 462, Short.MAX_VALUE)
+                .addComponent(JTabEscolas, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1400,6 +1406,18 @@ public final class Home2 extends JFrame {
         
         reloadPagInicialCampeonato();
     }//GEN-LAST:event_jComboEpocaCampeonatoActionPerformed
+
+    private void IniciarCampActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IniciarCampActionPerformed
+        // TODO add your handling code here:
+        String anos = (String) this.jComboEpocaCampeonato.getSelectedItem();
+        String[] ano = anos.split("/");
+        int a = Integer.parseInt(ano[0]); System.out.println("ANO EPOCA COMBOBOX - "+a);
+        this.ano = a;
+        
+        JDialog frame = new jIniciarCampeonato(this,a);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+    }//GEN-LAST:event_IniciarCampActionPerformed
 
     /**
      * @param args the command line arguments

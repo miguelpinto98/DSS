@@ -113,10 +113,7 @@ public class Campeonato implements Competicao{
     }
 
     public Map<Integer,Escalao> getListaEscaloes() {
-        Map<Integer,Escalao> aux = new EscalaoDAO();
-        for(Escalao e: this.listaEscaloes.values()) 
-            aux.put(e.getID(),e);
-        return aux;
+        return this.listaEscaloes;
     }
 
     public void setListaEscaloes (Map<Integer,Escalao> le){
