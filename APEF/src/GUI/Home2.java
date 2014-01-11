@@ -23,6 +23,7 @@ import GUI.Campeonato.JCampeonatoClassificacao;
 import GUI.Campeonato.JCampeonatoEstatistica;
 import GUI.Campeonato.JCampeonatoJornadas;
 import GUI.Campeonato.JCriarCampeonato;
+import GUI.Campeonato.JInscreverCampeonato;
 import GUI.Escola.EscolasMenuAdmin;
 import GUI.Header.JEntrar;
 import GUI.Header.JMenuAdmin;
@@ -993,6 +994,11 @@ public final class Home2 extends JFrame {
         });
 
         IniciarCamp.setText("Iniciar");
+        IniciarCamp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                IniciarCampActionPerformed(evt);
+            }
+        });
 
         criarCamp.setText("Criar");
         criarCamp.addActionListener(new java.awt.event.ActionListener() {
@@ -1389,6 +1395,9 @@ public final class Home2 extends JFrame {
 
     private void inscreverCampActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inscreverCampActionPerformed
         // TODO add your handling code here:
+        JDialog frame = new JInscreverCampeonato(this);
+        frame.setVisible(true);
+        frame.setLocationRelativeTo(null);        
     }//GEN-LAST:event_inscreverCampActionPerformed
 
     private void jComboEpocaCampeonatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboEpocaCampeonatoActionPerformed
@@ -1400,6 +1409,10 @@ public final class Home2 extends JFrame {
         
         reloadPagInicialCampeonato();
     }//GEN-LAST:event_jComboEpocaCampeonatoActionPerformed
+
+    private void IniciarCampActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IniciarCampActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_IniciarCampActionPerformed
 
     /**
      * @param args the command line arguments
